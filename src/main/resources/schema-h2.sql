@@ -39,3 +39,12 @@ CREATE TABLE IF NOT EXISTS `timesheet` (
 -- -----------------------------------------------------
 -- Table `daysWorked`
 -- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `days_worked` (
+     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+     `monday` Date,
+     `tuesday` Date,
+     `wednesday` Date,
+     `thursday` Date,
+     `friday` Date,
+     PRIMARY KEY (`id`))
+ ENGINE = InnoDB;
