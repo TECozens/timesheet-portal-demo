@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class timesheet {
+public class Timesheet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +24,9 @@ public class timesheet {
   //  @JoinColumn(name = "agency_id")
   //  private Agency agency;
 
-  //  @ManyToOne(fetch = FetchType.EAGER) once agency entity added then this included
-    //@JoinColumn(name = "days_worked_id")
-    //private DaysWorked days_worked_id;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "days_worked_id")
+    private DaysWorked days_worked_id;
 
     @Column(name = "approved")
     private Boolean approved;

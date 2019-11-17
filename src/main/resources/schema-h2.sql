@@ -24,7 +24,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `timesheet`
+-- Table `Timesheet`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `timesheet` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `timesheet` (
 
 
 -- -----------------------------------------------------
--- Table `daysWorked`
+-- Table `DaysWorked`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `days_worked` (
      `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
