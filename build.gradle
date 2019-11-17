@@ -13,6 +13,12 @@ configurations {
     runtimeClasspath {
         extendsFrom developmentOnly
     }
+
+    prodOnly
+    runtimeClasspath {
+        extendsFrom prodOnly
+    }
+
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -27,18 +33,19 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-//  Lombok
+//  Compile only
     compileOnly 'org.projectlombok:lombok'
-
-//  H2 support
-    runtimeOnly 'com.h2database:h2'
 
 //  JPA support
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-//  Spring
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//  H2 Support
+    runtimeOnly 'com.h2database:h2'
 
+
+
+//  Dev only
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.projectlombok:lombok'
@@ -50,4 +57,14 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+bootRun {
+    sourceResources sourceSets.main
+//    Use this for Prod.
+//        environment 'spring.profiles.active', 'production'
+    
+//    Use this for Dev.
+    systemProperty 'spring.profiles.active', 'demo'
+    main = 'com.admiral.tsp.timesheetportal.TimesheetportalApplication'
 }
