@@ -21,3 +21,30 @@ CREATE TABLE IF NOT EXISTS `agency` (
     `agency_name` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`))
 ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `Timesheet`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `timesheet` (
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `contractor_id` INT UNSIGNED NOT NULL,
+    `agency_id` INT UNSIGNED NOT NULL,
+    'days_worked_id'INT UNSIGNED NOT NULL,
+    'approved' INT,
+     PRIMARY KEY (`id`))
+ ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `DaysWorked`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `days_worked` (
+     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+     `monday` Date,
+     `tuesday` Date,
+     `wednesday` Date,
+     `thursday` Date,
+     `friday` Date,
+     PRIMARY KEY (`id`))
+ ENGINE = InnoDB;
