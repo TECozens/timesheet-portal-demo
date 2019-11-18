@@ -20,9 +20,9 @@ public class Timesheet {
     @JoinColumn(name = "contractor_id")
     private Contractor contractor;
 
-   // @ManyToOne(fetch = FetchType.EAGER) once agency entity added then this included
-  //  @JoinColumn(name = "agency_id")
-  //  private Agency agency;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "agency_id")
+    private Agency agency;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "days_worked_id")
