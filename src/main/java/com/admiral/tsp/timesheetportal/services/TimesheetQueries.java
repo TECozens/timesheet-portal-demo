@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.queries;
+package com.admiral.tsp.timesheetportal.services;
 
 
 import com.admiral.tsp.timesheetportal.domain.Timesheet;
