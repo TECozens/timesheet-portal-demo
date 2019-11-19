@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `timesheet` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `contractor_id` INT UNSIGNED NOT NULL,
     `agency_id` INT UNSIGNED NOT NULL,
-    'days_worked_id'INT UNSIGNED NOT NULL,
-    'approved' INT,
+    `days_worked_id`INT UNSIGNED NOT NULL,
+    `approved` INT,
      PRIMARY KEY (`id`))
  ENGINE = InnoDB;
 
