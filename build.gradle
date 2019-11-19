@@ -14,11 +14,6 @@ configurations {
         extendsFrom developmentOnly
     }
 
-    prodOnly
-    runtimeClasspath {
-        extendsFrom prodOnly
-    }
-
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -28,23 +23,28 @@ repositories {
     mavenCentral()
 }
 
+def profile1 = "dev"
+def profile2 = "prod"
+
+
+
 dependencies {
-//  Spring & Thmyleaf Impl
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-//  Compile only
     compileOnly 'org.projectlombok:lombok'
 
-//  JPA support
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
-//  H2 Support
-    runtimeOnly 'com.h2database:h2'
+    if (profile1 == "dev") {
+        runtimeOnly 'com.h2database:h2'
+        println("H2")
+    } else {
+        runtimeOnly 'mysql:mysql-connector-java'
+        println("SQL")
+    }
 
-
-
-//  Dev only
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
@@ -61,10 +61,11 @@ test {
 
 bootRun {
     sourceResources sourceSets.main
-//    Use this for Prod.
-//        environment 'spring.profiles.active', 'production'
-    
-//    Use this for Dev.
-    systemProperty 'spring.profiles.active', 'demo'
+//SQL
+//        environment 'spring.profiles.active', 'prod'
+
+//H2
+    systemProperty 'spring.profiles.active', 'dev'
+
     main = 'com.admiral.tsp.timesheetportal.TimesheetportalApplication'
 }
