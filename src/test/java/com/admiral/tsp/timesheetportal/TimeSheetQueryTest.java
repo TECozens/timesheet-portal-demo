@@ -28,7 +28,7 @@ public class TimeSheetQueryTest {
     public void theOneWhereJoesTimeSheetisReturned() throws Exception {
 
         Optional<Timesheet> aTimeSheet = repo.findById(1L);
-        assertEquals("Joe", aTimeSheet.get().getContractor());
+        assertEquals("Joe", aTimeSheet.get().getContractor().getName());
 
 
     }

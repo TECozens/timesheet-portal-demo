@@ -5,8 +5,8 @@ insert into agency (id, agency_name ) values (1,'Agency1');
 insert into agency (id, agency_name ) values (2,'Agency2');
 //
 
-insert into days_worked (id, monday, tuesday, wednesday, thursday, friday  ) values (1, 28/07/2016, 29/07/2016, 30/07/2016, 24/08/2016, 22/08/2016);
-insert into days_worked (id, monday, tuesday, wednesday, thursday, friday  ) values (2, 28/08/2016, 29/08/2016, 30/08/2016, 15/09/2016, 23/09/2016);
+insert into days_worked (id, monday, tuesday, wednesday, thursday, friday  ) values (1, '2016-07-28', '2016-07-29', '2016-07-30', '2016-08-24', '2016-08-22');
+insert into days_worked (id, monday, tuesday, wednesday, thursday, friday  ) values (2, '2016-08-28', '2016-08-29', '2016-08-30', '2016-09-15', '2016-09-23');
 
 //
 
