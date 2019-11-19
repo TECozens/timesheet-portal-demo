@@ -38,7 +38,7 @@ public class time_sheetForm {
     @NotNull
     private Integer expenses;
 
-    @NotNull
-    private Boolean approved;
+//    @NotNull
+//    private Boolean approved;
 
 }
