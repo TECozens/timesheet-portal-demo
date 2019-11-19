@@ -62,6 +62,7 @@ test {
 bootRun {
     sourceResources sourceSets.main
 //SQL
+//        
 //        environment 'spring.profiles.active', 'prod'
 
 //H2
