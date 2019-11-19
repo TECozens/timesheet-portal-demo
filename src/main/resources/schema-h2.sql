@@ -7,7 +7,6 @@ SET IGNORECASE=TRUE;
 CREATE TABLE IF NOT EXISTS `contractor` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `contractor_name` VARCHAR(45) NOT NULL,
-    `company` VARCHAR(45) NOT NULL,
     `agency_id` INT UNSIGNED NOT NULL,
     `timesheet_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`))
@@ -24,7 +23,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `Timesheet`
+-- Table `timesheet`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `timesheet` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -37,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `timesheet` (
 
 
 -- -----------------------------------------------------
--- Table `DaysWorked`
+-- Table `daysWorked`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `days_worked` (
      `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,

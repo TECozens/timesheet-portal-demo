@@ -20,9 +20,6 @@ public class Contractor {
     @Column(name = "contractor_name")
     private String name;
 
-    @Column(name = "company")
-    private String company;
-
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "agency_id")
     private Agency agency;
