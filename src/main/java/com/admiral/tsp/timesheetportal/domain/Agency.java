@@ -21,4 +21,8 @@ public class Agency {
     @Column(name = "agency_name")
     private String name;
 
+    @Email
+    @Column(name = "email")
+    private String agency_email;
+
 }

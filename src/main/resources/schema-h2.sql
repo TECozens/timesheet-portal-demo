@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `timesheet` (
     `agency_id` INT UNSIGNED NOT NULL,
     `days_worked_id`INT UNSIGNED NOT NULL,
     `overtime` INT UNSIGNED, -- TODO Make sure this is on form/entity
-    `week_finish` DATE NOT NULL, -- TODO Is this needed?
+    `week_finish` DATE NOT NULL, -- TODO How should this be specified?
     `approved` BOOLEAN, -- TODO Alter attributes for this
      PRIMARY KEY (`id`))
  ENGINE = InnoDB;

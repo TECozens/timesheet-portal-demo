@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Data
 @AllArgsConstructor
@@ -20,8 +21,9 @@ public class Contractor {
     @Column(name = "contractor_name")
     private String name;
 
-    @Column(name = "company")
-    private String company;
+    @Email
+    @Column(name = "email")
+    private String contractor_email;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "agency_id")
@@ -30,4 +32,5 @@ public class Contractor {
     @ManyToOne
     @JoinColumn(name = "timesheet_id")
     private Timesheet timesheet;
+
 }
