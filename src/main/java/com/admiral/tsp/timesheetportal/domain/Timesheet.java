@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -24,9 +25,15 @@ public class Timesheet {
     @JoinColumn(name = "agency_id")
     private Agency agency;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "days_worked_id")
-    private DaysWorked days_worked_id;
+
+    @Column(name = "days_worked")
+    private int daysWorked;
+
+    @Column(name = "overtime")
+    private Integer overtime;
+
+    @Column(name = "week_finish")
+    private LocalDate week_finish;
 
     @Column(name = "approved")
     private Boolean approved;
