@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 @Data
 @AllArgsConstructor
@@ -19,6 +20,5 @@ public class Agency {
 
     @Column(name = "agency_name")
     private String name;
-
 
 }
