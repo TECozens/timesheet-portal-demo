@@ -28,6 +28,6 @@ public class ContractorController {
     {
         LOG.debug("Putting timesheet on  model and therefore on session");
         model.addAttribute("timeSheetKey", new time_sheetForm());
-        return "t_timesheet_page";
+        return "time_sheet_form_3";
     }
 }

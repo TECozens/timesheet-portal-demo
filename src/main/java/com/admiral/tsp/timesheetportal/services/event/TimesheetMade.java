@@ -13,6 +13,6 @@ public class TimesheetMade {
 //    TODO Parse All Fields
     private Contractor contractorInstance;
     private Agency agencyInstance;
-    private int daysWorked;
-    private int overtime;
+    private Integer daysWorked;
+    private Integer overtime;
 }
