@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
+    <link href="/css/starter-template.css" rel="stylesheet">
+</head>
+<body>
+
+<main class="container mt-4" role="main">
+    <div class="starter-template">
+
+        <!--Contractor Details-->
+        <div id=contractorProfile>
+            <div>Logged in as: Contractor</div>
+            <h3>As a Contractor you may produce a new timesheet </h3>
+        </div>
+
+        <!--Timesheet Create Link not done by Id yet-->
+        <div class="row mt-4">
+            <div class="col-lg">
+                <a class="btn btn-primary btn-lg btn-block"
+                   th:href="@{/newTimesheet}"
+                   th:id="@{newTimesheetLink}">
+                    <span>Create Timesheet</span>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+
+</div>
+
+</body>
+</html>
