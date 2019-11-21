@@ -27,7 +27,7 @@ public class Timesheet {
 
 
     @Column(name = "days_worked")
-    private int daysWorked;
+    private Integer daysWorked;
 
     @Column(name = "overtime")
     private Integer overtime;

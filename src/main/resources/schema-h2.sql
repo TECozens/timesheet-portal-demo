@@ -31,8 +31,8 @@ CREATE TABLE IF NOT EXISTS `timesheet` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `contractor_id` INT UNSIGNED NOT NULL,
     `agency_id` INT UNSIGNED NOT NULL,
-    `days_worked `INT UNSIGNED NOT NULL,
-    `overtime` INT UNSIGNED,
+    `days_worked` INT NOT NULL,
+    `overtime` INT,
     `week_finish` DATE NOT NULL,
     `approved` BOOLEAN,
      PRIMARY KEY (`id`))
