@@ -31,5 +31,6 @@ public class TimesheetProcessor implements TimesheetCreator {
     @Transactional
     public void makeTimesheet(Timesheet newTimesheet) {
         timesheetRepoJPA.save(newTimesheet);
+        log.info(newTimesheet.toString());
     }
 }
