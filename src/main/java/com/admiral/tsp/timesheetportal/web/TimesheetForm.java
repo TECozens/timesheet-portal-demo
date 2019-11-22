@@ -11,7 +11,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class time_sheetForm {
+public class TimesheetForm {
 
     @NotNull
     @Size(min = 2, max = 50, message = "Invalid Name")

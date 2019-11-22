@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContractorLoginForm {
+public class PortalForm {
 
     @NotNull
     @Size(min = 2, max = 50, message = "Invalid Name")
