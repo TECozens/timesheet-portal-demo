@@ -61,8 +61,8 @@ public class TimesheetCreateController {
                 1L,
                 "x",
                 "xxxx@gmail.com",
-                agency,
-                timesheet
+                agency
+
         );
 
         Timesheet newTimesheet = new Timesheet(
@@ -71,8 +71,8 @@ public class TimesheetCreateController {
                 agency,
                 timesheetForm.getDays_worked(),
                 timesheetForm.getOvertime_completed(),
-                LocalDate.now(),
-                false
+                LocalDate.now()
+
 
         );
 
