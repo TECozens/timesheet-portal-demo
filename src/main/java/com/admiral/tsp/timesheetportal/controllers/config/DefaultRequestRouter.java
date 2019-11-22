@@ -8,6 +8,6 @@ public class DefaultRequestRouter implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("home_portal");
+        registry.addViewController("/").setViewName("portal_view");
     }
 }

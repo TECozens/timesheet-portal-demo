@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+    <!-- Fragment Insert -->
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="serializedFormContainer">
+    <!--  TODO Login Form Here + Fields Here  -->
+    <div class="row">
+        <a class="btn btn-primary btn-lg btn-block"
+           th:href="@{/contractorView}"
+           th:id="@{contractorView}">
+            <span>Sign In</span>
+        </a>
+    </div>
+
+
+</div>
+</body>
+
+</html>
