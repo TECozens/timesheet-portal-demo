@@ -35,9 +35,4 @@ public class Timesheet {
     @Column(name = "week_finish")
     private LocalDate week_finish;
 
-    @Column(name = "approved")
-    private Boolean approved;
-
-
-
 }

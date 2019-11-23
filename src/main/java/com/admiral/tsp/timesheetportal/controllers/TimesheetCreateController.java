@@ -1,11 +1,10 @@
-package com.admiral.tsp.timesheetportal.web;
+package com.admiral.tsp.timesheetportal.controllers;
 
 import com.admiral.tsp.timesheetportal.domain.Agency;
 import com.admiral.tsp.timesheetportal.domain.Contractor;
 import com.admiral.tsp.timesheetportal.domain.Timesheet;
 import com.admiral.tsp.timesheetportal.services.TimesheetCreator;
-import com.admiral.tsp.timesheetportal.services.TimesheetService;
-import com.admiral.tsp.timesheetportal.services.event.TimesheetMade;
+import com.admiral.tsp.timesheetportal.web.TimesheetForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,11 +14,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.sql.Time;
 import java.time.LocalDate;
 
 @Controller
-@SessionAttributes({"timeSheetKey"})
+@SessionAttributes({"TimesheetKey"})
 public class TimesheetCreateController {
 
     private TimesheetCreator timesheetCreator;
@@ -31,22 +29,23 @@ public class TimesheetCreateController {
 
     static final Logger LOG = LoggerFactory.getLogger(TimesheetCreateController.class);
 
-    @PostMapping("/timeSheetDetails")
-    public String timeSheetDetails(@ModelAttribute("timeSheetKey") @Valid time_sheetForm timesheetForm,
+    //    Timesheet Form Displayed on Contractor Page
+    @PostMapping("/newTimesheet")
+    public String timesheetDetails(@ModelAttribute("TimesheetKey") @Valid TimesheetForm timesheetForm,
                                    BindingResult bindingResult, // Keep this after valid
                                    Model model) {
         if (bindingResult.hasErrors()) {
             LOG.error(bindingResult.toString());
             LOG.error("Timesheet Form has binding errors");
             model.addAttribute("contractorTimesheetDetails", timesheetForm);
-            return "time_sheet_form_3";
+            return "contractor_view";
         }
 //        if details are correct do the submit
         return "redirect:/createTimesheet/";
     }
 
     @GetMapping("/createTimesheet")
-    public String submitTimesheet(@ModelAttribute("timeSheetKey") time_sheetForm timesheetForm,
+    public String submitTimesheet(@ModelAttribute("TimesheetKey") TimesheetForm timesheetForm,
                                   Model model) {
 
 //        TODO Fun create stuff
@@ -62,8 +61,8 @@ public class TimesheetCreateController {
                 1L,
                 "x",
                 "xxxx@gmail.com",
-                agency,
-                timesheet
+                agency
+
         );
 
         Timesheet newTimesheet = new Timesheet(
@@ -72,8 +71,8 @@ public class TimesheetCreateController {
                 agency,
                 timesheetForm.getDays_worked(),
                 timesheetForm.getOvertime_completed(),
-                LocalDate.now(),
-                false
+                LocalDate.now()
+
 
         );
 
@@ -82,7 +81,7 @@ public class TimesheetCreateController {
 
         LOG.debug("Here is the Timesheet going into DB" + newTimesheet.toString());
 
-        return "contractor_profile";
+        return "redirect:/contractorView";
     }
 
 

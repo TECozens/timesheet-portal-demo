@@ -29,8 +29,4 @@ public class Contractor {
     @JoinColumn(name = "agency_id")
     private Agency agency;
 
-    @ManyToOne
-    @JoinColumn(name = "timesheet_id")
-    private Timesheet timesheet;
-
 }

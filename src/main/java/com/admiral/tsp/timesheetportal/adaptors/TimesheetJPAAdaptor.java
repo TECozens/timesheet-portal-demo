@@ -37,8 +37,7 @@ public class TimesheetJPAAdaptor implements TimesheetRepo {
                 timesheetEvent.getContractorInstance().getId(),
                 timesheetEvent.getContractorInstance().getName(),
                 timesheetEvent.getContractorInstance().getContractor_email(),
-                timesheetEvent.getContractorInstance().getAgency(),
-                timesheetEvent.getContractorInstance().getTimesheet()
+                timesheetEvent.getContractorInstance().getAgency()
                 );
 
         Timesheet theTimesheet = new Timesheet(
@@ -47,8 +46,7 @@ public class TimesheetJPAAdaptor implements TimesheetRepo {
                 timesheetEvent.getAgencyInstance(),
                 timesheetEvent.getDaysWorked(),
                 timesheetEvent.getOvertime(),
-                LocalDate.now(),
-                false
+                LocalDate.now()
         );
 
 

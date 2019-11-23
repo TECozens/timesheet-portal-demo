@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS `contractor` (
     `contractor_name` VARCHAR(45) NOT NULL,
     `email` VARCHAR(50) NOT NULL, --
     `agency_id` INT UNSIGNED NOT NULL,
-    `timesheet_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -34,7 +33,6 @@ CREATE TABLE IF NOT EXISTS `timesheet` (
     `days_worked` INT NOT NULL,
     `overtime` INT,
     `week_finish` DATE NOT NULL,
-    `approved` BOOLEAN,
      PRIMARY KEY (`id`))
  ENGINE = InnoDB;
 
