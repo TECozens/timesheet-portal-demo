@@ -12,13 +12,11 @@
 
 
     <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
-        <div>No matching TIme Sheet</div>
+        <div>No matching Time Sheet</div>
     </div>
-2
 
     <div class="row mt-4">
-        <h4 th:text="${TimesheetKey.contractor.getName()} + 'Time sheet'"></h4>
-        <div class = "mx-3" th:each="Timesheet: ${TimesheetKey}">
+        <h4 th:text="${TimesheetKey.contractor.name} + 'Time sheet'"></h4>
             <table>
                 <thead>
                 <tr>
@@ -29,21 +27,12 @@
                     <th> Week finished</th>
                 </tr>
                 </thead>
-                <tbody>
                 <tr th:each="Timesheet: ${TimesheetKey}">
-                   <td><input th:field="${TimesheetKey.getContractor().getName()}" /></td>
-                </tr>
-                <tr>
-                   <td><input th:field="${TimesheetKey.getAgency().getName()}" /></td>
-                </tr>
-                <tr>
-                    <td><input th:field="${TimesheetKey.getDaysWorked()}" /></td>
-                </tr>
-                  <tr>
-                      <td><input th:field="${TimesheetKey.getOvertime()}" /></td>
-                  </tr>
-                  <tr>
-                      <td><input th:field="${TimesheetKey.getWeek_finish()}" /></td> </tr>
+                   <td><input th:field="${TimesheetKey.contractor.name}" /></td>
+                   <td><input th:field="${TimesheetKey.agency.name}" /></td>
+                    <td><input th:field="${TimesheetKey.daysWorked}" /></td>
+                      <td><input th:field="${TimesheetKey.overtime}" /></td>
+                      <td><input th:field="${TimesheetKey.week_finish}" /></td> </tr>
 
                 </tbody>
             </table>
