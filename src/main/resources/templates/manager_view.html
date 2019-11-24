@@ -15,30 +15,33 @@
         <div>No matching Time Sheet</div>
     </div>
 
+
     <div class="row mt-4">
-        <h4 th:text="${TimesheetKey.contractor.name} + 'Time sheet'"></h4>
+        <h4 th:text="'Contractor Time Sheets'"></h4>  </div>
+        <div class = "mx-3">
             <table>
                 <thead>
                 <tr>
                     <th>Name </th>
-                    <th> Agency</th>2
+                    <th> Agency</th>
                     <th> Days Worked</th>
                     <th> Overtime</th>
                     <th> Week finished</th>
                 </tr>
                 </thead>
+                <tbody>
                 <tr th:each="Timesheet: ${TimesheetKey}">
                    <td><input th:field="${TimesheetKey.contractor.name}" /></td>
                    <td><input th:field="${TimesheetKey.agency.name}" /></td>
                     <td><input th:field="${TimesheetKey.daysWorked}" /></td>
                       <td><input th:field="${TimesheetKey.overtime}" /></td>
-                      <td><input th:field="${TimesheetKey.week_finish}" /></td> </tr>
+                      <td><input th:field="${TimesheetKey.week_finish}" /></td>
+
 
                 </tbody>
             </table>
 
         </div>
-    </div>
    </main>
 </body>
 </html>
