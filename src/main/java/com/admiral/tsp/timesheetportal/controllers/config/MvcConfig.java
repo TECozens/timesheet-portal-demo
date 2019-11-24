@@ -1,26 +1,20 @@
 package com.admiral.tsp.timesheetportal.controllers.config;
 
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-
-//@Configuration
-//@EnableWebMvc
+@Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
+    public void addViewControllers(ViewControllerRegistry registry) {
 
-    /*@Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/resources/**")
-                .addResourceLocations("/resources/");
-    }*/
+        registry.addViewController("/login").setViewName("login");
+
+        registry.addViewController("/403").setViewName("403");
+
+        registry.addViewController("/reports").setViewName("forward:/reports/index.html");
+
+    }
 
 }
