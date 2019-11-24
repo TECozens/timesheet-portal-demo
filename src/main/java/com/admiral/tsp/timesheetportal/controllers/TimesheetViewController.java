@@ -14,16 +14,16 @@ import java.util.Optional;
 
 @Controller
 @SessionAttributes({"TimesheetKey"})
-public class TimesheetDashboardController {
+public class TimesheetViewController {
 
 
     private TimesheetFinder timesheetFinder;
 
 
-    public TimesheetDashboardController(TimesheetFinder timesheetFinder) {
+    public TimesheetViewController(TimesheetFinder timesheetFinder) {
         this.timesheetFinder = timesheetFinder;}
 
-    static final Logger LOG = LoggerFactory.getLogger(com.admiral.tsp.timesheetportal.controllers.TimesheetDashboardController.class);
+    static final Logger LOG = LoggerFactory.getLogger(com.admiral.tsp.timesheetportal.controllers.TimesheetViewController.class);
 
 
     @GetMapping("Timesheet/{i}")
@@ -34,7 +34,7 @@ public class TimesheetDashboardController {
         if (foundTimesheet.isPresent()) {
             model.addAttribute("TimesheetKey", foundTimesheet.get());
 
-            return "timesheet_DashBoard_profile";
+            return "manager_view";
 
         } else {
             return "404";

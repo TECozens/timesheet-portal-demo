@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+    <!-- Fragment Insert -->
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<main class="container mt-4" role="main">
+    <div class="starter-template"></div>
+
+
+    <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
+        <div>No matching TIme Sheet</div>
+    </div>
+2
+
+    <div class="row mt-4">
+        <h4 th:text="${TimesheetKey.contractor.getName()} + 'Time sheet'"></h4>
+        <div class = "mx-3" th:each="Timesheet: ${TimesheetKey}">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name </th>
+                    <th> Agency</th>2
+                    <th> Days Worked</th>
+                    <th> Overtime</th>
+                    <th> Week finished</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="Timesheet: ${TimesheetKey}">
+                   <td><input th:field="${TimesheetKey.getContractor().getName()}" /></td>
+                </tr>
+                <tr>
+                   <td><input th:field="${TimesheetKey.getAgency().getName()}" /></td>
+                </tr>
+                <tr>
+                    <td><input th:field="${TimesheetKey.getDaysWorked()}" /></td>
+                </tr>
+                  <tr>
+                      <td><input th:field="${TimesheetKey.getOvertime()}" /></td>
+                  </tr>
+                  <tr>
+                      <td><input th:field="${TimesheetKey.getWeek_finish()}" /></td> </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+   </main>
+</body>
+</html>
