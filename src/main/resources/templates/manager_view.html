@@ -17,8 +17,8 @@
 2
 
     <div class="row mt-4">
-        <h4 th:text="${TimesheetKey.contractor.getName()} + 'Time sheet'"></h4>
-        <div class = "mx-3" th:each="Timesheet: ${TimesheetKey}">
+        <h4 th:text="${TimesheetKey.contractor.name} + 'Time sheet'"></h4>
+        <div class = "mx-3">
             <table>
                 <thead>
                 <tr>
@@ -30,20 +30,20 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="Timesheet: ${TimesheetKey}">
-                   <td><input th:field="${TimesheetKey.getContractor().getName()}" /></td>
+                <tr>
+                   <td><input th:field="${TimesheetKey.contractor.name}" /></td>
                 </tr>
                 <tr>
-                   <td><input th:field="${TimesheetKey.getAgency().getName()}" /></td>
+                   <td><input th:field="${TimesheetKey.agency.name}" /></td>
                 </tr>
                 <tr>
-                    <td><input th:field="${TimesheetKey.getDaysWorked()}" /></td>
+                    <td><input th:field="${TimesheetKey.daysWorked}" /></td>
                 </tr>
                   <tr>
-                      <td><input th:field="${TimesheetKey.getOvertime()}" /></td>
+                      <td><input th:field="${TimesheetKey.daysWorked}" /></td>
                   </tr>
                   <tr>
-                      <td><input th:field="${TimesheetKey.getWeek_finish()}" /></td> </tr>
+                      <td><input th:field="${TimesheetKey.week_finish}" /></td> </tr>
 
                 </tbody>
             </table>

@@ -30,7 +30,7 @@ public class TimesheetProcessor implements TimesheetCreator {
     @Override
     @Transactional
     public void makeTimesheet(Timesheet newTimesheet) {
-        timesheetRepoJPA.save(newTimesheet);
+        log.info(String.valueOf(timesheetRepoJPA.saveAndFlush(newTimesheet).getId()));
         log.info(newTimesheet.toString());
     }
 }

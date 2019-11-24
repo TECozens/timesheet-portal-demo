@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface TimesheetRepoJPA extends JpaRepository<Timesheet, Long> {
     List<Timesheet> findByContractor(Contractor charityInstance);
+
 }
