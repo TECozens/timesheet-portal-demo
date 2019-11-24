@@ -19,7 +19,8 @@ public class TimesheetQueries implements TimesheetFinder {
         timesheetRepository = aTRepo;
     }
 
-    public Optional<Timesheet> findTimesheetByIndex (Integer index){
+    public Optional<Timesheet> FindTimesheetByIndex (Integer index){
         return timesheetRepository.findById(index.longValue());
     }
+
 }

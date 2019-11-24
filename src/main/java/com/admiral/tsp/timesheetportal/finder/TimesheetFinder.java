@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TimesheetFinder {
-    Optional<Timesheet> findTimesheetByIndex(Integer index);
+    Optional<Timesheet> getFindTimesheetByIndex(Integer index);
 }
