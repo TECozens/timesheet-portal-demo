@@ -1,6 +1,7 @@
 package com.admiral.tsp.timesheetportal.services;
 
 
+import com.admiral.tsp.timesheetportal.data.TimesheetRepoJPA;
 import com.admiral.tsp.timesheetportal.domain.Contractor;
 import com.admiral.tsp.timesheetportal.domain.Timesheet;
 import com.admiral.tsp.timesheetportal.finder.TimesheetFinder;
@@ -13,13 +14,16 @@ import java.util.Optional;
 @Service
 public class TimesheetQueries implements TimesheetFinder {
 
-    private TimesheetRepo timesheetRepository;
+    private TimesheetRepoJPA timesheetRepository;
 
-    public TimesheetQueries(TimesheetRepo aTRepo) {
+
+    public TimesheetQueries(TimesheetRepoJPA aTRepo) {
         timesheetRepository = aTRepo;
+
     }
 
-    public Optional<Timesheet> findTimesheetByIndex (Integer index){
+    public Optional<Timesheet> getFindTimesheetByIndex (Integer index){
         return timesheetRepository.findById(index.longValue());
     }
+
 }
