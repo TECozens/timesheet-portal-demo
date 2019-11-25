@@ -13,8 +13,5 @@ import java.util.Optional;
 @Repository
 public interface TimesheetRepoJPA extends JpaRepository<Timesheet, Long> {
     List<Timesheet> findByContractor(Contractor charityInstance);
-
-//    @Query(value = "select * from timesheet where id = :id", nativeQuery = true)
- //   Optional<Timesheet> findById(Long id);
-
+    Optional<Timesheet> findById(Long id);
 }

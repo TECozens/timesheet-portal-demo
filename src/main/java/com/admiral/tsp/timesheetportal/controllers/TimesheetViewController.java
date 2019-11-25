@@ -35,14 +35,14 @@ public class TimesheetViewController {
     static final Logger LOG = LoggerFactory.getLogger(com.admiral.tsp.timesheetportal.controllers.TimesheetViewController.class);
 
 
-    @GetMapping("Timesheet/{i}")
+    @GetMapping("Timesheet/{i}")                                                                 // will be all time sheets so link needs to show all like show -similar to search
     public String showTimesheetDashboardPage(@PathVariable("i") Integer index, Model model) {
 
 
 
-        createFakeResult();
+        //createFakeResult();
         Optional<Timesheet> foundTimesheet = timesheetFinder.getFindTimesheetByIndex(index);
-        log.info(String.valueOf(foundTimesheet.isPresent()));
+        log.info(String.valueOf(foundTimesheet.get()));
 
         if (foundTimesheet.isPresent()) {
             model.addAttribute("TimesheetKey", foundTimesheet.get());
