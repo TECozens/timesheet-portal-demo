@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -46,17 +48,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        AuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+
         http
                 .authorizeRequests()
                 .antMatchers("/reports/**").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/h2_console/**").permitAll()
                 .antMatchers("/").permitAll()
                 //.anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .successHandler(successHandler)
                 .loginPage("/login")
                 .permitAll()
                 .and()
                 .logout()
+//                .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
                 .permitAll()
                 .and()
@@ -64,7 +72,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .ignoringAntMatchers("/h2-console/**")
-
         ;
 
         http.headers().frameOptions().disable();
