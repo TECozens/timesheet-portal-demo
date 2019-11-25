@@ -1,6 +1,6 @@
 package com.admiral.tsp.timesheetportal.controllers;
 
-import com.admiral.tsp.timesheetportal.web.TimesheetForm;
+import com.admiral.tsp.timesheetportal.Timesheet.forms.TimesheetForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;

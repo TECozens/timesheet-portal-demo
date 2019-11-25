@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.web;
+package com.admiral.tsp.timesheetportal.Timesheet.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

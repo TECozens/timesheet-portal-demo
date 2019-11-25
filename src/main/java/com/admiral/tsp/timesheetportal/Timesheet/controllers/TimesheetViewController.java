@@ -1,10 +1,10 @@
-package com.admiral.tsp.timesheetportal.controllers;
+package com.admiral.tsp.timesheetportal.Timesheet.controllers;
 
+import com.admiral.tsp.timesheetportal.Timesheet.services.TimesheetRepoJPA;
 import com.admiral.tsp.timesheetportal.domain.Agency;
 import com.admiral.tsp.timesheetportal.domain.Contractor;
-import com.admiral.tsp.timesheetportal.domain.Timesheet;
-import com.admiral.tsp.timesheetportal.finder.TimesheetFinder;
-import com.admiral.tsp.timesheetportal.services.TimesheetCreator;
+import com.admiral.tsp.timesheetportal.Timesheet.Timesheet;
+import com.admiral.tsp.timesheetportal.Timesheet.services.TimesheetCreator;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,15 +24,15 @@ import java.util.Optional;
 public class TimesheetViewController {
 
 
-    private TimesheetFinder timesheetFinder;
+    private TimesheetRepoJPA timesheetFinder;
 
     private TimesheetCreator timesheetCreator;
     @Autowired
-    public TimesheetViewController(TimesheetFinder timesheetFinder, TimesheetCreator aTCreator) {
+    public TimesheetViewController(TimesheetRepoJPA timesheetFinder, TimesheetCreator aTCreator) {
         this.timesheetFinder = timesheetFinder;
         timesheetCreator = aTCreator;}
 
-    static final Logger LOG = LoggerFactory.getLogger(com.admiral.tsp.timesheetportal.controllers.TimesheetViewController.class);
+    static final Logger LOG = LoggerFactory.getLogger(TimesheetViewController.class);
 
 
     @GetMapping("Timesheet/{i}")                                                                 // will be all time sheets so link needs to show all like show -similar to search
@@ -41,7 +41,7 @@ public class TimesheetViewController {
 
 
         //createFakeResult();
-        Optional<Timesheet> foundTimesheet = timesheetFinder.getFindTimesheetByIndex(index);
+        Optional<Timesheet> foundTimesheet = timesheetFinder.findById(Long.valueOf(index));
         log.info(String.valueOf(foundTimesheet.get()));
 
         if (foundTimesheet.isPresent()) {

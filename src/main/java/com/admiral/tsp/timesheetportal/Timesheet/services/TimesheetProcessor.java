@@ -1,9 +1,6 @@
-package com.admiral.tsp.timesheetportal.services;
+package com.admiral.tsp.timesheetportal.Timesheet.services;
 
-import com.admiral.tsp.timesheetportal.data.TimesheetRepoJPA;
-import com.admiral.tsp.timesheetportal.domain.Timesheet;
-import com.admiral.tsp.timesheetportal.repository.TimesheetRepo;
-import com.admiral.tsp.timesheetportal.services.event.TimesheetMade;
+import com.admiral.tsp.timesheetportal.Timesheet.Timesheet;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,12 +14,10 @@ public class TimesheetProcessor implements TimesheetCreator {
 
     static final Logger LOG = LoggerFactory.getLogger(TimesheetProcessor.class);
 
-    private TimesheetRepo timesheetRepo;
     private TimesheetRepoJPA timesheetRepoJPA;
 
     @Autowired
-    public TimesheetProcessor(TimesheetRepo aTRepo, TimesheetRepoJPA aTJPARepo) {
-        timesheetRepo = aTRepo;
+    public TimesheetProcessor(TimesheetRepoJPA aTJPARepo) {
         timesheetRepoJPA = aTJPARepo;
     }
 

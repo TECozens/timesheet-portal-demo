@@ -1,10 +1,10 @@
-package com.admiral.tsp.timesheetportal.controllers;
+package com.admiral.tsp.timesheetportal.Timesheet.controllers;
 
 import com.admiral.tsp.timesheetportal.domain.Agency;
 import com.admiral.tsp.timesheetportal.domain.Contractor;
-import com.admiral.tsp.timesheetportal.domain.Timesheet;
-import com.admiral.tsp.timesheetportal.services.TimesheetCreator;
-import com.admiral.tsp.timesheetportal.web.TimesheetForm;
+import com.admiral.tsp.timesheetportal.Timesheet.Timesheet;
+import com.admiral.tsp.timesheetportal.Timesheet.services.TimesheetCreator;
+import com.admiral.tsp.timesheetportal.Timesheet.forms.TimesheetForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,6 @@ public class TimesheetCreateController {
                 "x"
         );
 
-        Timesheet timesheet = new Timesheet();
 
         Contractor contractor = new Contractor(
                 1L,
