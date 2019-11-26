@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Optional;
+
 @Slf4j
 @Service
 public class TimesheetProcessor implements TimesheetCreator {
@@ -25,4 +28,15 @@ public class TimesheetProcessor implements TimesheetCreator {
         log.info(newTimesheet.toString());
         return updatedTimesheet;
     }
+
+    @Override
+    public Optional<Timesheet> getTimesheetByIndex(Long index) {
+        return timesheetRepoJPA.findById(index);
+    }
+
+    @Override
+    public List<Timesheet> getAll() {
+        return timesheetRepoJPA.findAll();
+    }
+
 }

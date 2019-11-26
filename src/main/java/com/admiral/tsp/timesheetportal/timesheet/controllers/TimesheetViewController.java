@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -25,8 +26,10 @@ public class TimesheetViewController {
 
     private TimesheetCreator timesheetCreator;
     @Autowired
-    public TimesheetViewController(TimesheetRepoJPA timesheetRepoJPA) {
-        this.timesheetRepoJPA = timesheetRepoJPA;}
+    public TimesheetViewController(TimesheetRepoJPA timesheetRepoJPA, TimesheetCreator timesheetCreator) {
+        this.timesheetRepoJPA = timesheetRepoJPA;
+        this.timesheetCreator = timesheetCreator;
+    }
 
     static final Logger LOG = LoggerFactory.getLogger(TimesheetViewController.class);
 
@@ -42,11 +45,20 @@ public class TimesheetViewController {
         if (foundTimesheet.isPresent()) {
             model.addAttribute("TimesheetKey", foundTimesheet.get());
 
-            return "manager_view";
+            return "timesheet_view";
 
         } else {
             return "404";
         }
+    }
+    @GetMapping("Approvals")
+    public String showTimesheetApprovalPage(Model model){
+        List<Timesheet> foundTimesheets = timesheetCreator.getAll();
+
+        model.addAttribute("TimesheetKey", foundTimesheets);
+
+        return "manager_view";
+
     }
 
 
