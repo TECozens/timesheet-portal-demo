@@ -16,6 +16,9 @@
     <div sec:authorize="isAuthenticated()">
         Welcome back:
         <div sec:authentication="name"></div>
+        <form method="post" th:action="@{/logout}">
+            <div><input type="submit" value="Logout"/></div>
+        </form>
     </div>
 
     <div sec:authorize="!isAuthenticated()">
@@ -25,7 +28,7 @@
 
         <!--  TODO Login Form Here + Fields Here  -->
     <div class="row">
-        <a class="btn btn-primary btn-lg btn-block"
+        <a class="btn btn-primary"
            th:href="@{/contractorView}"
            th:id="contractorView">
             <span>Sign In</span>
