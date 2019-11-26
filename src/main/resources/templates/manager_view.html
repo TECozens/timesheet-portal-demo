@@ -8,7 +8,7 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <main class="container mt-4" role="main">
-    <div class="starter-template"></div>
+    <div class="starter-template">
 
 
     <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
@@ -45,6 +45,7 @@
             </table>
 
         </div>
+    </div>
    </main>
 </body>
 </html>
