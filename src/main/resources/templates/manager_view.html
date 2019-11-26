@@ -30,12 +30,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="Timesheet: ${TimesheetKey}">
-                   <td><input th:field="${TimesheetKey.contractor.name}" /></td>
-                   <td><input th:field="${TimesheetKey.agency.name}" /></td>
+                <tr>
+<!--                     th:each="timesheet: ${TimesheetKey}">-->
+<!--                    This doesn't belong here as it's an individual page basis-->
+<!--                    not a list of each page-->
+                    <td><input th:field="${TimesheetKey.contractor.name}" /></td>
+                    <td><input th:field="${TimesheetKey.agency.name}" /></td>
                     <td><input th:field="${TimesheetKey.daysWorked}" /></td>
-                      <td><input th:field="${TimesheetKey.overtime}" /></td>
-                      <td><input th:field="${TimesheetKey.week_finish}" /></td>
+                    <td><input th:field="${TimesheetKey.overtime}" /></td>
+                    <td><input th:field="${TimesheetKey.week_finish}" /></td>
 
 
                 </tbody>

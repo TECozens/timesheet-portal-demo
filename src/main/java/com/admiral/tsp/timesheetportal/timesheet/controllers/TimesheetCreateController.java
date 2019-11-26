@@ -1,10 +1,10 @@
-package com.admiral.tsp.timesheetportal.Timesheet.controllers;
+package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
-import com.admiral.tsp.timesheetportal.domain.Agency;
-import com.admiral.tsp.timesheetportal.domain.Contractor;
-import com.admiral.tsp.timesheetportal.Timesheet.Timesheet;
-import com.admiral.tsp.timesheetportal.Timesheet.services.TimesheetCreator;
-import com.admiral.tsp.timesheetportal.Timesheet.forms.TimesheetForm;
+import com.admiral.tsp.timesheetportal.agency.Agency;
+import com.admiral.tsp.timesheetportal.contractor.Contractor;
+import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
+import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetCreator;
+import com.admiral.tsp.timesheetportal.timesheet.forms.TimesheetForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +29,14 @@ public class TimesheetCreateController {
 
     static final Logger LOG = LoggerFactory.getLogger(TimesheetCreateController.class);
 
-    //    Timesheet Form Displayed on Contractor Page
+    //    timesheet Form Displayed on Contractor Page
     @PostMapping("/newTimesheet")
     public String timesheetDetails(@ModelAttribute("TimesheetKey") @Valid TimesheetForm timesheetForm,
                                    BindingResult bindingResult, // Keep this after valid
                                    Model model) {
         if (bindingResult.hasErrors()) {
             LOG.error(bindingResult.toString());
-            LOG.error("Timesheet Form has binding errors");
+            LOG.error("timesheet Form has binding errors");
             model.addAttribute("contractorTimesheetDetails", timesheetForm);
             return "contractor_view";
         }
@@ -78,7 +78,7 @@ public class TimesheetCreateController {
 
         timesheetCreator.makeTimesheet(newTimesheet);
 
-        LOG.debug("Here is the Timesheet going into DB" + newTimesheet.toString());
+        LOG.debug("Here is the timesheet going into DB" + newTimesheet.toString());
 
         return "redirect:/contractorView";
     }

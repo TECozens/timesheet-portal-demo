@@ -1,6 +1,6 @@
-package com.admiral.tsp.timesheetportal.Timesheet.services;
+package com.admiral.tsp.timesheetportal.timesheet.services;
 
-import com.admiral.tsp.timesheetportal.Timesheet.Timesheet;
+import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,5 +1,6 @@
-package com.admiral.tsp.timesheetportal.domain;
+package com.admiral.tsp.timesheetportal.contractor;
 
+import com.admiral.tsp.timesheetportal.agency.Agency;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,18 +12,22 @@ import javax.validation.constraints.Email;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "agency")
-public class Agency {
+@Table(name = "contractor")
+public class Contractor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "agency_name")
+    @Column(name = "contractor_name")
     private String name;
 
     @Email
     @Column(name = "email")
-    private String agency_email;
+    private String contractor_email;
+
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "agency_id")
+    private Agency agency;
 
 }

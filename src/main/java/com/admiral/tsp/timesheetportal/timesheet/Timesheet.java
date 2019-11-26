@@ -1,7 +1,7 @@
-package com.admiral.tsp.timesheetportal.Timesheet;
+package com.admiral.tsp.timesheetportal.timesheet;
 
-import com.admiral.tsp.timesheetportal.domain.Agency;
-import com.admiral.tsp.timesheetportal.domain.Contractor;
+import com.admiral.tsp.timesheetportal.agency.Agency;
+import com.admiral.tsp.timesheetportal.contractor.Contractor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
