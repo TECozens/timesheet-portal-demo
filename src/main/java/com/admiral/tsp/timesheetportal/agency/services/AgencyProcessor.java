@@ -21,8 +21,9 @@ public class AgencyProcessor implements AgencyCreator {
 
     @Override
     @Transactional
-    public void makeAgency(Agency newAgency) {
-        log.info(String.valueOf(agencyRepoJPA.saveAndFlush(newAgency).getId()));
-        log.info(newAgency.toString());
+    public Agency makeAgency(Agency newAgency) {
+        Agency updatedAgency = agencyRepoJPA.saveAndFlush(newAgency);
+        log.info(updatedAgency.toString());
+        return updatedAgency;
     }
 }

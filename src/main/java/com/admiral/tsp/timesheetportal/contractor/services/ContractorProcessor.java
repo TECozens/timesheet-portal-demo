@@ -20,8 +20,9 @@ public class ContractorProcessor implements ContractorCreator {
 
     @Override
     @Transactional
-    public void makeContractor(Contractor newContractor) {
-        log.info(String.valueOf(contractorRepoJPA.saveAndFlush(newContractor).getId()));
-        log.info(newContractor.toString());
+    public Contractor makeContractor(Contractor newContractor) {
+        Contractor updatedContractor = contractorRepoJPA.saveAndFlush(newContractor);
+        log.info(updatedContractor.toString());
+        return updatedContractor;
     }
 }

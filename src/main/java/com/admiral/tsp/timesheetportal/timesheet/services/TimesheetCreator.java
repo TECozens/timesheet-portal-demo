@@ -2,7 +2,7 @@ package com.admiral.tsp.timesheetportal.timesheet.services;
 
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
 
-// Implemented by TimesheetProcessor
+// Implemented by ReviewProcessor
 public interface TimesheetCreator {
-    void makeTimesheet(Timesheet timesheetEvent);
+    Timesheet makeTimesheet(Timesheet timesheetEvent);
 }

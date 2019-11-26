@@ -4,5 +4,5 @@ import com.admiral.tsp.timesheetportal.contractor.Contractor;
 
 // Implemented by AgencyProcessor
 public interface ContractorCreator {
-    void makeContractor(Contractor contractor);
+    Contractor makeContractor(Contractor contractor);
 }
