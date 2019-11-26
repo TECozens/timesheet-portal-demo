@@ -9,15 +9,13 @@
 <div th:replace="fragments/header :: header"></div>
 <main class="container mt-4" role="main">
     <div class="starter-template"></div>
-
-
     <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
         <div>No matching Time Sheet</div>
     </div>
 
 
     <div class="row mt-4">
-        <h4 th:text="'Contractor Time Sheets'"></h4>  </div>
+        <h2 th:text="'Contractor Time Sheets'"></h2>  </div>
         <div class = "mx-3">
             <table>
                 <thead>
