@@ -22,8 +22,13 @@ public class TimesheetQueries implements TimesheetFinder {
 
     }
 
-    public Optional<Timesheet> getFindTimesheetByIndex (Integer index){
+    public Optional<Timesheet> getFindTimesheetByIndex(Integer index) {
         return timesheetRepository.findById(index.longValue());
+    }
+
+    @Override
+    public List<Timesheet> getAll() {
+        return timesheetRepository.findAll();
     }
 
 }

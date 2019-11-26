@@ -8,4 +8,5 @@ import java.util.Optional;
 
 public interface TimesheetFinder {
     Optional<Timesheet> getFindTimesheetByIndex(Integer index);
+    List<Timesheet> getAll();
 }

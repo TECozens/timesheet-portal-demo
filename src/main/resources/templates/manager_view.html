@@ -31,11 +31,11 @@
                 </thead>
                 <tbody>
                 <tr th:each="Timesheet: ${TimesheetKey}">
-                   <td><input th:field="${TimesheetKey.contractor.name}" /></td>
-                   <td><input th:field="${TimesheetKey.agency.name}" /></td>
-                    <td><input th:field="${TimesheetKey.daysWorked}" /></td>
-                      <td><input th:field="${TimesheetKey.overtime}" /></td>
-                      <td><input th:field="${TimesheetKey.week_finish}" /></td>
+                   <td><span th:text="${Timesheet.contractor.name}" /></td>
+                   <td><span th:text="${Timesheet.agency.name}" /></td>
+                    <td><span th:text="${Timesheet.daysWorked}" /></td>
+                      <td><span th:text="${Timesheet.overtime}" /></td>
+                      <td><span th:text="${Timesheet.week_finish}" /></td>
 
 
                 </tbody>

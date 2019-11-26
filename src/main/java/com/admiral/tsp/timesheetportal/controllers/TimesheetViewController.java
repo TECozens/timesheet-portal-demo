@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -35,12 +36,9 @@ public class TimesheetViewController {
     static final Logger LOG = LoggerFactory.getLogger(com.admiral.tsp.timesheetportal.controllers.TimesheetViewController.class);
 
 
-    @GetMapping("Timesheet/{i}")                                                                 // will be all time sheets so link needs to show all like show -similar to search
+    @GetMapping("Timesheet/{i}")
     public String showTimesheetDashboardPage(@PathVariable("i") Integer index, Model model) {
 
-
-
-        //createFakeResult();
         Optional<Timesheet> foundTimesheet = timesheetFinder.getFindTimesheetByIndex(index);
         log.info(String.valueOf(foundTimesheet.get()));
 
@@ -54,37 +52,16 @@ public class TimesheetViewController {
         }
     }
 
-    void createFakeResult(){
-        Agency agency = new Agency(
-                1L,
-                "Agency",
-                "xxx@hotmail.com"
-        );
+    @GetMapping("Approvals")
+    public String showTimesheetApprovalPage(Model model){
+        List<Timesheet> foundTimesheets = timesheetFinder.getAll();
 
-        Timesheet timesheet = new Timesheet();
+        model.addAttribute("TimesheetKey", foundTimesheets);
 
-        Contractor contractor = new Contractor(
-                1L,
-                "John Doe",
-                "xxxx@gmail.com",
-                agency
-
-        );
-
-        Timesheet newTimesheet = new Timesheet(
-                null,
-                contractor,
-                agency,
-                1,
-                1,
-                LocalDate.now()
-
-
-        );
-
-        timesheetCreator.makeTimesheet(newTimesheet);
+        return "manager_view";
 
     }
+
 
 
 }

@@ -11,7 +11,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Timesheet {
+public class
+Timesheet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
