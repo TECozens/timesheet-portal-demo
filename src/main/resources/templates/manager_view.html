@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:type="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: head">
     <!-- Fragment Insert -->
@@ -36,8 +37,8 @@
                     <td><span th:text="${Timesheet.daysWorked}" /></td>
                     <td><span th:text="${Timesheet.overtime}" /></td>
                     <td><span th:text="${Timesheet.week_finish}" /></td>
-
-
+                    <td> <button class="btn btn-primary" id="approve" type="submit">Approve</button> </td>
+                    <td> <button class="btn btn-warning" id="reject" type="">Reject</button> </td>
                 </tbody>
             </table>
 
