@@ -33,19 +33,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
-//  @Bean
-//  @Override
-//  public UserDetailsService userDetailsService() {
-//    UserDetails user =
-//            User.withDefaultPasswordEncoder()
-//                    .username("user")
-//                    .password("password")
-//                    .roles("USER")
-//                    .build();
-//
-//    return new InMemoryUserDetailsManager(user);
-//  }
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -61,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .successHandler(successHandler)
                 .loginPage("/login")
+                //.defaultSuccessUrl("/contractor_view.html")
                 .permitAll()
                 .and()
                 .logout()

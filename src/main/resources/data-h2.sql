@@ -15,7 +15,7 @@ INSERT INTO user (username, password) VALUES ('Laura','{bcrypt}$2a$10$hF/OfRLdgR
 INSERT INTO user (username, password) VALUES ('Tomas','{bcrypt}$2a$10$1qtcvCeJFhq9EdQmWhurn.CVAgslKWug0sAOlJ3Z7HwwDoYcIY5/S'); -- tomtsp
 INSERT INTO user (username, password) VALUES ('Tzavier', '{bcrypt}$2a$10$NZNWWhljpNuBnjH9hEDW6OTRlXmZCaFChaWdlA5imyuxPzL/VxjUG'); -- tzatsp
 
-INSERT INTO user_role (userid, role) VALUES (001, 'ROLE_USER');
+INSERT INTO user_role (userid, role) VALUES (001, 'ROLE_CONTRACTOR');
 INSERT INTO user_role (userid, role) VALUES (002, 'ROLE_ADMIN');
-INSERT INTO user_role (userid, role) VALUES (003, 'ROLE_USER');
+INSERT INTO user_role (userid, role) VALUES (003, 'ROLE_MANAGER');
 INSERT INTO user_role (userid, role) VALUES (004, 'ROLE_ADMIN');

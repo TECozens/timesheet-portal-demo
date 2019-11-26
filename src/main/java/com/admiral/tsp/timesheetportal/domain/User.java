@@ -23,6 +23,14 @@ public class User {
     @NotEmpty
     private String username;
 
+//    @NotNull
+//    @NotEmpty
+//    private String firstName;
+//
+//    @NotNull
+//    @NotEmpty
+//    private String lastName;
+
     @NotNull
     @NotEmpty
     private String password;
@@ -32,6 +40,8 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
+//                ", firstName='" + firstName + '\'' +
+//                ", lastName='" + lastName + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }
