@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head">
+    <!-- Fragment Insert -->
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+<main class="container mt-4" role="main">
+    <div class="starter-template">
+
+
+    <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
+        <div>No matching Time Sheet</div>
+    </div>
+
+
+    <div class="row mt-4">
+        <h4 th:text="'Contractor Time Sheets'"></h4>  </div>
+        <div class = "mx-3">
+            <table>
+                <thead>
+                <tr>
+                    <th>Name </th>
+                    <th> Agency</th>
+                    <th> Days Worked</th>
+                    <th> Overtime</th>
+                    <th> Week finished</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+<!--                    th:each="timesheet: ${TimesheetKey}">-->
+                    <td><span th:text="${TimesheetKey.contractor.name}" /></td>
+                    <td><span th:text="${TimesheetKey.agency.name}" /></td>
+                    <td><span th:text="${TimesheetKey.daysWorked}" /></td>
+                    <td><span th:text="${TimesheetKey.overtime}" /></td>
+                    <td><span th:text="${TimesheetKey.week_finish}" /></td>
+
+
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+   </main>
+</body>
+</html>
