@@ -24,11 +24,6 @@ Timesheet {
     @JoinColumn(name = "contractor_id")
     private Contractor contractor;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "agency_id")
-    private Agency agency;
-
-
     @Column(name = "days_worked")
     private Integer daysWorked;
 

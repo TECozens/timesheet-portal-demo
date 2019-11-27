@@ -32,8 +32,8 @@
                 <tbody>
                 <tr>
 <!--                    th:each="timesheet: ${TimesheetKey}">-->
-                    <td><span th:text="${TimesheetKey.contractor.name}" /></td>
-                    <td><span th:text="${TimesheetKey.agency.name}" /></td>
+                    <td><span th:text="${TimesheetKey.contractor.user.firstname} + ' ' ${TimesheetKey.contractor.user.surname}" /></td>
+                    <td><span th:text="${TimesheetKey.contractor.agency.name}" /></td>
                     <td><span th:text="${TimesheetKey.daysWorked}" /></td>
                     <td><span th:text="${TimesheetKey.overtime}" /></td>
                     <td><span th:text="${TimesheetKey.week_finish}" /></td>

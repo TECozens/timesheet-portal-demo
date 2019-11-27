@@ -2,13 +2,19 @@ package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
 import com.admiral.tsp.timesheetportal.agency.Agency;
 import com.admiral.tsp.timesheetportal.contractor.Contractor;
-import com.admiral.tsp.timesheetportal.contractor.services.ContractorCreator;
+import com.admiral.tsp.timesheetportal.contractor.services.ContractorRepository;
+import com.admiral.tsp.timesheetportal.data.UserRepository;
+import com.admiral.tsp.timesheetportal.domain.User;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
-import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetCreator;
+import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpaRepo;
 import com.admiral.tsp.timesheetportal.timesheet.forms.TimesheetForm;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,70 +23,78 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDate;
 
+@Slf4j
 @Controller
 @SessionAttributes({"TimesheetKey"})
 public class TimesheetCreateController {
 
-
-    private TimesheetCreator timesheetCreator;
+    private TimesheetJpaRepo timesheetJpaRepo;
+    private UserRepository userJpaRepo;
+    private ContractorRepository contractorJpaRepo;
 
     @Autowired
-    public TimesheetCreateController(TimesheetCreator aTCreator) {
-        timesheetCreator = aTCreator;
+    public TimesheetCreateController(TimesheetJpaRepo aTCreator,
+                                     UserRepository userRepository,
+                                     ContractorRepository contractorRepository) {
+//        This needs to be changed in the future as
+//        by doing this it had a direct dependency
+        timesheetJpaRepo = aTCreator;
+        userJpaRepo = userRepository;
+        contractorJpaRepo = contractorRepository;
     }
 
-    static final Logger LOG = LoggerFactory.getLogger(TimesheetCreateController.class);
 
     //    timesheet Form Displayed on Contractor Page
     @PostMapping("/newTimesheet")
     public String timesheetDetails(@ModelAttribute("TimesheetKey") @Valid TimesheetForm timesheetForm,
                                    BindingResult bindingResult, // Keep this after valid
                                    Model model) {
+
         if (bindingResult.hasErrors()) {
-            LOG.error(bindingResult.toString());
-            LOG.error("timesheet Form has binding errors");
+
+            log.error(bindingResult.toString());
+            log.error("timesheet Form has binding errors");
+
             model.addAttribute("contractorTimesheetDetails", timesheetForm);
             return "contractor_view";
         }
+
 //        if details are correct do the submit
         return "redirect:/createTimesheet/";
     }
+
 
     @GetMapping("/createTimesheet")
     public String submitTimesheet(@ModelAttribute("TimesheetKey") TimesheetForm timesheetForm,
                                   Model model) {
 
+        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+
+        String user = a.getName();
+        a.getDetails();
+        log.info("The name given is: " + user + " - " + a.getDetails().toString());
+
+        User thisUser = userJpaRepo.findByUsername(user);
+
+        log.info("The user given is: " + thisUser.toString());
+
 //        TODO Fun create stuff
-        Agency agency = new Agency(
-                1L,
-                "x",
-                "x"
-        );
+        Contractor thisContractor = contractorJpaRepo.findContractorByUser(thisUser);
 
-
-        Contractor contractor = new Contractor(
-                1L,
-                "x",
-                "xxxx@gmail.com",
-                agency
-
-        );
+        log.info("The contractor given is: " + thisContractor.toString());
 
         Timesheet newTimesheet = new Timesheet(
                 null,
-                contractor,
-                agency,
+                thisContractor,
                 timesheetForm.getDays_worked(),
                 timesheetForm.getOvertime_completed(),
                 LocalDate.now()
-
-
         );
 
 
-        timesheetCreator.makeTimesheet(newTimesheet);
+        timesheetJpaRepo.makeTimesheet(newTimesheet);
 
-        LOG.debug("Here is the timesheet going into DB" + newTimesheet.toString());
+        log.debug("Here is the timesheet going into DB" + newTimesheet.toString());
 
         return "forward:/";
     }
