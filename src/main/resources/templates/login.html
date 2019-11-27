@@ -1,24 +1,53 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
->
-<head th:replace="fragments/header :: head">
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head"></head>
+
 <body>
+
 <div th:replace="fragments/header :: header"></div>
-<div class="serializedFormContainer">
-    <div th:if="${param.error}">
-        Invalid username and password.
+
+<main class="container" role="main">
+    <div class="starter-template">
+
+        <div class="row mx-auto custom-form">
+            <div class="col mx-auto custom-bg">
+
+                <form method="post" th:action="@{/login}">
+
+                    <div class="custom-label" th:if="${param.error}">
+                        Invalid username and password.
+                    </div>
+
+                    <div class="custom-label" th:if="${param.logout}">
+                        You have been logged out.
+                    </div>
+
+
+                    <div class="row mt-4 custom-label">
+                        <label class="custom-font">User Name:</label>
+                        <input class="form-control" name="username" type="text" required/>
+                    </div>
+
+                    <div class="row mt-4 custom-label">
+                        <label class="custom-font">Password:</label>
+                        <input class="form-control" name="password" type="password" required/>
+                    </div>
+
+
+                    <div class="row mt-4">
+                        <input class="btn btn-lg btn-primary btn-block text-uppercase custom-btn" type="submit"
+                               value="Sign In"/>
+
+                        <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
+                           th:href="@{/register}"
+                           th:id="register">Register</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
     </div>
-    <div th:if="${param.logout}">
-        You have been logged out.
-    </div>
-    <form method="post" th:action="@{/login}">
-        <div><label> User Name : <input name="username" type="text"/> </label></div>
-        <div><label> Password: <input name="password" type="password"/> </label></div>
-        <div><input type="submit" value="Sign In"/></div>
-    </form>
-    <a class="btn btn-primary"
-       th:href="@{/register}" th:id="register">Register</a>
-</div>
+</main>
 </body>
 </html>

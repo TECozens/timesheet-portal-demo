@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: head">
-    <!-- Fragment Insert -->
+<head th:replace="fragments/header :: head"></head>
 
-    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
-          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
-
-</head>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
-<div class="serializedFormContainer">
 
-    <div sec:authorize="isAuthenticated()">
-        Welcome back:
-        <div sec:authentication="name"></div>
-        <form method="post" th:action="@{/logout}">
-            <div><input type="submit" value="Logout"/></div>
-        </form>
+<main class="container mt-4 custom-form" role="main">
+    <div class="row custom-bg">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="serializedFormContainer">
+                <div sec:authorize="isAuthenticated()">
+
+
+
+                    <form method="post" th:action="@{/logout}">
+                        <label class="custom-label">
+                            <h3>
+                                Welcome back:
+                                <div sec:authentication="name"></div>
+                            </h3>
+                        </label>
+
+                        <input class="btn btn-lg btn-primary btn-block text-uppercase custom-btn" type="submit" value="Logout"/>
+                    </form>
+                </div>
+
+                <div sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
+                       th:href="@{/login}">Login</a>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div sec:authorize="!isAuthenticated()">
-        <a class="btn btn-primary"
-        th:href="@{/login}">Login</a>
-    </div>
-
-        <!--  TODO Login Form Here + Fields Here  -->
-<!--    <div class="row">-->
-<!--        <a class="btn btn-primary"-->
-<!--           th:href="@{/contractorView}"-->
-<!--           th:id="contractorView">-->
-<!--            <span>Sign In</span>-->
-<!--        </a>-->
-<!--    </div>-->
-
-</div>
+</main>
 </body>
 
 </html>
