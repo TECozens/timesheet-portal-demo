@@ -1,7 +1,7 @@
 package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
-import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetCreator;
+import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpaRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +22,10 @@ public class TimesheetViewController {
 
 
 
-    private TimesheetCreator timesheetCreator;
+    private TimesheetJpaRepo timesheetJpaRepo;
     @Autowired
-    public TimesheetViewController(TimesheetCreator timesheetCreator) {
-        this.timesheetCreator = timesheetCreator;
+    public TimesheetViewController(TimesheetJpaRepo timesheetJpaRepo) {
+        this.timesheetJpaRepo = timesheetJpaRepo;
     }
 
     static final Logger LOG = LoggerFactory.getLogger(TimesheetViewController.class);
@@ -36,7 +36,7 @@ public class TimesheetViewController {
 
 
 
-        Optional<Timesheet> foundTimesheet = timesheetCreator.getByID(Long.valueOf(index));
+        Optional<Timesheet> foundTimesheet = timesheetJpaRepo.getByID(Long.valueOf(index));
         log.info(String.valueOf(foundTimesheet.get()));
 
         if (foundTimesheet.isPresent()) {
@@ -50,7 +50,7 @@ public class TimesheetViewController {
     }
     @GetMapping("/Approvals")
     public String showTimesheetApprovalPage(Model model){
-        List<Timesheet> foundTimesheets = timesheetCreator.getAll();
+        List<Timesheet> foundTimesheets = timesheetJpaRepo.getAll();
 
         model.addAttribute("TimesheetKey", foundTimesheets);
 

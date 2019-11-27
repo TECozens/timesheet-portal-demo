@@ -7,30 +7,39 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Service
-public class ReviewProcessor implements ReviewCreator {
+public class ReviewProcessor implements ReviewJpaRepo {
 
-    private JpaRepository<Review, Long> reviewRepoJPA;
+    // Autowired the generic referenced JPA repository inside the implemented Repo
+    // This cleans up the layout of the code and bundles together the JPA interfaces
+    private JpaRepository<Review, Long> JpaRepo;
 
     @Autowired
-    public ReviewProcessor(JpaRepository<Review, Long> aRJPARepo) {
-        reviewRepoJPA = aRJPARepo;
+    public ReviewProcessor(JpaRepository<Review, Long> aJpaRepo) {
+        JpaRepo = aJpaRepo;
     }
 
 
     @Override
     @Transactional
-    public Review makeReview(Review newReview) {
-        Review updatedReview = reviewRepoJPA.saveAndFlush(newReview);
-        log.info(updatedReview.toString());
-        return updatedReview;
+    public Review makeReview(Review newR) {
+        Review updated = JpaRepo.saveAndFlush(newR);
+        log.info(updated.toString());
+
+        return updated;
     }
 
     @Override
     public Optional<Review> getByID(Long ID) {
-        return reviewRepoJPA.findById(ID);
+        return JpaRepo.findById(ID);
+    }
+
+    @Override
+    public List<Review> getAll() {
+        return JpaRepo.findAll();
     }
 }

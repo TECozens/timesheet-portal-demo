@@ -25,9 +25,9 @@ public class Review {
     private Boolean approved;
 
     @Column(name = "message")
-    private String a;
+    private String message;
 
-    @Column(name = "")
-    private String b;
+    @Column(name = "rating")
+    private Integer rating;
 
 }

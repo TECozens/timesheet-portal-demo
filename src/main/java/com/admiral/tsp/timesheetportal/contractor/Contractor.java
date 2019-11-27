@@ -1,6 +1,7 @@
 package com.admiral.tsp.timesheetportal.contractor;
 
 import com.admiral.tsp.timesheetportal.agency.Agency;
+import com.admiral.tsp.timesheetportal.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +20,9 @@ public class Contractor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "contractor_name")
-    private String name;
-
-    @Email
-    @Column(name = "email")
-    private String contractor_email;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "agency_id")
