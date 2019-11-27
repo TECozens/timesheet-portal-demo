@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
->
-<head>
-    <title>Logout</title>
-</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: head"></head>
+
+
 <body>
-<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-<form method="post" th:action="@{/logout}">
-    <input type="submit" value="Sign Out"/>
-</form>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container mt-4" role="main">
+    <div class="starter-template">
+
+        <div class="row">
+            <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+
+                <div class="row mt-4">
+                    <label>
+                        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+                    </label>
+                </div>
+
+                <form method="post" th:action="@{/logout}">
+                    <div class="row mt-4">
+                        <input class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" value="Sign Out"/>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
 </body>
 </html>

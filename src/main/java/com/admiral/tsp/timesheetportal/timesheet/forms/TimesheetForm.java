@@ -12,17 +12,17 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class TimesheetForm {
 
-    @NotNull
-    @Size(min = 2, max = 50, message = "Invalid Name")
-    private String name;
+//    @NotNull
+//    @Size(min = 2, max = 50, message = "Invalid Name")
+//    private String name;
 
 //    @NotNull
 //    @Size(min = 2, max = 50, message = "Invalid Manager Name")
 //    private String managerName;
 
-    @NotNull
-    @Size(min = 2, max = 50, message = "Invalid Agency")
-    private String agency;
+//    @NotNull
+//    @Size(min = 2, max = 50, message = "Invalid Agency")
+//    private String agency;
 
     @NotNull
     private Integer days_worked;

@@ -2,56 +2,69 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:type="http://www.w3.org/1999/xhtml">
 
-<head th:replace="fragments/header :: head">
-    <!-- Fragment Insert -->
-</head>
+<head th:replace="fragments/header :: head"></head>
 
 <body>
+
 <div th:replace="fragments/header :: header"></div>
-<main class="container mt-4" role="main">
+
+<main class="container" role="main">
     <div class="starter-template">
+        <div class="row mx-auto custom-form">
+            <div class="col mx-auto custom-bg">
+
+                <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
+                    <div>No matching Time Sheets</div>
+                </div>
 
 
-    <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
-        <div>No matching Time Sheets</div>
-    </div>
+                <div class="row mt-4 custom-label">
+                    <h4 th:text="'Contractor Time Sheets'"></h4>
+                </div>
 
-
-    <div class="row mt-4">
-        <h4 th:text="'Contractor Time Sheets'"></h4>  </div>
-        <div class = "mx-3">
-            <table>
-                <thead>
-                <tr>
-                    <th>Name </th>
-                    <th> Agency</th>
-                    <th> Days Worked</th>
-                    <th> Overtime</th>
-                    <th> Week finished</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="Timesheet: ${TimesheetKey}">
-                    <td><span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
-                    <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
-                    <td><span th:text="${Timesheet.daysWorked}"></span></td>
-                    <td><span th:text="${Timesheet.overtime}"></span></td>
-                    <td><span th:text="${Timesheet.week_finish}"></span></td>
-                    <td> <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|" id="approve" >Approve</button> </td>
-                   <td> <button class="btn btn-danger" id="reject">Reject</button> </td>
-                </tbody>
-            </table>
+                <div class="custom-form">
+                    <div class="mx-3 custom-bg">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Agency</th>
+                                <th>Days Worked</th>
+                                <th>Overtime</th>
+                                <th>Week finished</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="Timesheet: ${TimesheetKey}">
+                                <td><span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
+                                <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
+                                <td><span th:text="${Timesheet.daysWorked}"></span></td>
+                                <td><span th:text="${Timesheet.overtime}"></span></td>
+                                <td><span th:text="${Timesheet.week_finish}"></span></td>
+                                <td>
+                                    <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|"
+                                            id="approve">Approve
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" id="reject">Reject</button>
+                                </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </div>
-   </main>
-    <script>
-        function sendApproval(id) {
-            let xhr = new XMLHttpRequest();
+</main>
+<script>
+    function sendApproval(id) {
+        let xhr = new XMLHttpRequest();
 
-            xhr.open('POST', `/api/timesheets/approve/${id}`);
-            xhr.send();
-        }
-    </script>
+        xhr.open('POST', `/api/timesheets/approve/${id}`);
+        xhr.send();
+    }
+</script>
 </body>
 </html>
