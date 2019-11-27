@@ -21,4 +21,5 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/reports").setViewName("forward:/reports/index.html");
     }
 
+
 }

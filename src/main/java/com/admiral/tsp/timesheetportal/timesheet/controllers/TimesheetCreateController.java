@@ -2,6 +2,7 @@ package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
 import com.admiral.tsp.timesheetportal.agency.Agency;
 import com.admiral.tsp.timesheetportal.contractor.Contractor;
+import com.admiral.tsp.timesheetportal.contractor.services.ContractorCreator;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
 import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetCreator;
 import com.admiral.tsp.timesheetportal.timesheet.forms.TimesheetForm;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 @Controller
 @SessionAttributes({"TimesheetKey"})
 public class TimesheetCreateController {
+
 
     private TimesheetCreator timesheetCreator;
 
@@ -80,7 +82,7 @@ public class TimesheetCreateController {
 
         LOG.debug("Here is the timesheet going into DB" + newTimesheet.toString());
 
-        return "redirect:/contractorView";
+        return "forward:/";
     }
 
 
