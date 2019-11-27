@@ -38,12 +38,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        AuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+//        AuthenticationSuccessHandler successHandler = new SavedRequestAwareAuthenticationSuccessHandler();
+
+        AuthenticationSuccessHandler successHandler = new CustomAuthenticationSuccessHandler();
 
         http
                 .authorizeRequests()
                 .antMatchers("/reports/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/templates/contractor_view").access("hasRole('ROLE_CONTRACTOR')")
+                .antMatchers("/contractor_view").access("hasRole('ROLE_CONTRACTOR')")
+                .antMatchers("/manager_view").access("hasRole('ROLE_MANAGER')")
                 .antMatchers("/h2_console/**").permitAll()
                 .antMatchers("/").permitAll()
                 //.anyRequest().authenticated()
