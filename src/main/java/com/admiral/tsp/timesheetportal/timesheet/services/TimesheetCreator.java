@@ -8,6 +8,6 @@ import java.util.Optional;
 // Implemented by TimesheetProcessor
 public interface TimesheetCreator {
     Timesheet makeTimesheet(Timesheet timesheetEvent);
-    Optional<Timesheet> getTimesheetByIndex(Long index);
+    Optional<Timesheet> getByID(Long index);
     List<Timesheet> getAll();
 }

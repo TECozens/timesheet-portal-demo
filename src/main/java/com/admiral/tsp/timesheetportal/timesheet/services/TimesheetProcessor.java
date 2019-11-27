@@ -3,9 +3,11 @@ package com.admiral.tsp.timesheetportal.timesheet.services;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Time;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +15,10 @@ import java.util.Optional;
 @Service
 public class TimesheetProcessor implements TimesheetCreator {
 
-    private TimesheetRepoJPA timesheetRepoJPA;
+    private JpaRepository<Timesheet, Long> timesheetRepoJPA;
 
     @Autowired
-    public TimesheetProcessor(TimesheetRepoJPA aTJPARepo) {
+    public TimesheetProcessor(JpaRepository<Timesheet, Long> aTJPARepo) {
         timesheetRepoJPA = aTJPARepo;
     }
 
@@ -30,7 +32,7 @@ public class TimesheetProcessor implements TimesheetCreator {
     }
 
     @Override
-    public Optional<Timesheet> getTimesheetByIndex(Long index) {
+    public Optional<Timesheet> getByID(Long index) {
         return timesheetRepoJPA.findById(index);
     }
 

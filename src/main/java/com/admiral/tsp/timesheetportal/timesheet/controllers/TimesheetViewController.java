@@ -1,6 +1,5 @@
 package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
-import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetRepoJPA;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
 import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetCreator;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +21,10 @@ import java.util.Optional;
 public class TimesheetViewController {
 
 
-    private TimesheetRepoJPA timesheetRepoJPA;
 
     private TimesheetCreator timesheetCreator;
     @Autowired
-    public TimesheetViewController(TimesheetRepoJPA timesheetRepoJPA, TimesheetCreator timesheetCreator) {
-        this.timesheetRepoJPA = timesheetRepoJPA;
+    public TimesheetViewController(TimesheetCreator timesheetCreator) {
         this.timesheetCreator = timesheetCreator;
     }
 
@@ -39,7 +36,7 @@ public class TimesheetViewController {
 
 
 
-        Optional<Timesheet> foundTimesheet = timesheetRepoJPA.findById(Long.valueOf(index));
+        Optional<Timesheet> foundTimesheet = timesheetCreator.getByID(Long.valueOf(index));
         log.info(String.valueOf(foundTimesheet.get()));
 
         if (foundTimesheet.isPresent()) {

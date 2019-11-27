@@ -22,6 +22,12 @@ public class Review {
     private Timesheet timesheet;
 
     @Column(name = "approved")
-    private String approved;
+    private Boolean approved;
+
+    @Column(name = "message")
+    private String a;
+
+    @Column(name = "")
+    private String b;
 
 }
