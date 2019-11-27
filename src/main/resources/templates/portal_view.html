@@ -1,22 +1,39 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/header :: head">
     <!-- Fragment Insert -->
+
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" rel="stylesheet">
+
 </head>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="serializedFormContainer">
-    <!--  TODO Login Form Here + Fields Here  -->
-    <div class="row">
-        <a class="btn btn-primary btn-lg btn-block"
-           th:href="@{/contractorView}"
-           th:id="@{contractorView}">
-            <span>Sign In</span>
-        </a>
+
+    <div sec:authorize="isAuthenticated()">
+        Welcome back:
+        <div sec:authentication="name"></div>
+        <form method="post" th:action="@{/logout}">
+            <div><input type="submit" value="Logout"/></div>
+        </form>
     </div>
 
+    <div sec:authorize="!isAuthenticated()">
+        <a class="btn btn-primary"
+        th:href="@{/login}">Login</a>
+    </div>
+
+        <!--  TODO Login Form Here + Fields Here  -->
+<!--    <div class="row">-->
+<!--        <a class="btn btn-primary"-->
+<!--           th:href="@{/contractorView}"-->
+<!--           th:id="contractorView">-->
+<!--            <span>Sign In</span>-->
+<!--        </a>-->
+<!--    </div>-->
 
 </div>
 </body>
