@@ -1,11 +1,9 @@
-package com.admiral.tsp.timesheetportal.services.event;
+package com.admiral.tsp.timesheetportal.timesheet.services.event;
 
-import com.admiral.tsp.timesheetportal.domain.Agency;
-import com.admiral.tsp.timesheetportal.domain.Contractor;
+import com.admiral.tsp.timesheetportal.agency.Agency;
+import com.admiral.tsp.timesheetportal.contractor.Contractor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor

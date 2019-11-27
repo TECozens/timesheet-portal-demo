@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:type="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: head">
     <!-- Fragment Insert -->
@@ -8,11 +9,11 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <main class="container mt-4" role="main">
-    <div class="starter-template"></div>
+    <div class="starter-template">
 
 
     <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
-        <div>No matching Time Sheet</div>
+        <div>No matching Time Sheets</div>
     </div>
 
 
@@ -31,17 +32,26 @@
                 </thead>
                 <tbody>
                 <tr th:each="Timesheet: ${TimesheetKey}">
-                   <td><input th:field="${TimesheetKey.contractor.name}" /></td>
-                   <td><input th:field="${TimesheetKey.agency.name}" /></td>
-                    <td><input th:field="${TimesheetKey.daysWorked}" /></td>
-                      <td><input th:field="${TimesheetKey.overtime}" /></td>
-                      <td><input th:field="${TimesheetKey.week_finish}" /></td>
-
-
+                    <td><span th:text="${Timesheet.contractor.name}"></span></td>
+                    <td><span th:text="${Timesheet.agency.name}"></span></td>
+                    <td><span th:text="${Timesheet.daysWorked}"></span></td>
+                    <td><span th:text="${Timesheet.overtime}"></span></td>
+                    <td><span th:text="${Timesheet.week_finish}"></span></td>
+                    <td> <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|" id="approve" >Approve</button> </td>
+                   <td> <button class="btn btn-danger" id="reject">Reject</button> </td>
                 </tbody>
             </table>
 
         </div>
+    </div>
    </main>
+    <script>
+        function sendApproval(id) {
+            let xhr = new XMLHttpRequest();
+
+            xhr.open('POST', `/api/timesheets/approve/${id}`);
+            xhr.send();
+        }
+    </script>
 </body>
 </html>

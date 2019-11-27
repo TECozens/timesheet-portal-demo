@@ -1,5 +1,7 @@
-package com.admiral.tsp.timesheetportal.domain;
+package com.admiral.tsp.timesheetportal.timesheet;
 
+import com.admiral.tsp.timesheetportal.agency.Agency;
+import com.admiral.tsp.timesheetportal.contractor.Contractor;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +13,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Timesheet {
+public class
+Timesheet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
