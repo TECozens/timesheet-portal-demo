@@ -31,7 +31,7 @@
                                    class="form-control"
                                    placeholder="Days Worked"
                                    th:field="*{days_worked}"
-                                   type="text"/>
+                                   type="number" pattern="/d*"/>
 
                             <div class="alert alert-danger"
                                  th:errors="*{days_worked}"
@@ -48,7 +48,7 @@
                                    class="form-control"
                                    placeholder="Overtime Completed"
                                    th:field="*{overtime_completed}"
-                                   type="text"/>
+                                   type="number" pattern="/d*"/>
 
                             <div class="alert alert-danger"
                                  th:errors="*{overtime_completed}"

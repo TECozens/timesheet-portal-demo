@@ -23,8 +23,8 @@ public class ContractorController {
 
         String user = a.getName();
 
-        model.addAttribute("TimesheetKey", new TimesheetForm());
         model.addAttribute("User", user);
+        model.addAttribute("TimesheetKey", new TimesheetForm());
         return "contractor_view";
     }
 }

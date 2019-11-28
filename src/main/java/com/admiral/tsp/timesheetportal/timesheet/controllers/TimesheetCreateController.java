@@ -55,6 +55,11 @@ public class TimesheetCreateController {
             log.error(bindingResult.toString());
             log.error("timesheet Form has binding errors");
 
+            Authentication a = SecurityContextHolder.getContext().getAuthentication();
+
+            String user = a.getName();
+
+            model.addAttribute("User", user);
             model.addAttribute("contractorTimesheetDetails", timesheetForm);
             return "contractor_view";
         }
