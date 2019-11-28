@@ -27,7 +27,10 @@ public class TimesheetProcessor implements TimesheetJpaRepo {
     @Override
     @Transactional
     public Timesheet makeTimesheet(Timesheet newT) {
+        log.info("lookhere");
         Timesheet updated = RepoJPA.saveAndFlush(newT);
+
+
         log.info(updated.toString());
 
         return updated;

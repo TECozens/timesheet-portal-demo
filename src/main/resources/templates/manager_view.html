@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:type="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: head"></head>
 
@@ -22,22 +23,20 @@
                 </div>
 
                 <div class="custom-form">
-                    <div class="row mx-3 custom-bg">
+                    <div class="mx-3 custom-bg">
                         <table class="table table-light">
                             <thead>
                             <tr>
-                                <th>Name</th>
-                                <th> Agency</th>
-                                <th> Days Worked</th>
-                                <th> Overtime</th>
-                                <th> Week finished</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Agency</th>
+                                <th scope="col">Days Worked</th>
+                                <th scope="col">Overtime</th>
+                                <th scope="col">Week finished</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr th:each="Timesheet: ${TimesheetKey}">
-                                <td><span
-                                        th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span>
-                                </td>
+                                <td><span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
                                 <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
                                 <td><span th:text="${Timesheet.daysWorked}"></span></td>
                                 <td><span th:text="${Timesheet.overtime}"></span></td>
@@ -54,13 +53,11 @@
                         </table>
                     </div>
                 </div>
-
             </div>
 
         </div>
     </div>
 </main>
-
 <script>
     function sendApproval(id) {
         let xhr = new XMLHttpRequest();
