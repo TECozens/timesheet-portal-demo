@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -19,13 +20,18 @@ public class UserForm {
     @NotEmpty
     private String username;
 
-//    @NotNull
-//    @NotEmpty
-//    private String firstName;
-//
-//    @NotNull
-//    @NotEmpty
-//    private String lastName;
+    @NotNull
+    @NotEmpty
+    private String firstname;
+
+    @NotNull
+    @NotEmpty
+    private String surname;
+
+    @Email
+    @NotNull
+    @NotEmpty
+    private String email;
 
     @NotNull
     @NotEmpty

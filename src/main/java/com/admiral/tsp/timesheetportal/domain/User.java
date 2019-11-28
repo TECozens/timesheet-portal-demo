@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -23,13 +24,20 @@ public class User {
     @NotEmpty
     private String username;
 
-//    @NotNull
-//    @NotEmpty
-//    private String firstName;
-//
-//    @NotNull
-//    @NotEmpty
-//    private String lastName;
+    @Column
+    @NotNull
+    @NotEmpty
+    private String firstname;
+
+    @Column
+    @NotNull
+    @NotEmpty
+    private String surname;
+
+    @Email
+    @NotNull
+    @NotEmpty
+    private String email;
 
     @NotNull
     @NotEmpty
@@ -40,8 +48,8 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-//                ", firstName='" + firstName + '\'' +
-//                ", lastName='" + lastName + '\'' +
+                ", firstname='" + firstname + '\'' +
+                ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

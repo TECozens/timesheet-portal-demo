@@ -36,8 +36,8 @@
                             </thead>
                             <tbody>
                             <tr th:each="Timesheet: ${TimesheetKey}">
-                                <td><span th:text="${Timesheet.contractor.name}"></span></td>
-                                <td><span th:text="${Timesheet.agency.name}"></span></td>
+                                <td><span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
+                                <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
                                 <td><span th:text="${Timesheet.daysWorked}"></span></td>
                                 <td><span th:text="${Timesheet.overtime}"></span></td>
                                 <td><span th:text="${Timesheet.week_finish}"></span></td>
@@ -54,6 +54,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </main>
