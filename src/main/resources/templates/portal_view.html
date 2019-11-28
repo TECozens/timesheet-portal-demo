@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head"></head>
+
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container mt-4 custom-form" role="main">
+    <div class="row custom-bg">
+        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            <div class="serializedFormContainer">
+                <div sec:authorize="isAuthenticated()">
+
+
+
+                    <form method="post" th:action="@{/logout}">
+                        <label class="custom-label">
+                            <h3>
+                                Welcome back:
+                                <div sec:authentication="name"></div>
+                            </h3>
+                        </label>
+
+                        <input class="btn btn-lg btn-primary btn-block text-uppercase custom-btn" type="submit" value="Logout"/>
+                    </form>
+                </div>
+
+                <div sec:authorize="!isAuthenticated()">
+                    <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
+                       th:href="@{/login}">Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+
+</html>

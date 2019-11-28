@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+
+<main class="container" role="main">
+    <div class="starter-template">
+
+        <div class="row mx-auto custom-form">
+            <div class="col mx-auto custom-bg">
+                <div id=timeSheetDetails>
+
+                    <form action="#" method="post" th:action="@{/newTimesheet}" th:object="${TimesheetKey}">
+
+                        <!--Contractor Details Here-->
+                        <div class="custom-label" id=contractorProfile>
+                            <div><h4 th:text="'Logged in as: '+ ${User}"></h4></div>
+                        </div>
+
+                        <div class="custom-label">
+                            <h3>Please Enter Your Time Sheet Details</h3>
+                        </div>
+
+                        <div class="form-group custom-label">
+                            <label th:for="daysWorked">Days Worked</label>
+                            <input aria-describedby="Enter how many days you have worked."
+                                   class="form-control"
+                                   placeholder="Days Worked"
+                                   th:field="*{days_worked}"
+                                   type="number" pattern="/d*"/>
+
+                            <div class="alert alert-danger"
+                                 th:errors="*{days_worked}"
+                                 th:if="${#fields.hasErrors('days_worked')}">
+                                Days Worked Error: Please enter a valid number.
+                            </div>
+                        </div>
+
+
+                        <div class="form-group custom-label">
+                            <label th:for="overtime_completed">Overtime Completed</label>
+
+                            <input aria-describedby="Enter the amount of overtime completed."
+                                   class="form-control"
+                                   placeholder="Overtime Completed"
+                                   th:field="*{overtime_completed}"
+                                   type="number" pattern="/d*"/>
+
+                            <div class="alert alert-danger"
+                                 th:errors="*{overtime_completed}"
+                                 th:if="${#fields.hasErrors('overtime_completed')}">
+                                Overtime Error: Please enter a valid number.
+                            </div>
+                        </div>
+
+                        <div class="form-group custom-label custom-font">
+                            <label th:for="week_ending"><h3>Week Ending</h3></label>
+                            <p id="lastDay">
+                        </div>
+
+                        <div class="row mt-4">
+                            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+
+                            <input class="btn btn-lg btn-primary btn-block custom-btn" id="submit" type="submit"
+                                   value="Submit Time Sheet Form"/>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+
+<script>
+    var startingDate = new Date("15-Nov-2019");
+    var lastDay = new Date(startingDate.getTime() + 70 * 70 * 24 * 7 * 1000).toDateString();
+    document.getElementById('lastDay').innerText = lastDay;
+</script>
+
+</html>
