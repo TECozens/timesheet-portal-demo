@@ -96,7 +96,7 @@ public class TimesheetCreateController {
 
         log.debug("Here is the timesheet going into DB" + newTimesheet.toString());
 
-        return "forward:/";
+        return "redirect:/contractorView";
     }
 
 
