@@ -36,6 +36,8 @@ public class TimesheetCreateController {
     public TimesheetCreateController(TimesheetJpaRepo aTCreator,
                                      UserRepository userRepository,
                                      ContractorRepository contractorRepository) {
+//        This needs to be changed in the future as
+//        by doing this it had a direct dependency
         timesheetJpaRepo = aTCreator;
         userJpaRepo = userRepository;
         contractorJpaRepo = contractorRepository;
@@ -53,6 +55,11 @@ public class TimesheetCreateController {
             log.error(bindingResult.toString());
             log.error("timesheet Form has binding errors");
 
+            Authentication a = SecurityContextHolder.getContext().getAuthentication();
+
+            String user = a.getName();
+
+            model.addAttribute("User", user);
             model.addAttribute("contractorTimesheetDetails", timesheetForm);
             return "contractor_view";
         }
