@@ -4,12 +4,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/timesheets")
+@RequestMapping("/api/timesheets/")
 public class TimesheetRestController {
 
 
 
-    @PostMapping("/approve/{id}")
+    @PostMapping("/review/approve/{id}")
     public ResponseEntity approveTimesheet(@PathVariable("id") Integer id) {
 
         // Approve by the given id here
