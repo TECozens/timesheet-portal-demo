@@ -99,20 +99,22 @@
                                    </div>
 
                                                 <div class="form-group custom-label">
-                                                    <label th:for="comments">Comments</label>
+                                                    <label th:for="message">Comments</label>
                                                     <input
                                                             class="form-control"
                                                             placeholder="Comments"
-                                                            th:field="*{comments}"
+                                                            th:field="*{message}"
                                                             type="text" />
                                                 </div>
-                                                    <button class="btn btn- btn-primary" th:onclick="|sendApproval('${Timesheet.id}')|"
-                                                id="approve">Save</button>
+                                        <button class="btn btn- btn-primary" id="save" type="save"
+                                           id="approve">Save</button>
 
                                                     <button class="btn btn-primary "
                                                               th:href="@{/Review}"
                                                             th:id="back"> Back</button>
 
+                                <!--   <button class="btn btn- btn-primary" th:onclick="|sendApproval('${Timesheet.id}')|"
+                                           id="approve">Save</button> -->
 
                                 </form>
                             </div>

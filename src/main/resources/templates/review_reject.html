@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:type="http://www.w3.org/1999/xhtml">
+
+            <head th:replace="fragments/header :: head"></head>
+
+            <body>
+            <div th:replace="fragments/header :: header"></div>
+
+
+            <main class="container" role="main">
+                <div class="starter-template">
+
+                    <div class="row mx-auto custom-form">
+                        <div class="col mx-auto custom-bg">
+                            <div id=approvalReview>
+
+                               <form action="#" method="post" th:action="@{/newReview}" th:object="${ReviewKey}">
+
+                                    <div class="custom-label">
+                                        <h3>Time Sheet Rejection Explanation</h3>
+                                        <p>Please write a brief description as to why this time sheet was rejected </p>
+                                    </div>
+
+                                                <div class="form-group custom-label">
+                                                    <label th:for="message">Comments</label>
+                                                    <input
+                                                            class="form-control"
+                                                            placeholder="Comments"
+                                                            th:field="*{message}"
+                                                            type="text" />
+                                                </div>
+                                                    <button class="btn btn- btn-primary" id="saveReject" type="saveRejct"
+                                                id="approve">Save</button>
+                                                    <button class="btn btn-primary "
+                                                              th:href="@{/Review}"
+                                                            th:id="back"> Back</button>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+            </body>
+
+
+        </div>
+</main>
+<script>
+    function sendRejection(id) {
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('POST', `/api/timesheets/review/reject ${id}`);
+        xhr.send();
+    }
+</script>
+</body>
+</html>
