@@ -34,4 +34,6 @@ public class ApprovalReviewForm {
     @Min(value = 1, message = "You must choose a number between 1 and 3!")
     private Integer working_relations;
 
+
+    private String message;
 }
