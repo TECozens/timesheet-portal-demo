@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:type="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/header :: head"></head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container" role="main">
+    <div class="starter-template">
+        <div class="row mx-auto custom-form">
+            <div class="col mx-auto custom-bg">
+
+<!--                <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">-->
+<!--                    <div>No matching Time Sheets</div>-->
+<!--                </div>-->
+
+
+<!--                <div class="row mt-4 custom-label">-->
+<!--                    <h4 th:text="'Contractor Time Sheets'"></h4>-->
+<!--                </div>-->
+
+<!--                <div class="custom-form">-->
+<!--                    <div class="mx-3 custom-bg">-->
+<!--                        <table class="table table-light">-->
+<!--                            <thead>-->
+<!--                            <tr>-->
+<!--                                <th scope="col">Name</th>-->
+<!--                                <th scope="col">Agency</th>-->
+<!--                                <th scope="col">Days Worked</th>-->
+<!--                                <th scope="col">Overtime</th>-->
+<!--                                <th scope="col">Week finished</th>-->
+<!--                            </tr>-->
+<!--                            </thead>-->
+<!--                            <tbody>-->
+<!--                            <tr th:each="Timesheet: ${TimesheetKey}">-->
+<!--                                <td><span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>-->
+<!--                                <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>-->
+<!--                                <td><span th:text="${Timesheet.daysWorked}"></span></td>-->
+<!--                                <td><span th:text="${Timesheet.overtime}"></span></td>-->
+<!--                                <td><span th:text="${Timesheet.week_finish}"></span></td>-->
+<!--                                <td>-->
+<!--                                    <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|"-->
+<!--                                            id="approve">Approve-->
+<!--                                    </button>-->
+<!--                                </td>-->
+<!--                                <td>-->
+<!--                                    <button class="btn btn-danger" id="reject">Reject</button>-->
+<!--                                </td>-->
+<!--                            </tbody>-->
+<!--                        </table>-->
+<!--                    </div>-->
+<!--                </div>-->
+            </div>
+
+        </div>
+    </div>
+</main>
+<script>
+    function sendApproval(id) {
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('POST', `/api/timesheets/approve/${id}`);
+        xhr.send();
+    }
+</script>
+</body>
+</html>

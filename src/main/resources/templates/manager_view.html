@@ -41,13 +41,16 @@
                                 <td><span th:text="${Timesheet.daysWorked}"></span></td>
                                 <td><span th:text="${Timesheet.overtime}"></span></td>
                                 <td><span th:text="${Timesheet.week_finish}"></span></td>
-                                <td>
-                                    <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|"
-                                            id="approve">Approve
-                                    </button>
+                                <td>   <a class="btn btn-success btn-block "
+                                          th:href="@{/Approval}"
+                                          th:id="approve">Approve</a>
+                               <!--  <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|" />
+                                    id="approve">Approve
+                                    </button>-->
                                 </td>
-                                <td>
-                                    <button class="btn btn-danger" id="reject">Reject</button>
+                                <td>   <a class="btn btn-danger btn-block "
+                                          th:href="@{/Reject}"
+                                          th:id="reject">Reject</a>
                                 </td>
                             </tbody>
                         </table>
@@ -58,13 +61,6 @@
         </div>
     </div>
 </main>
-<script>
-    function sendApproval(id) {
-        let xhr = new XMLHttpRequest();
 
-        xhr.open('POST', `/api/timesheets/approve/${id}`);
-        xhr.send();
-    }
-</script>
 </body>
 </html>
