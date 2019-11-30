@@ -1,19 +1,14 @@
 package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
-import com.admiral.tsp.timesheetportal.agency.Agency;
 import com.admiral.tsp.timesheetportal.contractor.Contractor;
+import com.admiral.tsp.timesheetportal.contractor.services.ContractorJpa;
 import com.admiral.tsp.timesheetportal.contractor.services.ContractorRepository;
-import com.admiral.tsp.timesheetportal.data.UserRepository;
-import com.admiral.tsp.timesheetportal.domain.User;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
-import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpaRepo;
+import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpa;
 import com.admiral.tsp.timesheetportal.timesheet.forms.TimesheetForm;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +24,9 @@ import java.time.LocalDate;
 public class TimesheetCreateController {
 
     @Autowired
-    private TimesheetJpaRepo timesheetJpaRepo;
+    private TimesheetJpa timesheetJpa;
     @Autowired
-    private ContractorRepository contractorJpaRepo;
+    private ContractorJpa contractorJpa;
 
 
 
@@ -66,12 +61,12 @@ public class TimesheetCreateController {
 
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
 
-        String user = a.getName();
+        String username = a.getName();
 
-        log.info("The name given is: " + user + " - " + a.getDetails().toString());
+        log.info("The name given is: " + username + " - " + a.getDetails().toString());
 
 //        TODO Fun create stuff
-        Contractor thisContractor = contractorJpaRepo.getContractorByUsername(user).get();
+        Contractor thisContractor = contractorJpa.getByUsername(username).get();
 
         log.info("The contractor given is: " + thisContractor.toString());
 
@@ -84,7 +79,7 @@ public class TimesheetCreateController {
         );
 
 
-        timesheetJpaRepo.makeTimesheet(newTimesheet);
+        timesheetJpa.makeTimesheet(newTimesheet);
 
         log.debug("Here is the timesheet going into DB" + newTimesheet.toString());
 

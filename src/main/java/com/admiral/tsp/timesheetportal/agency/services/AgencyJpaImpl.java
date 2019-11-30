@@ -3,23 +3,20 @@ package com.admiral.tsp.timesheetportal.agency.services;
 import com.admiral.tsp.timesheetportal.agency.Agency;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service
-public class AgencyProcessor implements AgencyJpaRepo {
+public class AgencyJpaImpl implements AgencyJpa {
 
-    // Autowired the generic referenced JPA repository inside the implemented Repo
-    // This cleans up the layout of the code and bundles together the JPA interfaces
+    // Autowired the agency repository inside implementation
     private AgencyRepository agencyRepository;
 
     @Autowired
-    public AgencyProcessor(AgencyRepository agencyRepository) {
+    public AgencyJpaImpl(AgencyRepository agencyRepository) {
         this.agencyRepository = agencyRepository;
     }
 

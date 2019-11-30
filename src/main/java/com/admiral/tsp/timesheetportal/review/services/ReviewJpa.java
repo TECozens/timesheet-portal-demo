@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-// Implemented by ReviewProcessor
-public interface ReviewJpaRepo {
+// Implemented by ReviewJpaImpl
+public interface ReviewJpa {
 
     Review makeReview(Review item);
     Optional<Review> getByID(Integer ID);

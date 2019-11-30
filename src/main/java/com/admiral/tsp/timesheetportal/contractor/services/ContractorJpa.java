@@ -8,9 +8,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-// Implemented by ContractorProcessor
-@Repository
-public interface ContractorJpaRepo {
+// Implemented by ContractorJpaImpl
+public interface ContractorJpa {
 
     Contractor makeContractor(Contractor item);
     Optional<Contractor> getByID(Integer ID);

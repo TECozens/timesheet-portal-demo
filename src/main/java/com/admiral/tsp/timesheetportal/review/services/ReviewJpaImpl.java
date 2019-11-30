@@ -3,7 +3,6 @@ package com.admiral.tsp.timesheetportal.review.services;
 import com.admiral.tsp.timesheetportal.review.Review;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,14 +11,13 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class ReviewProcessor implements ReviewJpaRepo {
+public class ReviewJpaImpl implements ReviewJpa {
 
-    // Autowired the generic referenced JPA repository inside the implemented Repo
-    // This cleans up the layout of the code and bundles together the JPA interfaces
+    // Autowired the review repository inside implementation
     private ReviewRepository reviewRepository;
 
     @Autowired
-    public ReviewProcessor(ReviewRepository reviewRepository){
+    public ReviewJpaImpl(ReviewRepository reviewRepository){
         this.reviewRepository = reviewRepository;
     }
 
@@ -27,6 +25,7 @@ public class ReviewProcessor implements ReviewJpaRepo {
     @Override
     @Transactional
     public Review makeReview(Review newR) {
+
         Review updated = reviewRepository.saveAndFlush(newR);
         log.info(updated.toString());
 

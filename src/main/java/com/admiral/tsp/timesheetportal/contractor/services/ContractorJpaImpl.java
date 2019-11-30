@@ -5,7 +5,6 @@ import com.admiral.tsp.timesheetportal.data.UserRepository;
 import com.admiral.tsp.timesheetportal.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,16 +13,15 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class ContractorProcessor implements ContractorJpaRepo {
+public class ContractorJpaImpl implements ContractorJpa {
 
-    // Autowired the generic referenced JPA repository inside the implemented Repo
-    // This cleans up the layout of the code and bundles together the JPA interfaces
+    // Autowired the contractor repository inside implementation
     private ContractorRepository contractorRepository;
     private UserRepository UserJpaRepo;
 
     @Autowired
-    public ContractorProcessor(ContractorRepository contractorRepository,
-                               UserRepository UserJpaRepo) {
+    public ContractorJpaImpl(ContractorRepository contractorRepository,
+                             UserRepository UserJpaRepo) {
         this.contractorRepository = contractorRepository;
         this.UserJpaRepo = UserJpaRepo;
     }

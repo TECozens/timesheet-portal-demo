@@ -7,9 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
-// Implemented by AgencyProcessor
-@Repository
-public interface AgencyJpaRepo {
+// Implemented by AgencyJpaImpl
+public interface AgencyJpa {
 
     Agency makeAgency(Agency agency);
     Agency findByID(Integer ID);

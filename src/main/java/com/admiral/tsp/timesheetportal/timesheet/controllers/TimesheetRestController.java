@@ -1,9 +1,9 @@
 package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
 import com.admiral.tsp.timesheetportal.review.Review;
-import com.admiral.tsp.timesheetportal.review.services.ReviewJpaRepo;
+import com.admiral.tsp.timesheetportal.review.services.ReviewJpa;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
-import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpaRepo;
+import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.*;
 public class TimesheetRestController {
 
     @Autowired
-    private ReviewJpaRepo reviewJpaRepo;
+    private ReviewJpa reviewJpa;
     @Autowired
-    private TimesheetJpaRepo timesheetJpaRepo;
+    private TimesheetJpa timesheetJpa;
 
 
 
@@ -26,7 +26,7 @@ public class TimesheetRestController {
 
         // Approve by the given id here
 
-        Timesheet timesheet = timesheetJpaRepo.getByID(id).get();
+        Timesheet timesheet = timesheetJpa.getByID(id).get();
         Boolean approved = true;
 
         Review review = new Review(
@@ -41,7 +41,7 @@ public class TimesheetRestController {
                 3,
                 3);
 
-        review = reviewJpaRepo.makeReview(review);
+        review = reviewJpa.makeReview(review);
 
         log.info(review.toString());
 

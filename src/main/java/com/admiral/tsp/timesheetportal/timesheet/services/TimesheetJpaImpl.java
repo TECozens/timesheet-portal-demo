@@ -3,7 +3,6 @@ package com.admiral.tsp.timesheetportal.timesheet.services;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,10 +11,9 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class TimesheetProcessor implements TimesheetJpaRepo {
+public class TimesheetJpaImpl implements TimesheetJpa {
 
-    // Autowired the generic referenced JPA repository inside the implemented Repo
-    // This cleans up the layout of the code and bundles together the JPA interfaces
+    // Autowired the timesheet repository inside implementation
     @Autowired
     private TimesheetRepository timesheetRepository;
 
@@ -24,9 +22,8 @@ public class TimesheetProcessor implements TimesheetJpaRepo {
     @Override
     @Transactional
     public Timesheet makeTimesheet(Timesheet newT) {
-        log.info("lookhere");
-        Timesheet updated = timesheetRepository.saveAndFlush(newT);
 
+        Timesheet updated = timesheetRepository.saveAndFlush(newT);
 
         log.info(updated.toString());
 
