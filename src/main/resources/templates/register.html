@@ -28,7 +28,7 @@
 
                             <div class="alert alert-danger"
                                  th:errors="*{username}"
-                                 th:if="${#fields.hasErrors(username)}">
+                                 th:if="${#fields.hasErrors('username')}">
                                 Username Error: Please enter a valid username.
                             </div>
                         </div>
@@ -43,7 +43,7 @@
 
                             <div class="alert alert-danger"
                                  th:errors="*{firstName}"
-                                 th:if="${#fields.hasErrors(firstName)}">
+                                 th:if="${#fields.hasErrors('firstName')}">
                                 First Name Error: Please enter a valid First Name.
                             </div>
                         </div>
@@ -58,7 +58,7 @@
 
                             <div class="alert alert-danger"
                                  th:errors="*{surname}"
-                                 th:if="${#fields.hasErrors(surname)}">
+                                 th:if="${#fields.hasErrors('surname')}">
                                 Surname Error: Please enter a valid surname.
                             </div>
                         </div>
@@ -73,7 +73,7 @@
 
                             <div class="alert alert-danger"
                                  th:errors="*{email}"
-                                 th:if="${#fields.hasErrors(email)}">
+                                 th:if="${#fields.hasErrors('email')}">
                                 Email Error: Please enter a valid email.
                             </div>
                         </div>
@@ -88,7 +88,7 @@
 
                             <div class="alert alert-danger"
                                  th:errors="*{password}"
-                                 th:if="${#fields.hasErrors(password)}">
+                                 th:if="${#fields.hasErrors('password')}">
                                 Password Error: Please enter a valid password.
                             </div>
                         </div>
