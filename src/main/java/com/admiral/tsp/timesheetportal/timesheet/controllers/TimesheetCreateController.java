@@ -1,19 +1,14 @@
 package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
-import com.admiral.tsp.timesheetportal.agency.Agency;
 import com.admiral.tsp.timesheetportal.contractor.Contractor;
+import com.admiral.tsp.timesheetportal.contractor.services.ContractorJpa;
 import com.admiral.tsp.timesheetportal.contractor.services.ContractorRepository;
-import com.admiral.tsp.timesheetportal.data.UserRepository;
-import com.admiral.tsp.timesheetportal.domain.User;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
-import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpaRepo;
+import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpa;
 import com.admiral.tsp.timesheetportal.timesheet.forms.TimesheetForm;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,20 +23,11 @@ import java.time.LocalDate;
 @SessionAttributes({"TimesheetKey"})
 public class TimesheetCreateController {
 
-    private TimesheetJpaRepo timesheetJpaRepo;
-    private UserRepository userJpaRepo;
-    private ContractorRepository contractorJpaRepo;
-
     @Autowired
-    public TimesheetCreateController(TimesheetJpaRepo aTCreator,
-                                     UserRepository userRepository,
-                                     ContractorRepository contractorRepository) {
-//        This needs to be changed in the future as
-//        by doing this it had a direct dependency
-        timesheetJpaRepo = aTCreator;
-        userJpaRepo = userRepository;
-        contractorJpaRepo = contractorRepository;
-    }
+    private TimesheetJpa timesheetJpa;
+    @Autowired
+    private ContractorJpa contractorJpa;
+
 
 
     //    timesheet Form Displayed on Contractor Page
@@ -75,16 +61,12 @@ public class TimesheetCreateController {
 
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
 
-        String user = a.getName();
-        a.getDetails();
-        log.info("The name given is: " + user + " - " + a.getDetails().toString());
+        String username = a.getName();
 
-        User thisUser = userJpaRepo.findByUsername(user);
-
-        log.info("The user given is: " + thisUser.toString());
+        log.info("The name given is: " + username + " - " + a.getDetails().toString());
 
 //        TODO Fun create stuff
-        Contractor thisContractor = contractorJpaRepo.findContractorByUser(thisUser);
+        Contractor thisContractor = contractorJpa.getByUsername(username).get();
 
         log.info("The contractor given is: " + thisContractor.toString());
 
@@ -97,7 +79,7 @@ public class TimesheetCreateController {
         );
 
 
-        timesheetJpaRepo.makeTimesheet(newTimesheet);
+        timesheetJpa.makeTimesheet(newTimesheet);
 
         log.debug("Here is the timesheet going into DB" + newTimesheet.toString());
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:type="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/header :: head"></head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container" role="main">
+    <div class="starter-template">
+        <div class="row mx-auto custom-form">
+            <div class="col mx-auto custom-bg">
+
+                <div id=missingTimesheetMessage th:if="${Reviews.isEmpty()}">
+                    <div>No matching Invoices</div>
+                </div>
+
+
+                <div class="row mt-4 custom-label">
+                    <h4 th:text="'Invoices'"></h4>
+                </div>
+
+                <div class="custom-form" th:if="${!Reviews.isEmpty()}">
+                    <div class="mx-3 custom-bg">
+                        <table class="table table-light">
+                            <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Agency</th>
+                                <th scope="col">Agency Email</th>
+                                <th scope="col">Days Worked</th>
+                                <th scope="col">Overtime</th>
+                                <th scope="col">Week finished</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="ReviewItem: ${Reviews}">
+                                <td><span th:text="${ReviewItem.timesheet.contractor.user.firstname}
+                                            + ' ' + ${ReviewItem.timesheet.contractor.user.surname}"></span></td>
+                                <td><span th:text="${ReviewItem.timesheet.contractor.agency.name}"></span></td>
+                                <td><span th:text="${ReviewItem.timesheet.contractor.agency.agency_email}"></span></td>
+                                <td><span th:text="${ReviewItem.timesheet.daysWorked}"></span></td>
+                                <td><span th:text="${ReviewItem.timesheet.overtime}"></span></td>
+                                <td><span th:text="${ReviewItem.timesheet.week_finish}"></span></td>
+                                <td><span th:text="${ReviewItem.approved}"></span></td>
+                                <td>
+                                    <button class="btn btn-success" id="approve"
+                                            th:onclick="|sendApproval(${ReviewItem.id})|">
+                                        Confirm Invoice
+                                    </button>
+                                </td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</main>
+<script>
+    function sendApproval(id) {
+        // Commented out cos not been mapped to a rest API yet
+        // let xhr = new XMLHttpRequest();
+        //
+        // xhr.open('POST', `/api/timesheets/approve/${id}`);
+        // xhr.send();
+    }
+</script>
+</body>
+</html>
