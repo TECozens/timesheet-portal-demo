@@ -65,6 +65,9 @@ CREATE TABLE IF NOT EXISTS `review`
 (
     `id`       int(11)      NOT NULL AUTO_INCREMENT,
     `timesheet_id` INT UNSIGNED NOT NULL,
+    `approved` BIT,
+    `paid` BIT,
+    `message` VARCHAR (70),
     `communication_rating` INT UNSIGNED,
     `tech_skills_rating` INT UNSIGNED,
     `quality_rating` INT UNSIGNED,

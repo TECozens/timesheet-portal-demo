@@ -23,6 +23,10 @@ INSERT INTO contractor (id, user_id, agency_id, manager_id) VALUES (1L, 1, 1, 3)
 INSERT INTO timesheet (id, contractor_id, days_worked, overtime, week_finish) VALUES (1L, 1, 5, 1, '2019-11-10');
 INSERT INTO timesheet (id, contractor_id, days_worked, overtime, week_finish) VALUES (2L, 1, 4, 2, '2019-11-17');
 
+INSERT INTO review (id, timesheet_id, approved, paid, message, communication_rating, tech_skills_rating,
+                    quality_rating, initiative_rating, productivity_rating, working_relationships_rating)
+            VALUES (1, 1, TRUE, FALSE , 'Fake message cos this is perfectly fine', 3, 3, 3, 3, 3, 3);
+
 INSERT INTO user_role (userid, role) VALUES (001, 'ROLE_CONTRACTOR');
 INSERT INTO user_role (userid, role) VALUES (002, 'ROLE_ADMIN');
 INSERT INTO user_role (userid, role) VALUES (003, 'ROLE_MANAGER');

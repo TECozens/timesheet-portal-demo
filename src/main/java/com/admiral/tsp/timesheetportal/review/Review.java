@@ -24,6 +24,9 @@ public class Review {
     @Column(name = "approved")
     private Boolean approved;
 
+    @Column(name = "paid")
+    private Boolean paid;
+
     @Column(name = "message")
     private String message;
 
