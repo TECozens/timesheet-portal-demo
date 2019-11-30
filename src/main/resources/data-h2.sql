@@ -18,7 +18,7 @@ INSERT INTO agency (id, agency_name, email) VALUES (1L, 'agency1', 'xxx@hotmail.
 INSERT INTO agency (id, agency_name, email) VALUES (2L, 'agency2', 'xxx@sky.com');
 
 
-INSERT INTO contractor (id, user_id, agency_id) VALUES (1L, 1, 1);
+INSERT INTO contractor (id, user_id, agency_id, manager_id) VALUES (1L, 1, 1, 3);
 
 INSERT INTO timesheet (id, contractor_id, days_worked, overtime, week_finish) VALUES (1L, 1, 5, 1, '2019-11-10');
 INSERT INTO timesheet (id, contractor_id, days_worked, overtime, week_finish) VALUES (2L, 1, 4, 2, '2019-11-17');

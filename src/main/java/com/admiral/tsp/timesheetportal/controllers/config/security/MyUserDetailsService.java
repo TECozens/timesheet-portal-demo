@@ -16,12 +16,16 @@ import java.util.List;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserRolesRepository userRolesRepository;
     @Autowired
     private PasswordEncoder encoder;
+
+    @Autowired
+    public MyUserDetailsService(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) {
@@ -29,7 +33,7 @@ public class MyUserDetailsService implements UserDetailsService {
         System.out.println("password encoded = " + encoder.encode("password"));
 
 
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.getUserByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         } else {

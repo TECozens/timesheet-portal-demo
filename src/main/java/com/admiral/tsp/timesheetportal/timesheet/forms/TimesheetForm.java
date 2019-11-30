@@ -17,7 +17,7 @@ import javax.validation.constraints.*;
 public class TimesheetForm {
 
     @NotNull(message = "Must not be empty!")
-    @Max(value = 5, message = "Must be 5 days or less")
+    @Max(value = 7, message = "Must be 5 days or less")
     @Min(value = 1, message = "You must work at least 1 day!")
     private Integer days_worked;
 
