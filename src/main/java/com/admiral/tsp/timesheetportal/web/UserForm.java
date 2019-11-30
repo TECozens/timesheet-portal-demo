@@ -22,7 +22,7 @@ public class UserForm {
 
     @NotNull
     @NotEmpty
-    private String firstname;
+    private String firstName;
 
     @NotNull
     @NotEmpty

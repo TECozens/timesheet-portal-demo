@@ -3,15 +3,12 @@ package com.admiral.tsp.timesheetportal.registration.controllers;
 //import com.admiral.tsp.timesheetportal.agency.services.AgencyRepository;
 import com.admiral.tsp.timesheetportal.data.UserRepository;
 import com.admiral.tsp.timesheetportal.domain.User;
-import com.admiral.tsp.timesheetportal.domain.UserRole;
 import com.admiral.tsp.timesheetportal.registration.forms.RegistrationForm;
-import com.admiral.tsp.timesheetportal.registration.services.RegistrationJpaRepo;
+import com.admiral.tsp.timesheetportal.registration.services.RegistrationJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,16 +21,16 @@ import javax.validation.Valid;
 @SessionAttributes({"registerKey"})
 public class RegistrationController {
 
-    private RegistrationJpaRepo registrationJpaRepo;
+    private RegistrationJpa registrationJpa;
     private UserRepository userRepository;
 //    private AgencyRepository agencyRepository;
 
     @Autowired
-    public RegistrationController(RegistrationJpaRepo aRegistrationJpaRepo,
+    public RegistrationController(RegistrationJpa aRegistrationJpa,
                                   UserRepository aUserRepository
 //                                  AgencyRepository aAgencyRepository
     ){
-        this.registrationJpaRepo = aRegistrationJpaRepo;
+        this.registrationJpa = aRegistrationJpa;
         this.userRepository = aUserRepository;
 //        this.agencyRepository = aAgencyRepository;
     }
@@ -81,8 +78,8 @@ public class RegistrationController {
 //                registrationForm.getRole()
 //        );
 
-        registrationJpaRepo.makeUser(newUser);
-//        registrationJpaRepo.makeUser(newRole);
+        registrationJpa.makeUser(newUser);
+//        registrationJpa.makeUser(newRole);
 
         log.debug("New User going into DB" + newUser.toString());
 

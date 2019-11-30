@@ -31,6 +31,20 @@
                                 Username Error: Please enter a valid username.
                             </div>
 
+                            <div class="form-group custom-label">
+                                <label th:for="firstname">firstName</label>
+                                <input aria-describedby="Enter First Name."
+                                       class="form-control"
+                                       placeholder="First Name"
+                                       th:field="*{firstname}"
+                                       type="text">
+
+                                <div class="alert alert-danger"
+                                     th:errors="*{firstname}"
+                                     th:if="${#fields.hasErrors(firstname)}">
+                                    First Name Error: Please enter a valid First Name.
+                                </div>
+
                         </div>
 
                     </form>
