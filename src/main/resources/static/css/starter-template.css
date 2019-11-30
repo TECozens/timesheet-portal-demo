@@ -1,3 +1,4 @@
+
 body {
     background-color: gainsboro;
 }
@@ -6,6 +7,11 @@ body {
     padding: 5rem 5rem;
     text-align: left;
 }
+
+.custom-focus, button:focus {
+    outline: 0;
+}
+
 
 .custom-txt {
     font-family: sans-serif;
@@ -44,4 +50,16 @@ body {
 .custom-form {
     background-color: #0D3759;
     border-radius: 20px;
+}
+@media (min-width: 768px) {
+    .container-fluid>.navbar-header,
+    .container>.navbar-header {
+        width: 31%; /*31% as you mentioned in comments*/
+    }
+    img.navbar-brand {
+        width: auto;
+        height: auto;
+        max-height: 500px;
+        max-width: 100%;
+    }
 }
