@@ -28,4 +28,8 @@ public class Contractor {
     @JoinColumn(name = "agency_id")
     private Agency agency;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "manager_id")
+    private User manager;
+
 }

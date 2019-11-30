@@ -28,20 +28,11 @@ import java.time.LocalDate;
 @SessionAttributes({"TimesheetKey"})
 public class TimesheetCreateController {
 
+    @Autowired
     private TimesheetJpaRepo timesheetJpaRepo;
-    private UserRepository userJpaRepo;
+    @Autowired
     private ContractorRepository contractorJpaRepo;
 
-    @Autowired
-    public TimesheetCreateController(TimesheetJpaRepo aTCreator,
-                                     UserRepository userRepository,
-                                     ContractorRepository contractorRepository) {
-//        This needs to be changed in the future as
-//        by doing this it had a direct dependency
-        timesheetJpaRepo = aTCreator;
-        userJpaRepo = userRepository;
-        contractorJpaRepo = contractorRepository;
-    }
 
 
     //    timesheet Form Displayed on Contractor Page
@@ -76,15 +67,11 @@ public class TimesheetCreateController {
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
 
         String user = a.getName();
-        a.getDetails();
+
         log.info("The name given is: " + user + " - " + a.getDetails().toString());
 
-        User thisUser = userJpaRepo.findByUsername(user);
-
-        log.info("The user given is: " + thisUser.toString());
-
 //        TODO Fun create stuff
-        Contractor thisContractor = contractorJpaRepo.findContractorByUser(thisUser);
+        Contractor thisContractor = contractorJpaRepo.getContractorByUsername(user).get();
 
         log.info("The contractor given is: " + thisContractor.toString());
 

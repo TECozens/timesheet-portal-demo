@@ -16,19 +16,16 @@ public class TimesheetProcessor implements TimesheetJpaRepo {
 
     // Autowired the generic referenced JPA repository inside the implemented Repo
     // This cleans up the layout of the code and bundles together the JPA interfaces
-    private JpaRepository<Timesheet, Long> RepoJPA;
-
     @Autowired
-    public TimesheetProcessor(JpaRepository<Timesheet, Long> aJPARepo) {
-        RepoJPA = aJPARepo;
-    }
+    private TimesheetRepository timesheetRepository;
+
 
 
     @Override
     @Transactional
     public Timesheet makeTimesheet(Timesheet newT) {
         log.info("lookhere");
-        Timesheet updated = RepoJPA.saveAndFlush(newT);
+        Timesheet updated = timesheetRepository.saveAndFlush(newT);
 
 
         log.info(updated.toString());
@@ -37,13 +34,13 @@ public class TimesheetProcessor implements TimesheetJpaRepo {
     }
 
     @Override
-    public Optional<Timesheet> getByID(Long index) {
-        return RepoJPA.findById(index);
+    public Optional<Timesheet> getByID(Integer id) {
+        return timesheetRepository.getTimesheetById(id);
     }
 
     @Override
     public List<Timesheet> getAll() {
-        return RepoJPA.findAll();
+        return timesheetRepository.getAllTimesheets();
     }
 
 }

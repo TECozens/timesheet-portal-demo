@@ -16,30 +16,30 @@ public class AgencyProcessor implements AgencyJpaRepo {
 
     // Autowired the generic referenced JPA repository inside the implemented Repo
     // This cleans up the layout of the code and bundles together the JPA interfaces
-    private JpaRepository<Agency, Long> JpaRepo;
+    private AgencyRepository agencyRepository;
 
     @Autowired
-    public AgencyProcessor(JpaRepository<Agency, Long> aJPARepo) {
-        JpaRepo = aJPARepo;
+    public AgencyProcessor(AgencyRepository agencyRepository) {
+        this.agencyRepository = agencyRepository;
     }
 
 
     @Override
     @Transactional
     public Agency makeAgency(Agency newA) {
-        Agency updated = JpaRepo.saveAndFlush(newA);
+        Agency updated = agencyRepository.saveAndFlush(newA);
         log.info(updated.toString());
 
         return updated;
     }
 
     @Override
-    public Optional<Agency> findByID(Long ID) {
-        return JpaRepo.findById(ID);
+    public Agency findByID(Integer ID) {
+        return agencyRepository.getAgencyById(ID);
     }
 
     @Override
     public List<Agency> findAll() {
-        return JpaRepo.findAll();
+        return agencyRepository.getAllAgency();
     }
 }

@@ -27,7 +27,22 @@ public class Review {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "rating")
-    private Integer rating;
+    @Column(name = "communication_rating")
+    private Integer communication_rating;
+
+    @Column(name = "tech_skills_rating")
+    private Integer tech_skills_rating;
+
+    @Column(name = "quality_rating")
+    private Integer quality_rating;
+
+    @Column(name = "initiative_rating")
+    private Integer initiative_rating;
+
+    @Column(name = "productivity_rating")
+    private Integer productivity_rating;
+
+    @Column(name = "working_relationships_rating")
+    private Integer working_relationships_rating;
 
 }

@@ -16,30 +16,30 @@ public class ReviewProcessor implements ReviewJpaRepo {
 
     // Autowired the generic referenced JPA repository inside the implemented Repo
     // This cleans up the layout of the code and bundles together the JPA interfaces
-    private JpaRepository<Review, Long> JpaRepo;
+    private ReviewRepository reviewRepository;
 
     @Autowired
-    public ReviewProcessor(JpaRepository<Review, Long> aJpaRepo) {
-        JpaRepo = aJpaRepo;
+    public ReviewProcessor(ReviewRepository reviewRepository){
+        this.reviewRepository = reviewRepository;
     }
 
 
     @Override
     @Transactional
     public Review makeReview(Review newR) {
-        Review updated = JpaRepo.saveAndFlush(newR);
+        Review updated = reviewRepository.saveAndFlush(newR);
         log.info(updated.toString());
 
         return updated;
     }
 
     @Override
-    public Optional<Review> getByID(Long ID) {
-        return JpaRepo.findById(ID);
+    public Optional<Review> getByID(Integer ID) {
+        return reviewRepository.getReviewById(ID);
     }
 
     @Override
     public List<Review> getAll() {
-        return JpaRepo.findAll();
+        return reviewRepository.getAllReviews();
     }
 }

@@ -12,7 +12,7 @@ import java.util.Optional;
 public interface AgencyJpaRepo {
 
     Agency makeAgency(Agency agency);
-    Optional<Agency> findByID(Long ID);
+    Agency findByID(Integer ID);
     List<Agency> findAll();
 
 }

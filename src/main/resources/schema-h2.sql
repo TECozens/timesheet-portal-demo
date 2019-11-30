@@ -36,8 +36,10 @@ CREATE TABLE IF NOT EXISTS `contractor` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
     `user_id` INT UNSIGNED NOT NULL,
     `agency_id` INT UNSIGNED NOT NULL,
+    `manager_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
+    FOREIGN KEY (`manager_id`) REFERENCES `user`(`id`),
     FOREIGN KEY (`agency_id`) REFERENCES `agency`(`id`))
 ENGINE = InnoDB;
 
@@ -51,8 +53,28 @@ CREATE TABLE IF NOT EXISTS `timesheet` (
     `days_worked` INT NOT NULL,
     `overtime` INT,
     `week_finish` DATE NOT NULL,
-     PRIMARY KEY (`id`))
+     PRIMARY KEY (`id`)
+     )
  ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `review`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `review`
+(
+    `id`       int(11)      NOT NULL AUTO_INCREMENT,
+    `timesheet_id` INT UNSIGNED NOT NULL,
+    `communication_rating` INT UNSIGNED,
+    `tech_skills_rating` INT UNSIGNED,
+    `quality_rating` INT UNSIGNED,
+    `initiative_rating` INT UNSIGNED,
+    `productivity_rating` INT UNSIGNED,
+    `working_relationships_rating` INT UNSIGNED,
+    FOREIGN KEY (`timesheet_id`) REFERENCES `timesheet`(`id`),
+    PRIMARY KEY (`id`)
+)
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------

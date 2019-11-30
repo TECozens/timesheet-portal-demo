@@ -1,6 +1,7 @@
 package com.admiral.tsp.timesheetportal.contractor.services;
 
 import com.admiral.tsp.timesheetportal.contractor.Contractor;
+import com.admiral.tsp.timesheetportal.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +13,9 @@ import java.util.Optional;
 public interface ContractorJpaRepo {
 
     Contractor makeContractor(Contractor item);
-    Optional<Contractor> getByID(Long ID);
+    Optional<Contractor> getByID(Integer ID);
     Optional<Contractor> getByUsername(String name);
+    Optional<Contractor> getByUser(User user);
     List<Contractor> getAll();
 
 }
