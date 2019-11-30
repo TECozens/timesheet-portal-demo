@@ -1,10 +1,7 @@
 package com.admiral.tsp.timesheetportal.review.controllers;
 
 import com.admiral.tsp.timesheetportal.review.Review;
-import com.admiral.tsp.timesheetportal.review.services.ReviewJpaRepo;
-import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
-import com.admiral.tsp.timesheetportal.timesheet.controllers.TimesheetViewController;
-import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpaRepo;
+import com.admiral.tsp.timesheetportal.review.services.ReviewJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,7 +21,7 @@ public class ReviewViewController {
 
 
     @Autowired
-    private ReviewJpaRepo reviewJpaRepo;
+    private ReviewJpa reviewJpa;
 
 
 //    @GetMapping("Invoice/{i}")
@@ -44,9 +41,9 @@ public class ReviewViewController {
 //            return "404";
 //        }
 //    }
-    @GetMapping("/Invoice")
+    @GetMapping("/Invoices")
     public String showTimesheetApprovalPage(Model model){
-        List<Review> foundReviews = reviewJpaRepo.getAll();
+        List<Review> foundReviews = reviewJpa.getAll();
 
         model.addAttribute("Reviews", foundReviews);
 

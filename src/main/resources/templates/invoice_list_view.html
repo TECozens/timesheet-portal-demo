@@ -14,12 +14,12 @@
             <div class="col mx-auto custom-bg">
 
                 <div id=missingTimesheetMessage th:if="${Reviews.isEmpty()}">
-                    <div>No matching Time Sheets</div>
+                    <div>No matching Invoices</div>
                 </div>
 
 
                 <div class="row mt-4 custom-label">
-                    <h4 th:text="'Contractor Time Sheets'"></h4>
+                    <h4 th:text="'Invoices'"></h4>
                 </div>
 
                 <div class="custom-form" th:if="${!Reviews.isEmpty()}">
@@ -47,8 +47,9 @@
                                 <td><span th:text="${ReviewItem.timesheet.week_finish}"></span></td>
                                 <td><span th:text="${ReviewItem.approved}"></span></td>
                                 <td>
-                                    <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|"
-                                            id="approve">Approve
+                                    <button class="btn btn-success" id="approve"
+                                            th:onclick="|sendApproval(${ReviewItem.id})|">
+                                        Confirm Invoice
                                     </button>
                                 </td>
                             </tbody>
@@ -62,10 +63,11 @@
 </main>
 <script>
     function sendApproval(id) {
-        let xhr = new XMLHttpRequest();
-
-        xhr.open('POST', `/api/timesheets/approve/${id}`);
-        xhr.send();
+        // Commented out cos not been mapped to a rest API yet
+        // let xhr = new XMLHttpRequest();
+        //
+        // xhr.open('POST', `/api/timesheets/approve/${id}`);
+        // xhr.send();
     }
 </script>
 </body>
