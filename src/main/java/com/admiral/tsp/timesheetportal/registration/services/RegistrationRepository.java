@@ -1,4 +1,7 @@
 package com.admiral.tsp.timesheetportal.registration.services;
 
-public interface RegistrationRepository {
+import com.admiral.tsp.timesheetportal.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RegistrationRepository extends JpaRepository<User, Long> {
 }

@@ -1,8 +1,45 @@
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head th:replace="fragments/header :: head"></head>
-<body>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<h1>To Be Implemented Next Sprint</h1>
+<head th:replace="fragments/header :: head"></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container" role="main">
+    <div class="starter-template">
+
+        <div class="row mx-auto custom-form">
+            <div class="col mx-auto custom-bg">
+                <div id = registrationDetails>
+                    <form action="#" method="post" th:action="@{/newUser}" th:object="${registerKey}">
+
+                        <div class="custom-label">
+                            <h3>Please Enter The Details For A New User</h3>
+                        </div>
+
+                        <div class="form-group custom-label">
+                            <label th:for="username">Username</label>
+                            <input aria-describedby="Enter a Username."
+                                   class="form-control"
+                                   placeholder="Username"
+                                   th:field="*{username}"
+                                   type="text">
+
+                            <div class="alert alert-danger"
+                                 th:errors="*{username}"
+                                 th:if="${#fields.hasErrors(username)}">
+                                Username Error: Please enter a valid username.
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
 <!--<div th:replace="fragments/header :: header"></div>-->
 
 <!--<h1 th:text="#{label.form.title}">form</h1>-->
