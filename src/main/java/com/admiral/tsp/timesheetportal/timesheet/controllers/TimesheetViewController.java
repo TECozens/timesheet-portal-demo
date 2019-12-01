@@ -42,7 +42,7 @@ public class TimesheetViewController {
             return "404";
         }
     }
-    @GetMapping("/Approvals")
+    @GetMapping("/Reviews")
     public String showTimesheetApprovalPage(Model model){
         List<Timesheet> foundTimesheets = timesheetJpa.getAll();
 
