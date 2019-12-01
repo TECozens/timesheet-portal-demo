@@ -65,30 +65,7 @@
 </main>
 <script>
     function sendApproval(id) {
-
         fetch(`/api/reviews/confirm/` +id)
-        // let xhr = new XMLHttpRequest();
-        // var data = {"integer" : id};
-        // data.integer = id;
-        // var json = JSON.stringify(data);
-        // console.debug(data);
-
-        // var paramName = /*[[${_csrf.parameterName}]]*/ 'default';
-        // var paramToken = /*[[${_csrf.token}]]*/ 'default';
-        // console.debug(paramName);
-        // console.debug(paramToken);
-        // xhr.setRequestHeader(paramName, paramToken);
-
-        // xhr.open('GET', `/api/reviews/confirm/` +id);
-        // xhr.onload = function () {
-        //     var users = JSON.parse(xhr.responseText);
-        //     if (xhr.readyState == 4 && xhr.status == "200") {
-        //         console.table(users);
-        //     } else {
-        //         console.error(users);
-        //     }
-        // }
-        // xhr.send();
     }
 </script>
 </body>

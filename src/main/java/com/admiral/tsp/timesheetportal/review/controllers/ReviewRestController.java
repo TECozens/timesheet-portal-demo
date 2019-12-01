@@ -15,8 +15,6 @@ public class ReviewRestController {
 
     @Autowired
     private ReviewJpa reviewJpa;
-    @Autowired
-    private TimesheetJpa timesheetJpa;
 
 
 
