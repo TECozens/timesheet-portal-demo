@@ -34,16 +34,16 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label th:for="firstName">First Name</label>
+                            <label th:for="firstname">First Name</label>
                             <input aria-describedby="Enter First Name."
                                    class="form-control"
                                    placeholder="First Name"
-                                   th:field="*{firstName}"
+                                   th:field="*{firstname}"
                                    type="text">
 
                             <div class="alert alert-danger"
-                                 th:errors="*{firstName}"
-                                 th:if="${#fields.hasErrors('firstName')}">
+                                 th:errors="*{firstname}"
+                                 th:if="${#fields.hasErrors('firstname')}">
                                 First Name Error: Please enter a valid First Name.
                             </div>
                         </div>

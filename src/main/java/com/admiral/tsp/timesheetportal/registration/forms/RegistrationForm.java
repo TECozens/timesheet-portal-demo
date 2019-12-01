@@ -15,7 +15,7 @@ public class RegistrationForm {
     private String username;
 
     @NotNull(message = "Must have a first name")
-    private String firstName;
+    private String firstname;
 
     @NotNull(message = "Must have a surname")
     private String surname;

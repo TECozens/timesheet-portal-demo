@@ -9,7 +9,7 @@ public class RegistrationMade {
 
     private String username;
 
-    private String firstName;
+    private String firstname;
 
     private String surname;
 

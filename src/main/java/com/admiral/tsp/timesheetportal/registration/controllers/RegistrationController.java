@@ -1,6 +1,6 @@
 package com.admiral.tsp.timesheetportal.registration.controllers;
 
-//import com.admiral.tsp.timesheetportal.agency.services.AgencyRepository;
+import com.admiral.tsp.timesheetportal.agency.services.AgencyJpa;
 import com.admiral.tsp.timesheetportal.data.UserRepository;
 import com.admiral.tsp.timesheetportal.domain.User;
 import com.admiral.tsp.timesheetportal.registration.forms.RegistrationForm;
@@ -21,41 +21,39 @@ import javax.validation.Valid;
 @SessionAttributes({"registerKey"})
 public class RegistrationController {
 
-    private RegistrationJpa registrationJpa;
-    private UserRepository userRepository;
-//    private AgencyRepository agencyRepository;
-
     @Autowired
-    public RegistrationController(RegistrationJpa aRegistrationJpa,
-                                  UserRepository aUserRepository
-//                                  AgencyRepository aAgencyRepository
-    ){
-        this.registrationJpa = aRegistrationJpa;
-        this.userRepository = aUserRepository;
-//        this.agencyRepository = aAgencyRepository;
-    }
+    private RegistrationJpa registrationJpa;
+    @Autowired
+    private AgencyJpa agencyJpa;
+
 
     static final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
 
     @GetMapping("/register")
-    public String goToRegister() {return "/register";}
+    public String goToRegister(Model model) {
+        model.addAttribute("registerKey", new RegistrationForm());
+        return "register";
+    }
 
     @PostMapping("/newUser")
     public String userDetails(@ModelAttribute("registerKey") @Valid RegistrationForm registrationForm,
                               BindingResult bindingResult,
                               Model model) {
 
+        User user = new User();
+
         if (bindingResult.hasErrors()) {
 
             log.error(bindingResult.toString());
             log.error("Registration Form has binding errors");
 
+            model.addAttribute("User", user);
             model.addAttribute("registrationDetails", registrationForm);
-            return "/register";
+            return "register";
 
         }
 
-        return "redirect:/createUser";
+        return "redirect:/createUser/";
 
     }
 
@@ -65,7 +63,7 @@ public class RegistrationController {
         User newUser = new User(
                 null,
                 registrationForm.getUsername(),
-                registrationForm.getFirstName(),
+                registrationForm.getFirstname(),
                 registrationForm.getSurname(),
                 registrationForm.getEmail(),
                 registrationForm.getPassword()

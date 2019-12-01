@@ -17,7 +17,10 @@ public class RegistrationJpaImpl implements RegistrationJpa {
     @Override
     @Transactional
     public User makeUser(User newUser) {
+
         User update = registrationRepository.saveAndFlush(newUser);
+
+        log.info(update.toString());
 
         return update;
     }
