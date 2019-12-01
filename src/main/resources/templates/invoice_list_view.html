@@ -34,6 +34,7 @@
                                 <th scope="col">Overtime</th>
                                 <th scope="col">Week finished</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Paid</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,6 +47,7 @@
                                 <td><span th:text="${ReviewItem.timesheet.overtime}"></span></td>
                                 <td><span th:text="${ReviewItem.timesheet.week_finish}"></span></td>
                                 <td><span th:text="${ReviewItem.approved}"></span></td>
+                                <td><span th:text="${ReviewItem.paid}"></span></td>
                                 <td>
                                     <button class="btn btn-success" id="approve"
                                             th:onclick="|sendApproval(${ReviewItem.id})|">
@@ -63,11 +65,7 @@
 </main>
 <script>
     function sendApproval(id) {
-        // Commented out cos not been mapped to a rest API yet
-        // let xhr = new XMLHttpRequest();
-        //
-        // xhr.open('POST', `/api/timesheets/approve/${id}`);
-        // xhr.send();
+        fetch(`/api/reviews/confirm/` +id)
     }
 </script>
 </body>
