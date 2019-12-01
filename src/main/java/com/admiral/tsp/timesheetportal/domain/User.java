@@ -28,7 +28,7 @@ public class User {
     @Column
     @NotNull
     @NotEmpty
-    private String firstName;
+    private String firstname;
 
     @Column
     @NotNull
@@ -49,7 +49,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
-                ", firstName='" + firstName + '\'' +
+                ", firstname='" + firstname + '\'' +
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
                 '}';
