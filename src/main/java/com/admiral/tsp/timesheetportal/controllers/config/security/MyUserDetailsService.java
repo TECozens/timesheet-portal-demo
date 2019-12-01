@@ -44,17 +44,17 @@ public class MyUserDetailsService implements UserDetailsService {
         }
     }
 
-    public User registerNewUserAccount(UserForm userForm) {
-
-        User newUser = new User(null, userForm.getUsername(),
-                userForm.getFirstName(),
-                userForm.getSurname(),
-                userForm.getEmail(),
-                userForm.getPassword());
-
-
-        return newUser;
-
-    }
+//    public User registerNewUserAccount(UserForm userForm) {
+//
+//        User newUser = new User(null, userForm.getUsername(),
+//                userForm.getFirstName(),
+//                userForm.getSurname(),
+//                userForm.getEmail(),
+//                userForm.getPassword());
+//
+//
+//        return newUser;
+//
+//    }
 
 }

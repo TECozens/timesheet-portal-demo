@@ -38,7 +38,7 @@ public class RegistrationController {
     static final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
 
     @GetMapping("/register")
-    public String goToRegister() {return "register";}
+    public String goToRegister() {return "/register";}
 
     @PostMapping("/newUser")
     public String userDetails(@ModelAttribute("registerKey") @Valid RegistrationForm registrationForm,
@@ -51,7 +51,7 @@ public class RegistrationController {
             log.error("Registration Form has binding errors");
 
             model.addAttribute("registrationDetails", registrationForm);
-            return "registration";
+            return "/register";
 
         }
 
@@ -60,13 +60,12 @@ public class RegistrationController {
     }
 
     @GetMapping("/createUser")
-    public String submitRegistration(@ModelAttribute("registerKey") RegistrationForm registrationForm,
-                                     Model model) {
+    public String submitRegistration(@ModelAttribute("registerKey") RegistrationForm registrationForm) {
 
         User newUser = new User(
                 null,
                 registrationForm.getUsername(),
-                registrationForm.getFirstname(),
+                registrationForm.getFirstName(),
                 registrationForm.getSurname(),
                 registrationForm.getEmail(),
                 registrationForm.getPassword()

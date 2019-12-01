@@ -11,17 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class RegistrationJpaImpl implements RegistrationJpa {
 
-    private JpaRepository<User, Long> repoJpa;
-
     @Autowired
-    public RegistrationJpaImpl(JpaRepository<User, Long> aJPARepo){
-        repoJpa = aJPARepo;
-    }
+    private RegistrationRepository registrationRepository;
 
     @Override
     @Transactional
     public User makeUser(User newUser) {
-        User update = repoJpa.saveAndFlush(newUser);
+        User update = registrationRepository.saveAndFlush(newUser);
 
         return update;
     }
