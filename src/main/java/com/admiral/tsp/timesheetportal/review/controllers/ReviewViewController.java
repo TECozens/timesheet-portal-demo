@@ -43,7 +43,8 @@ public class ReviewViewController {
 //    }
     @GetMapping("/Invoices")
     public String showTimesheetApprovalPage(Model model){
-        List<Review> foundReviews = reviewJpa.getAll();
+        List<Review> foundReviews = reviewJpa.getUnpaid();
+        System.out.print("HEY HERE");
 
         model.addAttribute("Reviews", foundReviews);
 

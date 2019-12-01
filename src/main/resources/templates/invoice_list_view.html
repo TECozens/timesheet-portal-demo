@@ -34,6 +34,7 @@
                                 <th scope="col">Overtime</th>
                                 <th scope="col">Week finished</th>
                                 <th scope="col">Status</th>
+                                <th scope="col">Paid</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,6 +47,7 @@
                                 <td><span th:text="${ReviewItem.timesheet.overtime}"></span></td>
                                 <td><span th:text="${ReviewItem.timesheet.week_finish}"></span></td>
                                 <td><span th:text="${ReviewItem.approved}"></span></td>
+                                <td><span th:text="${ReviewItem.paid}"></span></td>
                                 <td>
                                     <button class="btn btn-success" id="approve"
                                             th:onclick="|sendApproval(${ReviewItem.id})|">
@@ -63,10 +65,29 @@
 </main>
 <script>
     function sendApproval(id) {
-        // Commented out cos not been mapped to a rest API yet
+
+        fetch(`/api/reviews/confirm/` +id)
         // let xhr = new XMLHttpRequest();
-        //
-        // xhr.open('POST', `/api/timesheets/approve/${id}`);
+        // var data = {"integer" : id};
+        // data.integer = id;
+        // var json = JSON.stringify(data);
+        // console.debug(data);
+
+        // var paramName = /*[[${_csrf.parameterName}]]*/ 'default';
+        // var paramToken = /*[[${_csrf.token}]]*/ 'default';
+        // console.debug(paramName);
+        // console.debug(paramToken);
+        // xhr.setRequestHeader(paramName, paramToken);
+
+        // xhr.open('GET', `/api/reviews/confirm/` +id);
+        // xhr.onload = function () {
+        //     var users = JSON.parse(xhr.responseText);
+        //     if (xhr.readyState == 4 && xhr.status == "200") {
+        //         console.table(users);
+        //     } else {
+        //         console.error(users);
+        //     }
+        // }
         // xhr.send();
     }
 </script>

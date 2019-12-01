@@ -15,7 +15,7 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "timesheet_id")
