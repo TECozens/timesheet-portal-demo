@@ -6,7 +6,7 @@ import com.admiral.tsp.timesheetportal.data.UserRepository;
 import com.admiral.tsp.timesheetportal.domain.User;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
 import com.admiral.tsp.timesheetportal.timesheet.forms.TimesheetForm;
-import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpaRepo;
+import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -26,18 +26,18 @@ import java.time.LocalDate;
 @Controller
 @SessionAttributes({"TimesheetKey", "ReviewKey"})
 public class ApprovalPerformanceReviewCreateController {
-
-//    private TimesheetJpaRepo timesheetJpaRepo;
+//
+//    private TimesheetJpa timesheetJpa;
 //    private UserRepository userJpaRepo;
 //    private ContractorRepository contractorJpaRepo;
 //
 //    @Autowired
-//    public ApprovalPerformanceReviewCreateController(TimesheetJpaRepo aTCreator,
+//    public ApprovalPerformanceReviewCreateController(TimesheetJpa aTCreator,
 //                                                     UserRepository userRepository,
 //                                                     ContractorRepository contractorRepository) {
 ////        This needs to be changed in the future as
 ////        by doing this it had a direct dependency
-//        timesheetJpaRepo = aTCreator;
+//        timesheetJpa = aTCreator;
 //        userJpaRepo = userRepository;
 //        contractorJpaRepo = contractorRepository;
 //    }
@@ -83,7 +83,7 @@ public class ApprovalPerformanceReviewCreateController {
 //        log.info("The user given is: " + thisUser.toString());
 //
 ////        TODO Fun create stuff
-//        Contractor thisContractor = contractorJpaRepo.findContractorByUser(thisUser);
+//        Contractor thisContractor = contractorJpaRepo.getContractorByUser(thisUser).get();
 //
 //        log.info("The contractor given is: " + thisContractor.toString());
 //
@@ -96,7 +96,7 @@ public class ApprovalPerformanceReviewCreateController {
 //        );
 //
 //
-//        timesheetJpaRepo.makeTimesheet(newTimesheet);
+//        timesheetJpa.makeTimesheet(newTimesheet);
 //
 //        log.debug("Here is the timesheet going into DB" + newTimesheet.toString());
 //
