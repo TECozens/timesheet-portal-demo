@@ -1,14 +1,14 @@
 package com.admiral.tsp.timesheetportal.registration.controllers;
 
 import com.admiral.tsp.timesheetportal.agency.services.AgencyJpa;
-import com.admiral.tsp.timesheetportal.data.UserRepository;
-import com.admiral.tsp.timesheetportal.domain.User;
+import com.admiral.tsp.timesheetportal.csrf.User;
 import com.admiral.tsp.timesheetportal.registration.forms.RegistrationForm;
 import com.admiral.tsp.timesheetportal.registration.services.RegistrationJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +25,8 @@ public class RegistrationController {
     private RegistrationJpa registrationJpa;
     @Autowired
     private AgencyJpa agencyJpa;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     static final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
@@ -66,7 +68,7 @@ public class RegistrationController {
                 registrationForm.getFirstname(),
                 registrationForm.getSurname(),
                 registrationForm.getEmail(),
-                registrationForm.getPassword()
+                passwordEncoder.encode(registrationForm.getPassword())
         );
 
 //        UserRole newRole = new UserRole(

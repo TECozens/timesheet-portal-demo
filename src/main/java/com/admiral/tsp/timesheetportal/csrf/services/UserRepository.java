@@ -1,6 +1,6 @@
-package com.admiral.tsp.timesheetportal.data;
+package com.admiral.tsp.timesheetportal.csrf.services;
 
-import com.admiral.tsp.timesheetportal.domain.User;
+import com.admiral.tsp.timesheetportal.csrf.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

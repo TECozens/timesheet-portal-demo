@@ -1,6 +1,6 @@
-package com.admiral.tsp.timesheetportal.controllers.config.security;
+package com.admiral.tsp.timesheetportal.csrf.security;
 
-import com.admiral.tsp.timesheetportal.domain.User;
+import com.admiral.tsp.timesheetportal.csrf.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

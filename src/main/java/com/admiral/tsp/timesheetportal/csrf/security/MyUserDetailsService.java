@@ -1,9 +1,8 @@
-package com.admiral.tsp.timesheetportal.controllers.config.security;
+package com.admiral.tsp.timesheetportal.csrf.security;
 
-import com.admiral.tsp.timesheetportal.data.UserRepository;
-import com.admiral.tsp.timesheetportal.data.UserRolesRepository;
-import com.admiral.tsp.timesheetportal.domain.User;
-import com.admiral.tsp.timesheetportal.web.UserForm;
+import com.admiral.tsp.timesheetportal.csrf.services.UserRepository;
+import com.admiral.tsp.timesheetportal.csrf.services.UserRolesRepository;
+import com.admiral.tsp.timesheetportal.csrf.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

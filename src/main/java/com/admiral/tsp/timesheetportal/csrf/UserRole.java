@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.domain;
+package com.admiral.tsp.timesheetportal.csrf;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
