@@ -15,7 +15,7 @@
                         <div class="col mx-auto custom-bg">
                             <div id=approvalReview>
 
-                               <form action="#" method="post" th:action="@{/newReview}" th:object="${ReviewKey}">
+                               <form action="#" method="post" th:action="@{/newRejectedReview}" th:object="${ReviewKey}">
 
                                     <div class="custom-label">
                                         <h3>Time Sheet Rejection Explanation</h3>
@@ -32,9 +32,9 @@
                                                 </div>
                                                     <button class="btn btn- btn-primary" id="saveReject" type="saveRejct"
                                                 id="approve">Save</button>
-                                                    <button class="btn btn-primary "
-                                                              th:href="@{/Review}"
-                                                            th:id="back"> Back</button>
+<!--                                                    <button class="btn btn-primary "-->
+<!--                                                              th:href="@{/Reviews}"-->
+<!--                                                            th:id="back"> Back</button>-->
 
                                 </form>
                             </div>

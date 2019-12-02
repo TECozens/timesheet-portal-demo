@@ -42,14 +42,14 @@
                                 <td><span th:text="${Timesheet.overtime}"></span></td>
                                 <td><span th:text="${Timesheet.week_finish}"></span></td>
                                 <td>   <a class="btn btn-success btn-block "
-                                          th:href="@{/Approval}"
-                                          th:id="approve">Approve</a>
+                                          th:href="@{/}"
+                                          th:id="approve">newApproveReview</a>
                                <!--  <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|" />
                                     id="approve">Approve
                                     </button>-->
                                 </td>
                                 <td>   <a class="btn btn-danger btn-block "
-                                          th:href="@{/Reject}"
+                                          th:href="@{/newRejectedReview}"
                                           th:id="reject">Reject</a>
                                 </td>
                             </tbody>
