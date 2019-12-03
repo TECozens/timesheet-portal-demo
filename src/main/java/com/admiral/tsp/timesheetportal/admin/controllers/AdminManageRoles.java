@@ -1,30 +1,70 @@
 package com.admiral.tsp.timesheetportal.admin.controllers;
 
 import com.admiral.tsp.timesheetportal.contractor.controllers.ContractorController;
-import com.admiral.tsp.timesheetportal.timesheet.forms.TimesheetForm;
+import com.admiral.tsp.timesheetportal.contractor.services.ContractorRepository;
+import com.admiral.tsp.timesheetportal.data.UserRepository;
+import com.admiral.tsp.timesheetportal.data.UserRolesRepository;
+import com.admiral.tsp.timesheetportal.domain.User;
+import com.admiral.tsp.timesheetportal.domain.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
-@SessionAttributes({"contractorKey", "TimesheetKey", "managerKey"})
+@SessionAttributes({"contractorKey", "managerKey"})
 public class AdminManageRoles {
     static final Logger LOG = LoggerFactory.getLogger(ContractorController.class);
 
-    //  Contractor Page
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private ContractorRepository contractorRepository;
+
+
+    //  Manager Roles Page
     @GetMapping("/ManageRoles")
-    public String doManageRolesView(Model model)
-    {
+    public String doManageRolesView(Model model) {
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
 
         String user = a.getName();
 
         model.addAttribute("User", user);
+        List<User> managers = userRepository.findByManagerRole();
+        model.addAttribute("managerKey", managers);
         return "admin_manage_roles_view";
+    }
+
+    //    TODO List of Managers to Select
+
+    @GetMapping("/managerSelectList")
+    public String managerSelect(@ModelAttribute("RoleKey") String role,Model model) {
+        List<User> managers = userRepository.findByManagerRole();
+        model.addAttribute("managerKey", managers);
+
+
+        return "x";
+    }
+
+    //    TODO List of Contractors to Assign to a Manager Vice Versa
+
+    @GetMapping("/contractorList")
+    public String getContractorList(Model model) {
+
+        return "r";
+    }
+
+    //    TODO Update the Contractor with new Manager from Select
+    @PostMapping("/updateContractorAssignee/{managerInstance}")
+    public String updateContractorAssignee(@PathVariable String managerInstance,
+                                           Model model) {
+
+        return "x";
     }
 }
