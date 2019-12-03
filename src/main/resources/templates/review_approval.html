@@ -47,8 +47,8 @@
                                 </div>
 
                                        <div class="alert alert-danger"
-                                             th:errors="*{technical_skills}"
-                                             th:if="${#fields.hasErrors('technical_skills')}">
+                                            th:if="${#fields.hasErrors('technical_skills')}"
+                                             th:errors="*{technical_skills}">
                                             Error: Please enter a number between 1-3.
                                         </div>
 

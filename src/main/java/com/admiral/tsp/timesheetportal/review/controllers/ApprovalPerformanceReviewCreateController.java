@@ -46,8 +46,9 @@ public class ApprovalPerformanceReviewCreateController {
     }
 
     //       Review Form Displayed on reviewing Page
-    @PostMapping("/newApproveReview/{id}")
+    @GetMapping("/newApproveReview/{id}")
     public String approvereviewDetails(@PathVariable("id") Long id,// Keep this after valid
+                                       ApprovalReviewForm approvalReviewForm,
                                        Model model) {
 //
 //        if (bindingResult.hasErrors()) {
@@ -62,7 +63,6 @@ public class ApprovalPerformanceReviewCreateController {
             System.out.println();
 
             Optional<Timesheet> ts = timesheetJpa.getByID(id);
-            ApprovalReviewForm approvalReviewForm = new ApprovalReviewForm();
             approvalReviewForm.setTimesheet(ts.get());
 
             model.addAttribute("ApprovalreviewDetails", approvalReviewForm);
@@ -75,21 +75,26 @@ public class ApprovalPerformanceReviewCreateController {
 
 
     @PostMapping("/createReview")
-    public String submitApproveReview(@ModelAttribute("ReviewKey") ApprovalReviewForm approvalReviewForm,
-                                  Model model) {
-        System.out.println(approvalReviewForm.getTimesheet().toString());
+    public String submitApproveReview(@Valid @ModelAttribute("ApprovalreviewDetails")  ApprovalReviewForm approvalReviewForm,
+                                      BindingResult bindingResult, Model model) {
+        String id_string =approvalReviewForm.getTimesheet().getId().toString();
+        System.out.println(approvalReviewForm.toString());
+        if (bindingResult.hasErrors()){
+            model.addAttribute("ApprovalreviewDetails", approvalReviewForm);
+            return "review_approval";
+        }
 
-                               Review newReview = new Review( null,
-                                       approvalReviewForm.getTimesheet(),
-                                       true,
-                                false,
-                                       approvalReviewForm.getMessage(),
-                                approvalReviewForm.getCommunication(),
-                                approvalReviewForm.getTechnical_skills(),
-                                approvalReviewForm.getQuality(),
-                                approvalReviewForm.getInitative(),
-                                approvalReviewForm.getProductivity (),
-                                approvalReviewForm.getWorking_relationships()
+        Review newReview = new Review(null,
+                approvalReviewForm.getTimesheet(),
+                true,
+                false,
+                approvalReviewForm.getMessage(),
+                approvalReviewForm.getCommunication(),
+                approvalReviewForm.getTechnical_skills(),
+                approvalReviewForm.getQuality(),
+                approvalReviewForm.getInitative(),
+                approvalReviewForm.getProductivity (),
+                approvalReviewForm.getWorking_relationships()
 
         );
         System.out.println(newReview.toString());
