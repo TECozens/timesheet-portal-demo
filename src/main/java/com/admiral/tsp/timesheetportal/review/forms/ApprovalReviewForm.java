@@ -15,6 +15,9 @@ import javax.validation.constraints.NotNull;
 public class ApprovalReviewForm {
 
     private Timesheet timesheet;
+    private Boolean approved;
+    private Boolean paid;
+    private String message;
     @NotNull(message = "Must not be empty!")
     @Max(value = 3, message = "You must choose a number between 1 and 3!")
     @Min(value = 1, message = "You must choose a number between 1 and 3!")
@@ -38,8 +41,7 @@ public class ApprovalReviewForm {
     @NotNull(message = "Must not be empty!")
     @Max(value = 3, message = "You must choose a number between 1 and 3!")
     @Min(value = 1, message = "You must choose a number between 1 and 3!")
-    private Integer working_relations;
+    private Integer working_relationships;
 
 
-    private String message;
 }

@@ -66,21 +66,21 @@ public class ApprovalPerformanceReviewCreateController {
     }
 
 
-    @GetMapping("/createReview")
+    @PostMapping("/createReview")
     public String submitApproveReview(@ModelAttribute("ReviewKey") ApprovalReviewForm approvalReviewForm,
                                   Model model) {
 
-                               Review newReview = new Review(
+                               Review newReview = new Review( null,
+                                       approvalReviewForm.getTimesheet(),
                                true,
                                 false,
                                        approvalReviewForm.getMessage(),
-                                approvalReviewForm.getTimesheet(),
                                 approvalReviewForm.getCommunication(),
                                 approvalReviewForm.getTechnical_skills(),
                                 approvalReviewForm.getQuality(),
                                 approvalReviewForm.getInitative(),
                                 approvalReviewForm.getProductivity (),
-                                approvalReviewForm.getWorking_relations()
+                                approvalReviewForm.getWorking_relationships()
 
         );
 

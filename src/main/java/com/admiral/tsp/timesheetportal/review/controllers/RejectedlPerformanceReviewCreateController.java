@@ -48,8 +48,10 @@ public class RejectedlPerformanceReviewCreateController {
             log.error(bindingResult.toString());
             log.error("review Form has binding errors");
 
+            RejectionReviewForm.setTimesheet_ID();
+
             model.addAttribute("RejectedreviewDetails", RejectionReviewForm);
-            return "review_approval";
+            return "review_reject";
         }
 
 ////        if details are correct do the submit
@@ -57,20 +59,24 @@ public class RejectedlPerformanceReviewCreateController {
     }
 
 
-    @GetMapping("/createRejectedReview")
+    @PostMapping("/createRejectedReview")
     public String submitApproveReview(@ModelAttribute("ReviewKey") RejectionReviewForm rejectionReviewForm,
                                   Model model) {
 
-                        Review newReview = new Review(
+                        Review newReview = new Review(rejectionReviewForm.getTimesheet_ID(),
+                                rejectionReviewForm.// get a time sheet
                                 false,
                                 false,
-                                rejectionReviewForm.getTimesheet(),
-                                rejectionReviewForm.getMessage()
+                                rejectionReviewForm.getMessage(),
+                                rejectionReviewForm.getCommunication(),
+                                rejectionReviewForm.getTechnical_skills(),
+                                rejectionReviewForm.getQuality(),
+                                rejectionReviewForm.getInitative(),
+                                rejectionReviewForm.getProductivity(),
+                                rejectionReviewForm.getWorking_relationships()
 
         );
-
-
-        reviewJpa.makeReview(newReview);
+                reviewJpa.makeReview(newReview);
 
         log.debug("Here is the review going into DB" + newReview.toString());
 

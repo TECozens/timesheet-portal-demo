@@ -14,9 +14,18 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class RejectionReviewForm {
 
-    private Timesheet timesheet;
+    private Integer timesheet_ID;
+    private Boolean approved;
+    private Boolean paid;
     @NotNull(message = "Must not be empty!")
     private  String message;
+    private Integer communication;
+    private Integer technical_skills;
+    private Integer quality;
+    private Integer initative;
+    private Integer productivity;
+    private Integer working_relationships;
+
 
 
 }
