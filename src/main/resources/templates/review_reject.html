@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:type="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
             <head th:replace="fragments/header :: head"></head>
 
@@ -15,12 +14,13 @@
                         <div class="col mx-auto custom-bg">
                             <div id=approvalReview>
 
-                               <form action="#" method="post" th:action="@{/newReview}" th:object="${ReviewKey}">
+                               <form action="#" method="post" th:action="@{/createRejectedReview}" th:object="${RejectedreviewDetails}">
 
                                     <div class="custom-label">
                                         <h3>Time Sheet Rejection Explanation</h3>
                                         <p>Please write a brief description as to why this time sheet was rejected </p>
                                     </div>
+                                   <input th:field="*{timesheet}" th:value="*{timesheet}" type="hidden"/>
 
                                                 <div class="form-group custom-label">
                                                     <label th:for="message">Comments</label>
@@ -30,11 +30,8 @@
                                                             th:field="*{message}"
                                                             type="text" />
                                                 </div>
-                                                    <button class="btn btn- btn-primary" id="saveReject" type="saveRejct"
-                                                id="approve">Save</button>
-                                                    <button class="btn btn-primary "
-                                                              th:href="@{/Review}"
-                                                            th:id="back"> Back</button>
+                                                    <button class="btn btn- btn-primary" id="reject" type="saveReject"
+                                                >Save</button>
 
                                 </form>
                             </div>
@@ -48,13 +45,6 @@
 
         </div>
 </main>
-<script>
-    function sendRejection(id) {
-        let xhr = new XMLHttpRequest();
 
-        xhr.open('POST', `/api/timesheets/review/reject ${id}`);
-        xhr.send();
-    }
-</script>
 </body>
 </html>
