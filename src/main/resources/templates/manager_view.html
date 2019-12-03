@@ -24,10 +24,16 @@
 
                 <div class="custom-form">
                     <div class="mx-3 custom-bg">
-                        <table class="table table-light">
+
+
+                        <input type="date" id="startDate" onkeyup="filterResults()" placeholder="hello">
+                        <table class="table table-light" id="timesheetInfo">
                             <thead>
                             <tr>
-                                <th scope="col">Name</th>
+                                <th scope="col">
+                                    <label for="nameSearch">Name</label><input type="text" id="nameSearch" onkeyup="filterResults()" placeholder="Name">
+
+                                </th>
                                 <th scope="col">Agency</th>
                                 <th scope="col">Days Worked</th>
                                 <th scope="col">Overtime</th>
@@ -36,7 +42,7 @@
                             </thead>
                             <tbody>
                             <tr th:each="Timesheet: ${TimesheetKey}">
-                                <td><span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
+                                <td> <span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
                                 <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
                                 <td><span th:text="${Timesheet.daysWorked}"></span></td>
                                 <td><span th:text="${Timesheet.overtime}"></span></td>
