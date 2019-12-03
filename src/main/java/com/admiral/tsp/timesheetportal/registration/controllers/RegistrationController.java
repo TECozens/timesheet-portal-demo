@@ -2,6 +2,8 @@ package com.admiral.tsp.timesheetportal.registration.controllers;
 
 import com.admiral.tsp.timesheetportal.agency.services.AgencyJpa;
 import com.admiral.tsp.timesheetportal.csrf.User;
+import com.admiral.tsp.timesheetportal.csrf.UserRole;
+import com.admiral.tsp.timesheetportal.csrf.services.UserRepository;
 import com.admiral.tsp.timesheetportal.registration.forms.RegistrationForm;
 import com.admiral.tsp.timesheetportal.registration.services.RegistrationJpa;
 import lombok.extern.slf4j.Slf4j;
@@ -61,7 +63,7 @@ public class RegistrationController {
 
     @GetMapping("/createUser")
     public String submitRegistration(@ModelAttribute("registerKey") RegistrationForm registrationForm) {
-
+        
         User newUser = new User(
                 null,
                 registrationForm.getUsername(),
@@ -69,20 +71,20 @@ public class RegistrationController {
                 registrationForm.getSurname(),
                 registrationForm.getEmail(),
                 passwordEncoder.encode(registrationForm.getPassword())
+
         );
 
-//        UserRole newRole = new UserRole(
-//                null,
-//                newUser.getId(),
-//                registrationForm.getRole()
-//        );
-
         registrationJpa.makeUser(newUser);
-//        registrationJpa.makeUser(newRole);
+
+        UserRole newRole = new UserRole();
+        newRole.setUserid(newUser.getId());
+        newRole.setRole(registrationForm.getRole());
+
+        registrationJpa.makeRole(newRole);
 
         log.debug("New User going into DB" + newUser.toString());
 
-        return "redirect:/register";
+        return "redirect:/login";
 
     }
 

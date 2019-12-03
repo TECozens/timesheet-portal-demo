@@ -26,7 +26,7 @@ public class RegistrationForm {
     @NotNull(message = "Must have a password")
     private String password;
 
-//    @NotNull(message = "Must have a role")
-//    private String role;
+    @NotNull(message = "Must have a role")
+    private String role;
 
 }

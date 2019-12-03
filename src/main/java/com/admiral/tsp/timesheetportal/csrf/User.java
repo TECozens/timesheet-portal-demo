@@ -8,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -54,4 +55,14 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+//    @ManyToMany
+//    @JoinTable(
+//            name = "user_role",
+//            joinColumns = @JoinColumn(
+//                    name = "user_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(
+//                    name = "role_id", referencedColumnName = "id"))
+//    private List<UserRole> role;
+
 }

@@ -1,6 +1,7 @@
 package com.admiral.tsp.timesheetportal.registration.services;
 
 import com.admiral.tsp.timesheetportal.csrf.User;
+import com.admiral.tsp.timesheetportal.csrf.UserRole;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,9 @@ public class RegistrationJpaImpl implements RegistrationJpa {
     @Autowired
     private RegistrationRepository registrationRepository;
 
+    @Autowired
+    private RegistrationRoleRepository registrationRoleRepository;
+
     @Override
     @Transactional
     public User makeUser(User newUser) {
@@ -24,10 +28,12 @@ public class RegistrationJpaImpl implements RegistrationJpa {
         return update;
     }
 
-//    @Override
-//    @Transactional
-//    public UserRole makeRole(UserRole newRole) {
-//        UserRole update =
-//    }
+    @Override
+    @Transactional
+    public UserRole makeRole(UserRole newRole) {
+        UserRole update = registrationRoleRepository.saveAndFlush(newRole);
+
+        return update;
+    }
 
 }
