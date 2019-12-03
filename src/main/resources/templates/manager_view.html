@@ -41,17 +41,21 @@
                                 <td><span th:text="${Timesheet.daysWorked}"></span></td>
                                 <td><span th:text="${Timesheet.overtime}"></span></td>
                                 <td><span th:text="${Timesheet.week_finish}"></span></td>
-                                <td>   <a class="btn btn-success btn-block "
-                                          th:href="@{/}"
-                                          th:id="approve">newApproveReview</a>
-                               <!--  <button class="btn btn-success" th:onclick="|sendApproval('${Timesheet.id}')|" />
-                                    id="approve">Approve
-                                    </button>-->
+                                <td>
+                                    <form  method="post" th:action="@{'/newApproveReview/' + ${Timesheet.id}}">
+                                        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+                                        <input class="btn btn-lg btn-success btn-block " id="submit" type="submit"
+                                               value="Approve"/>
+                                    </form>
                                 </td>
-                                <td>   <a class="btn btn-danger btn-block "
-                                          th:href="@{/newRejectedReview}"
-                                          th:id="reject">Reject</a>
+                                <td>
+                                    <form  method="post" th:action="@{'/newRejectedReview/' + ${Timesheet.id}}">
+                                        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+                                        <input class="btn btn-lg btn-danger btn-block " id="submitReject" type="submit"
+                                               value="Reject"/>
+                                    </form>
                                 </td>
+
                             </tbody>
                         </table>
                     </div>

@@ -15,12 +15,13 @@
                         <div class="col mx-auto custom-bg">
                             <div id=approvalReview>
 
-                               <form action="#" method="post" th:action="@{/newRejectedReview}" th:object="${ReviewKey}">
+                               <form action="#" method="post" th:action="@{/createRejectedReview}" th:object="${RejectedreviewDetails}">
 
                                     <div class="custom-label">
                                         <h3>Time Sheet Rejection Explanation</h3>
                                         <p>Please write a brief description as to why this time sheet was rejected </p>
                                     </div>
+                                   <input th:field="*{timesheet}" th:value="*{timesheet}" type="hidden"/>
 
                                                 <div class="form-group custom-label">
                                                     <label th:for="message">Comments</label>
@@ -30,8 +31,8 @@
                                                             th:field="*{message}"
                                                             type="text" />
                                                 </div>
-                                                    <button class="btn btn- btn-primary" id="saveReject" type="saveRejct"
-                                                id="approve">Save</button>
+                                                    <button class="btn btn- btn-primary" id="reject" type="saveReject"
+                                                >Save</button>
 
                                 </form>
                             </div>

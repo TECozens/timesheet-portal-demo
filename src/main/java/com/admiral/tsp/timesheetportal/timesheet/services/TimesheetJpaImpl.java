@@ -31,7 +31,7 @@ public class TimesheetJpaImpl implements TimesheetJpa {
     }
 
     @Override
-    public Optional<Timesheet> getByID(Integer id) {
+    public Optional<Timesheet> getByID(Long id) {
         return timesheetRepository.getTimesheetById(id);
     }
 

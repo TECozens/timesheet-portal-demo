@@ -22,7 +22,7 @@ public class TimesheetRestController {
 
 
     @PostMapping("/review/approve/{id}")
-    public ResponseEntity approveTimesheet(@PathVariable("id") Integer id) {
+    public ResponseEntity approveTimesheet(@PathVariable("id") Long id) {
 
         // Approve by the given id here
 

@@ -6,6 +6,7 @@ import com.admiral.tsp.timesheetportal.data.UserRepository;
 import com.admiral.tsp.timesheetportal.domain.User;
 import com.admiral.tsp.timesheetportal.review.Review;
 import com.admiral.tsp.timesheetportal.review.forms.ApprovalReviewForm;
+import com.admiral.tsp.timesheetportal.review.forms.TimesheetIdPassForm;
 import com.admiral.tsp.timesheetportal.review.services.ReviewJpa;
 import com.admiral.tsp.timesheetportal.review.services.ReviewRepository;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
@@ -18,17 +19,15 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @Slf4j
 @Controller
-@SessionAttributes({"TimesheetKey", "ReviewKey"})
+@SessionAttributes({"TimesheetKey"})
 public class ApprovalPerformanceReviewCreateController {
 
     @Autowired
@@ -47,32 +46,42 @@ public class ApprovalPerformanceReviewCreateController {
     }
 
     //       Review Form Displayed on reviewing Page
-    @PostMapping("/newApproveReview")
-    public String approvereviewDetails(@ModelAttribute("ReviewKey") @Valid ApprovalReviewForm ApprovalReviewForm,
-                                       BindingResult bindingResult, // Keep this after valid
+    @PostMapping("/newApproveReview/{id}")
+    public String approvereviewDetails(@PathVariable("id") Long id,// Keep this after valid
                                        Model model) {
+//
+//        if (bindingResult.hasErrors()) {
+//
+//            log.error(bindingResult.toString());
+//            log.error("review Form has binding errors");
+            System.out.println();
+            System.out.println();
+            System.out.println(id);
+            System.out.println(id);
+            System.out.println();
+            System.out.println();
 
-        if (bindingResult.hasErrors()) {
+            Optional<Timesheet> ts = timesheetJpa.getByID(id);
+            ApprovalReviewForm approvalReviewForm = new ApprovalReviewForm();
+            approvalReviewForm.setTimesheet(ts.get());
 
-            log.error(bindingResult.toString());
-            log.error("review Form has binding errors");
-
-            model.addAttribute("ApprovalreviewDetails", ApprovalReviewForm);
+            model.addAttribute("ApprovalreviewDetails", approvalReviewForm);
             return "review_approval";
-        }
+//        }
 
 ////        if details are correct do the submit
-        return "redirect:/createReview/";
+//        return "redirect:/createReview/";
     }
 
 
     @PostMapping("/createReview")
     public String submitApproveReview(@ModelAttribute("ReviewKey") ApprovalReviewForm approvalReviewForm,
                                   Model model) {
+        System.out.println(approvalReviewForm.getTimesheet().toString());
 
                                Review newReview = new Review( null,
                                        approvalReviewForm.getTimesheet(),
-                               true,
+                                       true,
                                 false,
                                        approvalReviewForm.getMessage(),
                                 approvalReviewForm.getCommunication(),
@@ -83,13 +92,13 @@ public class ApprovalPerformanceReviewCreateController {
                                 approvalReviewForm.getWorking_relationships()
 
         );
-
+        System.out.println(newReview.toString());
 
         reviewJpa.makeReview(newReview);
 
         log.debug("Here is the review going into DB" + newReview.toString());
 
-        return "redirect:/review_approval";
+        return "redirect:/Reviews";
     }
 
 }

@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface TimesheetRepository extends JpaRepository<Timesheet, Long> {
 
     @Query("SELECT t FROM Timesheet t WHERE t.id = :id")
-    Optional<Timesheet> getTimesheetById(@Param("id") Integer id);
+    Optional<Timesheet> getTimesheetById(@Param("id") Long id);
 
     @Query("SELECT t FROM Timesheet t")
     List<Timesheet> getAllTimesheets();
