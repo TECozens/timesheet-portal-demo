@@ -24,20 +24,22 @@
 
                 <div class="custom-form">
                     <div class="mx-3 custom-bg">
-
-
-                        <input type="date" id="startDate" onkeyup="filterResults()" placeholder="hello">
                         <table class="table table-light" id="timesheetInfo">
                             <thead>
                             <tr>
                                 <th scope="col">
                                     <label for="nameSearch">Name</label><input type="text" id="nameSearch" onkeyup="filterResults()" placeholder="Name">
-
                                 </th>
-                                <th scope="col">Agency</th>
-                                <th scope="col">Days Worked</th>
-                                <th scope="col">Overtime</th>
-                                <th scope="col">Week finished</th>
+                                <th scope="col">
+                                    <label for="agencySearch">Agency</label><input type="text" id="agencySearch" onkeyup="filterResults()" placeholder="Agency">
+                                </th>
+                                <th scope="col"><label for="daysWorkedSearch">Days Worked</label><input type="number" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()">
+                                </th>
+                                <th scope="col"><label for="daysWorkedSearch">Over Time</label><input type="number" id="OverTimeSearch" onkeyup="filterResults()">
+                                </th>
+                                <th scope="col">
+                                    <label for="weekFinishedSearch">Week Finished</label><input type="date" id="weekFinishedSearch" onkeyup="filterResults()">
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
