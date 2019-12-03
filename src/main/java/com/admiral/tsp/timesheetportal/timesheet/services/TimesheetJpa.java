@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface TimesheetJpa {
 
     Timesheet makeTimesheet(Timesheet item);
-    Optional<Timesheet> getByID(Integer index);
+    Optional<Timesheet> getByID(Long index);
     List<Timesheet> getAll();
 
 }
