@@ -37,7 +37,7 @@ public class ContractorJpaImpl implements ContractorJpa {
     }
 
     @Override
-    public Optional<Contractor> getByID(Integer ID) {
+    public Optional<Contractor> getByID(Long ID) {
         return contractorRepository.getContractorById(ID);
     }
 
@@ -49,6 +49,13 @@ public class ContractorJpaImpl implements ContractorJpa {
     @Override
     public Optional<Contractor> getByUser(User user) {
         return contractorRepository.getContractorByUser(user);
+    }
+
+    @Transactional
+    @Override
+    public void updateContractor(User manager, Long c_id) {
+        contractorRepository.updateContractor(manager, c_id);
+        return;
     }
 
     @Override

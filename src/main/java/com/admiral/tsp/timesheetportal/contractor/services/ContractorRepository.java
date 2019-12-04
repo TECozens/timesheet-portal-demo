@@ -15,7 +15,7 @@ import java.util.Optional;
 public interface ContractorRepository extends JpaRepository<Contractor, Long> {
 
     @Query("SELECT c FROM Contractor c WHERE c.id =:id")
-    Optional<Contractor> getContractorById(@Param("id") Integer id);
+    Optional<Contractor> getContractorById(@Param("id") Long id);
 
     @Query("SELECT c FROM Contractor c WHERE c.user =:user")
     Optional<Contractor> getContractorByUser(@Param("user") User user);
@@ -25,8 +25,10 @@ public interface ContractorRepository extends JpaRepository<Contractor, Long> {
 
     @Modifying
     @Query("UPDATE Contractor c SET c.manager =:manager WHERE c.id =:c_id")
-    void updateTimesheet(@Param("manager") User manager,@Param("c_id") Integer c_id);
+    void updateContractor(@Param("manager") User manager,@Param("c_id") Long c_id);
 
     @Query("SELECT c FROM Contractor c")
     List<Contractor> getAllContractor();
+
+
 }

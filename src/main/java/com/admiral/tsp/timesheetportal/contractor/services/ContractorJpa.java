@@ -12,9 +12,10 @@ import java.util.Optional;
 public interface ContractorJpa {
 
     Contractor makeContractor(Contractor item);
-    Optional<Contractor> getByID(Integer ID);
+    Optional<Contractor> getByID(Long ID);
     Optional<Contractor> getByUsername(String name);
     Optional<Contractor> getByUser(User user);
+    void updateContractor(User manager, Long c_id);
     List<Contractor> getAll();
 
 }
