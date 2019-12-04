@@ -72,9 +72,9 @@
                 <!--Do Login Based Buttons Here-->
                 <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                     <a class="btn btn-light" href="/">Home</a>
-                    <a class="btn btn-light">View Timesheets WIP</a>
-                    <a class="btn btn-light">Create Users WIP</a>
-                    <a class="btn btn-light">Manage Users WIP</a>
+                    <a class="btn btn-light" th:href="@{/Invoices}">View Invoices WIP</a>
+                    <a class="btn btn-light">Register Users WIP</a>
+                    <a class="btn btn-light" th:href="@{/ManageRoles}">Manage Users WIP</a>
                 </div>
 
                 <div sec:authorize="hasAuthority('ROLE_MANAGER')">

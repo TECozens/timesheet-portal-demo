@@ -89,3 +89,10 @@ body {
         max-width: 100%;
     }
 }
+
+.modal-open {
+    position: fixed;
+    overflow: scroll;
+    width: 100%;
+    padding-right: 0!important;
+}
