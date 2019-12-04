@@ -36,6 +36,8 @@ public class AdminManageRoles {
         String user = a.getName();
 
         model.addAttribute("User", user);
+        List<User> managers = userRepository.findByManagerRole();
+        model.addAttribute("managerKey", managers);
         return "admin_manage_roles_view";
     }
 

@@ -41,14 +41,16 @@
                                                     <label>
                                                         <select id="appointManager" name="managerSelect"
                                                                 class="btn btn-lg btn-secondary btn-block custom-btn">
-                                                            <option th:each="i:${managerKey}" th:value="*{i}"
-                                                                    th:text="*{i.username}"></option>
+                                                            <option th:each="i:${managerKey}" th:value="*{i.id}"
+                                                                    th:text="*{i.username}">
+
+                                                            </option>
                                                         </select>
                                                     </label>
 
                                                     <!--TODO Help Here-->
                                                     <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
-                                                       th:href="@{/contractorList/{managerKey} (managerKey.username=${managerKey})}"
+                                                       th:onclick="mapSelection()"
                                                        th:id="assign">Continue</a>
                                                 </div>
                                             </div>
@@ -78,4 +80,11 @@
     </div>
 </main>
 </body>
+<script>
+    function mapSelection() {
+        var sel = document.getElementById("appointManager");
+        var userChosenId = sel.options[sel.selectedIndex].value;
+        window.location.href = "/contractorList/" + userChosenId;
+    }
+</script>
 </html>
