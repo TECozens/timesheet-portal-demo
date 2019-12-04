@@ -102,7 +102,7 @@
                             </select>
                         </div>
 
-                        <div class="form-group custom-label" th:id="managerHidden">
+                        <div class="form-group custom-label" id="managerHidden">
                             <label th:for="manager">Select Manager For Contractor</label>
                                 <select class="btn btn-lg btn-secondary btn-block custom-btn">
                                     <option th:each="i:${managerKey}" th:value="*{i.id}"
