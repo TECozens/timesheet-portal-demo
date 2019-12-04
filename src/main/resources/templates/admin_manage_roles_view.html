@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <head th:replace="fragments/header :: head"></head>
 
@@ -16,7 +16,7 @@
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-lg btn-primary btn-block custom-btn" data-toggle="modal"
                             data-target="#modalQuickView">
-                        Manage Role
+                        Edit Manager
                     </button>
                 </div>
 
@@ -25,63 +25,39 @@
                      aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
+                        <div class="modal-content custom-form">
+                            <div class="modal-header custom-bg">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="btn-group">
-                                            <label>
-                                                <select id="roleSelect" name="Role Select"
-                                                        class="md-form mdb-select colorful-select btn-secondary btn-lg">
-                                                    <option value="" disabled selected>Select an Option
-                                                    </option>
-                                                    <option value="contractors">Assign Contractors</option>
-                                                    <option value="2">Contractor</option>
-                                                    <option value="3">Agency</option>
-                                                </select>
-                                            </label>
-                                        </div>
-
-
-                                        <label>Role to Edit</label>
-                                    </div>
+                                    <label>Manager to Edit</label>
                                 </div>
                             </div>
 
-                            <div class="modal-body">
-
+                            <div class="modal-body custom-bg">
                                 <div class="row">
-
                                     <div class="col-lg-5">
+                                        <div class="card-body ">
+                                            <div class="row">
+                                                <div class="text-center">
+                                                    <label>
+                                                        <select id="appointManager" name="managerSelect"
+                                                                class="btn btn-lg btn-secondary btn-block custom-btn">
+                                                            <option th:each="i:${managerKey}" th:value="*{i}"
+                                                                    th:text="*{i.username}"></option>
+                                                        </select>
+                                                    </label>
 
-                                        <!-- Dropdown For Manager Select-->
-                                        <div class="card-body">
-
-
-                                            <div class="row lists custom-form" id="contractors" style="display:none">
-                                                <div class="col-xl custom-bg">
-                                                    <div class="text-center">
-                                                        <Form>
-                                                            <select>
-                                                                <option th:each="i:${managerKey}" th:value="*{i}" th:text="*{i.username}"></option>
-                                                            </select>
-
-                                                            <!--TODO Some Crazy Table Insert Or Server Call to Populate Here-->
-                                                            Contractor
-                                                            Table Here
-                                                        </Form>
-                                                    </div>
+                                                    <!--TODO Help Here-->
+                                                    <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
+                                                       th:href="@{/contractorList/{managerKey} (managerKey.username=${managerKey})}"
+                                                       th:id="assign">Continue</a>
                                                 </div>
                                             </div>
-
-
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
 
-                            <div class="modal-footer">
+                            <div class="modal-footer custom-bg">
                                 <div class="text-center">
                                     <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">
@@ -91,9 +67,9 @@
                                     <button class="btn btn-primary">
                                         Save Changes
                                     </button>
-
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -102,20 +78,4 @@
     </div>
 </main>
 </body>
-
-<script>
-    // Material Select Initialization
-    $(document).ready(function () {
-        $('.mdb-select').materialSelect();
-    });
-
-    $(document).ready(function () {
-        $('#roleSelect').change(function () {
-            $('.lists').hide();
-            $('#' + $(this).val()).show();
-        });
-    });
-
-
-</script>
 </html>

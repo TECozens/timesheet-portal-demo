@@ -36,32 +36,28 @@ public class AdminManageRoles {
         String user = a.getName();
 
         model.addAttribute("User", user);
-        List<User> managers = userRepository.findByManagerRole();
-        model.addAttribute("managerKey", managers);
         return "admin_manage_roles_view";
     }
 
-    //    TODO List of Managers to Select
-
+    //    MANAGER DROPDOWN
     @GetMapping("/managerSelectList")
-    public String managerSelect(@ModelAttribute("RoleKey") String role,Model model) {
+    public String managerSelectOption(Model model) {
         List<User> managers = userRepository.findByManagerRole();
         model.addAttribute("managerKey", managers);
 
 
-        return "x";
+        return "managerSelectOption";
     }
 
     //    TODO List of Contractors to Assign to a Manager Vice Versa
+    @GetMapping("/contractorList/{i}")
+    public String getContractorList(@PathVariable("i") Integer index, Model model) {
 
-    @GetMapping("/contractorList")
-    public String getContractorList(Model model) {
-
-        return "r";
+        return "admin_select_contractors_list";
     }
 
     //    TODO Update the Contractor with new Manager from Select
-    @PostMapping("/updateContractorAssignee/{managerInstance}")
+    @PostMapping("/updateContractorAssignee")
     public String updateContractorAssignee(@PathVariable String managerInstance,
                                            Model model) {
 
