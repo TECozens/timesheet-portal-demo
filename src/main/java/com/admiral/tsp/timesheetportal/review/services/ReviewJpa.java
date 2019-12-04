@@ -14,6 +14,8 @@ public interface ReviewJpa {
     Review makeReview(Review item);
     Optional<Review> getByID(Integer ID);
     List<Review> getAll();
+    Optional<Review> updatePaid(Integer ID, Boolean paid);
+    List<Review> getUnpaid();
 
 
 }

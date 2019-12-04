@@ -41,4 +41,17 @@ public class ReviewJpaImpl implements ReviewJpa {
     public List<Review> getAll() {
         return reviewRepository.getAllReviews();
     }
+
+    @Transactional
+    @Override
+    public Optional<Review> updatePaid(Integer ID, Boolean paid) {
+
+        System.out.println(reviewRepository.updateReviewStatus(ID, paid));
+        return reviewRepository.getReviewById(1);
+    }
+
+    @Override
+    public List<Review> getUnpaid() {
+        return reviewRepository.getAllUnpaidReviews();
+    }
 }

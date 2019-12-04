@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:type="http://www.w3.org/1999/xhtml">
+
+            <head th:replace="fragments/header :: head"></head>
+
+            <body>
+            <div th:replace="fragments/header :: header"></div>
+
+
+            <main class="container" role="main">
+                <div class="starter-template">
+
+                    <div class="row mx-auto custom-form">
+                        <div class="col mx-auto custom-bg">
+                            <div id=approvalReview>
+
+                               <form action="#" method="post" th:action="@{/createReview}" th:object="${ApprovalreviewDetails}">
+
+                                    <div class="custom-label">
+                                        <h3>Contractor Performance Review</h3>
+                                        <p>Please rate on a scale of 1-3  1: Needs Improvement  2: Meets Expectations </p>
+                                    </div>
+                                   <input th:field="*{timesheet}" th:value="*{timesheet}" type="hidden"/>
+
+                                    <div class="form-group custom-label">
+                                        <label >Communication</label>
+                                        <input
+                                               class="form-control"
+                                               th:field="*{communication}"
+                                               type="number" pattern="/d*"/>
+                                    </div>
+                                   <div class="alert alert-danger"
+                                        th:errors="*{communication}"
+                                        th:if="${#fields.hasErrors('communication')}">
+                                       Error: Please enter a number between 1-3.
+                                   </div>
+
+
+
+                                   <div class="form-group custom-label">
+                                    <label >Technical Skills</label>
+                                    <input
+                                            class="form-control"
+                                            th:field="*{technical_skills}"
+                                            type="number" pattern="/d*"/>
+                                </div>
+
+                                       <div class="alert alert-danger"
+                                            th:if="${#fields.hasErrors('technical_skills')}"
+                                             th:errors="*{technical_skills}">
+                                            Error: Please enter a number between 1-3.
+                                        </div>
+
+
+                                    <div class="form-group custom-label">
+                                        <label>Quality</label>
+                                        <input class="form-control"
+                                               th:field="*{quality}"
+                                               type="number" pattern="/d*"/>
+                                    </div>
+
+                                   <div class="alert alert-danger"
+                                        th:errors="*{quality}"
+                                        th:if="${#fields.hasErrors('quality')}">
+                                       Error: Please enter a number between 1-3.
+                                   </div>
+
+
+                                   <div class="form-group custom-label">
+                                            <label th:for="initative">Initative</label>
+                                            <input
+                                                    class="form-control"
+                                                    th:field="*{initative}"
+                                                    type="number" pattern="/d*"/>
+                                        </div>
+
+
+                                   <div class="alert alert-danger"
+                                        th:errors="*{initative}"
+                                        th:if="${#fields.hasErrors('initative')}">
+                                       Error: Please enter a number between 1-3.
+                                   </div>
+
+
+                                   <div class="form-group custom-label">
+                                       <label>Productivity</label>
+                                       <input
+                                               class="form-control"
+                                               th:field="*{productivity}"
+                                               type="number" pattern="/d*"/>
+                                   </div>
+
+
+                                   <div class="alert alert-danger"
+                                        th:errors="*{productivity}"
+                                        th:if="${#fields.hasErrors('productivity')}">
+                                       Error: Please enter a number between 1-3.
+                                   </div>
+
+                                   <div class="form-group custom-label">
+                                                <label>Working Relationships</label>
+                                                <input
+                                                        class="form-control"
+                                                        th:field="*{working_relationships}"
+                                                        type="number" pattern="/d*"/>
+                                            </div>
+                                   <div class="alert alert-danger"
+                                        th:errors="*{working_relationships}"
+                                        th:if="${#fields.hasErrors('working_relationships')}">
+                                       Error: Please enter a number between 1-3.
+                                   </div>
+
+                                                <div class="form-group custom-label">
+                                                    <label th:for="message">Comments</label>
+                                                    <input
+                                                            class="form-control"
+                                                            placeholder="Comments"
+                                                            th:field="*{message}"
+                                                            type="text" />
+                                                </div>
+                                        <button class="btn btn- btn-primary" type="submit"
+                                           id="approve">Save</button>
+
+<!--                                                    <button class="btn btn-primary "-->
+<!--                                                              th:href="@{/Reviews}"-->
+<!--                                                            th:id="back"> Back</button>-->
+
+                                <!--   <button class="btn btn- btn-primary" th:onclick="|sendApproval('${Timesheet.id}')|"
+                                           id="approve">Save</button> -->
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+            </body>
+
+
+        </div>
+</main>
+<script>
+    function sendApproval(id) {
+        let xhr = new XMLHttpRequest();
+
+        xhr.open('POST', `/api/timesheets/review/approve ${id}`);
+        xhr.send();
+    }
+</script>
+</body>
+</html>
