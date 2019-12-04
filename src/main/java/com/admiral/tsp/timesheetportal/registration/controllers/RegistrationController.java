@@ -19,18 +19,19 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @Controller
-@SessionAttributes({"registerKey","agencyKey"})
+@SessionAttributes({"registerKey","agencyKey","managerKey"})
 public class RegistrationController {
 
     @Autowired
     private RegistrationJpa registrationJpa;
     @Autowired
-    private AgencyJpa agencyJpa;
-    @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private UserRepository userRepository;
 
 
     static final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
@@ -39,7 +40,11 @@ public class RegistrationController {
 
     @GetMapping("/register")
     public String goToRegister(Model model) {
+
+        List<User> managers = userRepository.findByManagerRole();
+
         model.addAttribute("registerKey", new RegistrationForm());
+        model.addAttribute("managerKey", managers);
         return "register";
     }
 
@@ -48,6 +53,7 @@ public class RegistrationController {
                               BindingResult bindingResult,
                               Model model) {
 
+        List<User> managers = userRepository.findByManagerRole();
         User user = new User();
 
         if (bindingResult.hasErrors()) {
@@ -56,6 +62,7 @@ public class RegistrationController {
             log.error("Registration Form has binding errors");
 
             model.addAttribute("User", user);
+            model.addAttribute("managerKey", managers);
             model.addAttribute("registrationDetails", registrationForm);
             return "register";
 
