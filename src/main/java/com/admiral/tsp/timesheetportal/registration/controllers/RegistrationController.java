@@ -112,7 +112,7 @@ public class RegistrationController {
 
         log.debug("New User going into DB" + newUser.toString());
 
-        return "redirect:/login";
+        return "redirect:/Invoices";
 
     }
 
@@ -160,7 +160,7 @@ public class RegistrationController {
 
         log.debug("New User going into DB" + newAgency.toString());
 
-        return "redirect:/login";
+        return "redirect:/Invoices";
 
     }
 
