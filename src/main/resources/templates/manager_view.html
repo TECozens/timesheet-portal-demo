@@ -42,7 +42,7 @@
                                 <td><span th:text="${Timesheet.overtime}"></span></td>
                                 <td><span th:text="${Timesheet.week_finish}"></span></td>
                                 <td>
-                                    <form  method="post" th:action="@{'/newApproveReview/' + ${Timesheet.id}}">
+                                    <form  method="get" th:action="@{'/newApproveReview/' + ${Timesheet.id}}">
                                         <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
                                         <input class="btn btn-lg btn-success btn-block " id="submit" type="submit"
                                                value="Approve"/>
