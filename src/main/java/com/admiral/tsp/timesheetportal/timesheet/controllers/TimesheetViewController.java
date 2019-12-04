@@ -1,5 +1,6 @@
 package com.admiral.tsp.timesheetportal.timesheet.controllers;
 
+import com.admiral.tsp.timesheetportal.review.forms.TimesheetIdPassForm;
 import com.admiral.tsp.timesheetportal.timesheet.Timesheet;
 import com.admiral.tsp.timesheetportal.timesheet.services.TimesheetJpa;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,7 @@ public class TimesheetViewController {
 
 
     @GetMapping("Timesheet/{i}")
-    public String showTimesheetDashboardPage(@PathVariable("i") Integer index, Model model) {
+    public String showTimesheetDashboardPage(@PathVariable("i") Long index, Model model) {
 
         Optional<Timesheet> foundTimesheet = timesheetJpa.getByID(index);
         log.info(String.valueOf(foundTimesheet.get()));
@@ -42,11 +43,12 @@ public class TimesheetViewController {
             return "404";
         }
     }
-    @GetMapping("/Approvals")
+    @GetMapping("/Reviews")
     public String showTimesheetApprovalPage(Model model){
         List<Timesheet> foundTimesheets = timesheetJpa.getAll();
 
         model.addAttribute("TimesheetKey", foundTimesheets);
+        model.addAttribute("TimesheetIdPass", new TimesheetIdPassForm());
 
         return "manager_view";
 

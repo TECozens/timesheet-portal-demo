@@ -24,26 +24,10 @@ public class ReviewViewController {
     private ReviewJpa reviewJpa;
 
 
-//    @GetMapping("Invoice/{i}")
-//    public String showInvoiceDashboardPage(@PathVariable("i") Integer index, Model model) {
-//
-//
-//
-//        Optional<Review> foundReview = reviewJpaRepo.getByID(Long.valueOf(index));
-//        log.info(String.valueOf(foundReview.get()));
-//
-//        if (foundReview.isPresent()) {
-//            model.addAttribute("review", foundReview.get());
-//
-//            return "invoice_list_view";
-//
-//        } else {
-//            return "404";
-//        }
-//    }
     @GetMapping("/Invoices")
     public String showTimesheetApprovalPage(Model model){
-        List<Review> foundReviews = reviewJpa.getAll();
+        List<Review> foundReviews = reviewJpa.getUnpaid();
+        System.out.print("HEY HERE");
 
         model.addAttribute("Reviews", foundReviews);
 

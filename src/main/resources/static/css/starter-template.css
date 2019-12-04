@@ -7,6 +7,11 @@ body {
     text-align: left;
 }
 
+.custom-focus, button:focus {
+    outline: 0;
+}
+
+
 .custom-txt {
     font-family: sans-serif;
     font-weight: 800;
@@ -24,6 +29,7 @@ body {
     border-radius: 10px;
     background-color: #FFFFFF;
 }
+
 
 .custom-btn {
     margin: 20px;
@@ -45,6 +51,51 @@ body {
     background-color: #0D3759;
     border-radius: 20px;
 }
+
+.small-input, .tiny-input, .date-input{
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.date-input {
+    width: 150px;
+}
+
+.tiny-input {
+    width: 50px;
+}
+
+.scrolling-wrapper {
+    width: available;
+    overflow-x: auto;
+}
+.scrolling-wrapper .block {
+    display: inline-block;
+
+}
+
+@media (min-width: 768px) {
+    .container-fluid>.navbar-header,
+    .container>.navbar-header {
+        width: 31%; /*31% as you mentioned in comments*/
+    }
+    img.navbar-brand {
+        width: auto;
+        height: auto;
+        max-height: 500px;
+        max-width: 100%;
+    }
+}
+
+.modal-open {
+    position: fixed;
+    overflow: scroll;
+    width: 100%;
+    padding-right: 0!important;
+}
+
 
 #hidden {
     display: none;

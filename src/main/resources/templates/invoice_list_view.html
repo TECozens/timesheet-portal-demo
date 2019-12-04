@@ -23,17 +23,42 @@
                 </div>
 
                 <div class="custom-form" th:if="${!Reviews.isEmpty()}">
-                    <div class="mx-3 custom-bg">
+                    <div class="mx-3 custom-bg scrolling-wrapper">
                         <table class="table table-light">
                             <thead>
                             <tr>
-                                <th scope="col">Name</th>
-                                <th scope="col">Agency</th>
-                                <th scope="col">Agency Email</th>
-                                <th scope="col">Days Worked</th>
-                                <th scope="col">Overtime</th>
-                                <th scope="col">Week finished</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">
+                                    <label for="nameSearch">Name</label>
+                                    <input class="small-input" type="text" id="nameSearch" onkeyup="filterResults()"placeholder="Name">
+                                </th>
+                                <th scope="col">
+                                    <label for="agencySearch">Agency</label>
+                                    <input class="small-input" type="text" id="agencySearch" onkeyup="filterResults()"placeholder="Agency">
+                                </th>
+                                <th scope="col">
+                                    <label for="agencyEmailSearch">Agency Email</label>
+                                    <input class="small-input" type="text" id="agencyEmailSearch" onkeyup="filterResults()"placeholder="agency@gmail.com">
+                                </th>
+                                <th scope="col">
+                                    <label for="daysWorkedSearch">Days Worked</label>
+                                    <input class="tiny-input" type="number" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()"placeholder="0">
+                                </th>
+                                <th scope="col">
+                                    <label for="overTimeSearch">Over Time</label>
+                                    <input class="tiny-input" type="number" pattern="/d*" id="overTimeSearch" onkeyup="filterResults()"placeholder="0">
+                                </th>
+                                <th scope="col">
+                                    <label for="weekFinishedSearch">Week End Date</label>
+                                    <input class="date-input" type="date" id="weekFinishedSearch" onkeyup="filterResults()">
+                                </th>
+                                <th scope="col">
+                                    <label for="statusSearch">Status</label>
+                                    <input class="tiny-input" type="text" id="statusSearch" onkeyup="filterResults()"placeholder="Approved"/>
+                                </th>
+                                <th scope="col">
+                                    <label for="paidSearch">Paid</label>
+                                    <input class="tiny-input" type="text" id="paidSearch" onkeyup="filterResults()"placeholder="true"/>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
@@ -46,6 +71,7 @@
                                 <td><span th:text="${ReviewItem.timesheet.overtime}"></span></td>
                                 <td><span th:text="${ReviewItem.timesheet.week_finish}"></span></td>
                                 <td><span th:text="${ReviewItem.approved}"></span></td>
+                                <td><span th:text="${ReviewItem.paid}"></span></td>
                                 <td>
                                     <button class="btn btn-success" id="approve"
                                             th:onclick="|sendApproval(${ReviewItem.id})|">
@@ -63,11 +89,10 @@
 </main>
 <script>
     function sendApproval(id) {
-        // Commented out cos not been mapped to a rest API yet
-        // let xhr = new XMLHttpRequest();
-        //
-        // xhr.open('POST', `/api/timesheets/approve/${id}`);
-        // xhr.send();
+        fetch(`/api/reviews/confirm/` +id)
+    }
+    function filterResults() {
+
     }
 </script>
 </body>
