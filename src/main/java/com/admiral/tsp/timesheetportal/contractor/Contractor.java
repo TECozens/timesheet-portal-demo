@@ -31,4 +31,12 @@ public class Contractor {
     @JoinColumn(name = "manager_id")
     private User manager;
 
+    public void setUser(Long id) {
+    }
+
+    public void setAgency(Long agencyId) {
+    }
+
+    public void setManager(Long managerId) {
+    }
 }

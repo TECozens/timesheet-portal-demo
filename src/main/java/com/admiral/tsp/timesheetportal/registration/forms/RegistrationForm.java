@@ -33,4 +33,8 @@ public class RegistrationForm {
     @NotNull(message = "Must have a role")
     private String role;
 
+    private Long agencyId;
+
+    private Long managerId;
+
 }

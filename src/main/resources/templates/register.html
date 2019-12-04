@@ -95,20 +95,27 @@
 
                         <div class="form-group custom-label">
                             <label th:for="role">Select Role</label>
-                            <select class="form-control" th:field="*{role}">
-                                <option th:value="ROLE_CONTRACTOR">CONTRACTOR</option>
-                                <option th:value="ROLE_MANAGER">MANAGER</option>
+                            <select class="form-control" th:field="*{role}" onchange="showHidden('hidden', this)">
                                 <option th:value="ROLE_ADMIN">ADMIN</option>
+                                <option th:value="ROLE_MANAGER">MANAGER</option>
+                                <option th:value="ROLE_CONTRACTOR">CONTRACTOR</option>
                             </select>
                         </div>
 
-                        <div class="form-group custom-label" id="managerHidden">
+                        <div class="form-group custom-label" id="hidden">
                             <label th:for="manager">Select Manager For Contractor</label>
-                                <select class="btn btn-lg btn-secondary btn-block custom-btn">
+                                <select class="form-control">
                                     <option th:each="i:${managerKey}" th:value="${i.id}"
                                             th:text="${i.username}">
                                     </option>
                                 </select>
+
+                            <label th:for="agency">Select Agency For Contractor</label>
+                            <select class="form-control">
+                                <option th:each="a:${agencyKey}" th:value="${a.id}"
+                                        th:text="${a.name}">
+                                </option>
+                            </select>
                         </div>
 
                         <div class="row mt-4">
@@ -124,6 +131,13 @@
         </div>
     </div>
 </main>
-
 </body>
+<script>
+
+    function showHidden(divId, element) {
+        document.getElementById(divId).style.display = element.value == "ROLE_CONTRACTOR" ? 'block' : 'none';
+        
+    }
+
+</script>
 </html>

@@ -2,6 +2,8 @@ package com.admiral.tsp.timesheetportal.registration.controllers;
 
 import com.admiral.tsp.timesheetportal.agency.Agency;
 import com.admiral.tsp.timesheetportal.agency.services.AgencyJpa;
+import com.admiral.tsp.timesheetportal.agency.services.AgencyRepository;
+import com.admiral.tsp.timesheetportal.contractor.Contractor;
 import com.admiral.tsp.timesheetportal.csrf.User;
 import com.admiral.tsp.timesheetportal.csrf.UserRole;
 import com.admiral.tsp.timesheetportal.csrf.services.UserRepository;
@@ -32,6 +34,8 @@ public class RegistrationController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private AgencyRepository agencyRepository;
 
 
     static final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
@@ -43,8 +47,12 @@ public class RegistrationController {
 
         List<User> managers = userRepository.findByManagerRole();
 
+        List<Agency> agency = agencyRepository.getAllAgency();
+
         model.addAttribute("registerKey", new RegistrationForm());
         model.addAttribute("managerKey", managers);
+        model.addAttribute("agencyKey", agency);
+
         return "register";
     }
 
@@ -54,6 +62,7 @@ public class RegistrationController {
                               Model model) {
 
         List<User> managers = userRepository.findByManagerRole();
+        List<Agency> agency = agencyRepository.getAllAgency();
         User user = new User();
 
         if (bindingResult.hasErrors()) {
@@ -63,6 +72,7 @@ public class RegistrationController {
 
             model.addAttribute("User", user);
             model.addAttribute("managerKey", managers);
+            model.addAttribute("agencyKey", agency);
             model.addAttribute("registrationDetails", registrationForm);
             return "register";
 
@@ -92,6 +102,13 @@ public class RegistrationController {
         newRole.setRole(registrationForm.getRole());
 
         registrationJpa.makeRole(newRole);
+
+        if (newRole.getRole() == "ROLE_CONTRACTOR"){
+            Contractor newContractor = new Contractor();
+            newContractor.setUser(newUser.getId());
+            newContractor.setAgency(registrationForm.getAgencyId());
+            newContractor.setManager(registrationForm.getManagerId());
+        }
 
         log.debug("New User going into DB" + newUser.toString());
 
