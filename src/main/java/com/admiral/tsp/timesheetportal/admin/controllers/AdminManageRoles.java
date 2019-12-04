@@ -1,5 +1,6 @@
 package com.admiral.tsp.timesheetportal.admin.controllers;
 
+import com.admiral.tsp.timesheetportal.contractor.Contractor;
 import com.admiral.tsp.timesheetportal.contractor.controllers.ContractorController;
 import com.admiral.tsp.timesheetportal.contractor.services.ContractorRepository;
 import com.admiral.tsp.timesheetportal.data.UserRepository;
@@ -24,9 +25,9 @@ public class AdminManageRoles {
 
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private ContractorRepository contractorRepository;
-
 
     //  Manager Roles Page
     @GetMapping("/ManageRoles")
@@ -54,15 +55,20 @@ public class AdminManageRoles {
     //    TODO List of Contractors to Assign to a Manager Vice Versa
     @GetMapping("/contractorList/{i}")
     public String getContractorList(@PathVariable("i") Integer index, Model model) {
+        List<Contractor> foundContractors = contractorRepository.getAllContractor();
+        model.addAttribute("Contractors", foundContractors);
 
         return "admin_select_contractors_list";
     }
 
-    //    TODO Update the Contractor with new Manager from Select
-    @PostMapping("/updateContractorAssignee")
-    public String updateContractorAssignee(@PathVariable String managerInstance,
-                                           Model model) {
-
-        return "x";
-    }
+//    //    TODO Update the Contractor with new Manager from Select
+//    @PostMapping("/assignContractor")
+//    public String assignContractor(@SessionAttribute("managerKey") User manager,
+//                                   @SessionAttribute("contractorKey") Contractor contractor,
+//                                   Model model) {
+//        contractor.setManager(manager);
+//        contractorRepository.updateContractor(manager, contractor.getId().intValue());
+//
+//        return "redirect:/manageRoles";
+//    }
 }

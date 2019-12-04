@@ -25,8 +25,10 @@ public interface ContractorRepository extends JpaRepository<Contractor, Long> {
 
     @Modifying
     @Query("UPDATE Contractor c SET c.manager =:manager WHERE c.id =:c_id")
-    void updateTimesheet(@Param("manager") User manager,@Param("c_id") Integer c_id);
+    void updateContractor(@Param("manager") User manager,@Param("c_id") Integer c_id);
 
     @Query("SELECT c FROM Contractor c")
     List<Contractor> getAllContractor();
+
+
 }

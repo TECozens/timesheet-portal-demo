@@ -12,13 +12,54 @@
 
         <div class="row mx-auto custom-form">
             <div class="col mx-auto custom-bg">
-                <div class="row">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-lg btn-primary btn-block custom-btn">
-                        Welp it works
-                    </button>
+
+                <div id=missingContractorsMessage th:if="${Contractors.isEmpty()}">
+                    <div>No matching Contractors</div>
                 </div>
 
+
+                <div class="row mt-4 custom-label">
+                    <h4 th:text="'Invoices'"></h4>
+                </div>
+
+                <div class="custom-form" th:if="${!Contractors.isEmpty()}">
+                    <div class="mx-3 custom-bg scrolling-wrapper">
+                        <table class="table table-light">
+                            <thead>
+                            <tr>
+                                <th scope="col">
+                                    <label for="usernameSearch">Name</label>
+                                    <input class="small-input" type="text" id="usernameSearch" onkeyup="filterResults()"
+                                           placeholder="Name">
+                                </th>
+                                <th scope="col">
+                                    <label for="managernameSearch">Agency</label>
+                                    <input class="small-input" type="text" id="managernameSearch" onkeyup="filterResults()"
+                                           placeholder="Agency">
+                                </th>
+                                <th scope="col">
+                                    <label for="ContractorEmailSearch">Contractor Email</label>
+                                    <input class="small-input" type="text" id="ContractorEmailSearch"
+                                           onkeyup="filterResults()" placeholder="agency@gmail.com">
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="AContractor: ${Contractors}">
+                                <td><span th:text="${AContractor.getUser().getUsername()}"></span></td>
+                                <td><span th:text="${AContractor.getUser().getEmail()}"></span></td>
+                                <td><span th:text="${AContractor.getManager().getUsername()} + 'Current Manager'"></span></td>
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
