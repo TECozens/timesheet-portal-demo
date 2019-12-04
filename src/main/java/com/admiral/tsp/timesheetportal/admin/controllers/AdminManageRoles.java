@@ -42,19 +42,14 @@ public class AdminManageRoles {
         return "admin_manage_roles_view";
     }
 
-    //    MANAGER DROPDOWN
-    @GetMapping("/managerSelectList")
-    public String managerSelectOption(Model model) {
-        List<User> managers = userRepository.findByManagerRole();
-        model.addAttribute("managerKey", managers);
-
-
-        return "managerSelectOption";
-    }
-
     //    TODO List of Contractors to Assign to a Manager Vice Versa
     @GetMapping("/contractorList/{i}")
     public String getContractorList(@PathVariable("i") Integer index, Model model) {
+        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+
+        String user = a.getName();
+        model.addAttribute("User", user);
+
         List<Contractor> foundContractors = contractorRepository.getAllContractor();
         model.addAttribute("Contractors", foundContractors);
 
@@ -63,11 +58,18 @@ public class AdminManageRoles {
 
     //    TODO Update the Contractor with new Manager from Select
     @PostMapping("/assignContractor/{id}")
-    public String assignContractor(@SessionAttribute("managerKey") User manager,
+    public String assignContractor(@PathVariable("id") Integer index,
+                                   @SessionAttribute("managerKey") User manager,
                                    @SessionAttribute("contractorKey") Contractor contractor,
                                    Model model) {
+        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+
+        String user = a.getName();
+        model.addAttribute("User", user);
+
         contractor.setManager(manager);
-        contractorRepository.updateContractor(manager, contractor.getId().intValue());
+
+        contractorRepository.updateContractor(manager,index);
 
         return "redirect:/manageRoles";
     }
