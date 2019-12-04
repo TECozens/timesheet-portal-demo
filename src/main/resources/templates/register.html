@@ -1,53 +1,143 @@
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="fragments/header :: head"></head>
+
 <body>
+<div th:replace="fragments/header :: header"></div>
 
-<h1>To Be Implemented Next Sprint</h1>
-<!--<div th:replace="fragments/header :: header"></div>-->
+<main class="container" role="main">
+    <div class="starter-template">
 
-<!--<h1 th:text="#{label.form.title}">form</h1>-->
-<!--<form action="/" enctype="utf8" method="POST" th:object="${user}">-->
+        <div class="row mx-auto custom-form">
+            <div class="col mx-auto custom-bg">
+                <div id = registrationDetails>
+                    <form action="#" method="post" th:action="@{/newUser}" th:object="${registerKey}">
 
+                        <div class="custom-label">
+                            <h3>Please Enter The Details For A New User</h3>
+                        </div>
 
-<!--    <div>-->
-<!--        <label th:text="#{label.user.lastName}">username</label>-->
-<!--        <input th:field="*{username}"/>-->
-<!--        <p th:each="error : ${#fields.errors('username')}"-->
-<!--           th:text="${error}">Validation error</p>-->
-<!--    </div>-->
+                        <div class="form-group custom-label">
+                            <label th:for="username">Username</label>
+                            <input aria-describedby="Enter a Username."
+                                   class="form-control"
+                                   placeholder="Username"
+                                   th:field="*{username}"
+                                   type="text">
 
-<!--    <div>-->
-<!--        <label th:text="#{label.user.firstName}">firstName</label>-->
-<!--        <input th:field="*{firstName}"/>-->
-<!--        <p th:each="error : ${#fields.errors('firstName')}"-->
-<!--           th:text="${error}">Validation error</p>-->
-<!--    </div>-->
+                            <div class="alert alert-danger"
+                                 th:errors="*{username}"
+                                 th:if="${#fields.hasErrors('username')}">
+                                Username Error: Please enter a valid username.
+                            </div>
+                        </div>
 
-<!--    <div>-->
-<!--        <label th:text="#{label.user.lastName}">lastName</label>-->
-<!--        <input th:field="*{lastName}"/>-->
-<!--        <p th:each="error : ${#fields.errors('lastName')}"-->
-<!--           th:text="${error}">Validation error</p>-->
-<!--    </div>-->
+                        <div class="form-group custom-label">
+                            <label th:for="firstname">First Name</label>
+                            <input aria-describedby="Enter First Name."
+                                   class="form-control"
+                                   placeholder="First Name"
+                                   th:field="*{firstname}"
+                                   type="text">
 
-<!--    <div>-->
-<!--        <label th:text="#{label.user.password}">password</label>-->
-<!--        <input th:field="*{password}" type="password"/>-->
-<!--        <p th:each="error : ${#fields.errors('password')}"-->
-<!--           th:text="${error}">Validation error</p>-->
-<!--    </div>-->
+                            <div class="alert alert-danger"
+                                 th:errors="*{firstname}"
+                                 th:if="${#fields.hasErrors('firstname')}">
+                                First Name Error: Please enter a valid First Name.
+                            </div>
+                        </div>
 
-<!--    <div>-->
-<!--        <label th:text="#{label.user.confirmPass}">confirm</label>-->
-<!--        <input th:field="*{matchingPassword}" type="password"/>-->
-<!--    </div>-->
-<!--    <button th:text="#{label.form.submit}" type="submit">submit</button>-->
-<!--</form>-->
+                        <div class="form-group custom-label">
+                            <label th:for="surname">Surname</label>
+                            <input aria-describedby="Enter a Surname."
+                                   class="form-control"
+                                   placeholder="Surname"
+                                   th:field="*{surname}"
+                                   type="text">
 
-<!--<a th:href="@{/login}" th:text="#{label.form.loginLink}">login</a>-->
+                            <div class="alert alert-danger"
+                                 th:errors="*{surname}"
+                                 th:if="${#fields.hasErrors('surname')}">
+                                Surname Error: Please enter a valid surname.
+                            </div>
+                        </div>
 
-<!--<div th:replace="fragments/footer :: footer">-->
-<!--</div>-->
+                        <div class="form-group custom-label">
+                            <label th:for="email">Email</label>
+                            <input aria-describedby="Enter an Email"
+                                   class="form-control"
+                                   placeholder="Email"
+                                   th:field="*{email}"
+                                   type="text">
 
+                            <div class="alert alert-danger"
+                                 th:errors="*{email}"
+                                 th:if="${#fields.hasErrors('email')}">
+                                Email Error: Please enter a valid email.
+                            </div>
+                        </div>
+
+                        <div class="form-group custom-label">
+                            <label th:for="password">Password</label>
+                            <input aria-describedby="Enter Password."
+                                   class="form-control"
+                                   placeholder="Password"
+                                   th:field="*{password}"
+                                   type="text">
+
+                            <div class="alert alert-danger"
+                                 th:errors="*{password}"
+                                 th:if="${#fields.hasErrors('password')}">
+                                Password Error: Please enter a valid password.
+                            </div>
+                        </div>
+
+                        <div class="form-group custom-label">
+                            <label th:for="role">Select Role</label>
+                            <select class="form-control" th:field="*{role}" onchange="showHidden('hidden', this)">
+                                <option th:value="ROLE_ADMIN">ADMIN</option>
+                                <option th:value="ROLE_MANAGER">MANAGER</option>
+                                <option th:value="ROLE_CONTRACTOR">CONTRACTOR</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group custom-label" id="hidden">
+                            <label th:for="manager">Select Manager For Contractor</label>
+                                <select class="form-control">
+                                    <option th:each="i:${managerKey}" th:value="${i.id}"
+                                            th:text="${i.username}">
+                                    </option>
+                                </select>
+
+                            <label th:for="agency">Select Agency For Contractor</label>
+                            <select class="form-control">
+                                <option th:each="a:${agencyKey}" th:value="${a.id}"
+                                        th:text="${a.name}">
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="row mt-4">
+                            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+
+                            <input class="btn btn-lg btn-primary btn-block custom-btn" id="submit" type="submit"
+                                   value="Submit Registration Form"/>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
 </body>
+<script>
+
+    function showHidden(divId, element) {
+        document.getElementById(divId).style.display = element.value == "ROLE_CONTRACTOR" ? 'block' : 'none';
+        
+    }
+
+</script>
 </html>

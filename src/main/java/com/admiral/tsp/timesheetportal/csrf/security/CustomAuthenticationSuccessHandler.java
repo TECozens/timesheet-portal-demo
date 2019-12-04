@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.controllers.config.security;
+package com.admiral.tsp.timesheetportal.csrf.security;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;

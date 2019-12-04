@@ -1,8 +1,8 @@
 package com.admiral.tsp.timesheetportal.contractor.services;
 
 import com.admiral.tsp.timesheetportal.contractor.Contractor;
-import com.admiral.tsp.timesheetportal.data.UserRepository;
-import com.admiral.tsp.timesheetportal.domain.User;
+import com.admiral.tsp.timesheetportal.csrf.services.UserRepository;
+import com.admiral.tsp.timesheetportal.csrf.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

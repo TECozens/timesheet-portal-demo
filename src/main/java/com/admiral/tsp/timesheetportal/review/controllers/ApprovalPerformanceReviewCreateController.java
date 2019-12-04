@@ -2,8 +2,6 @@ package com.admiral.tsp.timesheetportal.review.controllers;
 
 import com.admiral.tsp.timesheetportal.contractor.Contractor;
 import com.admiral.tsp.timesheetportal.contractor.services.ContractorRepository;
-import com.admiral.tsp.timesheetportal.data.UserRepository;
-import com.admiral.tsp.timesheetportal.domain.User;
 import com.admiral.tsp.timesheetportal.review.Review;
 import com.admiral.tsp.timesheetportal.review.forms.ApprovalReviewForm;
 import com.admiral.tsp.timesheetportal.review.forms.TimesheetIdPassForm;

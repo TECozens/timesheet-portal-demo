@@ -1,10 +1,11 @@
-package com.admiral.tsp.timesheetportal.domain;
+package com.admiral.tsp.timesheetportal.csrf;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -15,13 +16,15 @@ public class UserRole {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_role_id")
-    private Long userroleid;
+    private Long id;
 
     @Column(name = "userid")
     private Long userid;
 
     @Column(name = "role")
     private String role;
+
+//    @ManyToMany(mappedBy = "roles")
+//    private Collection<User> users;
 
 }

@@ -1,13 +1,12 @@
 package com.admiral.tsp.timesheetportal.contractor;
 
 import com.admiral.tsp.timesheetportal.agency.Agency;
-import com.admiral.tsp.timesheetportal.domain.User;
+import com.admiral.tsp.timesheetportal.csrf.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 
 @Data
 @AllArgsConstructor
@@ -32,4 +31,12 @@ public class Contractor {
     @JoinColumn(name = "manager_id")
     private User manager;
 
+    public void setUser(Long id) {
+    }
+
+    public void setAgency(Long agencyId) {
+    }
+
+    public void setManager(Long managerId) {
+    }
 }
