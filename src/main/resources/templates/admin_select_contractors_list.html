@@ -19,7 +19,8 @@
 
 
                 <div class="row mt-4 custom-label">
-                    <h4 th:text="'Invoices'"></h4>
+                    <h4 th:text="'Selecting contractors for ' + ${Manager.username}"></h4>
+                    <input type="hidden" id = "managerSelected" th:value="${Manager.id}">
                 </div>
 
                 <div class="custom-form" th:if="${!Contractors.isEmpty()}">
@@ -55,9 +56,10 @@
                                             th:text="${AContractor.getManager().getUsername()} + ' Current Manager'"></span>
                                     </td>
                                     <td>
-                                        <span><input type="checkbox" name="selected" class="custom-bg"
+                                        <span><input type="checkbox" name="selected" class="custom-bg determine-manager"
                                                      id="exampleCheck1"
-                                                     th:value="${AContractor.getUser().getId()}">
+                                                     th:value="'['+ ${AContractor.user.id} +',' + ${AContractor.manager.id} +']'">
+<!--                                            `'{"id":"'+${AContractor.getUser().getId()}+'","manager":"'+${AContractor.getManager().getId()}+'"}'`-->
                                         </span>
                                     </td>
                                 </tr>
@@ -77,19 +79,22 @@
 </main>
 </body>
 <script>
-    var radios = document.getElementById("selectForm").getElementsByClassName("form-check-input");
-    var prev = null;
-    // console.log(radios.length)
 
-    for (var i = 0; i < radios.length; i++) {
-        radios[i].addEventListener('change', function mapSelection() {
-            // (prev) ? console.log(prev.value): null;
-            if (this.checked) {
-                fetch("/assignContractors/" + this.value)
-            }
-        });
-    }
+        var radios = document.getElementById("selectForm").getElementsByClassName("determine-manager");
+        var manager = document.getElementById("managerSelected").value;
 
+        for (var i = 0; i < radios.length; i++) {
+            radios[i].addEventListener('change', function mapSelection() {
+                var data = JSON.parse(this.value);
+                var id = data[0];
+                var m_id = data[1];
+                if (this.checked) {
+                    fetch("/api/admin/updateManager/"+ id +"/" + manager)
+                } else {
+                    fetch("/api/admin/updateManager/"+ id +"/" + m_id)
+                }
+            });
+        }
 
 </script>
 </html>

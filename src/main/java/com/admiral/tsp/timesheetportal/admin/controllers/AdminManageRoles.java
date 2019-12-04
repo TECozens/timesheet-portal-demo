@@ -50,6 +50,9 @@ public class AdminManageRoles {
         String user = a.getName();
         model.addAttribute("User", user);
 
+        User manager = userRepository.getUserById(index.longValue());
+        model.addAttribute("Manager", manager);
+
         List<Contractor> foundContractors = contractorRepository.getAllContractor();
         model.addAttribute("Contractors", foundContractors);
 
@@ -58,7 +61,7 @@ public class AdminManageRoles {
 
     //    TODO Update the Contractor with new Manager from Select
     @PostMapping("/assignContractor/{id}")
-    public String assignContractor(@PathVariable("id") Integer index,
+    public String assignContractor(@PathVariable("id") Long index,
                                    @SessionAttribute("managerKey") User manager,
                                    @SessionAttribute("contractorKey") Contractor contractor,
                                    Model model) {
