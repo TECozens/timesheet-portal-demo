@@ -61,14 +61,14 @@ public class AdminManageRoles {
         return "admin_select_contractors_list";
     }
 
-//    //    TODO Update the Contractor with new Manager from Select
-//    @PostMapping("/assignContractor")
-//    public String assignContractor(@SessionAttribute("managerKey") User manager,
-//                                   @SessionAttribute("contractorKey") Contractor contractor,
-//                                   Model model) {
-//        contractor.setManager(manager);
-//        contractorRepository.updateContractor(manager, contractor.getId().intValue());
-//
-//        return "redirect:/manageRoles";
-//    }
+    //    TODO Update the Contractor with new Manager from Select
+    @PostMapping("/assignContractor/{id}")
+    public String assignContractor(@SessionAttribute("managerKey") User manager,
+                                   @SessionAttribute("contractorKey") Contractor contractor,
+                                   Model model) {
+        contractor.setManager(manager);
+        contractorRepository.updateContractor(manager, contractor.getId().intValue());
+
+        return "redirect:/manageRoles";
+    }
 }
