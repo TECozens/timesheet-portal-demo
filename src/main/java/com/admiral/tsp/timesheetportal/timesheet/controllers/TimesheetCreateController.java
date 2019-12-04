@@ -66,6 +66,7 @@ public class TimesheetCreateController {
         log.info("The name given is: " + username + " - " + a.getDetails().toString());
 
 //        TODO Fun create stuff
+        System.out.println("The name given is: " + username + " - " + a.getDetails().toString());
         Contractor thisContractor = contractorJpa.getByUsername(username).get();
 
         log.info("The contractor given is: " + thisContractor.toString());

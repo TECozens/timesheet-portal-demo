@@ -4,6 +4,7 @@ import com.admiral.tsp.timesheetportal.agency.Agency;
 import com.admiral.tsp.timesheetportal.agency.services.AgencyJpa;
 import com.admiral.tsp.timesheetportal.agency.services.AgencyRepository;
 import com.admiral.tsp.timesheetportal.contractor.Contractor;
+import com.admiral.tsp.timesheetportal.contractor.services.ContractorJpa;
 import com.admiral.tsp.timesheetportal.csrf.User;
 import com.admiral.tsp.timesheetportal.csrf.UserRole;
 import com.admiral.tsp.timesheetportal.csrf.services.UserRepository;
@@ -36,6 +37,8 @@ public class RegistrationController {
     private UserRepository userRepository;
     @Autowired
     private AgencyRepository agencyRepository;
+    @Autowired
+    private ContractorJpa contractorJpa;
 
 
     static final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
@@ -102,17 +105,19 @@ public class RegistrationController {
         newRole.setRole(registrationForm.getRole());
 
         registrationJpa.makeRole(newRole);
+        System.out.println(newRole.getRole());
 
-        if (newRole.getRole() == "ROLE_CONTRACTOR"){
+        if (newRole.getRole().equals("ROLE_CONTRACTOR")){
             Contractor newContractor = new Contractor();
-            newContractor.setUser(newUser.getId());
-            newContractor.setAgency(registrationForm.getAgencyId());
-            newContractor.setManager(registrationForm.getManagerId());
+            newContractor.setUser(newUser);
+            newContractor.setAgency(agencyRepository.getAgencyById(registrationForm.getAgencyId()));
+            newContractor.setManager(userRepository.getUserById(registrationForm.getManagerId()));
+            contractorJpa.makeContractor(newContractor);
         }
 
         log.debug("New User going into DB" + newUser.toString());
 
-        return "redirect:/login";
+        return "redirect:/Invoices";
 
     }
 
@@ -160,7 +165,7 @@ public class RegistrationController {
 
         log.debug("New User going into DB" + newAgency.toString());
 
-        return "redirect:/login";
+        return "redirect:/Invoices";
 
     }
 

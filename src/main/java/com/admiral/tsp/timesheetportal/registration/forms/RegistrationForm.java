@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Data
 @NoArgsConstructor
@@ -26,7 +27,7 @@ public class RegistrationForm {
     @NotNull(message = "Must have an email")
     private String email;
 
-    @Min(value = 8, message = "Password must be at least 8 characters or more!")
+    @Size(min = 8, message = "Password must be at least 8 characters or more!")
     @NotNull(message = "Must have a password")
     private String password;
 

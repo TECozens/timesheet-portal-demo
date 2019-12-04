@@ -104,14 +104,14 @@
 
                         <div class="form-group custom-label" id="hidden">
                             <label th:for="manager">Select Manager For Contractor</label>
-                                <select class="form-control">
+                                <select class="form-control" th:field="*{managerId}">
                                     <option th:each="i:${managerKey}" th:value="${i.id}"
                                             th:text="${i.username}">
                                     </option>
                                 </select>
 
                             <label th:for="agency">Select Agency For Contractor</label>
-                            <select class="form-control">
+                            <select class="form-control" th:field="*{agencyId}">
                                 <option th:each="a:${agencyKey}" th:value="${a.id}"
                                         th:text="${a.name}">
                                 </option>

@@ -1,6 +1,6 @@
 package com.admiral.tsp.timesheetportal.data;
 
-import com.admiral.tsp.timesheetportal.domain.User;
+import com.admiral.tsp.timesheetportal.csrf.User;
 import org.springframework.stereotype.Repository;
 
 @Repository

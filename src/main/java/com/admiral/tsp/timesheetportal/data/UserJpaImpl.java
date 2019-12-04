@@ -1,6 +1,7 @@
 package com.admiral.tsp.timesheetportal.data;
 
-import com.admiral.tsp.timesheetportal.domain.User;
+import com.admiral.tsp.timesheetportal.csrf.User;
+import com.admiral.tsp.timesheetportal.csrf.services.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 

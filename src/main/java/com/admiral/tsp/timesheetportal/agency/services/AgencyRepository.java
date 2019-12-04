@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface AgencyRepository extends JpaRepository<Agency, Long> {
 
     @Query("SELECT a FROM Agency a WHERE a.id = :id")
-    Agency getAgencyById(@Param("id") Integer id);
+    Agency getAgencyById(@Param("id") Long id);
 
     @Query("SELECT a FROM Agency a")
     List<Agency> getAllAgency();

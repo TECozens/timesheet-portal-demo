@@ -31,7 +31,7 @@ public class AgencyJpaImpl implements AgencyJpa {
     }
 
     @Override
-    public Agency findByID(Integer ID) {
+    public Agency findByID(Long ID) {
         return agencyRepository.getAgencyById(ID);
     }
 

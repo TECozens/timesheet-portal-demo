@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface AgencyJpa {
 
     Agency makeAgency(Agency agency);
-    Agency findByID(Integer ID);
+    Agency findByID(Long ID);
     List<Agency> findAll();
 
 }

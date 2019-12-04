@@ -73,7 +73,8 @@
                 <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                     <a class="btn btn-light" href="/">Home</a>
                     <a class="btn btn-light" th:href="@{/Invoices}">View Invoices WIP</a>
-                    <a class="btn btn-light">Register Users WIP</a>
+                    <a class="btn btn-light" th:href="@{/register}">Register Users</a>
+                    <a class="btn btn-light" th:href="@{/registerAgency}">Register Agent</a>
                     <a class="btn btn-light" th:href="@{/ManageRoles}">Manage Users WIP</a>
                 </div>
 

@@ -57,21 +57,21 @@ public class AdminManageRoles {
         return "admin_select_contractors_list";
     }
 
-    //    TODO Update the Contractor with new Manager from Select
-    @PostMapping("/assignContractor/{id}")
-    public String assignContractor(@PathVariable("id") Long index,
-                                   @SessionAttribute("managerKey") User manager,
-                                   @SessionAttribute("contractorKey") Contractor contractor,
-                                   Model model) {
-        Authentication a = SecurityContextHolder.getContext().getAuthentication();
-
-        String user = a.getName();
-        model.addAttribute("User", user);
-
-        contractor.setManager(manager);
-
-        contractorRepository.updateContractor(manager,index);
-
-        return "redirect:/manageRoles";
-    }
+//    //    TODO Update the Contractor with new Manager from Select
+//    @PostMapping("/assignContractor/{id}")
+//    public String assignContractor(@PathVariable("id") Long index,
+//                                   @SessionAttribute("managerKey") User manager,
+//                                   @SessionAttribute("contractorKey") Contractor contractor,
+//                                   Model model) {
+//        Authentication a = SecurityContextHolder.getContext().getAuthentication();
+//
+//        String user = a.getName();
+//        model.addAttribute("User", user);
+//
+//        contractor.setManager(manager);
+//
+//        contractorRepository.updateContractor(manager,index);
+//
+//        return "redirect:/manageRoles";
+//    }
 }
