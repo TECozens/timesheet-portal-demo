@@ -11,10 +11,8 @@
     <div class="row custom-bg">
         <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div class="serializedFormContainer">
+
                 <div sec:authorize="isAuthenticated()">
-
-
-
                     <form method="post" th:action="@{/logout}">
                         <label class="custom-label">
                             <h3>
