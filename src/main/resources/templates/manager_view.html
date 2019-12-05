@@ -29,22 +29,22 @@
                             <tr>
                                 <th scope="col">
                                     <label for="nameSearch">Name</label>
-                                    <input class="small-input" type="text" id="nameSearch" onkeyup="filterResults()" placeholder="Name">
+                                    <input class="small-input searcher" type="text" id="nameSearch" onkeyup="filterResults()" placeholder="Name">
                                 </th>
                                 <th scope="col">
                                     <label for="agencySearch">Agency</label>
-                                    <input class="small-input" type="text" id="agencySearch" onkeyup="filterResults()" placeholder="Agency">
+                                    <input class="small-input searcher" type="text" id="agencySearch" onkeyup="filterResults()" placeholder="Agency">
                                 </th>
                                 <th scope="col">
                                     <label for="daysWorkedSearch">Days Worked</label>
-                                    <input class="tiny-input" type="number" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()">
+                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()">
                                 </th>
                                     <th scope="col"><label for="OverTimeSearch">Over Time</label>
-                                    <input class="tiny-input" type="number" id="OverTimeSearch" onkeyup="filterResults()">
+                                    <input class="tiny-input searcher" type="text" id="OverTimeSearch" onkeyup="filterResults()">
                                 </th>
                                 <th scope="col">
                                     <label for="weekFinishedSearch">Week Finished</label>
-                                    <input class="date-input" type="date" id="weekFinishedSearch" onkeyup="filterResults()">
+                                    <input class="date-input searcher" type="text" id="weekFinishedSearch" onkeyup="filterResults()">
                                 </th>
                             </tr>
                             </thead>
@@ -84,47 +84,30 @@
 <script>
     function filterResults() {
 
-        var name_filter = document.getElementById("nameSearch").value.toUpperCase();
-        var agency_filter = document.getElementById("agencySearch").value.toUpperCase();
-        var worked_filter = document.getElementById("daysWorkedSearch").value;
-        var overtime_filter = document.getElementById("OverTimeSearch").value;
         var table = document.getElementById("timesheetInfo");
+        var search_items = document.getElementsByClassName("searcher");
         var tr = table.getElementsByTagName("tr");
 
         var td;
+        var filter;
         for (i = 0; i < tr.length; i++) {
-            tr[i].style.display = "";
 
 
-            td = tr[i].getElementsByTagName("td")[0];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (!(txtValue.toUpperCase().indexOf(name_filter) > -1) && name_filter) {
-                    tr[i].style.display = "none";
-                }
-            }
+            var row = tr[i];
+            row.style.display = "";
 
-            td = tr[i].getElementsByTagName("td")[1];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (!(txtValue.toUpperCase().indexOf(agency_filter) > -1) && agency_filter) {
-                    tr[i].style.display = "none";
-                }
-            }
+            for (iter = 0; iter < search_items.length; iter++) {
 
-            td = tr[i].getElementsByTagName("td")[2];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (!(txtValue == worked_filter) && worked_filter) {
-                    tr[i].style.display = "none";
-                }
-            }
+                td = row.getElementsByTagName("td")[iter];
+                if (td) {
 
-            td = tr[i].getElementsByTagName("td")[3];
-            if (td) {
-                txtValue = td.textContent || td.innerText;
-                if (!(txtValue == overtime_filter) && overtime_filter) {
-                    tr[i].style.display = "none";
+                    filter = search_items[iter].value.toUpperCase();
+                    txtValue = td.textContent || td.innerText;
+
+                    if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {
+                        tr[i].style.display = "none";
+                    }
+
                 }
             }
 
