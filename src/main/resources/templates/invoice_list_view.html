@@ -37,19 +37,19 @@
                                 </th>
                                 <th scope="col">
                                     <label for="agencyEmailSearch">Agency Email</label>
-                                    <input class="small-input searcher" type="text" id="agencyEmailSearch" onkeyup="filterResults()"placeholder="agency@gmail.com">
+                                    <input class="small-input searcher" type="text" id="agencyEmailSearch" onkeyup="filterResults()"placeholder="agency@email.com">
                                 </th>
                                 <th scope="col">
                                     <label for="daysWorkedSearch">Days Worked</label>
-                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()"placeholder="0">
+                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()"placeholder="">
                                 </th>
                                 <th scope="col">
                                     <label for="overTimeSearch">Over Time</label>
-                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="overTimeSearch" onkeyup="filterResults()"placeholder="0">
+                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="overTimeSearch" onkeyup="filterResults()"placeholder="">
                                 </th>
                                 <th scope="col">
                                     <label for="weekFinishedSearch">Week End Date</label>
-                                    <input class="date-input searcher" type="text" id="weekFinishedSearch" onkeyup="filterResults()">
+                                    <input class="date-input searcher" type="text" id="weekFinishedSearch" onkeyup="filterResults()" placeholder="YYYY-MM-DD">
                                 </th>
                                 <th scope="col">
                                     <label for="reviewSearch">Reviewed</label>
@@ -62,7 +62,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="ReviewItem: ${Reviews}">
+                            <tr th:each="ReviewItem: ${Reviews}" th:id="'reviewitem' + ${ReviewItem.id}" class="notsaved">
                                 <td><span th:text="${ReviewItem.timesheet.contractor.user.firstname}
                                             + ' ' + ${ReviewItem.timesheet.contractor.user.surname}"></span></td>
                                 <td><span th:text="${ReviewItem.timesheet.contractor.agency.name}"></span></td>
@@ -90,6 +90,9 @@
 <script>
     function sendApproval(id) {
         fetch(`/api/reviews/confirm/` +id)
+        var row = document.getElementById("reviewitem" + id);
+        row.classList.remove("notsaved");
+        row.style.display = "none";
     }
     function filterResults() {
 
@@ -103,7 +106,11 @@
 
 
             var row = tr[i];
-            row.style.display = "";
+            console.log(row.classList);
+            console.log("notsaved");
+            if (row.classList.contains("notsaved")) {
+                row.style.display = "";
+            }
 
             for (iter = 0; iter < search_items.length; iter++) {
 
@@ -119,39 +126,6 @@
 
                 }
             }
-
-
-            // td = tr[i].getElementsByTagName("td")[0];
-            // if (td) {
-            //     txtValue = td.textContent || td.innerText;
-            //     if (!(txtValue.toUpperCase().indexOf(name_filter) > -1) && name_filter) {
-            //         tr[i].style.display = "none";
-            //     }
-            // }
-            //
-            // td = tr[i].getElementsByTagName("td")[1];
-            // if (td) {
-            //     txtValue = td.textContent || td.innerText;
-            //     if (!(txtValue.toUpperCase().indexOf(agency_filter) > -1) && agency_filter) {
-            //         tr[i].style.display = "none";
-            //     }
-            // }
-            //
-            // td = tr[i].getElementsByTagName("td")[2];
-            // if (td) {
-            //     txtValue = td.textContent || td.innerText;
-            //     if (!(txtValue == worked_filter) && worked_filter) {
-            //         tr[i].style.display = "none";
-            //     }
-            // }
-            //
-            // td = tr[i].getElementsByTagName("td")[3];
-            // if (td) {
-            //     txtValue = td.textContent || td.innerText;
-            //     if (!(txtValue == overtime_filter) && overtime_filter) {
-            //         tr[i].style.display = "none";
-            //     }
-            // }
 
         }
     }

@@ -18,21 +18,33 @@ VALUES (5,'Carl','Jones','Carl-Jones','Carl-Jones@Admiral.co.uk',
 INSERT INTO user (id, username, firstname, surname, email, password)
 VALUES (6,'Reggie','Mikes','Reggie-Mikes','Reggie-Mikes@Admiral.co.uk',
 '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); -- password
+INSERT INTO user (id, username, firstname, surname, email, password)
+VALUES (7,'Kevin','Kevin','Anstead','AnsteadK@Admiral.co.uk',
+'{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); -- password
 
 
 
 INSERT INTO agency (id, agency_name, email) VALUES (1L, 'agency1', 'xxx@hotmail.com');
 INSERT INTO agency (id, agency_name, email) VALUES (2L, 'agency2', 'xxx@sky.com');
+INSERT INTO agency (id, agency_name, email) VALUES (3L, 'agency3', 'xxx@hotmail.com');
+INSERT INTO agency (id, agency_name, email) VALUES (4L, 'agency4', 'xxx@sky.com');
 
 
 INSERT INTO contractor (id, user_id, agency_id, manager_id) VALUES (1L, 1, 1, 3);
+INSERT INTO contractor (id, user_id, agency_id, manager_id) VALUES (2L, 7, 3, 5);
 
 INSERT INTO timesheet (id, contractor_id, days_worked, overtime, week_finish) VALUES (1L, 1, 5, 1, '2019-11-10');
 INSERT INTO timesheet (id, contractor_id, days_worked, overtime, week_finish) VALUES (2L, 1, 4, 2, '2019-11-17');
+INSERT INTO timesheet (id, contractor_id, days_worked, overtime, week_finish) VALUES (3L, 2, 2, 2, '2019-11-10');
+INSERT INTO timesheet (id, contractor_id, days_worked, overtime, week_finish) VALUES (4L, 2, 1, 4, '2019-11-17');
 
 INSERT INTO review (id, timesheet_id, approved, paid, message, communication_rating, tech_skills_rating,
                     quality_rating, initiative_rating, productivity_rating, working_relationships_rating)
             VALUES (1, 1, TRUE, FALSE , 'Fake message cos this is perfectly fine', 3, 3, 3, 3, 3, 3);
+
+INSERT INTO review (id, timesheet_id, approved, paid, message, communication_rating, tech_skills_rating,
+                    quality_rating, initiative_rating, productivity_rating, working_relationships_rating)
+            VALUES (2, 3, TRUE, FALSE , 'Fake message cos this is perfectly fine', 3, 3, 3, 3, 3, 3);
 
 INSERT INTO user_role (userid, role) VALUES (001, 'ROLE_CONTRACTOR');
 INSERT INTO user_role (userid, role) VALUES (002, 'ROLE_ADMIN');
@@ -40,3 +52,4 @@ INSERT INTO user_role (userid, role) VALUES (003, 'ROLE_MANAGER');
 INSERT INTO user_role (userid, role) VALUES (004, 'ROLE_ADMIN');
 INSERT INTO user_role (userid, role) VALUES (005, 'ROLE_MANAGER');
 INSERT INTO user_role (userid, role) VALUES (006, 'ROLE_MANAGER');
+INSERT INTO user_role (userid, role) VALUES (007, 'ROLE_CONTRACTOR');
