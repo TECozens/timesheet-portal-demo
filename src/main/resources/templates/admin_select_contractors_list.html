@@ -53,7 +53,7 @@
                                                onkeyup="filterResults()" placeholder="Email">
                                     </th>
                                     <th scope="col">
-                                        <label for="currentManagerSearch">Agency</label>
+                                        <label for="currentManagerSearch">Manager</label>
                                         <input class="small-input searcher" type="text" id="currentManagerSearch"
                                                onkeyup="filterResults()"
                                                placeholder="Manager">
@@ -73,7 +73,7 @@
                                     <td>
                                         <span><input type="checkbox" name="selected" class="custom-bg determine-manager"
                                                      id="exampleCheck1"
-                                                     th:value="'['+ ${AContractor.user.id} +',' + ${AContractor.manager.id} +']'">
+                                                     th:value="'['+ ${AContractor.id} +',' + ${AContractor.manager.id} +']'">
 <!--                                            `'{"id":"'+${AContractor.getUser().getId()}+'","manager":"'+${AContractor.getManager().getId()}+'"}'`-->
                                         </span>
                                     </td>
