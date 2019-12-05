@@ -72,16 +72,16 @@
                 <!--Do Login Based Buttons Here-->
                 <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                     <a class="btn btn-light" href="/">Home</a>
-                    <a class="btn btn-light" th:href="@{/Invoices}">View Invoices WIP</a>
+                    <a class="btn btn-light" th:href="@{/Invoices}">View Invoices</a>
                     <a class="btn btn-light" th:href="@{/register}">Register Users</a>
                     <a class="btn btn-light" th:href="@{/registerAgency}">Register Agent</a>
-                    <a class="btn btn-light" th:href="@{/ManageRoles}">Manage Users WIP</a>
+                    <a class="btn btn-light" th:href="@{/ManageRoles}">Manage Users</a>
                 </div>
 
                 <div sec:authorize="hasAuthority('ROLE_MANAGER')">
                     <a class="btn btn-light" href="/">Home</a>
 
-                    <a class="btn btn-light" th:href="@{/Approvals}">View Timesheets</a>
+                    <a class="btn btn-light" th:href="@{/Reviews}">View Timesheets</a>
 
                 </div>
 
@@ -89,7 +89,7 @@
                 <div sec:authorize="hasAuthority('ROLE_CONTRACTOR')">
                     <a class="btn btn-light" href="/">Home</a>
                     <a class="btn btn-light" th:href="@{/contractorView}">New Timesheet</a>
-                    <a class="btn btn-light">Old Timesheets WIP</a>
+<!--                    <a class="btn btn-light">Old Timesheets WIP</a>-->
                 </div>
 
             </div>
