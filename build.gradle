@@ -39,9 +39,9 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
 
 
-    if (profile1 == "dev") {
-        runtimeOnly 'com.h2database:h2'
-        println("H2")
+    if (profile1 == "devNo") {
+//        runtimeOnly 'com.h2database:h2'
+//        println("H2")
     } else {
         runtimeOnly 'mysql:mysql-connector-java'
         println("SQL")
@@ -65,10 +65,10 @@ bootRun {
     sourceResources sourceSets.main
 //SQL
 //        
-//        environment 'spring.profiles.active', 'prod'
+    environment 'spring.profiles.active', 'prod'
 
 //H2
-    systemProperty 'spring.profiles.active', 'dev'
+//    systemProperty 'spring.profiles.active', 'dev'
 
     main = 'com.admiral.tsp.timesheetportal.TimesheetportalApplication'
 }
