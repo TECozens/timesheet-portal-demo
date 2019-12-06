@@ -42,6 +42,7 @@
 
             <div sec:authorize="isAuthenticated()" class="nav-item">
                 <form method="post" th:action="@{/logout}">
+                    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
                     <input class="btn btn-outline-dark custom-bg" type="submit" value="Logout"/>
                 </form>
             </div>
