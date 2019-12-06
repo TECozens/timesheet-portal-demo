@@ -1,3 +1,5 @@
+CREATE SCHEMA IF NOT EXISTS tsap;
+USE tsap;
 -- -----------------------------------------------------
 -- Table `user`
 -- -----------------------------------------------------
@@ -30,9 +32,9 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `contractor` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `user_id` INT UNSIGNED NOT NULL,
+    `user_id` INT (11) NOT NULL,
     `agency_id` INT UNSIGNED NOT NULL,
-    `manager_id` INT UNSIGNED NOT NULL,
+    `manager_id` INT (11) NOT NULL,
     PRIMARY KEY (`id`),
     FOREIGN KEY (`user_id`) REFERENCES `user`(`id`),
     FOREIGN KEY (`manager_id`) REFERENCES `user`(`id`),
