@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+            <head th:replace="fragments/header :: head"></head>
+
+            <body>
+            <div th:replace="fragments/header :: header"></div>
+
+
+            <main class="container" role="main">
+                <div class="starter-template">
+
+                    <div class="row mx-auto custom-form">
+                        <div class="col mx-auto custom-bg">
+                            <div id=approvalReview>
+
+                               <form action="#" method="post" th:action="@{/createRejectedReview}" th:object="${RejectedreviewDetails}">
+
+                                    <div class="custom-label">
+                                        <h3>Time Sheet Rejection Explanation</h3>
+                                        <p>Please write a brief description as to why this time sheet was rejected </p>
+                                    </div>
+                                   <input th:field="*{timesheet}" th:value="*{timesheet}" type="hidden"/>
+
+                                                <div class="form-group custom-label">
+                                                    <label th:for="message">Comments</label>
+                                                    <input
+                                                            class="form-control"
+                                                            placeholder="Comments"
+                                                            th:field="*{message}"
+                                                            type="text" />
+                                                </div>
+                                   <div class="row mt-4">
+
+                                       <button class="btn btn-lg btn-primary btn-block custom-btn"  type="submit"
+                                               id="reject">Save</button>
+                                   </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </main>
+            </body>
+
+
+        </div>
+</main>
+
+</body>
+</html>

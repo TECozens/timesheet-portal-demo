@@ -1,32 +1,103 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <!--Fragment Start-->
 <head th:fragment="head">
     <meta charset="UTF-8">
     <title>Admiral Time Sheet Portal</title>
-
     <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          th:href="@{https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css}"
           crossorigin="anonymous"
           integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB">
-    <link href="css/starter-template.css" rel="stylesheet"/>
+    <link th:href="@{/css/starter-template.css}" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+
 </head>
 <!--Fragment End-->
 
 
 <body>
 <!--Fragment Start-->
-<header th:fragment="header" class="masthead mb-auto">
-    <div class="navbar navbar-expand-lg bg-light">
+<header th:fragment="header">
+
+
+    <nav class="navbar navbar-expand-lg bg-light navbar-fixed-top">
         <a class="navbar-brand custom-txt" href="/">
-            <img th:src="@{/images/banner_admiral_logo.png}" th:width="235" th:height="68"/>
+            <img th:src="@{/images/banner_admiral_logo.png}"
+                 th:width="235" th:height="65" class="img-responsive"/>
             Timesheet Portal
         </a>
+
+        <div class="container-fluid" id="navbarSupportedContent">
+            <div class="navbar-nav mr-auto"></div>
+            <div sec:authorize="isAnonymous()" class="nav-item">
+                <a class="btn btn-outline-dark custom-bg" th:href="@{/login}">Login</a>
+            </div>
+
+            <div sec:authorize="isAuthenticated()" class="nav-item">
+                <form method="post" th:action="@{/logout}">
+                    <input class="btn btn-outline-dark custom-bg" type="submit" value="Logout"/>
+                </form>
+            </div>
+
+            <!--Collapse Button-->
+            <button class="custom-focus custom-label" type="button" data-toggle="collapse"
+                    data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+            </button>
+
+        </div>
+    </nav>
+
+    <!--Collapse Menu-->
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-4">
+            <!--Not Logged In-->
+            <div sec:authorize="isAnonymous()">
+                <h5 class="text-white h4">You are not logged in and cannot view any Channels</h5>
+            </div>
+
+            <!--Is Logged In-->
+            <div sec:authorize="isAuthenticated()">
+
+                <h5 class="text-white h4">Channels</h5>
+
+                <!--Do Login Based Buttons Here-->
+                <div sec:authorize="hasAuthority('ROLE_ADMIN')">
+                    <a class="btn btn-light" href="/">Home</a>
+                    <a class="btn btn-light" th:href="@{/Invoices}">View Invoices</a>
+                    <a class="btn btn-light" th:href="@{/register}">Register Users</a>
+                    <a class="btn btn-light" th:href="@{/registerAgency}">Register Agent</a>
+                    <a class="btn btn-light" th:href="@{/ManageRoles}">Manage Users</a>
+                </div>
+
+                <div sec:authorize="hasAuthority('ROLE_MANAGER')">
+                    <a class="btn btn-light" href="/">Home</a>
+
+                    <a class="btn btn-light" th:href="@{/Reviews}">View Timesheets</a>
+
+                </div>
+
+                <!--            sec:authentication="principal.authorities"-->
+                <div sec:authorize="hasAuthority('ROLE_CONTRACTOR')">
+                    <a class="btn btn-light" href="/">Home</a>
+                    <a class="btn btn-light" th:href="@{/contractorView}">New Timesheet</a>
+<!--                    <a class="btn btn-light">Old Timesheets WIP</a>-->
+                </div>
+
+            </div>
+
+        </div>
     </div>
+
 </header>
 <!--Fragment End-->
 </body>
-
-
 </html>
