@@ -1,5 +1,4 @@
-
-
+USE tsap;
 INSERT INTO user (id, username, firstname, surname, email, password)
 VALUES (1,'Mo','Muhammad','Ahmad','AhmadM@Admiral.co.uk',
 '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); # password
