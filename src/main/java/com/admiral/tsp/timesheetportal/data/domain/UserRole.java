@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.security.data.domain;
+package com.admiral.tsp.timesheetportal.data.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,8 +23,5 @@ public class UserRole {
 
     @Column(name = "role")
     private String role;
-
-//    @ManyToMany(mappedBy = "roles")
-//    private Collection<User> users;
 
 }

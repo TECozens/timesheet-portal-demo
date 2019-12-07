@@ -3,7 +3,6 @@ package com.admiral.tsp.timesheetportal.web.controllers.review;
 import com.admiral.tsp.timesheetportal.data.domain.Review;
 import com.admiral.tsp.timesheetportal.web.forms.review.ApprovalReviewForm;
 import com.admiral.tsp.timesheetportal.data.jpa.review.ReviewJpa;
-import com.admiral.tsp.timesheetportal.services.ReviewRepository;
 import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
 import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimesheetJpa;
 import lombok.extern.slf4j.Slf4j;
@@ -25,16 +24,7 @@ public class ApprovalPerformanceReviewCreateController {
     private TimesheetJpa timesheetJpa;
     @Autowired
     private ReviewJpa reviewJpa;
-    @Autowired
-    ReviewRepository reviewRepository;
 
-    @Autowired
-    public ApprovalPerformanceReviewCreateController(ReviewJpa aRCreator,
-                                                     ReviewRepository reviewRepository) {
-        reviewJpa = aRCreator;
-        this.reviewRepository = reviewRepository;
-
-    }
 
     //       Review Form Displayed on reviewing Page
     @GetMapping("/newApproveReview/{id}")

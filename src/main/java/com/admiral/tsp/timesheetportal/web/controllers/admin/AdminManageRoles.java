@@ -1,10 +1,10 @@
 package com.admiral.tsp.timesheetportal.web.controllers.admin;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
+import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
 import com.admiral.tsp.timesheetportal.web.controllers.contractor.ContractorController;
-import com.admiral.tsp.timesheetportal.services.ContractorRepository;
-import com.admiral.tsp.timesheetportal.security.data.domain.User;
-import com.admiral.tsp.timesheetportal.security.services.UserRepository;
+import com.admiral.tsp.timesheetportal.data.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +22,10 @@ public class AdminManageRoles {
     static final Logger LOG = LoggerFactory.getLogger(ContractorController.class);
 
     @Autowired
-    private UserRepository userRepository;
+    private UserJpa userJpa;
 
     @Autowired
-    private ContractorRepository contractorRepository;
+    private ContractorJpa contractorJpa;
 
     //  Manager Roles Page
     @GetMapping("/ManageRoles")
@@ -35,7 +35,7 @@ public class AdminManageRoles {
         String user = a.getName();
 
         model.addAttribute("User", user);
-        List<User> managers = userRepository.findByManagerRole();
+        List<User> managers = userJpa.findManagers();
         model.addAttribute("managerKey", managers);
         return "admin_manage_roles_view";
     }
@@ -48,10 +48,10 @@ public class AdminManageRoles {
         String user = a.getName();
         model.addAttribute("User", user);
 
-        User manager = userRepository.getUserById(index.longValue());
+        User manager = userJpa.getById(index.longValue());
         model.addAttribute("Manager", manager);
 
-        List<Contractor> foundContractors = contractorRepository.getAllContractor();
+        List<Contractor> foundContractors = contractorJpa.getAll();
         model.addAttribute("Contractors", foundContractors);
 
         return "admin_select_contractors_list";

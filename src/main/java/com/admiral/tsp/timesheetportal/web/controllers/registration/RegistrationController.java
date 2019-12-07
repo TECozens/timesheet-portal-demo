@@ -4,12 +4,11 @@ import com.admiral.tsp.timesheetportal.data.domain.Agency;
 import com.admiral.tsp.timesheetportal.data.jpa.agency.AgencyJpa;
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
 import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
-import com.admiral.tsp.timesheetportal.security.data.domain.User;
-import com.admiral.tsp.timesheetportal.security.data.domain.UserRole;
-import com.admiral.tsp.timesheetportal.security.services.UserRepository;
+import com.admiral.tsp.timesheetportal.data.domain.User;
+import com.admiral.tsp.timesheetportal.data.domain.UserRole;
+import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
 import com.admiral.tsp.timesheetportal.web.forms.registration.AgencyForm;
 import com.admiral.tsp.timesheetportal.web.forms.registration.RegistrationForm;
-import com.admiral.tsp.timesheetportal.data.jpa.registration.RegistrationJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,11 +28,9 @@ import java.util.List;
 public class RegistrationController {
 
     @Autowired
-    private RegistrationJpa registrationJpa;
-    @Autowired
     private PasswordEncoder passwordEncoder;
     @Autowired
-    private UserRepository userRepository;
+    private UserJpa userJpa;
     @Autowired
     private AgencyJpa agencyJpa;
     @Autowired
@@ -47,7 +44,7 @@ public class RegistrationController {
     @GetMapping("/register")
     public String goToRegister(Model model) {
 
-        List<User> managers = userRepository.findByManagerRole();
+        List<User> managers = userJpa.findManagers();
 
         List<Agency> agency = agencyJpa.findAll();
 
@@ -63,7 +60,7 @@ public class RegistrationController {
                               BindingResult bindingResult,
                               Model model) {
 
-        List<User> managers = userRepository.findByManagerRole();
+        List<User> managers = userJpa.findManagers();
         List<Agency> agency = agencyJpa.findAll();
         User user = new User();
 
@@ -97,20 +94,20 @@ public class RegistrationController {
 
         );
 
-        registrationJpa.makeUser(newUser);
+        userJpa.makeUser(newUser);
 
         UserRole newRole = new UserRole();
         newRole.setUserid(newUser.getId());
         newRole.setRole(registrationForm.getRole());
 
-        registrationJpa.makeRole(newRole);
+        userJpa.makeUserRole(newRole);
         System.out.println(newRole.getRole());
 
         if (newRole.getRole().equals("ROLE_CONTRACTOR")){
             Contractor newContractor = new Contractor();
             newContractor.setUser(newUser);
             newContractor.setAgency(agencyJpa.findByID(registrationForm.getAgencyId()));
-            newContractor.setManager(userRepository.getUserById(registrationForm.getManagerId()));
+            newContractor.setManager(userJpa.getById(registrationForm.getManagerId()));
             contractorJpa.makeContractor(newContractor);
         }
 
@@ -160,7 +157,7 @@ public class RegistrationController {
                 agencyForm.getEmail()
         );
 
-        registrationJpa.makeAgency(newAgency);
+        agencyJpa.makeAgency(newAgency);
 
         log.debug("New User going into DB" + newAgency.toString());
 

@@ -1,9 +1,8 @@
 package com.admiral.tsp.timesheetportal.security.services;
 
-import com.admiral.tsp.timesheetportal.security.data.domain.MyUserPrincipal;
-import com.admiral.tsp.timesheetportal.security.services.UserRepository;
-import com.admiral.tsp.timesheetportal.security.services.UserRolesRepository;
-import com.admiral.tsp.timesheetportal.security.data.domain.User;
+import com.admiral.tsp.timesheetportal.security.data.MyUserPrincipal;
+import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.data.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,9 +15,7 @@ import java.util.List;
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private UserRolesRepository userRolesRepository;
+    private UserJpa userJpa;
     @Autowired
     private PasswordEncoder encoder;
 
@@ -28,13 +25,13 @@ public class MyUserDetailsService implements UserDetailsService {
         System.out.println("password encoded = " + encoder.encode("password"));
 
 
-        User user = userRepository.getUserByUsername(username);
+        User user = userJpa.getByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         } else {
             System.out.println("User = " + user);
 
-            List<String> userRoles = userRolesRepository.findRoleByUsername(username);
+            List<String> userRoles = userJpa.findRoleByUsername(username);
             return new MyUserPrincipal(user, userRoles);
         }
     }

@@ -1,7 +1,6 @@
 package com.admiral.tsp.timesheetportal.data.jpa.timesheet;
 
 import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
-import com.admiral.tsp.timesheetportal.services.TimesheetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

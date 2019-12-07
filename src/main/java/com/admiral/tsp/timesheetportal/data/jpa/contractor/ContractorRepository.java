@@ -1,7 +1,7 @@
-package com.admiral.tsp.timesheetportal.services;
+package com.admiral.tsp.timesheetportal.data.jpa.contractor;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
-import com.admiral.tsp.timesheetportal.security.data.domain.User;
+import com.admiral.tsp.timesheetportal.data.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

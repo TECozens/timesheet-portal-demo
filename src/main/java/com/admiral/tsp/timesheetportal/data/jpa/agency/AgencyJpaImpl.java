@@ -1,6 +1,5 @@
 package com.admiral.tsp.timesheetportal.data.jpa.agency;
 
-import com.admiral.tsp.timesheetportal.services.AgencyRepository;
 import com.admiral.tsp.timesheetportal.data.domain.Agency;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

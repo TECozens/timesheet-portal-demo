@@ -1,6 +1,6 @@
-package com.admiral.tsp.timesheetportal.security.services;
+package com.admiral.tsp.timesheetportal.data.jpa.user;
 
-import com.admiral.tsp.timesheetportal.security.data.domain.UserRole;
+import com.admiral.tsp.timesheetportal.data.domain.UserRole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

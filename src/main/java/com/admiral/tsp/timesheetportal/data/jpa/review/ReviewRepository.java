@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.services;
+package com.admiral.tsp.timesheetportal.data.jpa.review;
 
 import com.admiral.tsp.timesheetportal.data.domain.Review;
 import org.springframework.data.jpa.repository.JpaRepository;

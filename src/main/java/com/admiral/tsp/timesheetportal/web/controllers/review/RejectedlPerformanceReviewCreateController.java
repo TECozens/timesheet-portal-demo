@@ -3,7 +3,6 @@ package com.admiral.tsp.timesheetportal.web.controllers.review;
 import com.admiral.tsp.timesheetportal.data.domain.Review;
 import com.admiral.tsp.timesheetportal.web.forms.review.RejectionReviewForm;
 import com.admiral.tsp.timesheetportal.data.jpa.review.ReviewJpa;
-import com.admiral.tsp.timesheetportal.services.ReviewRepository;
 import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
 import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimesheetJpa;
 import lombok.extern.slf4j.Slf4j;
@@ -23,16 +22,7 @@ public class RejectedlPerformanceReviewCreateController {
     private TimesheetJpa timesheetJpa;
     @Autowired
     private ReviewJpa reviewJpa;
-    @Autowired
-    ReviewRepository reviewRepository;
 
-    @Autowired
-    public RejectedlPerformanceReviewCreateController(ReviewJpa aRCreator,
-                                                      ReviewRepository reviewRepository) {
-        reviewJpa = aRCreator;
-        this.reviewRepository = reviewRepository;
-
-    }
 
     //       Review Form Displayed on Contractor Page
     @PostMapping("/newRejectedReview/{id}")
