@@ -21,6 +21,15 @@
                             <div><h4 th:text="'Logged in as: '+ ${User}"></h4></div>
                         </div>
 
+                        <div th:if="${aTimesheet != null}">
+                        <div th:if="${aTimesheet.id != null}" class="custom-label">
+
+                            <h3 th:text="'Timesheet for '     +${aTimesheet.week_finish}+' submitted'"></h3>
+                            <h4 th:text="'Days worked: '      +${aTimesheet.daysWorked}"></h4>
+                            <h4 th:text="'Hours of overtime: '+${aTimesheet.overtime}"></h4>
+                        </div>
+                        </div>
+
                         <div class="custom-label">
                             <h3>Please Enter Your Time Sheet Details</h3>
                         </div>
@@ -59,7 +68,15 @@
 
                         <div class="form-group custom-label custom-font">
                             <label th:for="week_ending"><h3>Week Ending</h3></label>
-                            <p id="lastDay">
+                            <input type="date" class="date-picker" min="1997-01-05"
+                                   step="7" id="date-selector" th:field="*{week_ending}">
+
+<!--                            <p id="lastDay">-->
+                            <div class="alert alert-danger"
+                                 th:errors="*{week_ending}"
+                                 th:if="${#fields.hasErrors('week_ending')}">
+                                Date Error: Please enter a valid Date.
+                            </div>
                         </div>
 
                         <div class="row mt-4">
@@ -77,9 +94,14 @@
 </body>
 
 <script>
-    var startingDate = new Date("15-Nov-2019");
-    var lastDay = new Date(startingDate.getTime() + 70 * 70 * 24 * 7 * 1000).toDateString();
-    document.getElementById('lastDay').innerText = lastDay;
+    var initDate = new Date();
+    var d = new Date(new Date().setDate(initDate.getDate() - initDate.getDay()));
+    // document.getElementById('lastDay').innerText = d.toDateString();
+
+    var today = [d.getFullYear(),("0" +(d.getMonth() + 1)).slice(-2),("0"+d.getDate()).slice(-2)].join('-');
+
+    var dateInput = document.getElementById('date-selector');
+    dateInput.value = today;
 </script>
 
 </html>

@@ -1,5 +1,6 @@
 package com.admiral.tsp.timesheetportal.web.controllers.contractor;
 
+import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
 import com.admiral.tsp.timesheetportal.web.forms.timesheet.TimesheetForm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +18,13 @@ public class ContractorController {
 
     //  Contractor Page
     @GetMapping("/contractorView")
-    public String doContractorProfile(Model model)
+    public String doContractorProfile(@ModelAttribute("aTimesheet") Timesheet atimesheet,
+            Model model)
     {
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
 
         String user = a.getName();
+        model.addAttribute("aTimesheet", atimesheet);
 
         model.addAttribute("User", user);
         model.addAttribute("TimesheetKey", new TimesheetForm());
