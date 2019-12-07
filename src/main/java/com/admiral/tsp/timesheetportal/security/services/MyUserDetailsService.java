@@ -15,17 +15,12 @@ import java.util.List;
 
 @Service
 public class MyUserDetailsService implements UserDetailsService {
-
+    @Autowired
     private UserRepository userRepository;
     @Autowired
     private UserRolesRepository userRolesRepository;
     @Autowired
     private PasswordEncoder encoder;
-
-    @Autowired
-    public MyUserDetailsService(UserRepository userRepository){
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) {

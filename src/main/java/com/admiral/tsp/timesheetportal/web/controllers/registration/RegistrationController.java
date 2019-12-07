@@ -1,7 +1,7 @@
 package com.admiral.tsp.timesheetportal.web.controllers.registration;
 
 import com.admiral.tsp.timesheetportal.data.domain.Agency;
-import com.admiral.tsp.timesheetportal.services.AgencyRepository;
+import com.admiral.tsp.timesheetportal.data.jpa.agency.AgencyJpa;
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
 import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
 import com.admiral.tsp.timesheetportal.security.data.domain.User;
@@ -35,7 +35,7 @@ public class RegistrationController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
-    private AgencyRepository agencyRepository;
+    private AgencyJpa agencyJpa;
     @Autowired
     private ContractorJpa contractorJpa;
 
@@ -49,7 +49,7 @@ public class RegistrationController {
 
         List<User> managers = userRepository.findByManagerRole();
 
-        List<Agency> agency = agencyRepository.getAllAgency();
+        List<Agency> agency = agencyJpa.findAll();
 
         model.addAttribute("registerKey", new RegistrationForm());
         model.addAttribute("managerKey", managers);
@@ -64,7 +64,7 @@ public class RegistrationController {
                               Model model) {
 
         List<User> managers = userRepository.findByManagerRole();
-        List<Agency> agency = agencyRepository.getAllAgency();
+        List<Agency> agency = agencyJpa.findAll();
         User user = new User();
 
         if (bindingResult.hasErrors()) {
@@ -109,7 +109,7 @@ public class RegistrationController {
         if (newRole.getRole().equals("ROLE_CONTRACTOR")){
             Contractor newContractor = new Contractor();
             newContractor.setUser(newUser);
-            newContractor.setAgency(agencyRepository.getAgencyById(registrationForm.getAgencyId()));
+            newContractor.setAgency(agencyJpa.findByID(registrationForm.getAgencyId()));
             newContractor.setManager(userRepository.getUserById(registrationForm.getManagerId()));
             contractorJpa.makeContractor(newContractor);
         }
