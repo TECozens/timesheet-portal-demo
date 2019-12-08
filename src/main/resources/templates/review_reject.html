@@ -14,7 +14,8 @@
             <div class="col mx-auto custom-bg">
                 <div id=approvalReview>
 
-                    <form action="#" method="post" th:action="@{/createRejectedReview}" th:object="${RejectedReviewDetails}">
+                    <form action="#" method="post" th:action="@{/createRejectedReview}"
+                          th:object="${RejectedReviewDetails}">
 
                         <div class="custom-label">
                             <h3>Time Sheet Rejection Explanation</h3>
@@ -23,13 +24,12 @@
                         <input th:field="*{timesheet}" th:value="*{timesheet}" type="hidden"/>
 
                         <div class="form-group custom-label">
-                        <label th:for="message">Comments
-                                <input
-                                        class="form-control"
-                                        placeholder="Comments"
-                                        th:field="*{message}"
-                                        type="text" />
-                            </label>
+                        <label for="message">Comments</label>
+                            <input id="message"
+                                   class="form-control"
+                                   placeholder="Comments"
+                                   th:field="*{message}"
+                                   type="text" />
                         </div>
 
                         <div class="alert alert-danger"
@@ -39,8 +39,10 @@
                         </div>
                         <div class="row mt-4">
 
-                            <button class="btn btn-lg btn-primary btn-block custom-btn"  type="submit"
-                                   id="reject">Save</button>
+                            <button class="btn btn-lg btn-primary
+                                           btn-block custom-btn"
+                                    type="submit"
+                                    id="reject">Save</button>
                         </div>
 
                     </form>

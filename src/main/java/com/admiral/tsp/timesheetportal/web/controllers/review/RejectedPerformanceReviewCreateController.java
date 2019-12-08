@@ -31,7 +31,7 @@ public class RejectedPerformanceReviewCreateController {
 
 
     //       Review Form Displayed on Contractor Page
-    @PostMapping("/newRejectedReview/{id}")
+    @GetMapping("/newRejectedReview/{id}")
     public String approveReviewDetails(@PathVariable("id") Long id,
                                        Model model) {
 

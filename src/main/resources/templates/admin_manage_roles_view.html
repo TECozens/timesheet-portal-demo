@@ -14,7 +14,8 @@
             <div class="col mx-auto custom-bg">
                 <div class="row">
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-lg btn-primary btn-block custom-btn" data-toggle="modal"
+                    <button type="button" data-toggle="modal"
+                            class="btn btn-lg btn-primary btn-block custom-btn"
                             data-target="#modalQuickView">
                         Edit Manager
                     </button>
@@ -39,15 +40,24 @@
                                             <div class="row">
                                                 <div class="text-center">
                                                     <label>
-                                                        <select id="appointManager" name="managerSelect"
-                                                                class="btn btn-lg btn-secondary btn-block custom-btn">
-                                                            <option th:each="i:${managerKey}" th:value="*{i.id}"
+                                                        <select id="appointManager"
+                                                                name="managerSelect"
+                                                                class="btn btn-lg
+                                                                       btn-secondary
+                                                                       btn-block
+                                                                       custom-btn">
+                                                            <option th:each="i:${managerKey}"
+                                                                    th:value="*{i.id}"
                                                                     th:text="*{i.username}">
 
                                                             </option>
                                                         </select>
                                                     </label>
-                                                    <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
+                                                    <a class="btn btn-lg
+                                                              btn-primary
+                                                              btn-block
+                                                              text-uppercase
+                                                              custom-btn"
                                                        onclick="mapSelection()"
                                                        th:id="assign">Continue</a>
                                                 </div>
