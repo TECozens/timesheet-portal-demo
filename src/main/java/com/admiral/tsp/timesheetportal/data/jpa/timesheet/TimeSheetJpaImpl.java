@@ -24,7 +24,7 @@ public class TimeSheetJpaImpl implements TimeSheetJpa {
 
     @Override
     @Transactional
-    public TimeSheet makeTimesheet(TimeSheet newT) {
+    public TimeSheet makeTimeSheet(TimeSheet newT) {
 
         TimeSheet updated = timesheetRepository.saveAndFlush(newT);
 
@@ -35,12 +35,12 @@ public class TimeSheetJpaImpl implements TimeSheetJpa {
 
     @Override
     public Optional<TimeSheet> getByID(Long id) {
-        return timesheetRepository.getTimesheetById(id);
+        return timesheetRepository.getTimeSheetById(id);
     }
 
     @Override
     public List<TimeSheet> getAll() {
-        return timesheetRepository.getAllTimesheets();
+        return timesheetRepository.getAllTimeSheets();
     }
 
 }

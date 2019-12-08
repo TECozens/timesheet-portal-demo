@@ -8,7 +8,7 @@ import java.util.Optional;
 // Implemented by TimeSheetJpaImpl
 public interface TimeSheetJpa {
 
-    TimeSheet makeTimesheet(TimeSheet item);
+    TimeSheet makeTimeSheet(TimeSheet item);
     Optional<TimeSheet> getByID(Long index);
     List<TimeSheet> getAll();
 

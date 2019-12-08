@@ -33,7 +33,7 @@ public class ApprovalReviewForm {
     @NotNull(message = "Must not be empty!")
     @Max(value = 3, message = "You must choose a number between 1 and 3!")
     @Min(value = 1, message = "You must choose a number between 1 and 3!")
-    private Integer initative;
+    private Integer initiative;
     @NotNull(message = "Must not be empty!")
     @Max(value = 3, message = "You must choose a number between 1 and 3!")
     @Min(value = 1, message = "You must choose a number between 1 and 3!")

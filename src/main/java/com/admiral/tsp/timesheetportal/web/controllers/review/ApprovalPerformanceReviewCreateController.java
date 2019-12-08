@@ -65,7 +65,7 @@ public class ApprovalPerformanceReviewCreateController {
                 approvalReviewForm.getCommunication(),
                 approvalReviewForm.getTechnical_skills(),
                 approvalReviewForm.getQuality(),
-                approvalReviewForm.getInitative(),
+                approvalReviewForm.getInitiative(),
                 approvalReviewForm.getProductivity (),
                 approvalReviewForm.getWorking_relationships()
 

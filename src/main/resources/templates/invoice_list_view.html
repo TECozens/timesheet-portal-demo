@@ -13,7 +13,7 @@
         <div class="row mx-auto custom-form">
             <div class="col mx-auto custom-bg">
 
-                <div id=missingTimesheetMessage th:if="${Reviews.isEmpty()}">
+                <div id=missingTimeSheetMessage th:if="${Reviews.isEmpty()}">
                     <div>No matching Invoices</div>
                 </div>
 
@@ -62,7 +62,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="ReviewItem: ${Reviews}" th:id="'reviewitem' + ${ReviewItem.id}" class="notsaved">
+                            <tr th:each="ReviewItem: ${Reviews}" th:id="'reviewItem' + ${ReviewItem.id}" class="notSaved">
                                 <td><span th:text="${ReviewItem.timeSheet.contractor.user.firstname}
                                             + ' ' + ${ReviewItem.timeSheet.contractor.user.surname}"></span></td>
                                 <td><span th:text="${ReviewItem.timeSheet.contractor.agency.name}"></span></td>
@@ -90,8 +90,8 @@
 <script>
     function sendApproval(id) {
         fetch(`/api/reviews/confirm/` +id);
-        let row = document.getElementById("reviewitem" + id);
-        row.classList.remove("notsaved");
+        let row = document.getElementById("reviewItem" + id);
+        row.classList.remove("notSaved");
         row.style.display = "none";
     }
     function filterResults() {
@@ -107,7 +107,7 @@
 
 
             let row = tr[i];
-            if (row.classList.contains("notsaved")) {
+            if (row.classList.contains("notSaved")) {
                 row.style.display = "";
             }
 

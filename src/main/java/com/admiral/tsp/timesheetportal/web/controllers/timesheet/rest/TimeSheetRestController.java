@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/timesheets/")
+@RequestMapping("/api/timeSheets/")
 public class TimeSheetRestController {
 
     private final ReviewJpa reviewJpa;
@@ -25,7 +25,7 @@ public class TimeSheetRestController {
 
 
     @PostMapping("/review/approve/{id}")
-    public ResponseEntity approveTimesheet(@PathVariable("id") Long id) {
+    public ResponseEntity approveTimeSheet(@PathVariable("id") Long id) {
 
         // Approve by the given id here
 

@@ -80,7 +80,7 @@ public class TimeSheetCreateController {
         );
 
 
-        timesheetJpa.makeTimesheet(newTimeSheet);
+        timesheetJpa.makeTimeSheet(newTimeSheet);
 
         log.info("Here is the timeSheet going into DB" + newTimeSheet.toString());
         model.addFlashAttribute("aTimeSheet", newTimeSheet);

@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Slf4j
 @Controller
-@SessionAttributes({"TimesheetKey"})
+@SessionAttributes({"TimeSheetKey"})
 public class TimeSheetViewController {
 
 
@@ -27,13 +27,13 @@ public class TimeSheetViewController {
     }
 
 
-    @GetMapping("Timesheet/{i}")
-    public String showTimesheetDashboardPage(@PathVariable("i") Long index, Model model) {
+    @GetMapping("TimeSheet/{i}")
+    public String showTimeSheetDashboardPage(@PathVariable("i") Long index, Model model) {
 
-        Optional<TimeSheet> foundTimesheet = timesheetJpa.getByID(index);
+        Optional<TimeSheet> foundTimeSheet = timesheetJpa.getByID(index);
 
-        if (foundTimesheet.isPresent()) {
-            model.addAttribute("TimesheetKey", foundTimesheet.get());
+        if (foundTimeSheet.isPresent()) {
+            model.addAttribute("TimeSheetKey", foundTimeSheet.get());
 
             return "timesheet_view";
 

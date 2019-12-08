@@ -13,8 +13,8 @@ import java.util.Optional;
 public interface TimeSheetRepository extends JpaRepository<TimeSheet, Long> {
 
     @Query("SELECT t FROM TimeSheet t WHERE t.id = :id")
-    Optional<TimeSheet> getTimesheetById(@Param("id") Long id);
+    Optional<TimeSheet> getTimeSheetById(@Param("id") Long id);
 
     @Query("SELECT t FROM TimeSheet t")
-    List<TimeSheet> getAllTimesheets();
+    List<TimeSheet> getAllTimeSheets();
 }

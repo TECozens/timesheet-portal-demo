@@ -13,7 +13,7 @@
         <div class="row mx-auto custom-form">
             <div class="col mx-auto custom-bg">
 
-                <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
+                <div id=missingTimeSheetMessage th:if="${TimesheetKey}==  null">
                     <div>No matching Time Sheets</div>
                 </div>
 
@@ -24,7 +24,7 @@
 
                 <div class="custom-form">
                     <div class="mx-3 custom-bg scrolling-wrapper">
-                        <table class="table table-light" id="timesheetInfo">
+                        <table class="table table-light" id="timeSheetInfo">
                             <thead>
                             <tr>
                                 <th scope="col">
@@ -84,7 +84,7 @@
 <script>
     function filterResults() {
 
-        let table = document.getElementById("timesheetInfo");
+        let table = document.getElementById("timeSheetInfo");
         let search_items = document.getElementsByClassName("searcher");
         let tr = table.getElementsByTagName("tr");
 
