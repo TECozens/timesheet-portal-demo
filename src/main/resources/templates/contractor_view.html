@@ -14,7 +14,8 @@
             <div class="col mx-auto custom-bg">
                 <div id=timeSheetDetails>
 
-                    <form action="#" method="post" th:action="@{/newTimeSheet}" th:object="${TimeSheetKey}">
+                    <form action="#" method="post" th:action="@{/newTimeSheet}"
+                          onsubmit="return validateDate()" th:object="${TimeSheetKey}">
 
                         <!--Contractor Details Here-->
                         <div class="custom-label" id=contractorProfile>
@@ -36,9 +37,10 @@
 
                         <div class="form-group custom-label">
 
-                            <label th:for="daysWorked">Days Worked
+                            <label for="daysWorked">Days Worked
 
                                 <input aria-describedby="Enter how many days you have worked."
+                                       id="daysWorked"
                                        class="form-control"
                                        placeholder="Days Worked"
                                        th:field="*{days_worked}"
@@ -74,7 +76,7 @@
                         <div class="form-group custom-label custom-font">
 
                             <label for="date-selector"><h3>Week Ending</h3></label>
-                            <input type="date" class="date-picker" min="1997-01-05"
+                            <input type="date" class="date-picker" min="1997-01-05" required="required"
                                    step="7" id="date-selector" th:field="*{week_ending}">
 
 <!--                            <p id="lastDay">-->
@@ -106,7 +108,30 @@
     let today = [d.getFullYear(), ("0" + (d.getMonth() + 1)).slice(-2), ("0" + d.getDate()).slice(-2)].join('-');
 
     let dateInput = document.getElementById('date-selector');
+    let daysWorkedInput = document.getElementById("daysWorked");
+
+    dateInput.max = new Date(d.setDate(d.getDate()+6)).toISOString().split("T")[0];
     dateInput.value = today;
+    function validateDate() {
+        let selectedDate =new Date(dateInput.value);
+        let difference = (initDate.getDate() - selectedDate.getDate()) + 7;
+        let daysWorked = daysWorkedInput.value;
+        let sameMonth = (selectedDate.getMonth()===initDate.getMonth());
+        // console.log(selectedDate.getDate());
+        // console.log(initDate.getDate());
+        // console.log(difference);
+        // console.log(daysWorked);
+        // console.log(sameMonth);
+        if (difference < daysWorked && sameMonth){
+            if (daysWorked > 7){
+                return true;
+            }
+            alert("It's not possible to work that many days in an unfinished week");
+            return false;
+        } else {
+            return true;
+        }
+    }
 </script>
 
 </html>

@@ -71,11 +71,14 @@ public class TimeSheetCreateController {
 
         log.info("The contractor given is: " + thisContractor.toString());
 
+        Integer overtime = (timeSheetForm.getOvertime_completed() != null
+                ? timeSheetForm.getOvertime_completed() : 0);
+
         TimeSheet newTimeSheet = new TimeSheet(
                 null,
                 thisContractor,
                 timeSheetForm.getDays_worked(),
-                timeSheetForm.getOvertime_completed(),
+                overtime,
                 timeSheetForm.getWeek_ending()
         );
 
