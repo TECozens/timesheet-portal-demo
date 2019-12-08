@@ -1,7 +1,6 @@
 package com.admiral.tsp.timesheetportal.data.jpa.contractor;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
-import com.admiral.tsp.timesheetportal.data.jpa.user.UserRepository;
 import com.admiral.tsp.timesheetportal.data.domain.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +15,11 @@ import java.util.Optional;
 public class ContractorJpaImpl implements ContractorJpa {
 
     // Autowired the contractor repository inside implementation
-    private ContractorRepository contractorRepository;
-    private UserRepository UserJpaRepo;
+    private final ContractorRepository contractorRepository;
 
     @Autowired
-    public ContractorJpaImpl(ContractorRepository contractorRepository,
-                             UserRepository UserJpaRepo) {
+    public ContractorJpaImpl(ContractorRepository contractorRepository) {
         this.contractorRepository = contractorRepository;
-        this.UserJpaRepo = UserJpaRepo;
     }
 
 
@@ -55,7 +51,6 @@ public class ContractorJpaImpl implements ContractorJpa {
     @Override
     public void updateContractor(User manager, Long c_id) {
         contractorRepository.updateContractor(manager, c_id);
-        return;
     }
 
     @Override

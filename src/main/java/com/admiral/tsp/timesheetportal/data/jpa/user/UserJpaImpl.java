@@ -10,10 +10,15 @@ import java.util.List;
 
 @Service
 public class UserJpaImpl implements UserJpa{
+
+    private final UserRepository userRepository;
+    private final UserRolesRepository userRolesRepository;
+
     @Autowired
-    UserRepository userRepository;
-    @Autowired
-    UserRolesRepository userRolesRepository;
+    public UserJpaImpl(UserRepository userRepository, UserRolesRepository userRolesRepository) {
+        this.userRepository = userRepository;
+        this.userRolesRepository = userRolesRepository;
+    }
 
     @Override
     @Transactional

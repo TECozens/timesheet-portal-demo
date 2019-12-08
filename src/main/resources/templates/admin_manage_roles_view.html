@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -48,7 +48,7 @@
                                                         </select>
                                                     </label>
                                                     <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
-                                                       th:onclick="mapSelection()"
+                                                       onclick="mapSelection()"
                                                        th:id="assign">Continue</a>
                                                 </div>
                                             </div>
@@ -80,8 +80,8 @@
 </body>
 <script>
     function mapSelection() {
-        var sel = document.getElementById("appointManager");
-        var userChosenId = sel.options[sel.selectedIndex].value;
+        let sel = document.getElementById("appointManager");
+        let userChosenId = sel.options[sel.selectedIndex].value;
         window.location.href = "/contractorList/" + userChosenId;
     }
 </script>

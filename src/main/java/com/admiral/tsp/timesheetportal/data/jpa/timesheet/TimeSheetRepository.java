@@ -1,6 +1,6 @@
 package com.admiral.tsp.timesheetportal.data.jpa.timesheet;
 
-import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
+import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface TimesheetRepository extends JpaRepository<Timesheet, Long> {
+public interface TimeSheetRepository extends JpaRepository<TimeSheet, Long> {
 
-    @Query("SELECT t FROM Timesheet t WHERE t.id = :id")
-    Optional<Timesheet> getTimesheetById(@Param("id") Long id);
+    @Query("SELECT t FROM TimeSheet t WHERE t.id = :id")
+    Optional<TimeSheet> getTimesheetById(@Param("id") Long id);
 
-    @Query("SELECT t FROM Timesheet t")
-    List<Timesheet> getAllTimesheets();
+    @Query("SELECT t FROM TimeSheet t")
+    List<TimeSheet> getAllTimesheets();
 }

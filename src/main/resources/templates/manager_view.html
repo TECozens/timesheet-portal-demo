@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:type="http://www.w3.org/1999/xhtml">
+>
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 
@@ -84,24 +84,25 @@
 <script>
     function filterResults() {
 
-        var table = document.getElementById("timesheetInfo");
-        var search_items = document.getElementsByClassName("searcher");
-        var tr = table.getElementsByTagName("tr");
+        let table = document.getElementById("timesheetInfo");
+        let search_items = document.getElementsByClassName("searcher");
+        let tr = table.getElementsByTagName("tr");
 
-        var td;
-        var filter;
-        for (i = 0; i < tr.length; i++) {
+        let td;
+        let filter;
+        for (let i = 0; i < tr.length; i++) {
 
 
-            var row = tr[i];
+            let row = tr[i];
             row.style.display = "";
 
-            for (iter = 0; iter < search_items.length; iter++) {
+            for (let iter = 0; iter < search_items.length; iter++) {
 
                 td = row.getElementsByTagName("td")[iter];
                 if (td) {
 
                     filter = search_items[iter].value.toUpperCase();
+                    let txtValue;
                     txtValue = td.textContent || td.innerText;
 
                     if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {

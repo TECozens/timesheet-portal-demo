@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AdminRestController {
 
-    @Autowired
-    private UserJpa userJpa;
+    private final UserJpa userJpa;
+
+    private final ContractorJpa contractorJpa;
 
     @Autowired
-    private ContractorJpa contractorJpa;
-
+    public AdminRestController(UserJpa userJpa, ContractorJpa contractorJpa) {
+        this.userJpa = userJpa;
+        this.contractorJpa = contractorJpa;
+    }
 
 
     @GetMapping(path = "/api/admin/updateManager/{id}/{m_id}")
@@ -30,7 +33,7 @@ public class AdminRestController {
 
 
         contractorJpa.updateContractor(manager, id);
-        System.out.println(contractorJpa.getByID(id));
+        log.info(contractorJpa.getByID(id).toString());
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }

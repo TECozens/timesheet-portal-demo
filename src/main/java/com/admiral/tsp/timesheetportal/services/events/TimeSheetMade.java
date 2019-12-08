@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class TimesheetMade {
+public class TimeSheetMade {
 //    TODO Parse All Fields
     private Contractor contractorInstance;
     private Agency agencyInstance;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -71,8 +71,8 @@
                                             th:text="${AContractor.getManager().getUsername()}"></span>
                                     </td>
                                     <td>
-                                        <span><input type="checkbox" name="selected" class="custom-bg determine-manager"
-                                                     id="exampleCheck1"
+                                        <span>
+                                            <input type="checkbox" name="selected" class="custom-bg determine-manager"
                                                      th:value="'['+ ${AContractor.id} +',' + ${AContractor.manager.id} +']'">
 <!--                                            `'{"id":"'+${AContractor.getUser().getId()}+'","manager":"'+${AContractor.getManager().getId()}+'"}'`-->
                                         </span>
@@ -95,14 +95,14 @@
 </body>
 <script>
 
-    var radios = document.getElementById("selectForm").getElementsByClassName("determine-manager");
-    var manager = document.getElementById("managerSelected").value;
+    let radios = document.getElementById("selectForm").getElementsByClassName("determine-manager");
+    let manager = document.getElementById("managerSelected").value;
 
-    for (var i = 0; i < radios.length; i++) {
+    for (let i = 0; i < radios.length; i++) {
         radios[i].addEventListener('change', function mapSelection() {
-            var data = JSON.parse(this.value);
-            var id = data[0];
-            var m_id = data[1];
+            let data = JSON.parse(this.value);
+            let id = data[0];
+            let m_id = data[1];
             if (this.checked) {
                 fetch("/api/admin/updateManager/"+ id +"/" + manager)
             } else {
@@ -113,19 +113,20 @@
 
     function filterResults() {
 
-        var table = document.getElementById("contractorSelect");
-        var search_items = document.getElementsByClassName("searcher");
-        var tr = table.getElementsByTagName("tr");
+        let table = document.getElementById("contractorSelect");
+        let search_items = document.getElementsByClassName("searcher");
+        let tr = table.getElementsByTagName("tr");
 
-        var td;
-        var filter;
-        for (i = 0; i < tr.length; i++) {
+        let td;
+        let filter;
+        let txtValue;
+        for (let i = 0; i < tr.length; i++) {
 
 
-            var row = tr[i];
+            let row = tr[i];
             row.style.display = "";
 
-            for (iter = 0; iter < search_items.length; iter++) {
+            for (let iter = 0; iter < search_items.length; iter++) {
 
                 td = row.getElementsByTagName("td")[iter];
                 if (td) {

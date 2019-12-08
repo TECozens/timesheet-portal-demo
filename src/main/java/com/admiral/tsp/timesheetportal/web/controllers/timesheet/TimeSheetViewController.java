@@ -1,11 +1,8 @@
 package com.admiral.tsp.timesheetportal.web.controllers.timesheet;
 
-import com.admiral.tsp.timesheetportal.web.forms.review.TimesheetIdPassForm;
-import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
-import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimesheetJpa;
+import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
+import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,20 +16,21 @@ import java.util.Optional;
 @Slf4j
 @Controller
 @SessionAttributes({"TimesheetKey"})
-public class TimesheetViewController {
+public class TimeSheetViewController {
 
+
+    private final TimeSheetJpa timesheetJpa;
 
     @Autowired
-    private TimesheetJpa timesheetJpa;
-
-    static final Logger LOG = LoggerFactory.getLogger(TimesheetViewController.class);
+    public TimeSheetViewController(TimeSheetJpa timesheetJpa) {
+        this.timesheetJpa = timesheetJpa;
+    }
 
 
     @GetMapping("Timesheet/{i}")
     public String showTimesheetDashboardPage(@PathVariable("i") Long index, Model model) {
 
-        Optional<Timesheet> foundTimesheet = timesheetJpa.getByID(index);
-        log.info(String.valueOf(foundTimesheet.get()));
+        Optional<TimeSheet> foundTimesheet = timesheetJpa.getByID(index);
 
         if (foundTimesheet.isPresent()) {
             model.addAttribute("TimesheetKey", foundTimesheet.get());
@@ -45,10 +43,9 @@ public class TimesheetViewController {
     }
     @GetMapping("/Reviews")
     public String showTimesheetApprovalPage(Model model){
-        List<Timesheet> foundTimesheets = timesheetJpa.getAll();
+        List<TimeSheet> foundTimeSheets = timesheetJpa.getAll();
 
-        model.addAttribute("TimesheetKey", foundTimesheets);
-        model.addAttribute("TimesheetIdPass", new TimesheetIdPassForm());
+        model.addAttribute("TimesheetKey", foundTimeSheets);
 
         return "manager_view";
 

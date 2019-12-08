@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -14,19 +14,19 @@
             <div class="col mx-auto custom-bg">
                 <div id=timeSheetDetails>
 
-                    <form action="#" method="post" th:action="@{/newTimesheet}" th:object="${TimesheetKey}">
+                    <form action="#" method="post" th:action="@{/newTimeSheet}" th:object="${TimeSheetKey}">
 
                         <!--Contractor Details Here-->
                         <div class="custom-label" id=contractorProfile>
                             <div><h4 th:text="'Logged in as: '+ ${User}"></h4></div>
                         </div>
 
-                        <div th:if="${aTimesheet != null}">
-                        <div th:if="${aTimesheet.id != null}" class="custom-label">
+                        <div th:if="${aTimeSheet != null}">
+                        <div th:if="${aTimeSheet.id != null}" class="custom-label">
 
-                            <h3 th:text="'Timesheet for '     +${aTimesheet.week_finish}+' submitted'"></h3>
-                            <h4 th:text="'Days worked: '      +${aTimesheet.daysWorked}"></h4>
-                            <h4 th:text="'Hours of overtime: '+${aTimesheet.overtime}"></h4>
+                            <h3 th:text="'Timesheet for '     +${aTimeSheet.week_finish}+' submitted'"></h3>
+                            <h4 th:text="'Days worked: '      +${aTimeSheet.daysWorked}"></h4>
+                            <h4 th:text="'Hours of overtime: '+${aTimeSheet.overtime}"></h4>
                         </div>
                         </div>
 
@@ -35,29 +35,34 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label th:for="daysWorked">Days Worked</label>
-                            <input aria-describedby="Enter how many days you have worked."
-                                   class="form-control"
-                                   placeholder="Days Worked"
-                                   th:field="*{days_worked}"
-                                   type="number" pattern="/d*"/>
+
+                            <label th:for="daysWorked">Days Worked
+
+                                <input aria-describedby="Enter how many days you have worked."
+                                       class="form-control"
+                                       placeholder="Days Worked"
+                                       th:field="*{days_worked}"
+                                       type="number" pattern="/d*"/>
+                            </label>
 
                             <div class="alert alert-danger"
                                  th:errors="*{days_worked}"
                                  th:if="${#fields.hasErrors('days_worked')}">
                                 Days Worked Error: Please enter a valid number.
                             </div>
+
                         </div>
 
 
                         <div class="form-group custom-label">
-                            <label th:for="overtime_completed">Overtime Completed</label>
+                            <label th:for="overtime_completed">Overtime Completed
 
-                            <input aria-describedby="Enter the amount of overtime completed."
-                                   class="form-control"
-                                   placeholder="Overtime Completed"
-                                   th:field="*{overtime_completed}"
-                                   type="number" pattern="/d*"/>
+                                <input aria-describedby="Enter the amount of overtime completed."
+                                       class="form-control"
+                                       placeholder="Overtime Completed"
+                                       th:field="*{overtime_completed}"
+                                       type="number" pattern="/d*"/>
+                            </label>
 
                             <div class="alert alert-danger"
                                  th:errors="*{overtime_completed}"
@@ -67,7 +72,8 @@
                         </div>
 
                         <div class="form-group custom-label custom-font">
-                            <label th:for="week_ending"><h3>Week Ending</h3></label>
+
+                            <label for="date-selector"><h3>Week Ending</h3></label>
                             <input type="date" class="date-picker" min="1997-01-05"
                                    step="7" id="date-selector" th:field="*{week_ending}">
 
@@ -94,13 +100,12 @@
 </body>
 
 <script>
-    var initDate = new Date();
-    var d = new Date(new Date().setDate(initDate.getDate() - initDate.getDay()));
-    // document.getElementById('lastDay').innerText = d.toDateString();
+    let initDate = new Date();
+    let d = new Date(new Date().setDate(initDate.getDate() - initDate.getDay()));
 
-    var today = [d.getFullYear(),("0" +(d.getMonth() + 1)).slice(-2),("0"+d.getDate()).slice(-2)].join('-');
+    let today = [d.getFullYear(), ("0" + (d.getMonth() + 1)).slice(-2), ("0" + d.getDate()).slice(-2)].join('-');
 
-    var dateInput = document.getElementById('date-selector');
+    let dateInput = document.getElementById('date-selector');
     dateInput.value = today;
 </script>
 

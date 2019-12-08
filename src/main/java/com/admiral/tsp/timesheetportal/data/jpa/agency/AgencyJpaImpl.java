@@ -13,7 +13,7 @@ import java.util.List;
 public class AgencyJpaImpl implements AgencyJpa {
 
     // Autowired the agency repository inside implementation
-    private AgencyRepository agencyRepository;
+    private final AgencyRepository agencyRepository;
 
     @Autowired
     public AgencyJpaImpl(AgencyRepository agencyRepository) {

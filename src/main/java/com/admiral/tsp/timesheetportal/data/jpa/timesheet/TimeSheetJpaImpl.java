@@ -1,6 +1,6 @@
 package com.admiral.tsp.timesheetportal.data.jpa.timesheet;
 
-import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
+import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,19 +11,22 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-public class TimesheetJpaImpl implements TimesheetJpa {
+public class TimeSheetJpaImpl implements TimeSheetJpa {
 
-    // Autowired the timesheet repository inside implementation
+    // Autowired the timeSheet repository inside implementation
+    private final TimeSheetRepository timesheetRepository;
+
     @Autowired
-    private TimesheetRepository timesheetRepository;
-
+    public TimeSheetJpaImpl(TimeSheetRepository timesheetRepository) {
+        this.timesheetRepository = timesheetRepository;
+    }
 
 
     @Override
     @Transactional
-    public Timesheet makeTimesheet(Timesheet newT) {
+    public TimeSheet makeTimesheet(TimeSheet newT) {
 
-        Timesheet updated = timesheetRepository.saveAndFlush(newT);
+        TimeSheet updated = timesheetRepository.saveAndFlush(newT);
 
         log.info(updated.toString());
 
@@ -31,12 +34,12 @@ public class TimesheetJpaImpl implements TimesheetJpa {
     }
 
     @Override
-    public Optional<Timesheet> getByID(Long id) {
+    public Optional<TimeSheet> getByID(Long id) {
         return timesheetRepository.getTimesheetById(id);
     }
 
     @Override
-    public List<Timesheet> getAll() {
+    public List<TimeSheet> getAll() {
         return timesheetRepository.getAllTimesheets();
     }
 

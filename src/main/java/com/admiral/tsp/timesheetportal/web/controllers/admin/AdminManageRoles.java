@@ -3,10 +3,8 @@ package com.admiral.tsp.timesheetportal.web.controllers.admin;
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
 import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
 import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
-import com.admiral.tsp.timesheetportal.web.controllers.contractor.ContractorController;
 import com.admiral.tsp.timesheetportal.data.domain.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,16 +14,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @SessionAttributes({"contractorKey", "managerKey"})
 public class AdminManageRoles {
-    static final Logger LOG = LoggerFactory.getLogger(ContractorController.class);
+
+    private final UserJpa userJpa;
+
+    private final ContractorJpa contractorJpa;
 
     @Autowired
-    private UserJpa userJpa;
-
-    @Autowired
-    private ContractorJpa contractorJpa;
+    public AdminManageRoles(UserJpa userJpa, ContractorJpa contractorJpa) {
+        this.userJpa = userJpa;
+        this.contractorJpa = contractorJpa;
+    }
 
     //  Manager Roles Page
     @GetMapping("/ManageRoles")

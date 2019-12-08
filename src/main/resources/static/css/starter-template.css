@@ -37,13 +37,6 @@ body {
     border-color: #0D3759;
     background-color: #2350A1;
 }
-.custom-btn2 {
-    margin: 20px;
-    border-width: 2px 0.2pc;
-    border-color: #0D3759;
-    background-color: #2350A1;
-    width: available;
-}
 
 .custom-label {
     margin: 10px;

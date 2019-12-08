@@ -1,6 +1,6 @@
 package com.admiral.tsp.timesheetportal.web.forms.review;
 
-import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
+import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class ApprovalReviewForm {
 
-    private Timesheet timesheet;
+    private TimeSheet timesheet;
     private Boolean approved;
     private Boolean paid;
     private String message;

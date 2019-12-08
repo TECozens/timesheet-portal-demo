@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -19,12 +19,13 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label th:for="name">Agency Name</label>
-                            <input aria-describedby="Enter an Agency."
-                                   class="form-control"
-                                   placeholder="Agency"
-                                   th:field="*{name}"
-                                   type="text">
+                            <label>Agency Name
+                                <input aria-describedby="Enter an Agency."
+                                       class="form-control"
+                                       placeholder="Agency"
+                                       th:field="*{name}"
+                                       type="text">
+                            </label>
 
                             <div class="alert alert-danger"
                                  th:errors="*{name}"
@@ -34,12 +35,13 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label th:for="email">Email</label>
-                            <input aria-describedby="Enter an Email"
-                                   class="form-control"
-                                   placeholder="Email"
-                                   th:field="*{email}"
-                                   type="text">
+                            <label>Email
+                                <input aria-describedby="Enter an Email"
+                                       class="form-control"
+                                       placeholder="Email"
+                                       th:field="*{email}"
+                                       type="text">
+                            </label>
 
                             <div class="alert alert-danger"
                                  th:errors="*{email}"

@@ -10,8 +10,6 @@ import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
 import com.admiral.tsp.timesheetportal.web.forms.registration.AgencyForm;
 import com.admiral.tsp.timesheetportal.web.forms.registration.RegistrationForm;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -27,17 +25,21 @@ import java.util.List;
 @SessionAttributes({"registerKey","agencyKey","managerKey"})
 public class RegistrationController {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserJpa userJpa;
-    @Autowired
-    private AgencyJpa agencyJpa;
-    @Autowired
-    private ContractorJpa contractorJpa;
+    private final PasswordEncoder passwordEncoder;
+    private final UserJpa userJpa;
+    private final AgencyJpa agencyJpa;
+    private final ContractorJpa contractorJpa;
 
-
-    static final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
+    @Autowired
+    public RegistrationController(PasswordEncoder passwordEncoder,
+                                  UserJpa userJpa,
+                                  AgencyJpa agencyJpa,
+                                  ContractorJpa contractorJpa) {
+        this.passwordEncoder = passwordEncoder;
+        this.userJpa = userJpa;
+        this.agencyJpa = agencyJpa;
+        this.contractorJpa = contractorJpa;
+    }
 
     // Creating a new User
 
@@ -56,23 +58,21 @@ public class RegistrationController {
     }
 
     @PostMapping("/newUser")
-    public String userDetails(@ModelAttribute("registerKey") @Valid RegistrationForm registrationForm,
+    public String userDetails(@Valid @ModelAttribute("registerKey") RegistrationForm registrationForm,
                               BindingResult bindingResult,
                               Model model) {
 
         List<User> managers = userJpa.findManagers();
         List<Agency> agency = agencyJpa.findAll();
-        User user = new User();
 
         if (bindingResult.hasErrors()) {
 
             log.error(bindingResult.toString());
             log.error("Registration Form has binding errors");
 
-            model.addAttribute("User", user);
             model.addAttribute("managerKey", managers);
             model.addAttribute("agencyKey", agency);
-            model.addAttribute("registrationDetails", registrationForm);
+            model.addAttribute("registerKey", registrationForm);
             return "register";
 
         }
@@ -101,7 +101,7 @@ public class RegistrationController {
         newRole.setRole(registrationForm.getRole());
 
         userJpa.makeUserRole(newRole);
-        System.out.println(newRole.getRole());
+        log.info(newRole.getRole());
 
         if (newRole.getRole().equals("ROLE_CONTRACTOR")){
             Contractor newContractor = new Contractor();

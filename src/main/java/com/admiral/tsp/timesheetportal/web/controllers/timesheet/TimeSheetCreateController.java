@@ -2,65 +2,63 @@ package com.admiral.tsp.timesheetportal.web.controllers.timesheet;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
 import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
-import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
-import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimesheetJpa;
-import com.admiral.tsp.timesheetportal.web.forms.timesheet.TimesheetForm;
+import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
+import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
+import com.admiral.tsp.timesheetportal.web.forms.timesheet.TimeSheetForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
-import java.util.Date;
 
 @Slf4j
 @Controller
-@SessionAttributes({"TimesheetKey"})
-public class TimesheetCreateController {
+@SessionAttributes({"TimeSheetKey"})
+public class TimeSheetCreateController {
+
+    private final TimeSheetJpa timesheetJpa;
+    private final ContractorJpa contractorJpa;
 
     @Autowired
-    private TimesheetJpa timesheetJpa;
-    @Autowired
-    private ContractorJpa contractorJpa;
+    public TimeSheetCreateController(TimeSheetJpa timesheetJpa, ContractorJpa contractorJpa) {
+        this.timesheetJpa = timesheetJpa;
+        this.contractorJpa = contractorJpa;
+    }
 
 
-
-    //    timesheet Form Displayed on Contractor Page
-    @PostMapping("/newTimesheet")
-    public String timesheetDetails(@ModelAttribute("TimesheetKey") @Valid TimesheetForm timesheetForm,
+    //    timeSheet Form Displayed on Contractor Page
+    @PostMapping("/newTimeSheet")
+    public String timeSheetDetails(@ModelAttribute("TimeSheetKey") @Valid TimeSheetForm timeSheetForm,
                                    BindingResult bindingResult, // Keep this after valid
                                    Model model) {
 
         if (bindingResult.hasErrors()) {
 
             log.error(bindingResult.toString());
-            log.error("timesheet Form has binding errors");
+            log.error("timeSheet Form has binding errors");
 
             Authentication a = SecurityContextHolder.getContext().getAuthentication();
 
             String user = a.getName();
 
             model.addAttribute("User", user);
-            model.addAttribute("contractorTimesheetDetails", timesheetForm);
+            model.addAttribute("TimeSheetKey", timeSheetForm);
             return "contractor_view";
         }
 
 //        if details are correct do the submit
-        return "redirect:/createTimesheet/";
+        return "redirect:/createTimeSheet/";
     }
 
 
-    @GetMapping("/createTimesheet")
-    public String submitTimesheet(@ModelAttribute("TimesheetKey") TimesheetForm timesheetForm,
+    @GetMapping("/createTimeSheet")
+    public String submitTimeSheet(@ModelAttribute("TimeSheetKey") TimeSheetForm timeSheetForm,
                                         RedirectAttributes model) {
 
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
@@ -69,25 +67,23 @@ public class TimesheetCreateController {
 
         log.info("The name given is: " + username + " - " + a.getDetails().toString());
 
-//        TODO Fun create stuff
-        System.out.println("The name given is: " + username + " - " + a.getDetails().toString());
         Contractor thisContractor = contractorJpa.getByUsername(username).get();
 
         log.info("The contractor given is: " + thisContractor.toString());
 
-        Timesheet newTimesheet = new Timesheet(
+        TimeSheet newTimeSheet = new TimeSheet(
                 null,
                 thisContractor,
-                timesheetForm.getDays_worked(),
-                timesheetForm.getOvertime_completed(),
-                timesheetForm.getWeek_ending()
+                timeSheetForm.getDays_worked(),
+                timeSheetForm.getOvertime_completed(),
+                timeSheetForm.getWeek_ending()
         );
 
 
-        timesheetJpa.makeTimesheet(newTimesheet);
+        timesheetJpa.makeTimesheet(newTimeSheet);
 
-        System.out.println("Here is the timesheet going into DB" + newTimesheet.toString());
-        model.addFlashAttribute("aTimesheet", newTimesheet);
+        log.info("Here is the timeSheet going into DB" + newTimeSheet.toString());
+        model.addFlashAttribute("aTimeSheet", newTimeSheet);
         return "redirect:/contractorView";
     }
 

@@ -30,7 +30,7 @@
     <nav class="navbar navbar-expand-lg bg-light navbar-fixed-top">
         <a class="navbar-brand custom-txt" href="/">
             <img th:src="@{/images/banner_admiral_logo.png}"
-                 th:width="235" th:height="65" class="img-responsive"/>
+                 th:width="235" th:height="65" class="img-responsive" alt="admiral_logo.png"/>
             Timesheet Portal
         </a>
 
@@ -62,7 +62,7 @@
         <div class="bg-dark p-4">
             <!--Not Logged In-->
             <div sec:authorize="isAnonymous()">
-                <h5 class="text-white h4">You are not logged in and cannot view any Channels</h5>
+                <h5 class="text-white h4">You are not logged in and cannot view any channels</h5>
             </div>
 
             <!--Is Logged In-->
