@@ -9,76 +9,96 @@
 <div th:replace="fragments/header :: header"></div>
 
 <main class="container" role="main">
-    <div class="starter-template">
-        <div class="row mx-auto custom-form">
-            <div class="col mx-auto custom-bg">
+<div class="starter-template">
+    <div class="row mx-auto custom-form">
+    <div class="col mx-auto custom-bg">
 
-                <div id=missingTimeSheetMessage th:if="${TimesheetKey}==  null">
-                    <div>No matching Time Sheets</div>
-                </div>
+        <div id=missingTimeSheetMessage th:if="${TimesheetKey}==  null">
+            <div>No matching Time Sheets</div>
+        </div>
 
 
-                <div class="row mt-4 custom-label">
-                    <h4 th:text="'Contractor Time Sheets'"></h4>
-                </div>
+        <div class="row mt-4 custom-label">
+            <h4 th:text="'Contractor Time Sheets'"></h4>
+        </div>
 
-                <div class="custom-form">
-                    <div class="mx-3 custom-bg scrolling-wrapper">
-                        <table class="table table-light" id="timeSheetInfo">
-                            <thead>
-                            <tr>
-                                <th scope="col">
-                                    <label for="nameSearch">Name</label>
-                                    <input class="small-input searcher" type="text" id="nameSearch" onkeyup="filterResults()" placeholder="Name">
-                                </th>
-                                <th scope="col">
-                                    <label for="agencySearch">Agency</label>
-                                    <input class="small-input searcher" type="text" id="agencySearch" onkeyup="filterResults()" placeholder="Agency">
-                                </th>
-                                <th scope="col">
-                                    <label for="daysWorkedSearch">Days Worked</label>
-                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()">
-                                </th>
-                                    <th scope="col"><label for="OverTimeSearch">Over Time</label>
-                                    <input class="tiny-input searcher" type="text" id="OverTimeSearch" onkeyup="filterResults()">
-                                </th>
-                                <th scope="col">
-                                    <label for="weekFinishedSearch">Week Finished</label>
-                                    <input class="date-input searcher" type="text" id="weekFinishedSearch" onkeyup="filterResults()" placeholder="YYYY-MM-DD">
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="Timesheet: ${TimesheetKey}"  th:id="'TimesheetItem' + ${Timesheet.id}">
+        <div class="custom-form">
+            <div class="mx-3 custom-bg scrolling-wrapper">
+            <table class="table table-light" id="timeSheetInfo">
+                <thead>
+                <tr>
+                    <th scope="col">
+                        <label for="nameSearch">Name</label>
+                        <input class="small-input searcher"
+                               type="text" id="nameSearch"
+                               onkeyup="filterResults()"
+                               placeholder="Name">
+                    </th>
+                    <th scope="col">
+                        <label for="agencySearch">Agency</label>
+                        <input class="small-input searcher"
+                               type="text" id="agencySearch"
+                               onkeyup="filterResults()"
+                               placeholder="Agency">
+                    </th>
+                    <th scope="col">
+                        <label for="daysWorkedSearch">Days Worked</label>
+                        <input class="tiny-input searcher"
+                               type="text" pattern="/d*"
+                               id="daysWorkedSearch"
+                               onkeyup="filterResults()">
+                    </th>
+                        <th scope="col"><label for="OverTimeSearch">Over Time</label>
+                        <input class="tiny-input searcher"
+                               type="text" id="OverTimeSearch"
+                               onkeyup="filterResults()">
+                    </th>
+                    <th scope="col">
+                        <label for="weekFinishedSearch">Week Finished</label>
+                        <input class="date-input searcher"
+                               type="text" id="weekFinishedSearch"
+                               onkeyup="filterResults()"
+                               placeholder="YYYY-MM-DD">
+                    </th>
+                </tr>
+                </thead>
 
-                                <td> <span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
-                                <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
-                                <td><span th:text="${Timesheet.daysWorked}"></span></td>
-                                <td><span th:text="${Timesheet.overtime}"></span></td>
-                                <td><span th:text="${Timesheet.week_finish}"></span></td>
-                                <td>
-                                    <form  method="get" th:action="@{'/newApproveReview/' + ${Timesheet.id}}">
-                                        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-                                        <input class="btn btn-lg btn-success btn-block " id="submit" type="submit"
-                                               value="Approve"/>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form  method="post" th:action="@{'/newRejectedReview/' + ${Timesheet.id}}">
-                                        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-                                        <input class="btn btn-lg btn-danger btn-block " id="submitReject" type="submit"
-                                               value="Reject"/>
-                                    </form>
-                                </td>
+                <tbody>
+                <tr th:each="Timesheet: ${TimesheetKey}"
+                    th:id="'TimesheetItem' + ${Timesheet.id}">
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                    <td> <span th:text="${Timesheet.contractor.user.firstname}
+                                + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
+                    <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
+                    <td><span th:text="${Timesheet.daysWorked}"></span></td>
+                    <td><span th:text="${Timesheet.overtime}"></span></td>
+                    <td><span th:text="${Timesheet.week_finish}"></span></td>
+
+                    <td>
+                    <form method="get"
+                          th:action="@{'/newApproveReview/' + ${Timesheet.id}}">
+                        <input class="btn btn-lg btn-success btn-block"
+                               id="submit" type="submit"
+                               value="Approve"/>
+                    </form>
+                    </td>
+                    <td>
+                        <form method="get"
+                               th:action="@{'/newRejectedReview/' + ${Timesheet.id}}">
+                            <input class="btn btn-lg btn-danger btn-block"
+                                   id="submitReject" type="submit"
+                                   value="Reject"/>
+                        </form>
+                    </td>
+
+                </tbody>
+            </table>
             </div>
-
         </div>
     </div>
+
+    </div>
+</div>
 </main>
 
 <script>

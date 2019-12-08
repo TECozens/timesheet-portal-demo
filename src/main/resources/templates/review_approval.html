@@ -14,7 +14,8 @@
             <div class="col mx-auto custom-bg">
                 <div id=approvalReview>
 
-                    <form action="#" method="post" th:action="@{/createReview}" th:object="${ApprovalReviewDetails}">
+                    <form action="#" method="post" th:action="@{/createReview}"
+                          th:object="${ApprovalReviewDetails}">
 
                         <div class="custom-label">
                             <h3>Contractor Performance Review</h3>
@@ -39,12 +40,11 @@
 
 
                         <div class="form-group custom-label">
-                            <label >Technical Skills
-                                <input
-                                    class="form-control"
-                                    th:field="*{technical_skills}"
-                                    type="number" pattern="/d*"/>
-                            </label>
+                            <label for="techSkills">Technical Skills</label>
+                            <input id="techSkills"
+                                   class="form-control"
+                                   th:field="*{technical_skills}"
+                                   type="number" pattern="/d*"/>
                         </div>
 
                         <div class="alert alert-danger"
@@ -55,11 +55,11 @@
 
 
                         <div class="form-group custom-label">
-                            <label>Quality
-                                <input class="form-control"
-                                       th:field="*{quality}"
-                                       type="number" pattern="/d*"/>
-                            </label>
+                            <label for="quality">Quality</label>
+                            <input id="quality"
+                                   class="form-control"
+                                   th:field="*{quality}"
+                                   type="number" pattern="/d*"/>
                         </div>
 
                         <div class="alert alert-danger"
@@ -70,12 +70,11 @@
 
 
                         <div class="form-group custom-label">
-                            <label th:for="initative">Initiative
-                                <input
-                                        class="form-control"
-                                        th:field="*{initiative}"
-                                        type="number" pattern="/d*"/>
-                            </label>
+                            <label for="initiative">Initiative</label>
+                            <input id="initiative"
+                                   class="form-control"
+                                   th:field="*{initiative}"
+                                   type="number" pattern="/d*"/>
                         </div>
 
 
@@ -87,12 +86,11 @@
 
 
                         <div class="form-group custom-label">
-                            <label>Productivity
-                                <input
-                                       class="form-control"
-                                       th:field="*{productivity}"
-                                       type="number" pattern="/d*"/>
-                            </label>
+                            <label for="productivity">Productivity</label>
+                            <input id="productivity"
+                                   class="form-control"
+                                   th:field="*{productivity}"
+                                   type="number" pattern="/d*"/>
                         </div>
 
 
@@ -103,12 +101,11 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label>Working Relationships
-                                <input
-                                        class="form-control"
-                                        th:field="*{working_relationships}"
-                                        type="number" pattern="/d*"/>
-                            </label>
+                            <label for="relationships">Working Relationships</label>
+                            <input class="form-control"
+                                   id="relationships"
+                                   th:field="*{working_relationships}"
+                                   type="number" pattern="/d*"/>
                         </div>
 
                         <div class="alert alert-danger"
@@ -118,18 +115,20 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label th:for="message">Comments
-                                <input
-                                        class="form-control"
-                                        placeholder="Comments"
-                                        th:field="*{message}"
-                                        type="text" />
+                            <label for="message">Comments
+                            <input class="form-control"
+                                   id="message"
+                                   placeholder="Comments"
+                                   th:field="*{message}"
+                                   type="text" />
                             </label>
                         </div>
 
                        <div class="row mt-4">
 
-                           <button class="btn btn-lg btn-primary btn-block custom-btn"  type="submit"
+                           <button class="btn btn-lg btn-primary
+                                          btn-block custom-btn"
+                                   type="submit"
                                    id="approve">Save</button>
                        </div>
 
