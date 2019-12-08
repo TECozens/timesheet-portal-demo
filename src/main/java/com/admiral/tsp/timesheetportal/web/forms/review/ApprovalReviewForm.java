@@ -1,6 +1,6 @@
 package com.admiral.tsp.timesheetportal.web.forms.review;
 
-import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
+import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class ApprovalReviewForm {
 
-    private Timesheet timesheet;
+    private TimeSheet timesheet;
     private Boolean approved;
     private Boolean paid;
     private String message;
@@ -33,7 +33,7 @@ public class ApprovalReviewForm {
     @NotNull(message = "Must not be empty!")
     @Max(value = 3, message = "You must choose a number between 1 and 3!")
     @Min(value = 1, message = "You must choose a number between 1 and 3!")
-    private Integer initative;
+    private Integer initiative;
     @NotNull(message = "Must not be empty!")
     @Max(value = 3, message = "You must choose a number between 1 and 3!")
     @Min(value = 1, message = "You must choose a number between 1 and 3!")

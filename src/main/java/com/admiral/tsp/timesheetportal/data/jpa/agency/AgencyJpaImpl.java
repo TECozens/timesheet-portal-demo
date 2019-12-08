@@ -1,6 +1,5 @@
 package com.admiral.tsp.timesheetportal.data.jpa.agency;
 
-import com.admiral.tsp.timesheetportal.services.AgencyRepository;
 import com.admiral.tsp.timesheetportal.data.domain.Agency;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import java.util.List;
 public class AgencyJpaImpl implements AgencyJpa {
 
     // Autowired the agency repository inside implementation
-    private AgencyRepository agencyRepository;
+    private final AgencyRepository agencyRepository;
 
     @Autowired
     public AgencyJpaImpl(AgencyRepository agencyRepository) {

@@ -15,14 +15,17 @@ import java.util.List;
 public class ReviewViewController {
 
 
+    private final ReviewJpa reviewJpa;
+
     @Autowired
-    private ReviewJpa reviewJpa;
+    public ReviewViewController(ReviewJpa reviewJpa) {
+        this.reviewJpa = reviewJpa;
+    }
 
 
     @GetMapping("/Invoices")
-    public String showTimesheetApprovalPage(Model model){
+    public String showTimeSheetApprovalPage(Model model){
         List<Review> foundReviews = reviewJpa.getUnpaid();
-        System.out.print("HEY HERE");
 
         model.addAttribute("Reviews", foundReviews);
 

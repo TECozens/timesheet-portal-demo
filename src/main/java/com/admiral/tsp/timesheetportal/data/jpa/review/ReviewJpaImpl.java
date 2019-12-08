@@ -1,7 +1,6 @@
 package com.admiral.tsp.timesheetportal.data.jpa.review;
 
 import com.admiral.tsp.timesheetportal.data.domain.Review;
-import com.admiral.tsp.timesheetportal.services.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +14,7 @@ import java.util.Optional;
 public class ReviewJpaImpl implements ReviewJpa {
 
     // Autowired the review repository inside implementation
-    private ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
 
     @Autowired
     public ReviewJpaImpl(ReviewRepository reviewRepository){
@@ -47,8 +46,8 @@ public class ReviewJpaImpl implements ReviewJpa {
     @Override
     public Optional<Review> updatePaid(Integer ID, Boolean paid) {
 
-        System.out.println(reviewRepository.updateReviewStatus(ID, paid));
-        return reviewRepository.getReviewById(1);
+        log.info(reviewRepository.updateReviewStatus(ID, paid).toString());
+        return reviewRepository.getReviewById(ID);
     }
 
     @Override

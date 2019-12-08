@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.security.data.domain;
+package com.admiral.tsp.timesheetportal.data.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,6 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -45,24 +44,5 @@ public class User {
     @NotEmpty
     private String password;
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", firstname='" + firstname + '\'' +
-                ", surname='" + surname + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
-
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_role",
-//            joinColumns = @JoinColumn(
-//                    name = "user_id", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(
-//                    name = "role_id", referencedColumnName = "id"))
-//    private List<UserRole> role;
 
 }

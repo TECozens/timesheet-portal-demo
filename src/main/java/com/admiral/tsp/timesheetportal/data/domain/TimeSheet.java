@@ -12,8 +12,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "timesheet")
 public class
-Timesheet {
+TimeSheet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

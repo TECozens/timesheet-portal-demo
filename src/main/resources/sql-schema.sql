@@ -43,7 +43,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `timesheet`
+-- Table `timeSheet`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `timesheet` (
     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,

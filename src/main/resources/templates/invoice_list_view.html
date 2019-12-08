@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:type="http://www.w3.org/1999/xhtml">
+>
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 
@@ -13,7 +13,7 @@
         <div class="row mx-auto custom-form">
             <div class="col mx-auto custom-bg">
 
-                <div id=missingTimesheetMessage th:if="${Reviews.isEmpty()}">
+                <div id=missingTimeSheetMessage th:if="${Reviews.isEmpty()}">
                     <div>No matching Invoices</div>
                 </div>
 
@@ -29,23 +29,23 @@
                             <tr>
                                 <th scope="col">
                                     <label for="nameSearch">Name</label>
-                                    <input class="small-input searcher" type="text" id="nameSearch" onkeyup="filterResults()"placeholder="Name">
+                                    <input class="small-input searcher" type="text" id="nameSearch" onkeyup="filterResults()" placeholder="Name">
                                 </th>
                                 <th scope="col">
                                     <label for="agencySearch">Agency</label>
-                                    <input class="small-input searcher" type="text" id="agencySearch" onkeyup="filterResults()"placeholder="Agency">
+                                    <input class="small-input searcher" type="text" id="agencySearch" onkeyup="filterResults()" placeholder="Agency">
                                 </th>
                                 <th scope="col">
                                     <label for="agencyEmailSearch">Agency Email</label>
-                                    <input class="small-input searcher" type="text" id="agencyEmailSearch" onkeyup="filterResults()"placeholder="agency@email.com">
+                                    <input class="small-input searcher" type="text" id="agencyEmailSearch" onkeyup="filterResults()" placeholder="agency@email.com">
                                 </th>
                                 <th scope="col">
                                     <label for="daysWorkedSearch">Days Worked</label>
-                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()"placeholder="">
+                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()" placeholder="">
                                 </th>
                                 <th scope="col">
                                     <label for="overTimeSearch">Over Time</label>
-                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="overTimeSearch" onkeyup="filterResults()"placeholder="">
+                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="overTimeSearch" onkeyup="filterResults()" placeholder="">
                                 </th>
                                 <th scope="col">
                                     <label for="weekFinishedSearch">Week End Date</label>
@@ -53,23 +53,23 @@
                                 </th>
                                 <th scope="col">
                                     <label for="reviewSearch">Reviewed</label>
-                                    <input class="tiny-input searcher" type="text" id="reviewSearch" onkeyup="filterResults()"placeholder="Approved"/>
+                                    <input class="tiny-input searcher" type="text" id="reviewSearch" onkeyup="filterResults()" placeholder="Approved"/>
                                 </th>
                                 <th scope="col">
                                     <label for="paidSearch">Paid</label>
-                                    <input class="tiny-input searcher" type="text" id="paidSearch" onkeyup="filterResults()"placeholder="true"/>
+                                    <input class="tiny-input searcher" type="text" id="paidSearch" onkeyup="filterResults()" placeholder="true"/>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="ReviewItem: ${Reviews}" th:id="'reviewitem' + ${ReviewItem.id}" class="notsaved">
-                                <td><span th:text="${ReviewItem.timesheet.contractor.user.firstname}
-                                            + ' ' + ${ReviewItem.timesheet.contractor.user.surname}"></span></td>
-                                <td><span th:text="${ReviewItem.timesheet.contractor.agency.name}"></span></td>
-                                <td><span th:text="${ReviewItem.timesheet.contractor.agency.agency_email}"></span></td>
-                                <td><span th:text="${ReviewItem.timesheet.daysWorked}"></span></td>
-                                <td><span th:text="${ReviewItem.timesheet.overtime}"></span></td>
-                                <td><span th:text="${ReviewItem.timesheet.week_finish}"></span></td>
+                            <tr th:each="ReviewItem: ${Reviews}" th:id="'reviewItem' + ${ReviewItem.id}" class="notSaved">
+                                <td><span th:text="${ReviewItem.timeSheet.contractor.user.firstname}
+                                            + ' ' + ${ReviewItem.timeSheet.contractor.user.surname}"></span></td>
+                                <td><span th:text="${ReviewItem.timeSheet.contractor.agency.name}"></span></td>
+                                <td><span th:text="${ReviewItem.timeSheet.contractor.agency.agency_email}"></span></td>
+                                <td><span th:text="${ReviewItem.timeSheet.daysWorked}"></span></td>
+                                <td><span th:text="${ReviewItem.timeSheet.overtime}"></span></td>
+                                <td><span th:text="${ReviewItem.timeSheet.week_finish}"></span></td>
                                 <td><span th:text="${ReviewItem.approved}"></span></td>
                                 <td><span th:text="${ReviewItem.paid}"></span></td>
                                 <td>
@@ -89,30 +89,29 @@
 </main>
 <script>
     function sendApproval(id) {
-        fetch(`/api/reviews/confirm/` +id)
-        var row = document.getElementById("reviewitem" + id);
-        row.classList.remove("notsaved");
+        fetch(`/api/reviews/confirm/` +id);
+        let row = document.getElementById("reviewItem" + id);
+        row.classList.remove("notSaved");
         row.style.display = "none";
     }
     function filterResults() {
 
-        var table = document.getElementById("reviews");
-        var search_items = document.getElementsByClassName("searcher");
-        var tr = table.getElementsByTagName("tr");
+        let table = document.getElementById("reviews");
+        let search_items = document.getElementsByClassName("searcher");
+        let tr = table.getElementsByTagName("tr");
 
-        var td;
-        var filter;
-        for (i = 0; i < tr.length; i++) {
+        let td;
+        let filter;
+        let txtValue;
+        for (let i = 0; i < tr.length; i++) {
 
 
-            var row = tr[i];
-            console.log(row.classList);
-            console.log("notsaved");
-            if (row.classList.contains("notsaved")) {
+            let row = tr[i];
+            if (row.classList.contains("notSaved")) {
                 row.style.display = "";
             }
 
-            for (iter = 0; iter < search_items.length; iter++) {
+            for (let iter = 0; iter < search_items.length; iter++) {
 
                 td = row.getElementsByTagName("td")[iter];
                 if (td) {

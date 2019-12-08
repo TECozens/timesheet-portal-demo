@@ -30,8 +30,8 @@
     <nav class="navbar navbar-expand-lg bg-light navbar-fixed-top">
         <a class="navbar-brand custom-txt" href="/">
             <img th:src="@{/images/banner_admiral_logo.png}"
-                 th:width="235" th:height="65" class="img-responsive"/>
-            Timesheet Portal
+                 th:width="235" th:height="65" class="img-responsive" alt="admiral_logo.png"/>
+            Time Sheet Portal
         </a>
 
         <div class="container-fluid" id="navbarSupportedContent">
@@ -62,7 +62,7 @@
         <div class="bg-dark p-4">
             <!--Not Logged In-->
             <div sec:authorize="isAnonymous()">
-                <h5 class="text-white h4">You are not logged in and cannot view any Channels</h5>
+                <h5 class="text-white h4">You are not logged in and cannot view any channels</h5>
             </div>
 
             <!--Is Logged In-->
@@ -82,15 +82,13 @@
                 <div sec:authorize="hasAuthority('ROLE_MANAGER')">
                     <a class="btn btn-light" href="/">Home</a>
 
-                    <a class="btn btn-light" th:href="@{/Reviews}">View Timesheets</a>
+                    <a class="btn btn-light" th:href="@{/Reviews}">View Time Sheets</a>
 
                 </div>
 
-                <!--            sec:authentication="principal.authorities"-->
                 <div sec:authorize="hasAuthority('ROLE_CONTRACTOR')">
                     <a class="btn btn-light" href="/">Home</a>
-                    <a class="btn btn-light" th:href="@{/contractorView}">New Timesheet</a>
-<!--                    <a class="btn btn-light">Old Timesheets WIP</a>-->
+                    <a class="btn btn-light" th:href="@{/contractorView}">New Time Sheet</a>
                 </div>
 
             </div>

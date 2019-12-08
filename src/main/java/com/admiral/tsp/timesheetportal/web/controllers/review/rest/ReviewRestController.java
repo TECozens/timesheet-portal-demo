@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ReviewRestController {
 
-    @Autowired
-    private ReviewJpa reviewJpa;
+    private final ReviewJpa reviewJpa;
 
+    @Autowired
+    public ReviewRestController(ReviewJpa reviewJpa) {
+        this.reviewJpa = reviewJpa;
+    }
 
 
     @GetMapping(path = "/api/reviews/confirm/{id}")
