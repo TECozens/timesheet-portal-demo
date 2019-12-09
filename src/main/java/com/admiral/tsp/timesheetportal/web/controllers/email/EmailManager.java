@@ -18,22 +18,14 @@ public class EmailManager {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("timeSheetPortal3@gmail.com", "Password03");
             }
-        });//account not exist
-
+        });
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com", false));
 
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("timeSheetPortal3@gmail.com"));//manager of contractor making ts
-        msg.setSubject("TSP Time Sheet Created ");
+        msg.setSubject("TSP-Manager Time Sheet Created ");
         msg.setContent("A time sheet has been created by a contractor please review", "text/html");
         msg.setSentDate(new Date());
-
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent("A time sheet has been created by a contractor please review\",", "text/html");
-
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(messageBodyPart);
-        msg.setContent(multipart);
         Transport.send(msg);
 
 

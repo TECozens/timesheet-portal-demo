@@ -17,7 +17,7 @@ public class EmailAdmin {
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("timeSheetPortal3@gmail.com", "Password03");
-                //account not exist
+
             }
         });
 
@@ -25,16 +25,9 @@ public class EmailAdmin {
         msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com",false));
 
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("timeSheetPortal3@gmail.com")); // all admin
-        msg.setSubject("TSP time sheet approved ");
-        msg.setContent(" A time sheet has been approved and waiting for an invoice", "text/html");
+        msg.setSubject("TSP-Admin time sheet approved ");
+        msg.setContent(" A time sheet has been approved and waiting for an invoice confirmation", "text/html");
         msg.setSentDate(new Date());
-
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent(" A time sheet has been approved and waiting for an invoice ", "text/html");
-
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(messageBodyPart);
-        msg.setContent(multipart);
         Transport.send(msg);
 
 

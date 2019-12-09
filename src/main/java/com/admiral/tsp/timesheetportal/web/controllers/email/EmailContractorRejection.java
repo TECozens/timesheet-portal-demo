@@ -18,23 +18,14 @@ public class EmailContractorRejection {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("timeSheetPortal3@gmail.com", "Password03");
             } //account not exist
-        });    // account not exist
-
+        });
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com", false));
 
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("timeSheetPortal3@gmail.com"));//contractor who made the sheet
-        msg.setSubject("TSP Time Sheet Rejection");
-        msg.setContent("Rejected Time Sheet", "text/html");
+        msg.setSubject("TSP-Contractor Time Sheet Rejection");
+        msg.setContent("Your Time Sheet was rejected please make another" , "text/html");
         msg.setSentDate(new Date());
-
-
-        MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent("Your time sheet was rejected", "text/html");
-
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(messageBodyPart);
-        msg.setContent(multipart);
         Transport.send(msg);
 
 
