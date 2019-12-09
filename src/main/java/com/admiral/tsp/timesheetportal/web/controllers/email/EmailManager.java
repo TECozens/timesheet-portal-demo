@@ -25,11 +25,11 @@ public class EmailManager {
 
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("timeSheetPortal3@gmail.com"));//manager of contractor making ts
         msg.setSubject("TSP Time Sheet Created ");
-        msg.setContent("Time sheet has been created please review", "text/html");
+        msg.setContent("A time sheet has been created by a contractor please review", "text/html");
         msg.setSentDate(new Date());
 
         MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent("Time sheet has been created please review\",", "text/html");
+        messageBodyPart.setContent("A time sheet has been created by a contractor please review\",", "text/html");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);
