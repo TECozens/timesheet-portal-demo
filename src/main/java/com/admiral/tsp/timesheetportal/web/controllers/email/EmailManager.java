@@ -16,20 +16,20 @@ public class EmailManager {
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("timeSheetPortal@gmail.com", "password");
+                return new PasswordAuthentication("timeSheetPortal3@gmail.com", "Password03");
             }
-        });
+        });//account not exist
 
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("timeSheetPortal@gmail.com", false));
+        msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com", false));
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("tutorialspoint@gmail.com"));//manager of contractor making ts
-        msg.setSubject("Timesheet was created ");
-        msg.setContent("Time sheet has been created", "text/html");
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("timeSheetPortal3@gmail.com"));//manager of contractor making ts
+        msg.setSubject("TSP Time Sheet Created ");
+        msg.setContent("Time sheet has been created please review", "text/html");
         msg.setSentDate(new Date());
 
         MimeBodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setContent("Tutorials point email", "text/html");
+        messageBodyPart.setContent("Time sheet has been created please review\",", "text/html");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(messageBodyPart);

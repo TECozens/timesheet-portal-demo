@@ -16,15 +16,16 @@ public class EmailAdmin {
 
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("timeSheetPortal@gmail.com", "password");
+                return new PasswordAuthentication("timeSheetPortal3@gmail.com", "Password03");
+                //account not exist
             }
         });
 
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("timeSheetPortal@gmail.com",false));
+        msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com",false));
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("utorialspoint@gmail.com")); // all admin
-        msg.setSubject("Time sheet has been approved ");
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("timeSheetPortal3@gmail.com")); // all admin
+        msg.setSubject("TSP time sheet approved ");
         msg.setContent(" A time sheet has been approved and waiting for an invoice", "text/html");
         msg.setSentDate(new Date());
 

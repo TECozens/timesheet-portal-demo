@@ -16,15 +16,15 @@ public class EmailContractorRejection {
 
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("timeSheetPortal@gmail.com", "password");
-            }
+                return new PasswordAuthentication("timeSheetPortal3@gmail.com", "Password03");
+            } //account not exist
         });
 
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("timeSheetPortal@gmail.com", false));
+        msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com", false));
 
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("tutorialspoint@gmail.com"));//contractor who made the sheet
-        msg.setSubject("Time Sheet Rejection");
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse("timeSheetPortal3@gmail.com"));//contractor who made the sheet
+        msg.setSubject("TSP Time Sheet Rejection");
         msg.setContent("Rejected Time Sheet", "text/html");
         msg.setSentDate(new Date());
 
