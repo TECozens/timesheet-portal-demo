@@ -18,7 +18,7 @@ public class EmailContractorRejection {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("timeSheetPortal3@gmail.com", "Password03");
             } //account not exist
-        });
+        });    // account not exist
 
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com", false));
