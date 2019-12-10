@@ -93,7 +93,7 @@ public class TimeSheetCreateController {
 
 
         EmailManager emailManager = new EmailManager();
-        emailManager.sendManagerMail();
+        emailManager.sendManagerMail(thisContractor.getManager());
 
 
         return "redirect:/contractorView";

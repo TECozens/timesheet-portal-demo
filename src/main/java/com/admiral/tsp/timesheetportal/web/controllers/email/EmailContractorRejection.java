@@ -1,19 +1,13 @@
 package com.admiral.tsp.timesheetportal.web.controllers.email;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
-import com.admiral.tsp.timesheetportal.data.domain.User;
-import com.admiral.tsp.timesheetportal.data.domain.UserRole;
-import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+
 
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.IOException;
 import java.util.Date;
-import java.util.List;
 import java.util.Properties;
-@Slf4j
 public class EmailContractorRejection {
     public void sendContractorMail(Contractor contractor) throws AddressException, MessagingException, IOException {
         Properties props = new Properties();
@@ -31,7 +25,6 @@ public class EmailContractorRejection {
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com", false));
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(contractor.getUser().getEmail()));
-        log.info(contractor.getUser().getEmail());
         msg.setSubject("TSP-Contractor Time Sheet Rejection");
         msg.setContent("Your Time Sheet was rejected please make another" , "text/html");
         msg.setSentDate(new Date());
