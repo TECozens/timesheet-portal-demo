@@ -3,6 +3,8 @@ package com.admiral.tsp.timesheetportal.web.controllers.review;
 import com.admiral.tsp.timesheetportal.data.domain.Review;
 import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
 import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.web.controllers.email.EmailAdmin;
 import com.admiral.tsp.timesheetportal.web.forms.review.ApprovalReviewForm;
 import com.admiral.tsp.timesheetportal.data.jpa.review.ReviewJpa;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Optional;
 
 @Slf4j
@@ -22,11 +26,14 @@ public class ApprovalPerformanceReviewCreateController {
 
     private final TimeSheetJpa timesheetJpa;
     private final ReviewJpa reviewJpa;
+    private final UserJpa userJpa;
 
     @Autowired
-    public ApprovalPerformanceReviewCreateController(TimeSheetJpa timesheetJpa, ReviewJpa reviewJpa) {
+    public ApprovalPerformanceReviewCreateController(TimeSheetJpa timesheetJpa, ReviewJpa reviewJpa, UserJpa userJpa) {
         this.timesheetJpa = timesheetJpa;
         this.reviewJpa = reviewJpa;
+        this.userJpa = userJpa;
+
     }
 
 
@@ -49,7 +56,7 @@ public class ApprovalPerformanceReviewCreateController {
     @PostMapping("/createReview")
     public String submitApproveReview(@Valid @ModelAttribute("ApprovalReviewDetails")
                                                   ApprovalReviewForm approvalReviewForm,
-                                      BindingResult bindingResult, Model model) {
+                                      BindingResult bindingResult, Model model) throws IOException, MessagingException {
 
 
         if (bindingResult.hasErrors()){
@@ -72,8 +79,11 @@ public class ApprovalPerformanceReviewCreateController {
         );
 
         reviewJpa.makeReview(newReview);
-
         log.info("Here is the review going into DB" + newReview.toString());
+
+        EmailAdmin emailAdmin = new EmailAdmin();
+        emailAdmin.sendAdminMail(userJpa.findAdmins());
+
 
         return "redirect:/Reviews";
     }
