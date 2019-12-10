@@ -1,9 +1,13 @@
 package com.admiral.tsp.timesheetportal.web.controllers.email;
 
+import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 public class EmailAdmin {
@@ -17,9 +21,10 @@ public class EmailAdmin {
         Session session = Session.getInstance(props, new Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication("timeSheetPortal3@gmail.com", "Password03");
-
             }
         });
+
+     //List<KafkaProperties.Admin> adminEmails = UserJpa.getEmail(); //  list of admin emails referenced in list
 
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress("timeSheetPortal3@gmail.com",false));

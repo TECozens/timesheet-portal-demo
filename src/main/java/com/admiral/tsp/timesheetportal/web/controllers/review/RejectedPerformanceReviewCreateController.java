@@ -83,7 +83,7 @@ public class RejectedPerformanceReviewCreateController {
         log.info("Here is the review going into DB" + newReview.toString());
 
         EmailContractorRejection emailContractorRejection = new EmailContractorRejection();
-        emailContractorRejection.sendContractorMail();
+        emailContractorRejection.sendContractorMail(rejectionReviewForm.getTimesheet().getContractor());
 
         return "redirect:/Reviews";
     }
