@@ -1,6 +1,7 @@
 package com.admiral.tsp.timesheetportal.data.jpa.review;
 
 import com.admiral.tsp.timesheetportal.data.domain.Review;
+import com.admiral.tsp.timesheetportal.services.ReviewRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

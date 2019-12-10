@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.data.jpa.contractor;
+package com.admiral.tsp.timesheetportal.services;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
 import com.admiral.tsp.timesheetportal.data.domain.User;

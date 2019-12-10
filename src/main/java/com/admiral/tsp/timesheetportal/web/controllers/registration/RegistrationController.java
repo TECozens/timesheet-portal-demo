@@ -108,7 +108,9 @@ public class RegistrationController {
             newContractor.setUser(newUser);
             newContractor.setAgency(agencyJpa.findByID(registrationForm.getAgencyId()));
             newContractor.setManager(userJpa.getById(registrationForm.getManagerId()));
+
             contractorJpa.makeContractor(newContractor);
+
         }
 
         log.debug("New User going into DB" + newUser.toString());
