@@ -31,7 +31,7 @@ public class ResetController {
 
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
-        if(token != null){
+        if (token != null) {
 
             User user = userJpa.getByUsername(token.getUser().getUsername());
 
@@ -55,7 +55,7 @@ public class ResetController {
     public String resetUserPassword(@ModelAttribute("resetKey") ResetForm resetForm,
                                     User user) {
 
-        if(user.getUsername() != null){
+        if (user.getUsername() != null) {
 
             User tokenUser = userJpa.getByUsername(user.getUsername());
 
@@ -68,7 +68,7 @@ public class ResetController {
             log.error("Error: The link is invalid or broken.");
 
         }
-            return "redirect:/passwordReset";
+        return "redirect:/passwordReset";
     }
 
 }
