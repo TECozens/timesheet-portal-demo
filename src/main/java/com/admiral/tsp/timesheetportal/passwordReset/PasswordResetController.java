@@ -44,7 +44,7 @@ public class PasswordResetController {
 
     }
 
-    @PostMapping("/passwordReset")
+    @PostMapping("/passwordRetrieve")
     public String forgotPasswordDetails(@Valid @ModelAttribute("passwordKey") PasswordResetForm passwordResetForm,
                               BindingResult bindingResult,
                               Model model) {
