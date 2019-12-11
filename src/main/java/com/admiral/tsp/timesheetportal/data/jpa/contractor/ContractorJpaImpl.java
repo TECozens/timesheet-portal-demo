@@ -58,4 +58,9 @@ public class ContractorJpaImpl implements ContractorJpa {
     public List<Contractor> getAll() {
         return contractorRepository.getAllContractor();
     }
+
+    @Override
+    public List<Contractor> getManagerContractors(User manager) {
+        return contractorRepository.getManagerContractors(manager);
+    }
 }

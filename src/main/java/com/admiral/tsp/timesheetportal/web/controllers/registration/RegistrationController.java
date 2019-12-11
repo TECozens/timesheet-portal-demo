@@ -64,6 +64,8 @@ public class RegistrationController {
 
         List<User> managers = userJpa.findManagers();
         List<Agency> agency = agencyJpa.findAll();
+//        if (userJpa.getByUsername(registrationForm.getUsername()).)
+//        bindingResult.addError();
 
         if (bindingResult.hasErrors()) {
 

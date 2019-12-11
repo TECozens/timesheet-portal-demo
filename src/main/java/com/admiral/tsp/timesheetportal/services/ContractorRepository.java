@@ -30,5 +30,8 @@ public interface ContractorRepository extends JpaRepository<Contractor, Long> {
     @Query("SELECT c FROM Contractor c")
     List<Contractor> getAllContractor();
 
+    @Query("SELECT c FROM Contractor c WHERE c.manager = :manager")
+    List<Contractor> getManagerContractors(@Param("manager") User manager);
+
 
 }
