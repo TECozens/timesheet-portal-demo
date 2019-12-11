@@ -20,12 +20,10 @@ import java.util.List;
 @SessionAttributes({"passwordKey","userKey"})
 public class PasswordResetController {
 
-    private final PasswordEncoder passwordEncoder;
     private final UserJpa userJpa;
 
     @Autowired
-    public PasswordResetController(PasswordEncoder passwordEncoder, UserJpa userJpa) {
-        this.passwordEncoder = passwordEncoder;
+    public PasswordResetController(UserJpa userJpa) {
         this.userJpa = userJpa;
     }
 
@@ -41,7 +39,7 @@ public class PasswordResetController {
 
     }
 
-    @PostMapping("/passwordSend")
+    @PostMapping("/passwordTokenSend")
     public String forgotPasswordDetails(@Valid @ModelAttribute("passwordKey") PasswordResetForm passwordResetForm,
                               BindingResult bindingResult,
                               Model model) {

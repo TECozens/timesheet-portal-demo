@@ -12,7 +12,7 @@
         <div class="row mx-auto custom-form">
             <div class="col mx-auto custom-bg">
                 <div id = resetUserPassword>
-                    <form action="#" method="post" th:action="@{/confirmResetPassword}" th:object="${resetKey}">
+                    <form action="#" method="post" th:action="@{/confirmReset}" th:object="${resetKey}">
 
                         <div class="custom-label">
                             <h3>Please Enter The Details To Reset Password</h3>
@@ -35,7 +35,7 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label>password
+                            <label>Password
                                 <input aria-describedby="Enter a new Password"
                                        class="form-control"
                                        placeholder="Password"

@@ -26,19 +26,28 @@ public class ResetController {
         this.confirmationTokenRepository = confirmationTokenRepository;
     }
 
-    @GetMapping("/confirmReset?token=")
-    public String validateResetToken(@RequestParam("token") String confirmationToken, Model model) {
+    @GetMapping("/confirmReset")
+    public String goToConfirmReset(@RequestParam("token") String confirmationToken, Model model) {
+
         ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
 
-        if(token !=null){
+        if(token != null){
+
             User user = userJpa.getByUsername(token.getUser().getUsername());
+
             model.addAttribute("User", user);
+
+            model.addAttribute("resetKey", new ResetForm());
+
             return "redirect:/confirmResetPassword";
+
         } else {
+
             log.error("Error: The link is invalid or broken.");
+
         }
 
-        return "redirect:/login";
+        return "confirmReset";
 
     }
 
@@ -47,12 +56,17 @@ public class ResetController {
                                     User user) {
 
         if(user.getUsername() != null){
+
             User tokenUser = userJpa.getByUsername(user.getUsername());
+
             tokenUser.setPassword(passwordEncoder.encode(resetForm.getPassword()));
 
             return "redirect:/login";
+
         } else {
+
             log.error("Error: The link is invalid or broken.");
+
         }
             return "redirect:/passwordReset";
     }
