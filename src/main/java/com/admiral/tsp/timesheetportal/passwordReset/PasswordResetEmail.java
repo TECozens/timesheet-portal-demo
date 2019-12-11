@@ -13,6 +13,9 @@ import java.util.Properties;
 public class PasswordResetEmail {
 
     public void passwordResetEmail(User username) throws AddressException, MessagingException, IOException {
+
+        ConfirmationToken confirmationToken = new ConfirmationToken(username);
+
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -29,7 +32,8 @@ public class PasswordResetEmail {
 
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(username.getEmail()));
         msg.setSubject("Forgot Password Request");
-        msg.setContent("Here is your password: " + username.getPassword(), "text/html");
+        msg.setContent("To complete the password reset process, please click here: "
+                + "http://localhost:8080/confirmReset?token=" +confirmationToken.getConfirmationToken(), "text/html");
         msg.setSentDate(new Date());
         Transport.send(msg);
 

@@ -21,7 +21,7 @@ INSERT INTO user (id, username, firstname, surname, email, password)
 VALUES (7,'Kevin','Kevin','Anstead','AnsteadK@Admiral.co.uk',
 '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); # password
 INSERT INTO user(id,username,firstname,surname,email,password)
-VALUES (8,'bob','bobby','bobtastic','mud301160@gmail.com',
+VALUES (8,'bob','bobby','bobtastic','hajiahmadmm@gmail.com',
         '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G');
 
 

@@ -11,8 +11,8 @@
 
         <div class="row mx-auto custom-form">
             <div class="col mx-auto custom-bg">
-                <div id = forgotPasswordDetails>
-                    <form action="#" method="post" th:action="@{/passwordSend}" th:object="${passwordKey}">
+                <div id = resetUserPassword>
+                    <form action="#" method="post" th:action="@{/confirmResetPassword}" th:object="${resetKey}">
 
                         <div class="custom-label">
                             <h3>Please Enter The Details To Reset Password</h3>
@@ -20,7 +20,7 @@
 
                         <div class="form-group custom-label">
                             <label>Username
-                                <input aria-describedby="Enter a Username"
+                                <input aria-describedby="Enter your Username"
                                        class="form-control"
                                        placeholder="Username"
                                        th:field="*{username}"
@@ -31,6 +31,22 @@
                                  th:errors="*{username}"
                                  th:if="${#fields.hasErrors('username')}">
                                 Username Error: Please enter a valid username.
+                            </div>
+                        </div>
+
+                        <div class="form-group custom-label">
+                            <label>password
+                                <input aria-describedby="Enter a new Password"
+                                       class="form-control"
+                                       placeholder="Password"
+                                       th:field="*{password}"
+                                       type="password">
+                            </label>
+
+                            <div class="alert alert-danger"
+                                 th:errors="*{password}"
+                                 th:if="${#fields.hasErrors('password')}">
+                                Password Error: Please enter a valid password.
                             </div>
                         </div>
 
