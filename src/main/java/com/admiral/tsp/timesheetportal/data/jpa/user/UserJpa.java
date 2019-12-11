@@ -15,11 +15,17 @@ public interface UserJpa {
 
     User getByUsername(String username);
 
+    User getEmailByUsername(String username);
+
     List<User> findManagers();
+
+    List<User> findUsers();
 
     List<User> findContractors();
 
     UserRole makeUserRole(UserRole userRole);
 
     List<String> findRoleByUsername(String username);
+
+    void save(User user);
 }
