@@ -67,8 +67,4 @@ public class UserJpaImpl implements UserJpa{
         return userRolesRepository.findRoleByUsername(username);
     }
 
-    @Override
-    public void save(User user) {
-
-    }
 }

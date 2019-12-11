@@ -27,5 +27,4 @@ public interface UserJpa {
 
     List<String> findRoleByUsername(String username);
 
-    void save(User user);
 }
