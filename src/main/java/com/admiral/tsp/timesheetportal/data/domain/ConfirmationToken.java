@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.passwordReset;
+package com.admiral.tsp.timesheetportal.data.domain;
 
 import com.admiral.tsp.timesheetportal.data.domain.User;
 import lombok.Data;

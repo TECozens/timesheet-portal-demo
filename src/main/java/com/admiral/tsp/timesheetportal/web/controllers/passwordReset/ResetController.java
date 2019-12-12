@@ -1,7 +1,10 @@
-package com.admiral.tsp.timesheetportal.passwordReset;
+package com.admiral.tsp.timesheetportal.web.controllers.passwordReset;
 
+import com.admiral.tsp.timesheetportal.data.domain.ConfirmationToken;
 import com.admiral.tsp.timesheetportal.data.domain.User;
+import com.admiral.tsp.timesheetportal.data.jpa.passwordreset.ConfirmationTokenRepository;
 import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.web.forms.passwordreset.ResetForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
