@@ -64,8 +64,9 @@ public class RegistrationController {
 
         List<User> managers = userJpa.findManagers();
         List<Agency> agency = agencyJpa.findAll();
-//        if (userJpa.getByUsername(registrationForm.getUsername()).)
-//        bindingResult.addError();
+        if (userJpa.getByUsername(registrationForm.getUsername()) != null){
+            bindingResult.rejectValue("username", "error.user", "An account already exists for this username.");
+        }
 
         if (bindingResult.hasErrors()) {
 
