@@ -1,10 +1,9 @@
-package com.admiral.tsp.timesheetportal.passwordReset;
+package com.admiral.tsp.timesheetportal.web.controllers.passwordreset;
 
+import com.admiral.tsp.timesheetportal.data.domain.ConfirmationToken;
 import com.admiral.tsp.timesheetportal.data.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.mail.*;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.IOException;
@@ -14,7 +13,7 @@ import java.util.Properties;
 public class PasswordResetEmail {
 
     public void passwordResetEmail(User username, ConfirmationToken confirmationToken)
-            throws AddressException, MessagingException, IOException {
+            throws MessagingException, IOException {
 
 
         Properties props = new Properties();
@@ -34,10 +33,9 @@ public class PasswordResetEmail {
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(username.getEmail()));
         msg.setSubject("Forgot Password Request");
         msg.setContent("To complete the password reset process, please click here: "
-                + "http://localhost:8080/confirmReset?token=" +confirmationToken.getConfirmationToken(), "text/html");
+                + "http://localhost:8080/confirmReset?token=" + confirmationToken.getConfirmationToken(), "text/html");
         msg.setSentDate(new Date());
         Transport.send(msg);
-
 
 
     }

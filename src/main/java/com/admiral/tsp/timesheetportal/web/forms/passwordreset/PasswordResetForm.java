@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.passwordReset;
+package com.admiral.tsp.timesheetportal.web.forms.passwordreset;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
