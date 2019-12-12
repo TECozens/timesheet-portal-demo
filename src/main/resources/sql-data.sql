@@ -1,27 +1,27 @@
 USE tsap;
 INSERT INTO user (id, username, firstname, surname, email, password)
-VALUES (1,'Mo','Muhammad','Ahmad','Mo@Admiral.co.uk',
+VALUES (1,'Mo','Muhammad','Ahmad','HajiAhmadmm@cardiff.ac.uk',
 '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); # password
 INSERT INTO user (id, username, firstname, surname, email, password)
-VALUES (2,'Laura','Laura','Camilleri','CamilleriL@Admiral.co.uk',
+VALUES (2,'Laura','Laura','Camilleri','CamilleriL2@cardiff.ac.uk',
 '{bcrypt}$2a$10$hF/OfRLdgRqSdUyhaezAWe5YzlnSN71dbitw8DGQEBXyI5cp2U5yG'); # ltsp
 INSERT INTO user (id, username, firstname, surname, email, password)
-VALUES (3,'Tomas','Tomas','Cozens','CozensT@Admiral.co.uk',
+VALUES (3,'Tomas','Tomas','Cozens','CozensTE@cardiff.ac.uk',
 '{bcrypt}$2a$10$1qtcvCeJFhq9EdQmWhurn.CVAgslKWug0sAOlJ3Z7HwwDoYcIY5/S'); # tomtsp
 INSERT INTO user (id, username, firstname, surname, email, password)
-VALUES (4,'Tzavier','Tzavier','Randle-Jolliffe','Randle-JolliffeT@Admiral.co.uk',
+VALUES (4,'Tzavier','Tzavier','Randle-Jolliffe','Randle-JolliffeT@Cardiff.ac.uk',
 '{bcrypt}$2a$10$NZNWWhljpNuBnjH9hEDW6OTRlXmZCaFChaWdlA5imyuxPzL/VxjUG'); # tzatsp
 INSERT INTO user (id, username, firstname, surname, email, password)
-VALUES (5,'Carl','Jones','Carl-Jones','Carl-Jones@Admiral.co.uk',
+VALUES (5,'Carl','Jones','Carl-Jones','Randle-JolliffeT@Cardiff.ac.uk',
 '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); # password
 INSERT INTO user (id, username, firstname, surname, email, password)
-VALUES (6,'Reggie','Mikes','Reggie-Mikes','Reggie-Mikes@Admiral.co.uk',
+VALUES (6,'Reggie','Mikes','Reggie-Mikes','Randle-JolliffeT@Cardiff.ac.uk',
 '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); # password
 INSERT INTO user (id, username, firstname, surname, email, password)
-VALUES (7,'Kevin','Kevin','Anstead','AnsteadK@Admiral.co.uk',
+VALUES (7,'Kevin','Kevin','Anstead','Randle-JolliffeT@Cardiff.ac.uk',
 '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); # password
 INSERT INTO user(id,username,firstname,surname,email,password)
-VALUES (8,'bob','bobby','bobtastic','hajiahmadmm@gmail.com',
+VALUES (8,'Robot','Robert','Stone','hajiahmadmm@gmail.com',
         '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G');
 
 
