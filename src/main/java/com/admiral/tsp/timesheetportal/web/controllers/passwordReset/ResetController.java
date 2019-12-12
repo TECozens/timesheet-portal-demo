@@ -2,7 +2,7 @@ package com.admiral.tsp.timesheetportal.web.controllers.passwordReset;
 
 import com.admiral.tsp.timesheetportal.data.domain.ConfirmationToken;
 import com.admiral.tsp.timesheetportal.data.domain.User;
-import com.admiral.tsp.timesheetportal.data.jpa.passwordreset.ConfirmationTokenRepository;
+import com.admiral.tsp.timesheetportal.data.jpa.passwordreset.ConfirmationTokenJpa;
 import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
 import com.admiral.tsp.timesheetportal.web.forms.passwordreset.ResetForm;
 import lombok.extern.slf4j.Slf4j;
@@ -20,19 +20,19 @@ public class ResetController {
 
     private final PasswordEncoder passwordEncoder;
     private final UserJpa userJpa;
-    private final ConfirmationTokenRepository confirmationTokenRepository;
+    private final ConfirmationTokenJpa confirmationTokenJpa;
 
     @Autowired
-    public ResetController(PasswordEncoder passwordEncoder, UserJpa userJpa, ConfirmationTokenRepository confirmationTokenRepository) {
+    public ResetController(PasswordEncoder passwordEncoder, UserJpa userJpa, ConfirmationTokenJpa confirmationTokenJpa) {
         this.passwordEncoder = passwordEncoder;
         this.userJpa = userJpa;
-        this.confirmationTokenRepository = confirmationTokenRepository;
+        this.confirmationTokenJpa = confirmationTokenJpa;
     }
 
     @GetMapping("/confirmReset")
     public String goToConfirmReset(@RequestParam("token") String confirmationToken, Model model) {
 
-        ConfirmationToken token = confirmationTokenRepository.findByConfirmationToken(confirmationToken);
+        ConfirmationToken token = confirmationTokenJpa.findByConfirmationToken(confirmationToken);
 
         if (token != null) {
 

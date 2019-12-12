@@ -2,7 +2,7 @@ package com.admiral.tsp.timesheetportal.web.controllers.passwordReset;
 
 import com.admiral.tsp.timesheetportal.data.domain.ConfirmationToken;
 import com.admiral.tsp.timesheetportal.data.domain.User;
-import com.admiral.tsp.timesheetportal.data.jpa.passwordreset.ConfirmationTokenRepository;
+import com.admiral.tsp.timesheetportal.data.jpa.passwordreset.ConfirmationTokenJpa;
 import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
 import com.admiral.tsp.timesheetportal.web.forms.passwordreset.PasswordResetForm;
 import lombok.extern.slf4j.Slf4j;
@@ -23,12 +23,12 @@ import java.util.List;
 public class PasswordResetController {
 
     private final UserJpa userJpa;
-    private final ConfirmationTokenRepository confirmationTokenRepository;
+    private final ConfirmationTokenJpa confirmationTokenJpa;
 
     @Autowired
-    public PasswordResetController(UserJpa userJpa, ConfirmationTokenRepository confirmationTokenRepository) {
+    public PasswordResetController(UserJpa userJpa, ConfirmationTokenJpa confirmationTokenJpa) {
         this.userJpa = userJpa;
-        this.confirmationTokenRepository = confirmationTokenRepository;
+        this.confirmationTokenJpa = confirmationTokenJpa;
     }
 
     @GetMapping("/passwordReset")
@@ -74,7 +74,7 @@ public class PasswordResetController {
         PasswordResetEmail passwordResetEmail = new PasswordResetEmail();
 
         ConfirmationToken confirmationToken = new ConfirmationToken(userEmail);
-        confirmationTokenRepository.save(confirmationToken);
+        confirmationTokenJpa.saveConfirmationToken(confirmationToken);
         passwordResetEmail.passwordResetEmail(userEmail, confirmationToken);
 
         return "redirect:/login";
