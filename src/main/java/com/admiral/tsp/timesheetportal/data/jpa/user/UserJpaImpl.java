@@ -2,6 +2,8 @@ package com.admiral.tsp.timesheetportal.data.jpa.user;
 
 import com.admiral.tsp.timesheetportal.data.domain.User;
 import com.admiral.tsp.timesheetportal.data.domain.UserRole;
+import com.admiral.tsp.timesheetportal.security.services.UserRepository;
+import com.admiral.tsp.timesheetportal.security.services.UserRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

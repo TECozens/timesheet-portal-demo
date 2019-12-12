@@ -4,9 +4,11 @@ import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
 import com.admiral.tsp.timesheetportal.data.domain.User;
 import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,7 +29,7 @@ public class AdminRestController {
 
 
     @GetMapping(path = "/api/admin/updateManager/{id}/{m_id}")
-    public ResponseEntity<Object> updateManager(@PathVariable("id") Long id, @PathVariable("m_id") Long m_id) {
+    public ResponseEntity<Object> updateManager(@PathVariable("id") Long id, @PathVariable("m_id") Long m_id, Model model) {
 
         User manager = userJpa.getById(m_id);
 

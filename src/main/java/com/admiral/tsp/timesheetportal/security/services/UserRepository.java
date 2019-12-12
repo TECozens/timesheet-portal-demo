@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.data.jpa.user;
+package com.admiral.tsp.timesheetportal.security.services;
 
 import com.admiral.tsp.timesheetportal.data.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;

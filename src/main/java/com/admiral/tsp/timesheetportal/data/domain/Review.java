@@ -11,6 +11,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "review")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "findAllReviewsProcedure",
+                procedureName = "FIND_REVIEW_ALL",
+                resultClasses = {Review.class})
+})
 public class Review {
 
     @Id

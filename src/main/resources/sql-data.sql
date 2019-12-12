@@ -56,3 +56,44 @@ INSERT INTO user_role (userid, role) VALUES (005, 'ROLE_MANAGER');
 INSERT INTO user_role (userid, role) VALUES (006, 'ROLE_MANAGER');
 INSERT INTO user_role (userid, role) VALUES (007, 'ROLE_CONTRACTOR');
 INSERT INTO user_role (userid, role) VALUES (008, 'ROLE_CONTRACTOR');
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIND_AGENCY_ALL`()
+BEGIN
+    SELECT *
+    FROM agency;
+END
+$$
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIND_CONTRACTOR_ALL`()
+BEGIN
+    SELECT *
+    FROM contractor;
+END
+$$
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIND_REVIEW_ALL`()
+BEGIN
+    SELECT *
+    FROM review;
+END
+$$
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIND_TIMESHEET_ALL`()
+BEGIN
+    SELECT *
+    FROM timesheet;
+END
+$$
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `FIND_USER_ALL`()
+BEGIN
+    SELECT *
+    FROM user;
+END
+$$

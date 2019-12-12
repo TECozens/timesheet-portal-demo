@@ -14,6 +14,12 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Entity
 @Table(name = "user")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "findAllUsersProcedure",
+                procedureName = "FIND_USER_ALL",
+                resultClasses = {User.class})
+})
 public class User {
 
     @Id
