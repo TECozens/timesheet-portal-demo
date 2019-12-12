@@ -39,15 +39,15 @@ public class ResetController {
 
             model.addAttribute("resetKey", new ResetForm());
 
-            return "redirect:/confirmResetPassword";
+
+            return "confirmReset";
 
         } else {
 
             log.error("Error: The link is invalid or broken.");
+            return "404";
 
         }
-
-        return "confirmReset";
 
     }
 
@@ -59,7 +59,11 @@ public class ResetController {
 
             User tokenUser = userJpa.getByUsername(user.getUsername());
 
-            tokenUser.setPassword(passwordEncoder.encode(resetForm.getPassword()));
+            userJpa.updatePassword(tokenUser.getId(),passwordEncoder.encode(resetForm.getPassword()));
+            System.out.println(resetForm.getPassword());
+            System.out.println(resetForm.getUsername());
+
+            System.out.println(user.getUsername());
 
             return "redirect:/login";
 

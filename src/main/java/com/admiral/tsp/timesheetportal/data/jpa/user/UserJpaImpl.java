@@ -67,4 +67,10 @@ public class UserJpaImpl implements UserJpa{
         return userRolesRepository.findRoleByUsername(username);
     }
 
+    @Override
+    @Transactional
+    public void updatePassword(Long id, String password) {
+        userRepository.updatePassword(id, password);
+    }
+
 }

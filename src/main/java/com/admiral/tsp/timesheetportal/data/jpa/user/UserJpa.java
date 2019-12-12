@@ -27,4 +27,6 @@ public interface UserJpa {
 
     List<String> findRoleByUsername(String username);
 
+    void updatePassword(Long id, String password);
+
 }

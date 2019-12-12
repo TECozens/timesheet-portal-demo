@@ -1,6 +1,7 @@
 package com.admiral.tsp.timesheetportal.passwordReset;
 
 import com.admiral.tsp.timesheetportal.data.domain.User;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.mail.*;
 import javax.mail.internet.AddressException;
@@ -12,9 +13,9 @@ import java.util.Properties;
 
 public class PasswordResetEmail {
 
-    public void passwordResetEmail(User username) throws AddressException, MessagingException, IOException {
+    public void passwordResetEmail(User username, ConfirmationToken confirmationToken)
+            throws AddressException, MessagingException, IOException {
 
-        ConfirmationToken confirmationToken = new ConfirmationToken(username);
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");

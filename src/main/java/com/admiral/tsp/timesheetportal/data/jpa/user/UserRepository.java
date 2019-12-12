@@ -2,6 +2,7 @@ package com.admiral.tsp.timesheetportal.data.jpa.user;
 
 import com.admiral.tsp.timesheetportal.data.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -22,4 +23,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findUsers();
     @Query("SELECT u FROM User u, UserRole a WHERE a.role = 'ROLE_CONTRACTOR' AND u.id = a.userid")
     List<User> findByContractorRole();
+
+    @Modifying(clearAutomatically = true)
+    @Query("UPDATE User u SET u.password = :password WHERE u.id = :id")
+    void updatePassword(@Param("id") Long id, @Param("password") String password);
 }

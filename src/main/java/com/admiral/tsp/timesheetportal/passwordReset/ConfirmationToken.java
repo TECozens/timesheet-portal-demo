@@ -1,12 +1,15 @@
 package com.admiral.tsp.timesheetportal.passwordReset;
 
 import com.admiral.tsp.timesheetportal.data.domain.User;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.UUID;
 
+@Data
 @Entity
+@Table(name = "confirmation_token")
 public class ConfirmationToken {
 
     @Id
@@ -17,6 +20,7 @@ public class ConfirmationToken {
     @Column(name = "confirmation_token")
     private String confirmationToken;
 
+    @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdDate;
 

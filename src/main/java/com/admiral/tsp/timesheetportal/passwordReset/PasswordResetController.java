@@ -21,10 +21,12 @@ import java.util.List;
 public class PasswordResetController {
 
     private final UserJpa userJpa;
+    private final ConfirmationTokenRepository confirmationTokenRepository;
 
     @Autowired
-    public PasswordResetController(UserJpa userJpa) {
+    public PasswordResetController(UserJpa userJpa, ConfirmationTokenRepository confirmationTokenRepository) {
         this.userJpa = userJpa;
+        this.confirmationTokenRepository = confirmationTokenRepository;
     }
 
     @GetMapping("/passwordReset")
@@ -71,7 +73,9 @@ public class PasswordResetController {
 
         PasswordResetEmail passwordResetEmail = new PasswordResetEmail();
 
-        passwordResetEmail.passwordResetEmail(userEmail);
+        ConfirmationToken confirmationToken = new ConfirmationToken(userEmail);
+        confirmationTokenRepository.save(confirmationToken);
+        passwordResetEmail.passwordResetEmail(userEmail, confirmationToken);
 
         return "redirect:/login";
 
