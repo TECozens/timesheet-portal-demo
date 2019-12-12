@@ -1,7 +1,7 @@
-package com.admiral.tsp.timesheetportal.passwordReset;
+package com.admiral.tsp.timesheetportal.web.controllers.passwordReset;
 
+import com.admiral.tsp.timesheetportal.data.domain.ConfirmationToken;
 import com.admiral.tsp.timesheetportal.data.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.mail.*;
 import javax.mail.internet.AddressException;
