@@ -2,6 +2,7 @@ package com.admiral.tsp.timesheetportal.data.jpa.contractor;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
 import com.admiral.tsp.timesheetportal.data.domain.User;
+import com.admiral.tsp.timesheetportal.services.ContractorRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,5 +57,10 @@ public class ContractorJpaImpl implements ContractorJpa {
     @Override
     public List<Contractor> getAll() {
         return contractorRepository.getAllContractor();
+    }
+
+    @Override
+    public List<Contractor> getManagerContractors(User manager) {
+        return contractorRepository.getManagerContractors(manager);
     }
 }

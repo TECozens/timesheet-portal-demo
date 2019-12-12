@@ -13,6 +13,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor;
+import org.springframework.web.servlet.support.RequestDataValueProcessor;
 
 @Configuration
 @EnableWebSecurity
@@ -47,11 +49,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/Invoices").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/ManageRoles").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/register").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/newUser").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/createUser").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/registerAgency").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/newAgency").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/createAgency").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/ManageRoles/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/contractorList/*").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/contractor_view").access("hasRole('ROLE_CONTRACTOR')")
+                .antMatchers("/api/admin/**").access("hasRole('ROLE_ADMIN')")
+
+                .antMatchers("/contractorView").access("hasRole('ROLE_CONTRACTOR')")
+                .antMatchers("/createTimeSheet").access("hasRole('ROLE_CONTRACTOR')")
+                .antMatchers("/newTimeSheet").access("hasRole('ROLE_CONTRACTOR')")
+
                 .antMatchers("/Approvals").access("hasRole('ROLE_MANAGER')")
+                .antMatchers("/Contractors").access("hasRole('ROLE_MANAGER')")
+                .antMatchers("/api/timeSheets/**").access("hasRole('ROLE_MANAGER')")
+                .antMatchers("/newApproveReview/*").access("hasRole('ROLE_MANAGER')")
+                .antMatchers("/createReview").access("hasRole('ROLE_MANAGER')")
+                .antMatchers("/newRejectedReview/*").access("hasRole('ROLE_MANAGER')")
+                .antMatchers("/createRejectedReview").access("hasRole('ROLE_MANAGER')")
+
                 .antMatchers("/h2_console/**").permitAll()
                 .antMatchers("/").permitAll()
                 //.anyRequest().authenticated()
@@ -94,11 +112,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-//
-//    @Bean
-//    public RequestDataValueProcessor requestDataValueProcessor() {
-//        return new CsrfRequestDataValueProcessor();
-//    }
+
+    @Bean
+    public RequestDataValueProcessor aRequestDataValueProcessor() {
+        return new CsrfRequestDataValueProcessor();
+    }
 
 
 }

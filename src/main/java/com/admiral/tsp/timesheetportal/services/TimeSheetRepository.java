@@ -1,6 +1,7 @@
-package com.admiral.tsp.timesheetportal.data.jpa.timesheet;
+package com.admiral.tsp.timesheetportal.services;
 
 import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
+import com.admiral.tsp.timesheetportal.data.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -17,4 +18,14 @@ public interface TimeSheetRepository extends JpaRepository<TimeSheet, Long> {
 
     @Query("SELECT t FROM TimeSheet t")
     List<TimeSheet> getAllTimeSheets();
+
+    @Query("SELECT t FROM TimeSheet t WHERE t NOT IN (SELECT r.timeSheet FROM Review r)")
+    List<TimeSheet> getUnreviewed();
+
+    @Query("SELECT t FROM TimeSheet t WHERE t.contractor.manager = :manager")
+    List<TimeSheet> getByManager(@Param("manager") User manager);
+
+    @Query("SELECT t FROM TimeSheet t WHERE t.contractor.manager = :manager " +
+            "AND t NOT IN (SELECT r.timeSheet FROM Review r)")
+    List<TimeSheet> getUnreviewedByManager(@Param("manager") User manager);
 }

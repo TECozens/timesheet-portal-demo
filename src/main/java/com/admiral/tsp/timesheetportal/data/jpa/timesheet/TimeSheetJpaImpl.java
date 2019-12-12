@@ -1,6 +1,8 @@
 package com.admiral.tsp.timesheetportal.data.jpa.timesheet;
 
 import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
+import com.admiral.tsp.timesheetportal.data.domain.User;
+import com.admiral.tsp.timesheetportal.services.TimeSheetRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,6 +43,21 @@ public class TimeSheetJpaImpl implements TimeSheetJpa {
     @Override
     public List<TimeSheet> getAll() {
         return timesheetRepository.getAllTimeSheets();
+    }
+
+    @Override
+    public List<TimeSheet> getUnreviewed() {
+        return timesheetRepository.getUnreviewed();
+    }
+
+    @Override
+    public List<TimeSheet> getByManager(User manager) {
+        return timesheetRepository.getByManager(manager);
+    }
+
+    @Override
+    public List<TimeSheet> getUnreviewedByManager(User manager) {
+        return timesheetRepository.getUnreviewedByManager(manager);
     }
 
 }

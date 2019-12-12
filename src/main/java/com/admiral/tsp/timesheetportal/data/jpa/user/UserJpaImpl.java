@@ -57,6 +57,11 @@ public class UserJpaImpl implements UserJpa{
     }
 
     @Override
+    public List<User> findAdmins(){return userRepository.findByAdminRole();
+    }
+
+
+    @Override
     @Transactional
     public UserRole makeUserRole(UserRole userRole) {
         return userRolesRepository.saveAndFlush(userRole);

@@ -16,8 +16,7 @@
                     <form method="post" th:action="@{/logout}">
                         <label class="custom-label">
                             <h3>
-                                Welcome back:
-                                <div sec:authentication="name"></div>
+                                Page not found. Please use the menu dropdown.
                             </h3>
                         </label>
 
@@ -28,6 +27,11 @@
                 </div>
 
                 <div sec:authorize="!isAuthenticated()">
+                    <label class="custom-label">
+                        <h3>
+                            Page not found. Please login and use the menu.
+                        </h3>
+                    </label>
                     <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
                        th:href="@{/login}">Login</a>
                 </div>

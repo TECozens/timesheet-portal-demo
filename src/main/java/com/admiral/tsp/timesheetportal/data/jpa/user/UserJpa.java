@@ -23,6 +23,8 @@ public interface UserJpa {
 
     List<User> findContractors();
 
+    List<User>findAdmins();
+
     UserRole makeUserRole(UserRole userRole);
 
     List<String> findRoleByUsername(String username);

@@ -4,6 +4,8 @@ import com.admiral.tsp.timesheetportal.data.domain.Contractor;
 import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
 import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
 import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
+import com.admiral.tsp.timesheetportal.web.controllers.email.EmailAdmin;
+import com.admiral.tsp.timesheetportal.web.controllers.email.EmailManager;
 import com.admiral.tsp.timesheetportal.web.forms.timesheet.TimeSheetForm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Slf4j
 @Controller
@@ -59,7 +63,7 @@ public class TimeSheetCreateController {
 
     @GetMapping("/createTimeSheet")
     public String submitTimeSheet(@ModelAttribute("TimeSheetKey") TimeSheetForm timeSheetForm,
-                                        RedirectAttributes model) {
+                                        RedirectAttributes model) throws IOException, MessagingException {
 
         Authentication a = SecurityContextHolder.getContext().getAuthentication();
 
@@ -84,9 +88,14 @@ public class TimeSheetCreateController {
 
 
         timesheetJpa.makeTimeSheet(newTimeSheet);
-
         log.info("Here is the timeSheet going into DB" + newTimeSheet.toString());
         model.addFlashAttribute("aTimeSheet", newTimeSheet);
+
+
+        EmailManager emailManager = new EmailManager();
+        emailManager.sendManagerMail(thisContractor.getManager());
+
+
         return "redirect:/contractorView";
     }
 

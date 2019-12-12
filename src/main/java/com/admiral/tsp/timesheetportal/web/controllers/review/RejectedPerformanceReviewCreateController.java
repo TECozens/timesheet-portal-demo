@@ -2,6 +2,7 @@ package com.admiral.tsp.timesheetportal.web.controllers.review;
 
 import com.admiral.tsp.timesheetportal.data.domain.Review;
 import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
+import com.admiral.tsp.timesheetportal.web.controllers.email.EmailContractorRejection;
 import com.admiral.tsp.timesheetportal.web.forms.review.RejectionReviewForm;
 import com.admiral.tsp.timesheetportal.data.jpa.review.ReviewJpa;
 import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
@@ -12,7 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Optional;
 
 @Slf4j
@@ -31,7 +35,7 @@ public class RejectedPerformanceReviewCreateController {
 
 
     //       Review Form Displayed on Contractor Page
-    @PostMapping("/newRejectedReview/{id}")
+    @GetMapping("/newRejectedReview/{id}")
     public String approveReviewDetails(@PathVariable("id") Long id,
                                        Model model) {
 
@@ -44,14 +48,13 @@ public class RejectedPerformanceReviewCreateController {
 
         model.addAttribute("RejectedReviewDetails", rejectionReviewForm);
         return "review_reject";
-    }
-
+        }
 
 
     @PostMapping("/createRejectedReview")
     public String submitRejectReview(@Valid @ModelAttribute("RejectedReviewDetails")
                                                   RejectionReviewForm rejectionReviewForm,
-                                      BindingResult bindingResult, Model model) {
+                                      BindingResult bindingResult, Model model) throws IOException, MessagingException {
 
 
         if (bindingResult.hasErrors()){
@@ -59,6 +62,7 @@ public class RejectedPerformanceReviewCreateController {
 
             model.addAttribute("RejectedReviewDetails", rejectionReviewForm);
             return "review_reject";
+
         }
 
         Review newReview = new Review( null,
@@ -76,10 +80,13 @@ public class RejectedPerformanceReviewCreateController {
         );
 
         reviewJpa.makeReview(newReview);
-
         log.info("Here is the review going into DB" + newReview.toString());
+
+        EmailContractorRejection emailContractorRejection = new EmailContractorRejection();
+        emailContractorRejection.sendContractorMail(rejectionReviewForm.getTimesheet().getContractor());
 
         return "redirect:/Reviews";
     }
 
 }
+

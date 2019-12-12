@@ -19,13 +19,13 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label>Agency Name
-                                <input aria-describedby="Enter an Agency."
-                                       class="form-control"
-                                       placeholder="Agency"
-                                       th:field="*{name}"
-                                       type="text">
-                            </label>
+                            <label for="name">Agency Name</label>
+                            <input aria-describedby="Enter an Agency."
+                                   id="name"
+                                   class="form-control"
+                                   placeholder="Agency"
+                                   th:field="*{name}"
+                                   type="text">
 
                             <div class="alert alert-danger"
                                  th:errors="*{name}"
@@ -35,13 +35,13 @@
                         </div>
 
                         <div class="form-group custom-label">
-                            <label>Email
-                                <input aria-describedby="Enter an Email"
-                                       class="form-control"
-                                       placeholder="Email"
-                                       th:field="*{email}"
-                                       type="text">
-                            </label>
+                            <label for="email">Email</label>
+                            <input aria-describedby="Enter an Email"
+                                   id="email"
+                                   class="form-control"
+                                   placeholder="Email"
+                                   th:field="*{email}"
+                                   type="text">
 
                             <div class="alert alert-danger"
                                  th:errors="*{email}"
@@ -51,9 +51,9 @@
                         </div>
 
                         <div class="row mt-4">
-                            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-
-                            <input class="btn btn-lg btn-primary btn-block custom-btn" id="submit" type="submit"
+                            <input class="btn btn-lg btn-primary
+                                          btn-block custom-btn"
+                                   id="submit" type="submit"
                                    value="Submit Agency Registration Form"/>
                         </div>
 
