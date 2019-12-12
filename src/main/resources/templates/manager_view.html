@@ -13,58 +13,67 @@
     <div class="row mx-auto custom-form">
     <div class="col mx-auto custom-bg">
 
-        <div id=missingTimeSheetMessage th:if="${TimesheetKey}==  null">
-            <div>No matching Time Sheets</div>
+        <div class="row mt-4 custom-label"
+             id=missingTimeSheetMessage
+             th:if="${TimesheetKey.isEmpty()}">
+            <h4>No matching Time Sheets</h4>
         </div>
 
 
-        <div class="row mt-4 custom-label">
+        <div class="row mt-4 custom-label" th:if="${!TimesheetKey.isEmpty()}">
             <h4 th:text="'Contractor Time Sheets'"></h4>
         </div>
 
-        <div class="custom-form">
+        <div class="custom-form" th:if="${!TimesheetKey.isEmpty()}">
             <div class="mx-3 custom-bg scrolling-wrapper">
-            <table class="table table-light" id="timeSheetInfo">
+            <table class="table table-light"
+                   style="table-layout: fixed; width: 95%"
+                   id="timeSheetInfo">
                 <thead>
                 <tr>
-                    <th scope="col">
+                    <th scope="col" class="shorter-header">
                         <label for="nameSearch">Name</label>
                         <input class="small-input searcher"
                                type="text" id="nameSearch"
                                onkeyup="filterResults()"
                                placeholder="Name">
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="shorter-header">
                         <label for="agencySearch">Agency</label>
                         <input class="small-input searcher"
                                type="text" id="agencySearch"
                                onkeyup="filterResults()"
                                placeholder="Agency">
                     </th>
-                    <th scope="col">
+                    <th scope="col" class="tiny-header">
                         <label for="daysWorkedSearch">Days Worked</label>
                         <input class="tiny-input searcher"
                                type="text" pattern="/d*"
                                id="daysWorkedSearch"
                                onkeyup="filterResults()">
                     </th>
-                        <th scope="col"><label for="OverTimeSearch">Over Time</label>
+                        <th scope="col" class="tiny-header">
+                        <label for="OverTimeSearch">Over Time Hours</label>
                         <input class="tiny-input searcher"
                                type="text" id="OverTimeSearch"
                                onkeyup="filterResults()">
                     </th>
-                    <th scope="col">
-                        <label for="weekFinishedSearch">Week Finished</label>
-                        <input class="date-input searcher"
-                               type="text" id="weekFinishedSearch"
-                               onkeyup="filterResults()"
-                               placeholder="YYYY-MM-DD">
+
+                    <th scope="col" class="searcher dates date-header">
+                        <label for="start-date-selector">From:</label>
+                        <input type="date" class="date-picker date-input" min="1997-01-05"
+                               step="7" id="start-date-selector"
+                               onchange="filterResults()">
+                        <label for="end-date-selector">To:</label>
+                        <input type="date" class="date-picker date-input" min="1997-01-05"
+                               step="7" id="end-date-selector"
+                               onchange="filterResults()">
                     </th>
                 </tr>
                 </thead>
 
                 <tbody>
-                <tr th:each="Timesheet: ${TimesheetKey}"
+                <tr th:each="Timesheet: ${TimesheetKey}" class="wrap"
                     th:id="'TimesheetItem' + ${Timesheet.id}">
 
                     <td> <span th:text="${Timesheet.contractor.user.firstname}
@@ -110,6 +119,8 @@
 
         let td;
         let filter;
+        let txtValue;
+        let search_input;
         for (let i = 0; i < tr.length; i++) {
 
 
@@ -121,14 +132,25 @@
                 td = row.getElementsByTagName("td")[iter];
                 if (td) {
 
-                    filter = search_items[iter].value.toUpperCase();
-                    let txtValue;
+                    search_input = search_items[iter];
                     txtValue = td.textContent || td.innerText;
 
-                    if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {
-                        tr[i].style.display = "none";
-                    }
+                    if (search_input.classList.contains("dates")){
+                        dates = search_input.getElementsByTagName("input");
+                        startDate = dates[0].valueAsDate;
+                        endDate = dates[1].valueAsDate;
+                        parsedDate = Date.parse(txtValue);
+                        if ((startDate > parsedDate && startDate != null)
+                            || (parsedDate > endDate && endDate != null)) {
+                            tr[i].style.display = "none";
+                        }
 
+                    } else {
+                        filter = search_input.value.toUpperCase();
+                        if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {
+                            tr[i].style.display = "none";
+                        }
+                    }
                 }
             }
 

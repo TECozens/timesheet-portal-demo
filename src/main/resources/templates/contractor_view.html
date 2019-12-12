@@ -38,15 +38,13 @@
 
                     <div class="form-group custom-label">
 
-                        <label for="daysWorked">Days Worked
-
-                            <input aria-describedby="Enter how many days you have worked."
-                                   id="daysWorked"
-                                   class="form-control"
-                                   placeholder="Days Worked"
-                                   th:field="*{days_worked}"
-                                   type="number" pattern="/d*"/>
-                        </label>
+                        <label for="daysWorked">Days Worked</label>
+                        <input aria-describedby="Enter how many days you have worked."
+                               id="daysWorked"
+                               class="form-control"
+                               placeholder="Days Worked"
+                               th:field="*{days_worked}"
+                               type="number" pattern="/d*"/>
 
                         <div class="alert alert-danger"
                              th:errors="*{days_worked}"
@@ -58,14 +56,13 @@
 
 
                     <div class="form-group custom-label">
-                        <label th:for="overtime_completed">Overtime Completed
+                        <label th:for="overtime_completed">Overtime Hours Completed</label>
 
-                            <input aria-describedby="Enter the amount of overtime completed."
-                                   class="form-control"
-                                   placeholder="Overtime Completed"
-                                   th:field="*{overtime_completed}"
-                                   type="number" pattern="/d*"/>
-                        </label>
+                        <input aria-describedby="Enter the amount of overtime completed."
+                               class="form-control"
+                               placeholder="Overtime Completed"
+                               th:field="*{overtime_completed}"
+                               type="number" pattern="/d*"/>
 
                         <div class="alert alert-danger"
                              th:errors="*{overtime_completed}"

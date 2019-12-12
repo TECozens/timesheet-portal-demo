@@ -13,21 +13,25 @@
 <div class="row mx-auto custom-form">
     <div class="col mx-auto custom-bg">
 
-    <div id=missingTimeSheetMessage th:if="${Reviews.isEmpty()}">
-        <div>No matching Invoices</div>
+    <div class="row mt-4 custom-label"
+         id="missingInvoicesMessage"
+         th:if="${Reviews.isEmpty()}">
+        <h4>No remaining Invoices</h4>
     </div>
 
 
-    <div class="row mt-4 custom-label">
+    <div class="row mt-4 custom-label" th:if="${!Reviews.isEmpty()}">
         <h4 th:text="'Invoices'"></h4>
     </div>
 
-    <div class="custom-form" th:if="${!Reviews.isEmpty()}">
+    <div class="custom-form reduced" th:if="${!Reviews.isEmpty()}">
         <div class="mx-3 custom-bg scrolling-wrapper">
-        <table class="table table-light" id="reviews">
+        <table class="table table-light"
+               style="table-layout: fixed; width: 95%"
+               id="reviews">
             <thead>
                 <tr>
-                <th scope="col">
+                <th scope="col" class="shorter-header">
                     <label for="nameSearch">Name</label>
                     <input class="small-input searcher"
                            type="text" id="nameSearch"
@@ -35,7 +39,7 @@
                            placeholder="Name">
                 </th>
 
-                <th scope="col">
+                <th scope="col" class="shorter-header">
                     <label for="agencySearch">Agency</label>
                     <input class="small-input searcher"
                            type="text" id="agencySearch"
@@ -43,15 +47,15 @@
                            placeholder="Agency">
                 </th>
 
-                <th scope="col">
+                <th scope="col" class="shorter-header">
                     <label for="agencyEmailSearch">Agency Email</label>
                     <input class="small-input searcher"
                            type="text" id="agencyEmailSearch"
                            onkeyup="filterResults()"
-                           placeholder="agency@email.com">
+                           placeholder="Agency email">
                 </th>
 
-                <th scope="col">
+                <th scope="col" class="tiny-header">
                     <label for="daysWorkedSearch">Days Worked</label>
                     <input class="tiny-input searcher"
                            type="text" pattern="/d*"
@@ -60,8 +64,8 @@
                            placeholder="">
                 </th>
 
-                <th scope="col">
-                    <label for="overTimeSearch">Over Time</label>
+                <th scope="col" class="tiny-header">
+                    <label for="overTimeSearch">Over Time Hours</label>
                     <input class="tiny-input searcher"
                            type="text" pattern="/d*"
                            id="overTimeSearch"
@@ -69,34 +73,21 @@
                            placeholder="">
                 </th>
 
-                <th scope="col">
-                    <label for="weekFinishedSearch">Week End Date</label>
-                    <input class="date-input searcher"
-                           type="text" id="weekFinishedSearch"
-                           onkeyup="filterResults()"
-                           placeholder="YYYY-MM-DD">
-                </th>
-
-                <th scope="col">
-                    <label for="reviewSearch">Reviewed</label>
-                    <input class="tiny-input searcher"
-                           type="text" id="reviewSearch"
-                           onkeyup="filterResults()"
-                           placeholder="Approved"/>
-                </th>
-
-                <th scope="col">
-                    <label for="paidSearch">Paid</label>
-                    <input class="tiny-input searcher"
-                           type="text" id="paidSearch"
-                           onkeyup="filterResults()"
-                           placeholder="true"/>
+                <th scope="col" class="searcher dates short-header">
+                    <label for="start-date-selector">From:</label>
+                    <input type="date" class="date-picker date-input short-date" min="1997-01-05"
+                           step="7" id="start-date-selector"
+                           onchange="filterResults()">
+                    <label for="end-date-selector">To:</label>
+                    <input type="date" class="date-picker date-input short-date" min="1997-01-05"
+                           step="7" id="end-date-selector"
+                           onchange="filterResults()">
                 </th>
 
                 </tr>
             </thead>
             <tbody>
-            <tr th:each="ReviewItem: ${Reviews}" class="notSaved"
+            <tr th:each="ReviewItem: ${Reviews}" class="notSaved wrap"
                 th:id="'reviewItem' + ${ReviewItem.id}">
 
                 <td><span th:text="${ReviewItem.timeSheet.contractor.user.firstname}
@@ -106,8 +97,6 @@
                 <td><span th:text="${ReviewItem.timeSheet.daysWorked}"></span></td>
                 <td><span th:text="${ReviewItem.timeSheet.overtime}"></span></td>
                 <td><span th:text="${ReviewItem.timeSheet.week_finish}"></span></td>
-                <td><span th:text="${ReviewItem.approved}"></span></td>
-                <td><span th:text="${ReviewItem.paid}"></span></td>
                 <td>
                     <button class="btn btn-success" id="approve"
                             th:onclick="|sendApproval(${ReviewItem.id})|">
@@ -140,6 +129,7 @@
         let td;
         let filter;
         let txtValue;
+        let search_input;
         for (let i = 0; i < tr.length; i++) {
 
 
@@ -153,11 +143,25 @@
                 td = row.getElementsByTagName("td")[iter];
                 if (td) {
 
-                    filter = search_items[iter].value.toUpperCase();
+                    search_input = search_items[iter];
                     txtValue = td.textContent || td.innerText;
 
-                    if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {
-                        tr[i].style.display = "none";
+                    if (search_input.classList.contains("dates")) {
+                        dates = search_input.getElementsByTagName("input");
+                        startDate = dates[0].valueAsDate;
+                        endDate = dates[1].valueAsDate;
+                        parsedDate = Date.parse(txtValue);
+                        if ((startDate > parsedDate && startDate != null)
+                            || (parsedDate > endDate && endDate != null)) {
+                            tr[i].style.display = "none";
+                        }
+
+                    } else {
+                        filter = search_input.value.toUpperCase();
+
+                        if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {
+                            tr[i].style.display = "none";
+                        }
                     }
 
                 }

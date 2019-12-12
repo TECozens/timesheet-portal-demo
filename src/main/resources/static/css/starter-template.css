@@ -63,8 +63,28 @@ body {
     width: 150px;
 }
 
+.date-header{
+    width: 170px;
+}
+
+.short-date {
+    width: 110px;
+}
+
+.short-header{
+    width: 130px;
+}
+.shorten {
+    width: 70px;
+}
+.shorter-header {
+    width: auto;
+}
 .tiny-input {
     width: 50px;
+}
+.tiny-header{
+    width: 70px;
 }
 
 .scrolling-wrapper {
@@ -76,6 +96,14 @@ body {
 
 }
 
+
+.reduced *{
+    font-size: 96%;
+}
+.wrap * {
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
 @media (min-width: 768px) {
     .container-fluid>.navbar-header,
     .container>.navbar-header {

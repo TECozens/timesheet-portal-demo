@@ -15,5 +15,6 @@ public interface ContractorJpa {
     Optional<Contractor> getByUser(User user);
     void updateContractor(User manager, Long c_id);
     List<Contractor> getAll();
+    List<Contractor> getManagerContractors(User manager);
 
 }
