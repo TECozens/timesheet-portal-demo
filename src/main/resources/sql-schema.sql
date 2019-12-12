@@ -89,3 +89,16 @@ CREATE TABLE IF NOT EXISTS `user_role`
     PRIMARY KEY (`id`)
 )
     ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `user`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `confirmation_token`
+(
+    `token_id`       int(11)      NOT NULL AUTO_INCREMENT,
+    `confirmation_token` VARCHAR(100),
+    `created` DATE,
+    `user_id` int(11),
+    PRIMARY KEY (`token_id`)
+)
+    ENGINE = InnoDB;

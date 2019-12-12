@@ -20,6 +20,9 @@ VALUES (6,'Reggie','Mikes','Reggie-Mikes','Reggie-Mikes@Admiral.co.uk',
 INSERT INTO user (id, username, firstname, surname, email, password)
 VALUES (7,'Kevin','Kevin','Anstead','AnsteadK@Admiral.co.uk',
 '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G'); # password
+INSERT INTO user(id,username,firstname,surname,email,password)
+VALUES (8,'bob','bobby','bobtastic','hajiahmadmm@gmail.com',
+        '{bcrypt}$2a$10$B188I9BfwGLsWGU9eF4wPOV6O6z.MgEbNxcErNEKb8xwM.4ChBT7G');
 
 
 
@@ -52,3 +55,4 @@ INSERT INTO user_role (userid, role) VALUES (004, 'ROLE_ADMIN');
 INSERT INTO user_role (userid, role) VALUES (005, 'ROLE_MANAGER');
 INSERT INTO user_role (userid, role) VALUES (006, 'ROLE_MANAGER');
 INSERT INTO user_role (userid, role) VALUES (007, 'ROLE_CONTRACTOR');
+INSERT INTO user_role (userid, role) VALUES (008, 'ROLE_CONTRACTOR');

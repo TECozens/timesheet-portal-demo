@@ -37,8 +37,18 @@ public class UserJpaImpl implements UserJpa{
     }
 
     @Override
+    public User getEmailByUsername(String username) {
+        return userRepository.getEmailByUsername(username);
+    }
+
+    @Override
     public List<User> findManagers() {
         return userRepository.findByManagerRole();
+    }
+
+    @Override
+    public List<User> findUsers() {
+        return userRepository.findUsers();
     }
 
     @Override
@@ -61,4 +71,11 @@ public class UserJpaImpl implements UserJpa{
     public List<String> findRoleByUsername(String username) {
         return userRolesRepository.findRoleByUsername(username);
     }
+
+    @Override
+    @Transactional
+    public void updatePassword(Long id, String password) {
+        userRepository.updatePassword(id, password);
+    }
+
 }
