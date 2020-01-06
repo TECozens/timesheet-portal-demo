@@ -269,50 +269,6 @@ BEFORE INSERT ON user FOR EACH ROW
 	END$$
 DELIMITER ;
 
--- Stored procedure, trigger and error handling for new user --
-
-DROP PROCEDURE IF EXISTS validate_user;
-
-DELIMITER $$
-CREATE PROCEDURE validate_user(
-	IN username VARCHAR(45),
-	IN firstname VARCHAR(45),
-	IN surname VARCHAR(45),
-	IN email VARCHAR(50),
-	IN password VARCHAR (100)
-)
-DETERMINISTIC
-NO SQL
-BEGIN
-		IF username = null THEN
-			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Must have a username';
-		END IF;
-		IF NOT (SELECT email REGEXP '$[A-Z0-9._%-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$') THEN
-			SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Wrong email';
-		END IF;
-	END $$
-DELIMITER ;
-
-DROP TRIGGER IF EXISTS validate_user_insert;
-
-DELIMITER $$
-CREATE TRIGGER validate_user_insert
-BEFORE INSERT ON user FOR EACH ROW
-BEGIN
-	CALL validate_user(NEW.username, NEW.firstname, NEW.surname, NEW.email, NEW.password);
-END $$
-DELIMITER ;
-
-DROP TRIGGER IF EXISTS validate_user_update;
-
-DELIMITER $$
-CREATE TRIGGER validate_user_update
-BEFORE UPDATE ON user FOR EACH ROW
-BEGIN
-	CALL validate_user(NEW.username, NEW.firstname, NEW.surname, NEW.email, NEW.password);
-END $$
-DELIMITER ;
-
 -- Function to find how many users there are in the system --
 
 DROP FUNCTION IF EXISTS numberOfUsers;
