@@ -1,7 +1,7 @@
 package com.admiral.tsp.timesheetportal.services;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
-import com.admiral.tsp.timesheetportal.security.data.domain.User;
+import com.admiral.tsp.timesheetportal.data.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -29,6 +29,9 @@ public interface ContractorRepository extends JpaRepository<Contractor, Long> {
 
     @Query("SELECT c FROM Contractor c")
     List<Contractor> getAllContractor();
+
+    @Query("SELECT c FROM Contractor c WHERE c.manager = :manager")
+    List<Contractor> getManagerContractors(@Param("manager") User manager);
 
 
 }

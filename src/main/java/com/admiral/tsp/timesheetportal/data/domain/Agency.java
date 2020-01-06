@@ -12,6 +12,12 @@ import javax.validation.constraints.Email;
 @NoArgsConstructor
 @Entity
 @Table(name = "agency")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "findAllAgencyProcedure",
+                procedureName = "FIND_AGENCY_ALL",
+                resultClasses = {Agency.class})
+})
 public class Agency {
 
     @Id

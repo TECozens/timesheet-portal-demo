@@ -12,8 +12,14 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class
-Timesheet {
+@Table(name = "timesheet")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "findAllTimesheetsProcedure",
+                procedureName = "FIND_TIMESHEET_ALL",
+                resultClasses = {TimeSheet.class})
+})
+public class TimeSheet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

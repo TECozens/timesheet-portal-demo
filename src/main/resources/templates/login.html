@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 
@@ -14,6 +14,7 @@
             <div class="col mx-auto custom-bg">
 
                 <form method="post" th:action="@{/login}">
+<!--<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>-->
 
                     <div class="custom-label" th:if="${param.error}">
                         Invalid username and password.
@@ -25,27 +26,36 @@
 
 
                     <div class="row mt-4 custom-label">
-                        <label class="custom-font">User Name:</label>
-                        <input class="form-control" name="username" type="text" required/>
+                        <label class="custom-font"
+                               for="username">
+                            User Name:
+                        </label>
+                        <input id="username"
+                               class="form-control"
+                               name="username"
+                               type="text"
+                               required="required"/>
                     </div>
 
                     <div class="row mt-4 custom-label">
-                        <label class="custom-font">Password:</label>
-                        <input class="form-control" name="password" type="password" required/>
+                        <label class="custom-font"
+                               for="password">
+                            Password:
+                        </label>
+                        <input class="form-control"
+                               name="password"
+                               id="password"
+                               type="password"
+                               required="required"/>
                     </div>
 
 
                     <div class="row mt-4">
-                        <input class="btn btn-lg btn-primary btn-block text-uppercase custom-btn" type="submit"
-                               value="Sign In"/>
 
-<!--                        <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"-->
-<!--                           th:href="@{/register}"-->
-<!--                           th:id="register">Register</a>-->
+                        <input class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
+                               type="submit" value="Sign In"/>
+                        <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn" th:href="@{/passwordReset}">Forgot Password</a>
 
-<!--                        <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"-->
-<!--                           th:href="@{/registerAgency}"-->
-<!--                           th:id="registerAgency">Register Agency</a>-->
                     </div>
 
                 </form>

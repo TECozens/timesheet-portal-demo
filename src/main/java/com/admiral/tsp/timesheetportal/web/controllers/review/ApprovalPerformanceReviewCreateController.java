@@ -1,11 +1,12 @@
 package com.admiral.tsp.timesheetportal.web.controllers.review;
 
 import com.admiral.tsp.timesheetportal.data.domain.Review;
+import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
+import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.web.controllers.email.EmailAdmin;
 import com.admiral.tsp.timesheetportal.web.forms.review.ApprovalReviewForm;
 import com.admiral.tsp.timesheetportal.data.jpa.review.ReviewJpa;
-import com.admiral.tsp.timesheetportal.services.ReviewRepository;
-import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
-import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimesheetJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,65 +14,53 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Optional;
 
 @Slf4j
 @Controller
-@SessionAttributes({"TimesheetKey"})
+@SessionAttributes({"TimeSheetKey"})
 public class ApprovalPerformanceReviewCreateController {
 
-    @Autowired
-    private TimesheetJpa timesheetJpa;
-    @Autowired
-    private ReviewJpa reviewJpa;
-    @Autowired
-    ReviewRepository reviewRepository;
+    private final TimeSheetJpa timesheetJpa;
+    private final ReviewJpa reviewJpa;
+    private final UserJpa userJpa;
 
     @Autowired
-    public ApprovalPerformanceReviewCreateController(ReviewJpa aRCreator,
-                                                     ReviewRepository reviewRepository) {
-        reviewJpa = aRCreator;
-        this.reviewRepository = reviewRepository;
+    public ApprovalPerformanceReviewCreateController(TimeSheetJpa timesheetJpa, ReviewJpa reviewJpa, UserJpa userJpa) {
+        this.timesheetJpa = timesheetJpa;
+        this.reviewJpa = reviewJpa;
+        this.userJpa = userJpa;
 
     }
 
+
     //       Review Form Displayed on reviewing Page
     @GetMapping("/newApproveReview/{id}")
-    public String approvereviewDetails(@PathVariable("id") Long id,// Keep this after valid
+    public String approveReviewDetails(@PathVariable("id") Long id,// Keep this after valid
                                        ApprovalReviewForm approvalReviewForm,
                                        Model model) {
-//
-//        if (bindingResult.hasErrors()) {
-//
-//            log.error(bindingResult.toString());
-//            log.error("review Form has binding errors");
-            System.out.println();
-            System.out.println();
-            System.out.println(id);
-            System.out.println(id);
-            System.out.println();
-            System.out.println();
 
-            Optional<Timesheet> ts = timesheetJpa.getByID(id);
-            approvalReviewForm.setTimesheet(ts.get());
 
-            model.addAttribute("ApprovalreviewDetails", approvalReviewForm);
-            return "review_approval";
-//        }
+        Optional<TimeSheet> ts = timesheetJpa.getByID(id);
+        approvalReviewForm.setTimesheet(ts.get());
 
-////        if details are correct do the submit
-//        return "redirect:/createReview/";
+        model.addAttribute("ApprovalReviewDetails", approvalReviewForm);
+        return "review_approval";
+
     }
 
 
     @PostMapping("/createReview")
-    public String submitApproveReview(@Valid @ModelAttribute("ApprovalreviewDetails")  ApprovalReviewForm approvalReviewForm,
-                                      BindingResult bindingResult, Model model) {
-        String id_string =approvalReviewForm.getTimesheet().getId().toString();
-        System.out.println(approvalReviewForm.toString());
+    public String submitApproveReview(@Valid @ModelAttribute("ApprovalReviewDetails")
+                                                  ApprovalReviewForm approvalReviewForm,
+                                      BindingResult bindingResult, Model model) throws IOException, MessagingException {
+
+
         if (bindingResult.hasErrors()){
-            model.addAttribute("ApprovalreviewDetails", approvalReviewForm);
+            model.addAttribute("ApprovalReviewDetails", approvalReviewForm);
             return "review_approval";
         }
 
@@ -83,16 +72,18 @@ public class ApprovalPerformanceReviewCreateController {
                 approvalReviewForm.getCommunication(),
                 approvalReviewForm.getTechnical_skills(),
                 approvalReviewForm.getQuality(),
-                approvalReviewForm.getInitative(),
+                approvalReviewForm.getInitiative(),
                 approvalReviewForm.getProductivity (),
                 approvalReviewForm.getWorking_relationships()
 
         );
-        System.out.println(newReview.toString());
 
         reviewJpa.makeReview(newReview);
+        log.info("Here is the review going into DB" + newReview.toString());
 
-        log.debug("Here is the review going into DB" + newReview.toString());
+        EmailAdmin emailAdmin = new EmailAdmin();
+        emailAdmin.sendAdminMail(userJpa.findAdmins());
+
 
         return "redirect:/Reviews";
     }

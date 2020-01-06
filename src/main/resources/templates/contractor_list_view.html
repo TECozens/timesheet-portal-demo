@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+>
+
+<head th:replace="fragments/header :: head"><title></title></head>
+
+<body>
+
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container" role="main">
+<div class="starter-template">
+<div class="row mx-auto custom-form">
+    <div class="col mx-auto custom-bg">
+
+    <div id=missingTimeSheetMessage th:if="${Contractors.isEmpty()}">
+        <div>No matching Contractors</div>
+    </div>
+
+
+    <div class="row mt-4 custom-label">
+        <h4 th:text="'Your Contractors'"></h4>
+    </div>
+
+    <div class="custom-form" th:if="${!Contractors.isEmpty()}">
+        <div class="mx-3 custom-bg scrolling-wrapper">
+        <table class="table table-light" id="contractors"
+               style="table-layout: fixed; width: 99%">
+            <thead>
+                <tr>
+                <th scope="col" class="shorter-header">
+                    <label for="usernameSearch">Username</label>
+                    <input class="small-input searcher"
+                           type="text" id="usernameSearch"
+                           onkeyup="filterResults()"
+                           placeholder="Username">
+                </th>
+
+                <th scope="col" class="shorter-header">
+                    <label for="nameSearch">Name</label>
+                    <input class="small-input searcher"
+                           type="text" id="nameSearch"
+                           onkeyup="filterResults()"
+                           placeholder="Name">
+                </th>
+
+                <th scope="col" class="date-header">
+                    <label for="userEmailSearch">Contractor Email</label>
+                    <input class="small-input searcher"
+                           type="text" id="userEmailSearch"
+                           onkeyup="filterResults()"
+                           placeholder="contractor@email.com">
+                </th>
+
+                <th scope="col" class="shorter-header">
+                    <label for="agencySearch">Agency</label>
+                    <input class="small-input searcher"
+                           type="text" id="agencySearch"
+                           onkeyup="filterResults()"
+                           placeholder="Agency">
+                </th>
+
+                <th scope="col" class="date-header">
+                    <label for="agencyEmailSearch">Agency Email</label>
+                    <input class="small-input searcher"
+                           type="text" id="agencyEmailSearch"
+                           onkeyup="filterResults()"
+                           placeholder="agency@email.com">
+                </th>
+
+                </tr>
+            </thead>
+            <tbody>
+            <tr th:each="Contractor: ${Contractors}" class="wrap"
+                th:id="'contractorItem' + ${Contractor.id}">
+
+                <td><span th:text="${Contractor.user.username}"></span></td>
+                <td><span th:text="${Contractor.user.firstname}
+                           + ' ' + ${Contractor.user.surname}"></span></td>
+                <td><span th:text="${Contractor.user.email}"></span></td>
+                <td><span th:text="${Contractor.agency.name}"></span></td>
+                <td><span th:text="${Contractor.agency.agency_email}"></span></td>
+                <td>
+                </td>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+
+</div>
+</div>
+</main>
+<script>
+
+    function filterResults() {
+
+        let table = document.getElementById("contractors");
+        let search_items = document.getElementsByClassName("searcher");
+        let tr = table.getElementsByTagName("tr");
+
+        let td;
+        let filter;
+        let txtValue;
+        for (let i = 0; i < tr.length; i++) {
+
+            let row = tr[i];
+            row.style.display = "";
+
+
+            for (let iter = 0; iter < search_items.length; iter++) {
+
+                td = row.getElementsByTagName("td")[iter];
+                if (td) {
+
+                    filter = search_items[iter].value.toUpperCase();
+                    txtValue = td.textContent || td.innerText;
+
+                    if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {
+                        tr[i].style.display = "none";
+                    }
+
+                }
+            }
+
+        }
+    }
+</script>
+</body>
+</html>

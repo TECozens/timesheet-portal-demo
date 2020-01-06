@@ -1,85 +1,140 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
 
 
 <main class="container" role="main">
-    <div class="starter-template">
 
-        <div class="row mx-auto custom-form">
-            <div class="col mx-auto custom-bg">
-                <div id=timeSheetDetails>
+<div class="starter-template">
 
-                    <form action="#" method="post" th:action="@{/newTimesheet}" th:object="${TimesheetKey}">
+    <div class="row mx-auto custom-form">
+        <div class="col mx-auto custom-bg">
+            <div id=timeSheetDetails>
 
-                        <!--Contractor Details Here-->
-                        <div class="custom-label" id=contractorProfile>
-                            <div><h4 th:text="'Logged in as: '+ ${User}"></h4></div>
+                <form action="#" method="post" th:action="@{/newTimeSheet}"
+                      onsubmit="return validateDate()" th:object="${TimeSheetKey}">
+
+                    <!--Contractor Details Here-->
+                    <div class="custom-label" id=contractorProfile>
+                        <div><h4 th:text="'Logged in as: '+ ${User}"></h4></div>
+                    </div>
+
+                    <div th:if="${aTimeSheet != null}">
+                    <div th:if="${aTimeSheet.id != null}" class="custom-label">
+
+                        <h3 th:text="'Timesheet for '     +${aTimeSheet.week_finish}+' submitted'"></h3>
+                        <h4 th:text="'Days worked: '      +${aTimeSheet.daysWorked}"></h4>
+                        <h4 th:text="'Hours of overtime: '+${aTimeSheet.overtime}"></h4>
+                    </div>
+                    </div>
+
+                    <div class="custom-label">
+                        <h3>Please Enter Your Time Sheet Details</h3>
+                    </div>
+
+                    <div class="form-group custom-label">
+
+                        <label for="daysWorked">Days Worked</label>
+                        <input aria-describedby="Enter how many days you have worked."
+                               id="daysWorked"
+                               class="form-control"
+                               placeholder="Days Worked"
+                               th:field="*{days_worked}"
+                               type="number" pattern="/d*"/>
+
+                        <div class="alert alert-danger"
+                             th:errors="*{days_worked}"
+                             th:if="${#fields.hasErrors('days_worked')}">
+                            Days Worked Error: Please enter a valid number.
                         </div>
 
-                        <div class="custom-label">
-                            <h3>Please Enter Your Time Sheet Details</h3>
+                    </div>
+
+
+                    <div class="form-group custom-label">
+                        <label th:for="overtime_completed">Overtime Hours Completed</label>
+
+                        <input aria-describedby="Enter the amount of overtime completed."
+                               class="form-control"
+                               placeholder="Overtime Completed"
+                               th:field="*{overtime_completed}"
+                               type="number" pattern="/d*"/>
+
+                        <div class="alert alert-danger"
+                             th:errors="*{overtime_completed}"
+                             th:if="${#fields.hasErrors('overtime_completed')}">
+                            Overtime Error: Please enter a valid number.
                         </div>
+                    </div>
 
-                        <div class="form-group custom-label">
-                            <label th:for="daysWorked">Days Worked</label>
-                            <input aria-describedby="Enter how many days you have worked."
-                                   class="form-control"
-                                   placeholder="Days Worked"
-                                   th:field="*{days_worked}"
-                                   type="number" pattern="/d*"/>
+                    <div class="form-group custom-label custom-font">
 
-                            <div class="alert alert-danger"
-                                 th:errors="*{days_worked}"
-                                 th:if="${#fields.hasErrors('days_worked')}">
-                                Days Worked Error: Please enter a valid number.
-                            </div>
+                        <label for="date-selector"><h3>Week Ending: </h3></label>
+                        <input type="date" class="date-picker" min="1997-01-05" required="required"
+                               step="7" id="date-selector" th:field="*{week_ending}">
+
+                        <div class="alert alert-danger"
+                             th:errors="*{week_ending}"
+                             th:if="${#fields.hasErrors('week_ending')}">
+                            Date Error: Please enter a valid Date.
                         </div>
+                    </div>
 
-
-                        <div class="form-group custom-label">
-                            <label th:for="overtime_completed">Overtime Completed</label>
-
-                            <input aria-describedby="Enter the amount of overtime completed."
-                                   class="form-control"
-                                   placeholder="Overtime Completed"
-                                   th:field="*{overtime_completed}"
-                                   type="number" pattern="/d*"/>
-
-                            <div class="alert alert-danger"
-                                 th:errors="*{overtime_completed}"
-                                 th:if="${#fields.hasErrors('overtime_completed')}">
-                                Overtime Error: Please enter a valid number.
-                            </div>
-                        </div>
-
-                        <div class="form-group custom-label custom-font">
-                            <label th:for="week_ending"><h3>Week Ending</h3></label>
-                            <p id="lastDay">
-                        </div>
-
-                        <div class="row mt-4">
-                            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-
-                            <input class="btn btn-lg btn-primary btn-block custom-btn" id="submit" type="submit"
-                                   value="Submit Time Sheet Form"/>
-                        </div>
-                    </form>
-                </div>
+                    <div class="row mt-4">
+                        <input class="btn btn-lg btn-primary btn-block custom-btn"
+                               id="submit" type="submit"
+                               value="Submit Time Sheet Form"/>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
+
 </main>
 </body>
 
 <script>
-    var startingDate = new Date("15-Nov-2019");
-    var lastDay = new Date(startingDate.getTime() + 70 * 70 * 24 * 7 * 1000).toDateString();
-    document.getElementById('lastDay').innerText = lastDay;
+    let initDate = new Date();
+    let d = new Date(new Date().setDate(initDate.getDate() - initDate.getDay()));
+
+    let today = [d.getFullYear(),
+                 ("0" + (d.getMonth() + 1)).slice(-2),
+                 ("0" + d.getDate()).slice(-2)].join('-');
+
+    let dateInput = document.getElementById('date-selector');
+    let daysWorkedInput = document.getElementById("daysWorked");
+
+    dateInput.max = new Date(d.setDate(d.getDate()+6)).toISOString().split("T")[0];
+    dateInput.value = today;
+    function validateDate() {
+        let selectedDate =new Date(dateInput.value);
+        let difference = (initDate.getDate() - selectedDate.getDate()) + 7;
+        let daysWorked = daysWorkedInput.value;
+        let sameMonth = (selectedDate.getMonth()===initDate.getMonth());
+        // console.log(selectedDate.getDate());
+        // console.log(initDate.getDate());
+        // console.log(difference);
+        // console.log(daysWorked);
+        // console.log(sameMonth);
+        if (selectedDate.getDay() === 0){
+            if (difference < daysWorked && sameMonth){
+                if (daysWorked > 7){
+                    return true;
+                }
+                alert("It's not possible to work that many days in an unfinished week");
+                return false;
+            } else {
+                return true;
+            }
+        }
+        alert("Please select the Sunday as the end of the week!");
+        return false;
+    }
 </script>
 
 </html>

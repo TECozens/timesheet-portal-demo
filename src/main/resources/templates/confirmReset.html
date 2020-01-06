@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/header :: head"><title></title></head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<main class="container" role="main">
+    <div class="starter-template">
+
+        <div class="row mx-auto custom-form">
+            <div class="col mx-auto custom-bg">
+                <div id=resetUserPassword>
+                    <form action="#" method="post" th:action="@{/confirmResetPassword}" th:object="${resetKey}">
+
+                        <div class="custom-label">
+                            <h3>Please Enter The Details To Reset Password</h3>
+                        </div>
+
+
+                        <div class="form-group custom-label">
+                            <label>Password
+                                <input aria-describedby="Enter a new Password"
+                                       class="form-control"
+                                       placeholder="Password"
+                                       th:field="*{password}"
+                                       type="password">
+                            </label>
+
+                            <div class="alert alert-danger"
+                                 th:errors="*{password}"
+                                 th:if="${#fields.hasErrors('password')}">
+                                Password Error: Please enter a valid password.
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+
+                            <input class="btn btn-lg btn-primary btn-block custom-btn" id="submit" type="submit"
+                                   value="Submit To Reset Password"/>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

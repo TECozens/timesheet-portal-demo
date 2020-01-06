@@ -1,18 +1,15 @@
 package com.admiral.tsp.timesheetportal.web.controllers.registration;
 
 import com.admiral.tsp.timesheetportal.data.domain.Agency;
-import com.admiral.tsp.timesheetportal.services.AgencyRepository;
+import com.admiral.tsp.timesheetportal.data.jpa.agency.AgencyJpa;
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
 import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
-import com.admiral.tsp.timesheetportal.security.data.domain.User;
-import com.admiral.tsp.timesheetportal.security.data.domain.UserRole;
-import com.admiral.tsp.timesheetportal.security.services.UserRepository;
+import com.admiral.tsp.timesheetportal.data.domain.User;
+import com.admiral.tsp.timesheetportal.data.domain.UserRole;
+import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
 import com.admiral.tsp.timesheetportal.web.forms.registration.AgencyForm;
 import com.admiral.tsp.timesheetportal.web.forms.registration.RegistrationForm;
-import com.admiral.tsp.timesheetportal.data.jpa.registration.RegistrationJpa;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,28 +25,30 @@ import java.util.List;
 @SessionAttributes({"registerKey","agencyKey","managerKey"})
 public class RegistrationController {
 
-    @Autowired
-    private RegistrationJpa registrationJpa;
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private AgencyRepository agencyRepository;
-    @Autowired
-    private ContractorJpa contractorJpa;
+    private final PasswordEncoder passwordEncoder;
+    private final UserJpa userJpa;
+    private final AgencyJpa agencyJpa;
+    private final ContractorJpa contractorJpa;
 
-
-    static final Logger LOG = LoggerFactory.getLogger(RegistrationController.class);
+    @Autowired
+    public RegistrationController(PasswordEncoder passwordEncoder,
+                                  UserJpa userJpa,
+                                  AgencyJpa agencyJpa,
+                                  ContractorJpa contractorJpa) {
+        this.passwordEncoder = passwordEncoder;
+        this.userJpa = userJpa;
+        this.agencyJpa = agencyJpa;
+        this.contractorJpa = contractorJpa;
+    }
 
     // Creating a new User
 
     @GetMapping("/register")
     public String goToRegister(Model model) {
 
-        List<User> managers = userRepository.findByManagerRole();
+        List<User> managers = userJpa.findManagers();
 
-        List<Agency> agency = agencyRepository.getAllAgency();
+        List<Agency> agency = agencyJpa.findAll();
 
         model.addAttribute("registerKey", new RegistrationForm());
         model.addAttribute("managerKey", managers);
@@ -59,23 +58,24 @@ public class RegistrationController {
     }
 
     @PostMapping("/newUser")
-    public String userDetails(@ModelAttribute("registerKey") @Valid RegistrationForm registrationForm,
+    public String userDetails(@Valid @ModelAttribute("registerKey") RegistrationForm registrationForm,
                               BindingResult bindingResult,
                               Model model) {
 
-        List<User> managers = userRepository.findByManagerRole();
-        List<Agency> agency = agencyRepository.getAllAgency();
-        User user = new User();
+        List<User> managers = userJpa.findManagers();
+        List<Agency> agency = agencyJpa.findAll();
+        if (userJpa.getByUsername(registrationForm.getUsername()) != null){
+            bindingResult.rejectValue("username", "error.user", "An account already exists for this username.");
+        }
 
         if (bindingResult.hasErrors()) {
 
             log.error(bindingResult.toString());
             log.error("Registration Form has binding errors");
 
-            model.addAttribute("User", user);
             model.addAttribute("managerKey", managers);
             model.addAttribute("agencyKey", agency);
-            model.addAttribute("registrationDetails", registrationForm);
+            model.addAttribute("registerKey", registrationForm);
             return "register";
 
         }
@@ -97,21 +97,23 @@ public class RegistrationController {
 
         );
 
-        registrationJpa.makeUser(newUser);
+        userJpa.makeUser(newUser);
 
         UserRole newRole = new UserRole();
         newRole.setUserid(newUser.getId());
         newRole.setRole(registrationForm.getRole());
 
-        registrationJpa.makeRole(newRole);
-        System.out.println(newRole.getRole());
+        userJpa.makeUserRole(newRole);
+        log.info(newRole.getRole());
 
         if (newRole.getRole().equals("ROLE_CONTRACTOR")){
             Contractor newContractor = new Contractor();
             newContractor.setUser(newUser);
-            newContractor.setAgency(agencyRepository.getAgencyById(registrationForm.getAgencyId()));
-            newContractor.setManager(userRepository.getUserById(registrationForm.getManagerId()));
+            newContractor.setAgency(agencyJpa.findByID(registrationForm.getAgencyId()));
+            newContractor.setManager(userJpa.getById(registrationForm.getManagerId()));
+
             contractorJpa.makeContractor(newContractor);
+
         }
 
         log.debug("New User going into DB" + newUser.toString());
@@ -160,7 +162,7 @@ public class RegistrationController {
                 agencyForm.getEmail()
         );
 
-        registrationJpa.makeAgency(newAgency);
+        agencyJpa.makeAgency(newAgency);
 
         log.debug("New User going into DB" + newAgency.toString());
 

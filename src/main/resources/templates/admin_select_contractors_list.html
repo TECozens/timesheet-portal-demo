@@ -1,108 +1,123 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 <div th:replace="fragments/header :: header"></div>
 
 
 <main class="container" role="main">
-    <div class="starter-template">
 
-        <div class="row mx-auto custom-form">
-            <div class="col mx-auto custom-bg">
+<div class="starter-template">
 
-                <div id=missingContractorsMessage th:if="${Contractors.isEmpty()}">
-                    <div>No matching Contractors</div>
-                </div>
+    <div class="row mx-auto custom-form">
+
+    <div class="col mx-auto custom-bg">
+
+        <div id=missingContractorsMessage
+             th:if="${Contractors.isEmpty()}"
+             class="row mt-4 custom-label">
+            <h4>No matching Contractors</h4>
+        </div>
 
 
-                <div class="row mt-4 custom-label">
-                    <h4 th:text="'Selecting contractors for ' + ${Manager.username}"></h4>
-                    <input type="hidden" id = "managerSelected" th:value="${Manager.id}">
-                </div>
+        <div class="row mt-4 custom-label">
+            <h4 th:text="'Selecting contractors for ' + ${Manager.username}"></h4>
+            <input type="hidden" id = "managerSelected" th:value="${Manager.id}">
+        </div>
 
-                <div class="custom-form" th:if="${!Contractors.isEmpty()}">
-                    <div class="mx-3 custom-bg scrolling-wrapper">
-                        <form name="selectForm" th:id="selectForm">
-                            <table class="table table-light" id="contractorSelect">
-                                <thead>
-                                <tr>
-                                    <th scope="col">
-                                        <label for="usernameSearch">Name</label>
-                                        <input class="small-input searcher" type="text" id="usernameSearch"
-                                               onkeyup="filterResults()"
-                                               placeholder="Username">
-                                    </th>
-                                    <th scope="col">
-                                        <label for="nameSearch">Name</label>
-                                        <input class="small-input searcher" type="text" id="nameSearch"
-                                               onkeyup="filterResults()"
-                                               placeholder="Full name">
-                                    </th>
-                                    <th scope="col">
-                                        <label for="agencyNameSearch">Agency</label>
-                                        <input class="small-input searcher" type="text" id="agencyNameSearch"
-                                               onkeyup="filterResults()"
-                                               placeholder="Agency">
-                                    </th>
-                                    <th scope="col">
-                                        <label for="ContractorEmailSearch">Contractor Email</label>
-                                        <input class="date-input searcher" type="text" id="ContractorEmailSearch"
-                                               onkeyup="filterResults()" placeholder="Email">
-                                    </th>
-                                    <th scope="col">
-                                        <label for="currentManagerSearch">Manager</label>
-                                        <input class="small-input searcher" type="text" id="currentManagerSearch"
-                                               onkeyup="filterResults()"
-                                               placeholder="Manager">
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr th:each="AContractor: ${Contractors}">
-                                    <td><span th:text="${AContractor.getUser().getUsername()}"></span></td>
-                                    <td><span th:text="${AContractor.getUser().getFirstname()} + ' '
-                                                      +${AContractor.getUser().getSurname()}"></span></td>
-                                    <td><span th:text="${AContractor.getAgency().getName()}"></span></td>
-                                    <td><span th:text="${AContractor.getUser().getEmail()}"></span></td>
-                                    <td><span
-                                            th:text="${AContractor.getManager().getUsername()}"></span>
-                                    </td>
-                                    <td>
-                                        <span><input type="checkbox" name="selected" class="custom-bg determine-manager"
-                                                     id="exampleCheck1"
-                                                     th:value="'['+ ${AContractor.id} +',' + ${AContractor.manager.id} +']'">
-<!--                                            `'{"id":"'+${AContractor.getUser().getId()}+'","manager":"'+${AContractor.getManager().getId()}+'"}'`-->
-                                        </span>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+        <div class="custom-form" th:if="${!Contractors.isEmpty()}">
 
-<!--                            <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"-->
-<!--                               th:onclick="mapSelection()"-->
-<!--                               th:id="assign">Finish</a>-->
+        <div class="mx-3 custom-bg scrolling-wrapper">
+            <form name="selectForm" th:id="selectForm">
+                <table class="table table-light" id="contractorSelect"
+                       style="table-layout: fixed; width: 99%">
 
-                        </form>
-                    </div>
-                </div>
-            </div>
+                <thead>
+                <tr>
+                    <th scope="col" class="shorter-header">
+                        <label for="usernameSearch">Username</label>
+                        <input class="small-input searcher"
+                               type="text" id="usernameSearch"
+                               onkeyup="filterResults()"
+                               placeholder="Username">
+                    </th>
+                    <th scope="col" class="shorter-header">
+                        <label for="nameSearch">Name</label>
+                        <input class="small-input searcher"
+                               type="text" id="nameSearch"
+                               onkeyup="filterResults()"
+                               placeholder="Full name">
+                    </th>
+                    <th scope="col" class="shorter-header">
+                        <label for="agencyNameSearch">Agency</label>
+                        <input class="small-input searcher"
+                               type="text" id="agencyNameSearch"
+                               onkeyup="filterResults()"
+                               placeholder="Agency">
+                    </th>
+                    <th scope="col" class="shorter-header">
+                        <label for="ContractorEmailSearch">Contractor Email</label>
+                        <input class="small-input searcher"
+                               type="text" id="ContractorEmailSearch"
+                               onkeyup="filterResults()" placeholder="Email">
+                    </th>
+                    <th scope="col" class="shorter-header">
+                        <label for="currentManagerSearch">Manager</label>
+                        <input class="small-input searcher"
+                               type="text" id="currentManagerSearch"
+                               onkeyup="filterResults()"
+                               placeholder="Manager">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="AContractor: ${Contractors}" class="wrap">
+                    <td><span th:text="${AContractor.getUser().getUsername()}"></span></td>
+                    <td><span th:text="${AContractor.getUser().getFirstname()} + ' '
+                                      +${AContractor.getUser().getSurname()}"></span></td>
+                    <td><span th:text="${AContractor.getAgency().getName()}"></span></td>
+                    <td><span th:text="${AContractor.getUser().getEmail()}"></span></td>
+                    <td><span th:text="${AContractor.getManager().getUsername()}"></span></td>
+
+                    <td>
+
+                        <span>
+                            <input type="checkbox" name="selected"
+                                   class="custom-bg determine-manager"
+                                     th:value="'['+ ${AContractor.id} +','
+                                     + ${AContractor.manager.id} +']'">
+                        </span>
+
+                    </td>
+                </tr>
+                </tbody>
+
+                </table>
+
+
+            </form>
+        </div>
+
         </div>
     </div>
+
+    </div>
+</div>
+
 </main>
 </body>
 <script>
 
-    var radios = document.getElementById("selectForm").getElementsByClassName("determine-manager");
-    var manager = document.getElementById("managerSelected").value;
+    let radios = document.getElementById("selectForm").getElementsByClassName("determine-manager");
+    let manager = document.getElementById("managerSelected").value;
 
-    for (var i = 0; i < radios.length; i++) {
+    for (let i = 0; i < radios.length; i++) {
         radios[i].addEventListener('change', function mapSelection() {
-            var data = JSON.parse(this.value);
-            var id = data[0];
-            var m_id = data[1];
+            let data = JSON.parse(this.value);
+            let id = data[0];
+            let m_id = data[1];
             if (this.checked) {
                 fetch("/api/admin/updateManager/"+ id +"/" + manager)
             } else {
@@ -113,19 +128,20 @@
 
     function filterResults() {
 
-        var table = document.getElementById("contractorSelect");
-        var search_items = document.getElementsByClassName("searcher");
-        var tr = table.getElementsByTagName("tr");
+        let table = document.getElementById("contractorSelect");
+        let search_items = document.getElementsByClassName("searcher");
+        let tr = table.getElementsByTagName("tr");
 
-        var td;
-        var filter;
-        for (i = 0; i < tr.length; i++) {
+        let td;
+        let filter;
+        let txtValue;
+        for (let i = 0; i < tr.length; i++) {
 
 
-            var row = tr[i];
+            let row = tr[i];
             row.style.display = "";
 
-            for (iter = 0; iter < search_items.length; iter++) {
+            for (let iter = 0; iter < search_items.length; iter++) {
 
                 td = row.getElementsByTagName("td")[iter];
                 if (td) {

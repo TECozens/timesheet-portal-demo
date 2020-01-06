@@ -1,113 +1,156 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:type="http://www.w3.org/1999/xhtml">
+>
 
-<head th:replace="fragments/header :: head"></head>
+<head th:replace="fragments/header :: head"><title></title></head>
 
 <body>
 
 <div th:replace="fragments/header :: header"></div>
 
 <main class="container" role="main">
-    <div class="starter-template">
-        <div class="row mx-auto custom-form">
-            <div class="col mx-auto custom-bg">
+<div class="starter-template">
+    <div class="row mx-auto custom-form">
+    <div class="col mx-auto custom-bg">
 
-                <div id=missingTimesheetMessage th:if="${TimesheetKey}==  null">
-                    <div>No matching Time Sheets</div>
-                </div>
+        <div class="row mt-4 custom-label"
+             id=missingTimeSheetMessage
+             th:if="${TimesheetKey.isEmpty()}">
+            <h4>No matching Time Sheets</h4>
+        </div>
 
 
-                <div class="row mt-4 custom-label">
-                    <h4 th:text="'Contractor Time Sheets'"></h4>
-                </div>
+        <div class="row mt-4 custom-label" th:if="${!TimesheetKey.isEmpty()}">
+            <h4 th:text="'Contractor Time Sheets'"></h4>
+        </div>
 
-                <div class="custom-form">
-                    <div class="mx-3 custom-bg scrolling-wrapper">
-                        <table class="table table-light" id="timesheetInfo">
-                            <thead>
-                            <tr>
-                                <th scope="col">
-                                    <label for="nameSearch">Name</label>
-                                    <input class="small-input searcher" type="text" id="nameSearch" onkeyup="filterResults()" placeholder="Name">
-                                </th>
-                                <th scope="col">
-                                    <label for="agencySearch">Agency</label>
-                                    <input class="small-input searcher" type="text" id="agencySearch" onkeyup="filterResults()" placeholder="Agency">
-                                </th>
-                                <th scope="col">
-                                    <label for="daysWorkedSearch">Days Worked</label>
-                                    <input class="tiny-input searcher" type="text" pattern="/d*" id="daysWorkedSearch" onkeyup="filterResults()">
-                                </th>
-                                    <th scope="col"><label for="OverTimeSearch">Over Time</label>
-                                    <input class="tiny-input searcher" type="text" id="OverTimeSearch" onkeyup="filterResults()">
-                                </th>
-                                <th scope="col">
-                                    <label for="weekFinishedSearch">Week Finished</label>
-                                    <input class="date-input searcher" type="text" id="weekFinishedSearch" onkeyup="filterResults()" placeholder="YYYY-MM-DD">
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="Timesheet: ${TimesheetKey}"  th:id="'TimesheetItem' + ${Timesheet.id}">
+        <div class="custom-form" th:if="${!TimesheetKey.isEmpty()}">
+            <div class="mx-3 custom-bg scrolling-wrapper">
+            <table class="table table-light"
+                   style="table-layout: fixed; width: 95%"
+                   id="timeSheetInfo">
+                <thead>
+                <tr>
+                    <th scope="col" class="shorter-header">
+                        <label for="nameSearch">Name</label>
+                        <input class="small-input searcher"
+                               type="text" id="nameSearch"
+                               onkeyup="filterResults()"
+                               placeholder="Name">
+                    </th>
+                    <th scope="col" class="shorter-header">
+                        <label for="agencySearch">Agency</label>
+                        <input class="small-input searcher"
+                               type="text" id="agencySearch"
+                               onkeyup="filterResults()"
+                               placeholder="Agency">
+                    </th>
+                    <th scope="col" class="tiny-header">
+                        <label for="daysWorkedSearch">Days Worked</label>
+                        <input class="tiny-input searcher"
+                               type="text" pattern="/d*"
+                               id="daysWorkedSearch"
+                               onkeyup="filterResults()">
+                    </th>
+                        <th scope="col" class="tiny-header">
+                        <label for="OverTimeSearch">Over Time Hours</label>
+                        <input class="tiny-input searcher"
+                               type="text" id="OverTimeSearch"
+                               onkeyup="filterResults()">
+                    </th>
 
-                                <td> <span th:text="${Timesheet.contractor.user.firstname} + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
-                                <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
-                                <td><span th:text="${Timesheet.daysWorked}"></span></td>
-                                <td><span th:text="${Timesheet.overtime}"></span></td>
-                                <td><span th:text="${Timesheet.week_finish}"></span></td>
-                                <td>
-                                    <form  method="get" th:action="@{'/newApproveReview/' + ${Timesheet.id}}">
-                                        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-                                        <input class="btn btn-lg btn-success btn-block " id="submit" type="submit"
-                                               value="Approve"/>
-                                    </form>
-                                </td>
-                                <td>
-                                    <form  method="post" th:action="@{'/newRejectedReview/' + ${Timesheet.id}}">
-                                        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-                                        <input class="btn btn-lg btn-danger btn-block " id="submitReject" type="submit"
-                                               value="Reject"/>
-                                    </form>
-                                </td>
+                    <th scope="col" class="searcher dates date-header">
+                        <label for="start-date-selector">From:</label>
+                        <input type="date" class="date-picker date-input" min="1997-01-05"
+                               step="7" id="start-date-selector"
+                               onchange="filterResults()">
+                        <label for="end-date-selector">To:</label>
+                        <input type="date" class="date-picker date-input" min="1997-01-05"
+                               step="7" id="end-date-selector"
+                               onchange="filterResults()">
+                    </th>
+                </tr>
+                </thead>
 
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <tbody>
+                <tr th:each="Timesheet: ${TimesheetKey}" class="wrap"
+                    th:id="'TimesheetItem' + ${Timesheet.id}">
+
+                    <td> <span th:text="${Timesheet.contractor.user.firstname}
+                                + ' ' + ${Timesheet.contractor.user.surname}"></span></td>
+                    <td><span th:text="${Timesheet.contractor.agency.name}"></span></td>
+                    <td><span th:text="${Timesheet.daysWorked}"></span></td>
+                    <td><span th:text="${Timesheet.overtime}"></span></td>
+                    <td><span th:text="${Timesheet.week_finish}"></span></td>
+
+                    <td>
+                    <form method="get"
+                          th:action="@{'/newApproveReview/' + ${Timesheet.id}}">
+                        <input class="btn btn-lg btn-success btn-block"
+                               id="submit" type="submit"
+                               value="Approve"/>
+                    </form>
+                    </td>
+                    <td>
+                        <form method="get"
+                               th:action="@{'/newRejectedReview/' + ${Timesheet.id}}">
+                            <input class="btn btn-lg btn-danger btn-block"
+                                   id="submitReject" type="submit"
+                                   value="Reject"/>
+                        </form>
+                    </td>
+
+                </tbody>
+            </table>
             </div>
-
         </div>
     </div>
+
+    </div>
+</div>
 </main>
 
 <script>
     function filterResults() {
 
-        var table = document.getElementById("timesheetInfo");
-        var search_items = document.getElementsByClassName("searcher");
-        var tr = table.getElementsByTagName("tr");
+        let table = document.getElementById("timeSheetInfo");
+        let search_items = document.getElementsByClassName("searcher");
+        let tr = table.getElementsByTagName("tr");
 
-        var td;
-        var filter;
-        for (i = 0; i < tr.length; i++) {
+        let td;
+        let filter;
+        let txtValue;
+        let search_input;
+        for (let i = 0; i < tr.length; i++) {
 
 
-            var row = tr[i];
+            let row = tr[i];
             row.style.display = "";
 
-            for (iter = 0; iter < search_items.length; iter++) {
+            for (let iter = 0; iter < search_items.length; iter++) {
 
                 td = row.getElementsByTagName("td")[iter];
                 if (td) {
 
-                    filter = search_items[iter].value.toUpperCase();
+                    search_input = search_items[iter];
                     txtValue = td.textContent || td.innerText;
 
-                    if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {
-                        tr[i].style.display = "none";
-                    }
+                    if (search_input.classList.contains("dates")){
+                        dates = search_input.getElementsByTagName("input");
+                        startDate = dates[0].valueAsDate;
+                        endDate = dates[1].valueAsDate;
+                        parsedDate = Date.parse(txtValue);
+                        if ((startDate > parsedDate && startDate != null)
+                            || (parsedDate > endDate && endDate != null)) {
+                            tr[i].style.display = "none";
+                        }
 
+                    } else {
+                        filter = search_input.value.toUpperCase();
+                        if (!(txtValue.toUpperCase().indexOf(filter) > -1) && filter) {
+                            tr[i].style.display = "none";
+                        }
+                    }
                 }
             }
 

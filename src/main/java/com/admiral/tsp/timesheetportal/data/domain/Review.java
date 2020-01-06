@@ -1,6 +1,5 @@
 package com.admiral.tsp.timesheetportal.data.domain;
 
-import com.admiral.tsp.timesheetportal.data.domain.Timesheet;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +10,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "review")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "findAllReviewsProcedure",
+                procedureName = "FIND_REVIEW_ALL",
+                resultClasses = {Review.class})
+})
 public class Review {
 
     @Id
@@ -19,7 +25,7 @@ public class Review {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "timesheet_id")
-    private Timesheet timesheet;
+    private TimeSheet timeSheet;
 
     @Column(name = "approved")
     private Boolean approved;

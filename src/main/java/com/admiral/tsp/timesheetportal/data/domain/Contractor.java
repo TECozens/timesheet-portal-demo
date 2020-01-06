@@ -1,6 +1,5 @@
 package com.admiral.tsp.timesheetportal.data.domain;
 
-import com.admiral.tsp.timesheetportal.security.data.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +11,12 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "contractor")
+@NamedStoredProcedureQueries({
+        @NamedStoredProcedureQuery(
+                name = "findAllContractorsProcedure",
+                procedureName = "FIND_CONTRACTOR_ALL",
+                resultClasses = {Contractor.class})
+})
 public class Contractor {
 
     @Id

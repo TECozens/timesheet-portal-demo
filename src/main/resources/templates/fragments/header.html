@@ -29,26 +29,33 @@
 
     <nav class="navbar navbar-expand-lg bg-light navbar-fixed-top">
         <a class="navbar-brand custom-txt" href="/">
+
             <img th:src="@{/images/banner_admiral_logo.png}"
-                 th:width="235" th:height="65" class="img-responsive"/>
-            Timesheet Portal
+                 th:width="235" th:height="65" class="img-responsive" alt="admiral_logo.png"/>
+            Time Sheet Portal
+
         </a>
 
         <div class="container-fluid" id="navbarSupportedContent">
+
             <div class="navbar-nav mr-auto"></div>
+
             <div sec:authorize="isAnonymous()" class="nav-item">
                 <a class="btn btn-outline-dark custom-bg" th:href="@{/login}">Login</a>
             </div>
 
             <div sec:authorize="isAuthenticated()" class="nav-item">
                 <form method="post" th:action="@{/logout}">
-                    <input class="btn btn-outline-dark custom-bg" type="submit" value="Logout"/>
+                    <input class="btn btn-outline-dark custom-bg"
+                           type="submit" value="Logout"/>
                 </form>
             </div>
 
             <!--Collapse Button-->
-            <button class="custom-focus custom-label" type="button" data-toggle="collapse"
-                    data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+            <button class="custom-focus custom-label"
+                    type="button" data-toggle="collapse"
+                    data-target="#navbarToggleExternalContent"
+                    aria-controls="navbarToggleExternalContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                 Menu
             </button>
@@ -59,9 +66,10 @@
     <!--Collapse Menu-->
     <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
+
             <!--Not Logged In-->
             <div sec:authorize="isAnonymous()">
-                <h5 class="text-white h4">You are not logged in and cannot view any Channels</h5>
+                <h5 class="text-white h4">You are not logged in and cannot view any channels</h5>
             </div>
 
             <!--Is Logged In-->
@@ -69,7 +77,7 @@
 
                 <h5 class="text-white h4">Channels</h5>
 
-                <!--Do Login Based Buttons Here-->
+                <!--Admin menus-->
                 <div sec:authorize="hasAuthority('ROLE_ADMIN')">
                     <a class="btn btn-light" href="/">Home</a>
                     <a class="btn btn-light" th:href="@{/Invoices}">View Invoices</a>
@@ -78,18 +86,17 @@
                     <a class="btn btn-light" th:href="@{/ManageRoles}">Manage Users</a>
                 </div>
 
+                <!--Manager Menu-->
                 <div sec:authorize="hasAuthority('ROLE_MANAGER')">
                     <a class="btn btn-light" href="/">Home</a>
-
-                    <a class="btn btn-light" th:href="@{/Reviews}">View Timesheets</a>
-
+                    <a class="btn btn-light" th:href="@{/Reviews}">View Time Sheets</a>
+                    <a class="btn btn-light" th:href="@{/Contractors}">View Contractors</a>
                 </div>
 
-                <!--            sec:authentication="principal.authorities"-->
+                <!--Contractor Menu-->
                 <div sec:authorize="hasAuthority('ROLE_CONTRACTOR')">
                     <a class="btn btn-light" href="/">Home</a>
-                    <a class="btn btn-light" th:href="@{/contractorView}">New Timesheet</a>
-<!--                    <a class="btn btn-light">Old Timesheets WIP</a>-->
+                    <a class="btn btn-light" th:href="@{/contractorView}">New Time Sheet</a>
                 </div>
 
             </div>

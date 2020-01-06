@@ -37,13 +37,6 @@ body {
     border-color: #0D3759;
     background-color: #2350A1;
 }
-.custom-btn2 {
-    margin: 20px;
-    border-width: 2px 0.2pc;
-    border-color: #0D3759;
-    background-color: #2350A1;
-    width: available;
-}
 
 .custom-label {
     margin: 10px;
@@ -70,8 +63,28 @@ body {
     width: 150px;
 }
 
+.date-header{
+    width: 170px;
+}
+
+.short-date {
+    width: 110px;
+}
+
+.short-header{
+    width: 130px;
+}
+.shorten {
+    width: 70px;
+}
+.shorter-header {
+    width: auto;
+}
 .tiny-input {
     width: 50px;
+}
+.tiny-header{
+    width: 70px;
 }
 
 .scrolling-wrapper {
@@ -83,6 +96,14 @@ body {
 
 }
 
+
+.reduced *{
+    font-size: 96%;
+}
+.wrap * {
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
 @media (min-width: 768px) {
     .container-fluid>.navbar-header,
     .container>.navbar-header {
@@ -102,7 +123,10 @@ body {
     width: 100%;
     padding-right: 0!important;
 }
-
+.date-picker::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    display: none;
+}
 
 #hidden {
     display: none;

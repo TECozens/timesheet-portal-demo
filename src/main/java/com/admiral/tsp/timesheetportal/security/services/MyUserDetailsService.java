@@ -1,9 +1,9 @@
 package com.admiral.tsp.timesheetportal.security.services;
 
-import com.admiral.tsp.timesheetportal.security.data.domain.MyUserPrincipal;
-import com.admiral.tsp.timesheetportal.security.services.UserRepository;
-import com.admiral.tsp.timesheetportal.security.services.UserRolesRepository;
-import com.admiral.tsp.timesheetportal.security.data.domain.User;
+import com.admiral.tsp.timesheetportal.security.data.MyUserPrincipal;
+import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.data.domain.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,33 +13,32 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class MyUserDetailsService implements UserDetailsService {
 
-    private UserRepository userRepository;
-    @Autowired
-    private UserRolesRepository userRolesRepository;
-    @Autowired
-    private PasswordEncoder encoder;
+    private final UserJpa userJpa;
+    private final PasswordEncoder encoder;
 
     @Autowired
-    public MyUserDetailsService(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public MyUserDetailsService(UserJpa userJpa, PasswordEncoder encoder) {
+        this.userJpa = userJpa;
+        this.encoder = encoder;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) {
 
-        System.out.println("password encoded = " + encoder.encode("password"));
+        log.info("password encoded = " + encoder.encode("password"));
 
 
-        User user = userRepository.getUserByUsername(username);
+        User user = userJpa.getByUsername(username);
         if (user == null) {
             throw new UsernameNotFoundException(username);
         } else {
-            System.out.println("User = " + user);
+            log.info("User = " + user);
 
-            List<String> userRoles = userRolesRepository.findRoleByUsername(username);
+            List<String> userRoles = userJpa.findRoleByUsername(username);
             return new MyUserPrincipal(user, userRoles);
         }
     }
