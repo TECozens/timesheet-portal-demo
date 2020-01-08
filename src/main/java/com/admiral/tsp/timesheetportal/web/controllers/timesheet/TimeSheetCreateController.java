@@ -1,10 +1,9 @@
 package com.admiral.tsp.timesheetportal.web.controllers.timesheet;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
-import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.ContractorJpa;
 import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
-import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
-import com.admiral.tsp.timesheetportal.web.controllers.email.EmailAdmin;
+import com.admiral.tsp.timesheetportal.data.jpa.TimeSheetJpa;
 import com.admiral.tsp.timesheetportal.web.controllers.email.EmailManager;
 import com.admiral.tsp.timesheetportal.web.forms.timesheet.TimeSheetForm;
 import lombok.extern.slf4j.Slf4j;

@@ -1,11 +1,9 @@
 package com.admiral.tsp.timesheetportal.web.controllers.manager;
 
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
-import com.admiral.tsp.timesheetportal.data.domain.Review;
 import com.admiral.tsp.timesheetportal.data.domain.User;
-import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
-import com.admiral.tsp.timesheetportal.data.jpa.review.ReviewJpa;
-import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.ContractorJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.UserJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;

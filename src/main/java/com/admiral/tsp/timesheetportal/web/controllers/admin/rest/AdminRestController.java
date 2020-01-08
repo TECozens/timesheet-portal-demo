@@ -1,10 +1,9 @@
 package com.admiral.tsp.timesheetportal.web.controllers.admin.rest;
 
-import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.ContractorJpa;
 import com.admiral.tsp.timesheetportal.data.domain.User;
-import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.UserJpa;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.catalina.Manager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

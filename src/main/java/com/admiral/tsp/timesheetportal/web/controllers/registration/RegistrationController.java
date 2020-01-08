@@ -1,12 +1,12 @@
 package com.admiral.tsp.timesheetportal.web.controllers.registration;
 
 import com.admiral.tsp.timesheetportal.data.domain.Agency;
-import com.admiral.tsp.timesheetportal.data.jpa.agency.AgencyJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.AgencyJpa;
 import com.admiral.tsp.timesheetportal.data.domain.Contractor;
-import com.admiral.tsp.timesheetportal.data.jpa.contractor.ContractorJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.ContractorJpa;
 import com.admiral.tsp.timesheetportal.data.domain.User;
 import com.admiral.tsp.timesheetportal.data.domain.UserRole;
-import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.UserJpa;
 import com.admiral.tsp.timesheetportal.web.forms.registration.AgencyForm;
 import com.admiral.tsp.timesheetportal.web.forms.registration.RegistrationForm;
 import lombok.extern.slf4j.Slf4j;

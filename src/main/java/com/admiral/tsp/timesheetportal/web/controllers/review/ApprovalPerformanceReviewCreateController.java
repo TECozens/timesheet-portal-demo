@@ -2,11 +2,11 @@ package com.admiral.tsp.timesheetportal.web.controllers.review;
 
 import com.admiral.tsp.timesheetportal.data.domain.Review;
 import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
-import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
-import com.admiral.tsp.timesheetportal.data.jpa.user.UserJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.TimeSheetJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.UserJpa;
 import com.admiral.tsp.timesheetportal.web.controllers.email.EmailAdmin;
 import com.admiral.tsp.timesheetportal.web.forms.review.ApprovalReviewForm;
-import com.admiral.tsp.timesheetportal.data.jpa.review.ReviewJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.ReviewJpa;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,10 +1,10 @@
 package com.admiral.tsp.timesheetportal.web.controllers.review;
 
 import com.admiral.tsp.timesheetportal.data.domain.Review;
-import com.admiral.tsp.timesheetportal.data.jpa.timesheet.TimeSheetJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.TimeSheetJpa;
 import com.admiral.tsp.timesheetportal.web.controllers.email.EmailContractorRejection;
 import com.admiral.tsp.timesheetportal.web.forms.review.RejectionReviewForm;
-import com.admiral.tsp.timesheetportal.data.jpa.review.ReviewJpa;
+import com.admiral.tsp.timesheetportal.data.jpa.ReviewJpa;
 import com.admiral.tsp.timesheetportal.data.domain.TimeSheet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Optional;
