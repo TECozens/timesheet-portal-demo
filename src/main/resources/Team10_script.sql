@@ -253,9 +253,8 @@ END $$
 
 -- Stored procedure, trigger and error handling for email --
 
-DROP TRIGGER IF EXISTS validateEmailAddressOnInsert;
-
 DELIMITER $$
+DROP TRIGGER IF EXISTS validateEmailAddressOnInsert;
 CREATE TRIGGER validateEmailAddressOnInsert
 BEFORE INSERT ON user FOR EACH ROW
 	BEGIN
