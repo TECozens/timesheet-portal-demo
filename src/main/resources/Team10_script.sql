@@ -195,7 +195,7 @@ INSERT INTO user_role (userid, role) VALUES (008, 'ROLE_CONTRACTOR');
 
 -- This query finds all timesheets where less than 3 days have been worked --
 
-SELECT * FROM timeSheet 
+SELECT * FROM timesheet 
 WHERE days_worked < 3;
 
 -- This test query finds all contractors under the agency with an id of 1 --
