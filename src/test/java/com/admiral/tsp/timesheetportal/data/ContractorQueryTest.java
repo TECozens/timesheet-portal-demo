@@ -1,4 +1,4 @@
-package com.admiral.tsp.timesheetportal.data;
-
-public class ContractorQueryTest {
-}
+//package com.admiral.tsp.timesheetportal.data;
+//
+//public class ContractorQueryTest {
+//}
