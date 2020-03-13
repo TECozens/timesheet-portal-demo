@@ -34,6 +34,7 @@ def profile1 = "dev"
 
 
 
+
 dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
