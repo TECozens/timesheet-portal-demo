@@ -2,7 +2,13 @@ package com.admiral.tsp.timesheetportal.security.config;
 
 import com.admiral.tsp.timesheetportal.security.services.CustomAuthenticationSuccessHandler;
 import com.admiral.tsp.timesheetportal.security.services.MyUserDetailsService;
+import org.apache.catalina.Context;
+import org.apache.tomcat.util.http.Rfc6265CookieProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
+import org.springframework.boot.web.servlet.server.ServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -10,11 +16,17 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor;
 import org.springframework.web.servlet.support.RequestDataValueProcessor;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import java.time.Duration;
 
 @Configuration
 @EnableWebSecurity
@@ -45,6 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
+
                 .antMatchers("/reports/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/Invoices").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/ManageRoles").access("hasRole('ROLE_ADMIN')")
