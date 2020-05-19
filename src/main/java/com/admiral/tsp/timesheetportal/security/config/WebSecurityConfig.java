@@ -67,8 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registerAgency").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/newAgency").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/createAgency").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/ManageRoles/**").access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/contractorList/*").access("hasRole('ROLE_ADMIN')")
+//                .antMatchers("/ManageRoles/**").access("hasRole('ROLE_ADMIN')")
+//                .antMatchers("/contractorList/*").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/api/admin/**").access("hasRole('ROLE_ADMIN')")
 
                 .antMatchers("/contractorView").access("hasRole('ROLE_CONTRACTOR')")
