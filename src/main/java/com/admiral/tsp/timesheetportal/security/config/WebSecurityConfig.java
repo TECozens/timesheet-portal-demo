@@ -55,9 +55,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         AuthenticationSuccessHandler successHandler = new CustomAuthenticationSuccessHandler();
 
+
         http
                 .authorizeRequests()
-
                 .antMatchers("/reports/**").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/Invoices").access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/ManageRoles").access("hasRole('ROLE_ADMIN')")
@@ -106,9 +106,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         ;
 
         http.headers().frameOptions().disable();
-
     }
-
     /**
      * Point the authentication to our own user service
      */
