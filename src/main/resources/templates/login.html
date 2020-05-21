@@ -17,8 +17,10 @@
 <!--<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>-->
 
                     <div class="custom-label" th:if="${param.error}">
-                        Invalid username and password.
+                        Invalid username and password, If you fail to log in 3 times your IP will be locked.
+
                     </div>
+
 
                     <div class="custom-label" th:if="${param.logout}">
                         You have been logged out.

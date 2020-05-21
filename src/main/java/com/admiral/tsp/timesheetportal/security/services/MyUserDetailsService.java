@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Slf4j
@@ -19,11 +20,15 @@ public class MyUserDetailsService implements UserDetailsService {
 
     private final UserJpa userJpa;
     private final PasswordEncoder encoder;
+    private final LoginAttemptService loginAttemptService;
+    private final HttpServletRequest request;
 
     @Autowired
-    public MyUserDetailsService(UserJpa userJpa, PasswordEncoder encoder) {
+    public MyUserDetailsService(UserJpa userJpa, PasswordEncoder encoder, LoginAttemptService loginAttemptService, HttpServletRequest request) {
         this.userJpa = userJpa;
         this.encoder = encoder;
+        this.loginAttemptService = loginAttemptService;
+        this.request = request;
     }
 
     @Override
@@ -31,8 +36,13 @@ public class MyUserDetailsService implements UserDetailsService {
 
         log.info("password encoded = " + encoder.encode("password"));
 
-
+        String ip = getClientIP();
         User user = userJpa.getByUsername(username);
+        if (loginAttemptService.isBlocked(ip)) {
+            throw new RuntimeException("blocked");
+        }
+
+
         if (user == null) {
             throw new UsernameNotFoundException(username);
         } else {
@@ -43,17 +53,11 @@ public class MyUserDetailsService implements UserDetailsService {
         }
     }
 
-//    public User registerNewUserAccount(UserForm userForm) {
-//
-//        User newUser = new User(null, userForm.getUsername(),
-//                userForm.getFirstName(),
-//                userForm.getSurname(),
-//                userForm.getEmail(),
-//                userForm.getPassword());
-//
-//
-//        return newUser;
-//
-//    }
-
+    private String getClientIP() {
+        String xfHeader = request.getHeader("X-Forwarded-For");
+        if (xfHeader == null){
+            return request.getRemoteAddr();
+        }
+        return xfHeader.split(",")[0];
+    }
 }
