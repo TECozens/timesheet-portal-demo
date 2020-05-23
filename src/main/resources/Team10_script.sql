@@ -308,3 +308,22 @@ Select numberOfContractorsAssignedToAManager() as 'Number of Contractors';
 
 
 -- Fix User Access Control --
+-- Admin --
+create user 'Laura'@'localhost' identified by 'LauraTsap2020';
+grant select on tsap.contractor to 'Laura'@'localhost';
+grant select on tsap.agency to 'Laura'@'localhost';
+grant select (id, username, email) on tsap.user to 'Laura'@'localhost';
+grant select on tsap.review to 'Laura'@'localhost';
+
+-- Manager --
+create user 'Tomas'@'localhost' identified by 'TomasTsap2020';
+grant select (id, contractor_id, week_finish) on tsap.timesheet to 'Tomas'@'localhost';
+grant select on tsap.contractor to 'Tomas'@'localhost';
+
+-- Contractor --
+create user 'Mo'@'localhost' identified by 'MoTsap2020';
+
+
+show grants for 'Laura'@'localhost';
+show grants for 'Tomas'@'localhost';
+show grants for 'Mo'@'localhost';
