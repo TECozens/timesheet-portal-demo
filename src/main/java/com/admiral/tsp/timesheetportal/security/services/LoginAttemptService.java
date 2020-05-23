@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class LoginAttemptService {
-
     private final int MAX_ATTEMPT = 3;
     private LoadingCache<String, Integer> attemptsCache;
 
@@ -22,11 +21,9 @@ public class LoginAttemptService {
             }
         });
     }
-
     public void loginSucceeded(String key) {
         attemptsCache.invalidate(key);
     }
-
     public void loginFailed(String key) {
         int attempts = 0;
         try {

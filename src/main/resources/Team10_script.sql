@@ -305,3 +305,6 @@ END $$
 DELIMITER ;
 
 Select numberOfContractorsAssignedToAManager() as 'Number of Contractors';
+
+
+-- Fix User Access Control --
