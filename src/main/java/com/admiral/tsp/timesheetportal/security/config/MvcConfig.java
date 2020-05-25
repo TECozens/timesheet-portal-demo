@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
+
     public void addViewControllers(ViewControllerRegistry registry) {
 
         registry.addViewController("/").setViewName("portal_view");
@@ -19,6 +20,7 @@ public class MvcConfig implements WebMvcConfigurer {
 
         registry.addViewController("/reports").setViewName("forward:/reports/index.html");
     }
+
 
 
 }

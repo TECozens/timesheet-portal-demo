@@ -4,6 +4,8 @@ import com.admiral.tsp.timesheetportal.security.data.MyUserPrincipal;
 import com.admiral.tsp.timesheetportal.data.jpa.UserJpa;
 import com.admiral.tsp.timesheetportal.data.domain.User;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
