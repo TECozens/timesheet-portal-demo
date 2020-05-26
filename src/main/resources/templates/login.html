@@ -13,14 +13,12 @@
         <div class="row mx-auto custom-form">
             <div class="col mx-auto custom-bg">
 
-                <form method="post" th:action="@{/login}">
+                <form id="form" method="post" th:action="@{/login}">
 <!--<input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>-->
 
                     <div class="custom-label" th:if="${param.error}">
-                        Invalid username and password, If you fail to log in 3 times your IP will be locked.
-
+                        Invalid username and password.
                     </div>
-
 
                     <div class="custom-label" th:if="${param.logout}">
                         You have been logged out.
@@ -54,8 +52,13 @@
 
                     <div class="row mt-4">
 
-                        <input class="btn btn-lg btn-primary btn-block text-uppercase custom-btn"
-                               type="submit" value="Sign In"/>
+                        <input class="g-recaptcha btn btn-lg btn-primary btn-block text-uppercase custom-btn"
+                               data-sitekey="6LdBlvwUAAAAAAXBFz25Zfw_rH8r0LqowH1NHLZQ"
+                               data-callback='onSubmit'
+                               data-action='submit'
+                               type="submit"
+                               value="Sign In"/>
+
                         <a class="btn btn-lg btn-primary btn-block text-uppercase custom-btn" th:href="@{/passwordReset}">Forgot Password</a>
 
                     </div>
@@ -66,4 +69,9 @@
     </div>
 </main>
 </body>
+<script>
+    function onSubmit(token) {
+        document.getElementById("form").submit();
+    }
+</script>
 </html>
